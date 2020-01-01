@@ -21,4 +21,4 @@ PHP is a widely-used general-purpose scripting language that is especially suite
 ### LGPL:
 The main difference between the GPL and the LGPL is that the latter can be linked to (in the case of a library, 'used by') a non-(L)GPLed program, which may be free software or proprietary software. This non-(L)GPLed program can then be distributed under any chosen terms if it is not a derivative work.
 
-[[LGPL](http://www.gnu.org/licenses/lgpl-3.0.html), [GNU FAQ]](http://www.gnu.org/licenses/gpl-faq.html)]
+[[LGPL](http://www.gnu.org/licenses/lgpl-3.0.html), [GNU FAQ](http://www.gnu.org/licenses/gpl-faq.html)]
