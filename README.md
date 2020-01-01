@@ -1,4 +1,4 @@
-# Ar-PHP Project ([http://www.ar-php.org/](http://www.ar-php.org/en_index-php-arabic.html))
+# Ar-PHP Project ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _PHP Speaks Arabic - be ready!_
 _Copyright © 2006-2020 Khaled Al-Sham'aa._
 
