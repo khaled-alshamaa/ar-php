@@ -1,5 +1,6 @@
-# [Ar-PHP](http://www.ar-php.org/en_index-php-arabic.html) Project
-*PHP Speaks Arabic - be ready!*
+# Ar-PHP Project ([http://www.ar-php.org/](http://www.ar-php.org/en_index-php-arabic.html))
+#### _PHP Speaks Arabic - be ready!_
+_Copyright © 2006-2020 Khaled Al-Sham'aa._
 
 ### Mission & Vision
 As has happened in the Far East and Latin America, as the Internet goes to the masses, people want it in their native language.
