@@ -9,6 +9,9 @@ Our mission is to develop open source solutions and provides professional suppor
 
 This project provides a set of tools that enable Arabic website developers to serve professional search, present and process Arabic content in PHP.
 
+> [How to Contribute?](#how-to-contribute)
+> [Professional Support](#professional-support)
+
 ### Arabic Language
 Worldwide Internet use has grown tremendously in recent years, most rapidly in non-English speaking regions especially in Arab world. For example, from 2000 to 2019, the online populations grew by more than 8,900 %. Meanwhile, Arabic Web content was estimated to be doubling every year. Such growth has created demand for better websites developing resources in Arabic language. However, existing websites developing resources may be unable to meet it because they primarily serve English-speaking users.
 
@@ -25,6 +28,22 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 [[LGPL](http://www.gnu.org/licenses/lgpl-3.0.html), [GNU FAQ](http://www.gnu.org/licenses/gpl-faq.html)]
 
 ## _Main Functionalities_
+* [English-Arabic Transliteration](#english-arabic-transliteration)
+* [Spell Numbers in the Arabic Idiom](#spell-numbers-in-the-arabic-idiom)
+* [Arabic Glyphs to Render Arabic Text](#arabic-glyphs-to-render-arabic-text)
+* [Arabic Keyboard Swapping Language](#arabic-keyboard-swapping-language)
+* [Arabic Soundex](#arabic-soundex)
+* [Arabic Gender Guesser](#arabic-gender-guesser)
+* [Arabic SQL Queary](#arabic-sql-queary)
+* [Muslim Prayer Times](#muslim-prayer-times)
+* [Qibla Determination](#qibla-determination)
+* [Arabic/Hijri Date](#arabic-hijri-date)
+* [Arabic/Hijri Maketime](#arabic-hijri-mktime)
+* [Arabic StrToTime](#arabic-strtotime)
+* [Arabic Text Standardize](#arabic-text-standardize)
+* [Arabic Auto Summarize](#arabic-auto-summarize)
+
+
 
 ### English-Arabic Transliteration
 Transliterate English words into Arabic by render them in the orthography of the Arabic language and vise versa.
@@ -43,6 +62,8 @@ $obj = new \ArPHP\I18N\Arabic();
 $ar_word_1 = $obj->en2ar($en_word_1);
 $en_word_2 = $obj->ar2en($ar_word_2);
 ```
+
+[Back to main functionalities list](#main-functionalities)
 
 ### Spell Numbers in the Arabic Idiom
 Spell numbers in the Arabic idiom. This function is very useful for e-Commerce applications in Arabic for example. It accepts almost any numeric value and convert it into an equivalent string of words in written Arabic language and take care of feminine and Arabic grammar rules.
@@ -82,6 +103,8 @@ $integer = $obj->str2int($string);
 echo "$string - $integer</ br>";
 ```
 
+[Back to main functionalities list](#main-functionalities)
+
 ### Arabic Glyphs to Render Arabic Text
 Takes Arabic text as an input and performs Arabic glyph joining on it and outputs a UTF-8 hexadecimals stream that is no longer logically arranged but in a visual order which gives readable results when formatted with a simple Unicode rendering just like GD and PDF libraries that does not handle basic connecting glyphs of Arabic language yet but simply outputs all stand alone glyphs in left-to-right order.
 
@@ -99,6 +122,8 @@ $text = $obj->utf8Glyphs($text);
 
 imagettftext($image, 20, 0, 250, 100, $black, $font, $text);
 ```
+
+[Back to main functionalities list](#main-functionalities)
 
 ### Arabic Keyboard Swapping Language
 Convert keyboard language between English/French and Arabic programmatically. This function can be helpful in dual language forms when users miss change keyboard language while they are entering data.
@@ -130,6 +155,8 @@ foreach ($examples as $example) {
 }
 ```
 
+[Back to main functionalities list](#main-functionalities)
+
 ### Arabic Soundex
 Takes Arabic word as an input and produces a character string which identifies a set words of those are (roughly) phonetically alike.
 
@@ -158,6 +185,8 @@ foreach ($clinton as $name) {
 echo 'Clinton - ' . soundex('Clinton');
 ```
 
+[Back to main functionalities list](#main-functionalities)
+
 ### Arabic Gender Guesser
 Attempts to guess the gender of Arabic names. Arabic nouns are either masculine or feminine. Usually when referring to a male, a masculine noun is usually used and when referring to a female, a feminine noun is used. In most cases the feminine noun is formed by adding a special characters to the end of the masculine noun. Its not just nouns referring to people that have gender. Inanimate objects (doors, houses, cars, etc.) is either masculine or feminine. Whether an inanimate noun is masculine or feminine is mostly arbitrary.  
 
@@ -170,6 +199,8 @@ if ($obj->isFemale($name) == true) {
    echo "$name is (Male)";
 } 
 ```
+
+[Back to main functionalities list](#main-functionalities)
 
 ### Arabic SQL Queary
 Build WHERE condition for SQL statement using MySQL REGEXP and Arabic lexical rules.
@@ -204,6 +235,8 @@ $strOrderBy   = $obj->arQueryOrderBy($keyword);
 
 $SQL = "SELECT `field` FROM `table` WHERE $strCondition ORDER BY $strOrderBy";
 ```
+
+[Back to main functionalities list](#main-functionalities)
 
 ### Muslim Prayer Times
 Calculate the time of Muslim prayer according to the geographic location.
@@ -247,6 +280,8 @@ echo "<b>Isha:</b> {$times[5]}<br />";
 echo "<b>Midnight:</b> {$times[7]}<br /><br />";
 ```
 
+[Back to main functionalities list](#main-functionalities)
+
 ### Qibla Determination
 The problem of qibla determination has a simple formulation in spherical trigonometry. A is a given location, K is the Ka'ba, and N is the North Pole. The great circle arcs AN and KN are along the meridians through A and K, respectively, and both point to the north. The qibla is along the great circle arc AK. The spherical angle q = NAK is the angle at A from the north direction AN to the direction AK towards the Ka'ba, and so q is the qibla bearing to be computed. Let F and L be the latitude and longitude of A, and FK and LK be the latitude and longitude of K (the Ka'ba). If all angles and arc lengths are measured in degrees, then it is seen that the arcs AN and KN are of measure 90 - F and 90 - FK, respectively. Also, the angle ANK between the meridians of K and A equals the difference between the longitudes of A and K, that is, LK - L, no matter what the prime meridian is. Here we are given two sides and the included angle of a spherical triangle, and it is required to determine one other angle. One of the simplest solutions is given by the formula:
 
@@ -269,7 +304,9 @@ $direction = $obj->getQibla();
 echo "<b>Qibla Direction (from the north direction):</b> $direction<br />";
 ```
 
-### Arabic Date
+[Back to main functionalities list](#main-functionalities)
+
+### Arabic/Hijri Date
 Arabic and Islamic customization of PHP date function. It can convert UNIX timestamp into string in Arabic as well as convert it into Hijri calendar
 
 #### _The Islamic Calendar_
@@ -306,7 +343,9 @@ $obj->setDateMode(4);
 echo $obj->date('l j F Y h:i:s A', $time);
 ```
 
-### Arabic Maketime
+[Back to main functionalities list](#main-functionalities)
+
+### Arabic/Hijri Maketime
 Arabic and Islamic customization of PHP mktime function. It can convert Hijri date into UNIX timestamp format.
 
 #### _UNIX timestamp_
@@ -326,6 +365,8 @@ $time = $obj->mktime(0, 0, 0, 9, 1, 1429, $fix);
   
 echo "Calculated first day of Ramadan 1429 unix timestamp is: $time<br>";
 ```
+
+[Back to main functionalities list](#main-functionalities)
 
 ### Arabic StrToTime
 Parse about any Arabic textual datetime description into a Unix timestamp.
@@ -360,6 +401,8 @@ $str7 = '1 رمضان 1429';
 $int7 = $obj->strtotime($str7, $time);
 ```
 
+[Back to main functionalities list](#main-functionalities)
+
 ### Arabic Text Standardize
 Standardize Arabic text just like rules followed in magazines and newspapers like spaces before and after punctuations, brackets and units etc ...
 
@@ -378,6 +421,8 @@ $str = $obj->standard($content);
 
 echo $str;
 ```
+
+[Back to main functionalities list](#main-functionalities)
 
 ### Arabic Auto Summarize
 Determines key points by analyzing Arabic document and assigning a score to each sentence. Sentences that contain words used frequently in the document are given a higher score. You can then choose a percentage of the highest-scoring sentences to display in the summary. It works best on well-structured documents such as reports, articles, and scientific papers.
@@ -416,6 +461,7 @@ echo '<h2>Summary:</h2><p dir="rtl" align="justify">'.$summary.'</p>';
 echo '<h2>Full Text:</h2><p dir="rtl" align="justify">'.$content.'</p>';
 ```
 
+[Back to main functionalities list](#main-functionalities)
 
 ## _How to Contribute?_
 We always welcome new contributors – especially new programmers. But no matter what your skills and interests are, there is a place where you can participate to improve Ar-PHP project:
@@ -463,6 +509,8 @@ We want to see you and your location prominently displayed in the picture, so do
 
 Once you have your photos ready to submit, email them to us. Please send your photos in .jpg or .png formats and at least 1200 x 800 pixels in size.
 
+[Top](#ar-php-project-ar-phporg)
+
 ## _Professional Support_
 As the developers of Ar-PHP project, we can help your company leverage the maximum power of Ar-PHP to achieve your business goals. We offer professional services that span the full life-cycle of Ar-PHP implementation.
 
@@ -486,3 +534,5 @@ At any point in the implementation of Ar-PHP you can call upon a Ar-PHP expert t
  
 ### Training
 Get comprehensive training for Ar-PHP.
+
+[Top](#ar-php-project-ar-phporg)
