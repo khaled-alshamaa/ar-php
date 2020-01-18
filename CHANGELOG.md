@@ -73,7 +73,7 @@
 
 ## What's new in ArPHP 3.6.0 _(release date: Jan 20, 2013)_
 
-* Implement more accurate algorithm to convert from/to Hijri calendar (published in the Islamic Crescents' Observation Project <http://www.icoproject.org>) in both "Mktime" and "Date" sub classes, thanks to Mohammed Al-Shehri <moh.alshehri@gmail.com>.
+* Implement more accurate algorithm to convert from/to Hijri calendar (published in the [Islamic Crescents' Observation Project](http://www.icoproject.org)) in both "Mktime" and "Date" sub classes, thanks to Mohammed Al-Shehri <moh.alshehri@gmail.com>.
   
 * Extend the "Numbers" sub class functionality by add "money2str" method to spell provided price in Arabic idiom by define value, Arabic currency ISO code, and language. Thanks to <msme@arabteam2000-forum.com> who developed the first draft.
 
@@ -91,7 +91,7 @@
 
 * Reduce the size of the "Salat" sub class by 20%, removed deprecated "getPrayTime" method, that method name is now just an alias of the new "getPrayTime2" method.
 
-* Drop the "pregPattern" method from the main "I18N_Arabic" class, it is too basic to handle it in a standalone method, instead of that users may consult this FAQ page: (http://www.ar-php.org/faq-php-arabic.html#regexp).
+* Drop the "pregPattern" method from the main "I18N_Arabic" class, it is too basic to handle it in a standalone method, instead of that users may consult this [FAQ page](http://www.ar-php.org/faq-php-arabic.html#regexp).
 
 * Minor library examples enhancements include: 
     - Check for MING extension in the "Glyphs_SWF" example.
@@ -121,9 +121,9 @@
   
 * Fix the transliteration issue of ال precedes a word beginning with one of the "sun letters", and issue of ة when it used in combined words to be Romanized as t instead of h.
 
-* Fix the question mark issue in the "swapEa" method in the "KeySwap" sub class, thanks to Al-Kindi project team <http://www.ar-php.org/stats/al-kindi> who reported this bug.
+* Fix the question mark issue in the "swapEa" method in the "KeySwap" sub class, thanks to [Al-Kindi project](http://www.ar-php.org/stats/al-kindi) team who reported this bug.
 
-* Fix the losing new line issue in the "standard" method in the "Standard" sub class, thanks to Al-Kindi project team <http://www.ar-php.org/stats/al-kindi> who reported this bug.
+* Fix the losing new line issue in the "standard" method in the "Standard" sub class, thanks to [Al-Kindi project](http://www.ar-php.org/stats/al-kindi) team who reported this bug.
 
 * Move out "js" sub directory and keyboard example to keep ArPHP pure PHP library.
 
@@ -193,11 +193,11 @@
   
 * Improve writing error rules used in the "ArQuery" sub class by add case to handle confusing between ظ and ض.
 
-* Improve the "ArIdentifier" sub class by ignoring the following symbols ! " # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : if they come in the Arabic context, thanks to Emiel Polman <e1polman@live.nl>
+* Improve the "ArIdentifier" sub class by ignoring the following symbols `! " # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 :` if they come in the Arabic context, thanks to Emiel Polman <e1polman@live.nl>.
 
-* Update stopwords list provided by Taha Zerrouki <taha.zerrouki@gmail.com>
+* Update stopwords list provided by Taha Zerrouki <taha.zerrouki@gmail.com>.
 
-* Fix issues of TAB "\t" and URL rendering in the "ArGlyphs" sub class (i.e. http://www.example.com)
+* Fix issues of TAB "\t" and URL rendering in the "ArGlyphs" sub class (i.e. http://www.example.com).
 
 * Fix Qibla angle calculation from the north direction for locations exists above Makkah latitude line, then add a small script in the "Examples" directory to enhance "Salat" example and present this information in SVG visual format.
   
@@ -228,7 +228,7 @@
 
 * Replace all the `__DIR__` magic constant (which added in PHP 5.3.0) by "dirname" function for the `__FILE__` magic constant to keep compatible with all PHP 5 versions.
   
-* Replace "split" function by "explode" function because it has been DEPRECATED as of PHP 5.3.0 
+* Replace "split" function by "explode" function because it has been DEPRECATED as of PHP 5.3.0.
 
 [Top](#arphp-library---change-log)
 
@@ -255,7 +255,7 @@
 
 * Implement cleaner way to convert between different Arabic character sets, this makes sub classes independent from main Arabic class by define input and output character set for each method. 
 
-* Improve Hieroglyphics symbols resolution and enable set background color (default is transparent), it also supports now writing direction [ltr, rtl, ttb and btt]
+* Improve Hieroglyphics symbols resolution and enable set background color (default is transparent), it also supports now writing direction [ltr, rtl, ttb and btt].
 
 * Fix the "ArGlyphs" sub class bug when English words have dash in between or when sentence starts or ends by English word.
 
@@ -371,7 +371,7 @@
 
 * Add "ArStandard" sub class, it has "standard" method which standardize Arabic text to follow writing standards (just like magazine rules).
   
-* Add simple and rough "ArStemmer" sub class, it has "stem" method which returns the Arabic stem for any given Arabic word (http://arabtechies.net/node/83), algorithm provides by Taha Zerrouki <taha.zerrouki@gmail.com>
+* Add simple and rough "ArStemmer" sub class, it has "stem" method which returns the Arabic stem for any given Arabic word (http://arabtechies.net/node/83), algorithm provides by Taha Zerrouki <taha.zerrouki@gmail.com>.
   
 * The "cleanCommon" method in the "ArAutoSummarize" sub class become public now.
 
@@ -412,7 +412,7 @@
 
 * Use PHP exception is optional now and disabled by default for ease of implement in other applications, you can configure it in the Arabic.php file.
 
-* Use PHP "__autoload" function is optional now and disabled by default for ease of implement in other applications, you can configure it in the Arabic.php file.
+* Use PHP `__autoload` function is optional now and disabled by default for ease of implement in other applications, you can configure it in the Arabic.php file.
 
 * Handle decimal numbers in the "ArNumber" sub class.
 
