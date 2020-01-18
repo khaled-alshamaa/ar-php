@@ -1,39 +1,40 @@
 # ArPHP Library - Change Log
 
-* Version 5.0 _(release date: Jan 25, 2020)_
-* Version 4.0 _(release date: Jan 8, 2016)_
-* Version 3.6.0 _(release date: Jan 20, 2013)_
-* Version 3.5.0 _(release date: Sep 1, 2012)_
-* Version 3.0.0 beta _(release date: Feb 5, 2012)_
-* Version 2.8 _(release date: Apr 14, 2011)_
-* Version 2.7.1 _(release date: Aug 23, 2010)_
-* Version 2.7 _(release date: Aug 15, 2010)_
-* Version 2.6 _(release date: Mar 15, 2010)_
-* Version 2.5.2 _(release date: Sep 16, 2009)_
-* Version 2.5.1 _(release date: Aug 19, 2009)_
-* Version 2.5 _(release date: Aug 5, 2009)_
-* Version 2.0 _(release date: Jul 7, 2009)_
-* Version 1.8 _(release date: Feb 15, 2009)_
-* Version 1.7 _(release date: Jan 5, 2009)_
-* Version 1.6 _(release date: Aug 25, 2008)_
-* Version 1.4 _(release date: Jul 23, 2008)_
-* Version 1.3 _(release date: May 18, 2008)_
-* Version 1.2 _(release date: Apr 8, 2008)_
-* Version 1.1 _(release date: Mar 10, 2008)_
-* Version 1.0 _(release date: Feb 24, 2008)_
+* Version [5.0.0](#whats-new-in-arphp-500-release-date-jan-25-2020) _(release date: Jan 25, 2020)_
+* Version [4.0.0](#whats-new-in-arphp-400-release-date-jan-8-2016) _(release date: Jan 8, 2016)_
+* Version [3.6.0](#whats-new-in-arphp-360-release-date-jan-20-2013) _(release date: Jan 20, 2013)_
+* Version [3.5.0](#whats-new-in-arphp-350-release-date-sep-1-2012) _(release date: Sep 1, 2012)_
+* Version [3.0.0](#whats-new-in-arphp-300-release-date-feb-5-2012) _(release date: Feb 5, 2012)_
+* Version [2.8.0](#whats-new-in-arphp-280-release-date-apr-14-2011) _(release date: Apr 14, 2011)_
+* Version [2.7.1](#whats-new-in-arphp-271-release-date-aug-23-2010) _(release date: Aug 23, 2010)_
+* Version [2.7.0](#whats-new-in-arphp-270-release-date-aug-15-2010) _(release date: Aug 15, 2010)_
+* Version [2.6.0](#whats-new-in-arphp-260-release-date-mar-15-2010) _(release date: Mar 15, 2010)_
+* Version [2.5.2](#whats-new-in-arphp-252-release-date-sep-16-2009) _(release date: Sep 16, 2009)_
+* Version [2.5.1](#whats-new-in-arphp-251-release-date-aug-19-2009) _(release date: Aug 19, 2009)_
+* Version [2.5.0](#whats-new-in-arphp-250-release-date-aug-5-2009) _(release date: Aug 5, 2009)_
+* Version [2.0.0](#whats-new-in-arphp-200-release-date-jul-7-2009) _(release date: Jul 7, 2009)_
+* Version [1.8.0](#whats-new-in-arphp-180-release-date-feb-15-2009) _(release date: Feb 15, 2009)_
+* Version [1.7.0](#whats-new-in-arphp-170-release-date-jan-5-2009) _(release date: Jan 5, 2009)_
+* Version [1.6.0](#whats-new-in-arphp-160-release-date-aug-25-2008) _(release date: Aug 25, 2008)_
+* Version [1.4.0](#whats-new-in-arphp-140-release-date-jul-23-2008) _(release date: Jul 23, 2008)_
+* Version [1.3.0](#whats-new-in-arphp-130-release-date-may-18-2008) _(release date: May 18, 2008)_
+* Version [1.2.0](#whats-new-in-arphp-120-release-date-apr-8-2008) _(release date: Apr 8, 2008)_
+* Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
+* Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
 
-## What's new in ArPHP 5.0 _(release date: Jan 25, 2020)_
+## What's new in ArPHP 5.0.0 _(release date: Jan 25, 2020)_
 
 * Simplify the whole library structure and re-build it to be cross-version compatibility for PHP 5.3 and above including PHP 7.4 in one class and single file using UTF-8 charset encoding and define its Namespace as ArPHP\I18N.
 
-* Compliance with coding standards including PSR-1 for Basic Coding Standard (https://www.php-fig.org/psr/psr-1/) and PSR-12 for Extended Coding Style (https://www.php-fig.org/psr/psr-12/).
+* Compliance with coding standards including [PSR-1 for Basic Coding Standard](https://www.php-fig.org/psr/psr-1/) and [PSR-12 for Extended Coding Style](https://www.php-fig.org/psr/psr-12/).
 
 * New hosting and distribution platform using GitHub, Composer and Packagist.
 
+[Top](#arphp-library---change-log)
 
 
-## What's new in ArPHP 4.0 _(release date: Jan 8, 2016)_
+## What's new in ArPHP 4.0.0 _(release date: Jan 8, 2016)_
 
 * Implement the lazy loading technique (i.e. include/load sub class file automatically when detect first time call for any related method).
 
@@ -67,6 +68,8 @@
 
 * Upgrade FPDF library from version 1.52 to 1.7 which used in the glyphs PDF example.
 
+[Top](#arphp-library---change-log)
+
 
 ## What's new in ArPHP 3.6.0 _(release date: Jan 20, 2013)_
 
@@ -99,6 +102,8 @@
     - Remove "Glyphs_SVG example" because current browsers don't have Arabic Glyphs problem anymore.
     - "Moon" example has day default value now.
 
+[Top](#arphp-library---change-log)
+
   
 ## What's new in ArPHP 3.5.0 _(release date: Sep 1, 2012)_
 
@@ -128,8 +133,10 @@
   
 * Convert time presented in the "Info.php" example to GMT based on the server time zone offset.
 
+[Top](#arphp-library---change-log)
+
   
-## What's new in ArPHP 3.0.0 beta _(release date: Feb 5, 2012)_
+## What's new in ArPHP 3.0.0 _(release date: Feb 5, 2012)_
 
 * Implement PEAR structure and naming style.
 
@@ -173,10 +180,12 @@
   
 * Back to the use "heredoc" in the examples as string delimiter instead of the "nowdoc" that used in the version 2.8 examples, this will keep examples compatible with all PHP 5 versions before 5.3 when "nowdoc" string delimiter introduced.
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 2.8 _(release date: Apr 14, 2011)_
 
-* Add more accurate method called "getPrayTime2" to the "Salat" sub class to calculate Salat times using algorithm presented by Hamid Zarrabi-Zadeh (http://www.praytimes.org).
+## What's new in ArPHP 2.8.0 _(release date: Apr 14, 2011)_
+
+* Add more accurate method called "getPrayTime2" to the "Salat" sub class to calculate Salat times using algorithm presented by [Hamid Zarrabi-Zadeh](http://www.praytimes.org).
 
 * Add support to the Phoenician language in the "Hiero" sub class.
 
@@ -198,6 +207,8 @@
 
 * Add comments/documentation to the XML files in the sub/data directory.
 
+[Top](#arphp-library---change-log)
+
 
 ## What's new in ArPHP 2.7.1 _(release date: Aug 23, 2010)_
 
@@ -215,22 +226,24 @@
 
 * Fix the "ArGlyphs" sub class bug when English words have dots in between (e.g. domain name).
 
-* Replace all the "__DIR__" magic constant (which added in PHP 5.3.0) by "dirname" function for the "__FILE__" magic constant to keep compatible with all PHP 5 versions.
+* Replace all the `__DIR__` magic constant (which added in PHP 5.3.0) by "dirname" function for the `__FILE__` magic constant to keep compatible with all PHP 5 versions.
   
 * Replace "split" function by "explode" function because it has been DEPRECATED as of PHP 5.3.0 
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 2.7 _(release date: Aug 15, 2010)_
+
+## What's new in ArPHP 2.7.0 _(release date: Aug 15, 2010)_
 
 * The "ArNumbers" sub class can handle now numbers exceeds 2^31 (integer limit), it is supports now numbers up to 15 digits (i.e. Trillions).
 
 * The "ArNumbers" sub class supports now negative numbers.
 
-* Fix Algerian time zone and add summer time information (including start and end dates in the strtotime text format) into the "arab_countries.xml" file, thanks to El-Bachiri <http://www.bp.ma>.
+* Fix Algerian time zone and add summer time information (including start and end dates in the strtotime text format) into the "arab_countries.xml" file, thanks to [El-Bachiri](http://www.bp.ma).
 
 * Improve the accuracy of the "ArStrToTime" sub class.
 
-* Set methods returns now $this object to build a fluent interface, thanks to Till Klampaeckel <http://pear.php.net/user/till> for his advice.
+* Set methods returns now $this object to build a fluent interface, thanks to [Till Klampaeckel](http://pear.php.net/user/till) for his advice.
 
 * Merge "EnTransliteration" and "ArTransliteration" sub classes in one sub class called "Transliteration".
 
@@ -258,11 +271,12 @@
 
 * Push data arrays into external documented XML files.
 
-_Warning:_
-Many people reported problems in the ArGlyphs_GD example, it's a bug in PHP 5.3.1 binary build; PHP 5.3.2 no longer misses chars or throws a warning. It's also been working fine in several setups up to PHP 5.3.0 and problems started when it run under PHP 5.3.1 where all non-ASCII characters are replaced by the hollow rectangle that represents missing or unknown chars.
+> _Warning:_ Many people reported problems in the ArGlyphs_GD example, it's a bug in PHP 5.3.1 binary build; PHP 5.3.2 no longer misses chars or throws a warning. It's also been working fine in several setups up to PHP 5.3.0 and problems started when it run under PHP 5.3.1 where all non-ASCII characters are replaced by the hollow rectangle that represents missing or unknown chars.
+
+[Top](#arphp-library---change-log)
 
 
-## What's new in ArPHP 2.6 _(release date: Mar 15, 2010)_
+## What's new in ArPHP 2.6.0 _(release date: Mar 15, 2010)_
 
 * Add new sub class "ArNormalise" developed by Djihed Afifi <djihed@gmail.com>, this class performs text normalization through various stages.
   
@@ -304,6 +318,8 @@ Many people reported problems in the ArGlyphs_GD example, it's a bug in PHP 5.3.
 
 * Enhance keyboard example by show the virtual keyboard just below selected input item (when "justBelow" JavaScript variable set to true).
 
+[Top](#arphp-library---change-log)
+
 
 ## What's new in ArPHP 2.5.2 _(release date: Sep 16, 2009)_
 
@@ -317,13 +333,15 @@ Many people reported problems in the ArGlyphs_GD example, it's a bug in PHP 5.3.
 
 * Pack a database of more than 2500 cities in the Arab world, available information includes Arabic and English name as well as latitude and longitude coordination.
 
-* Pack a virtual JavaScript keyboard with Arabic customization (originally developed by Dmitry Khudorozhkov http://www.codeproject.com/KB/scripting/jvk.aspx and we provide the Arabic customization for it)
+* Pack a virtual JavaScript keyboard with Arabic customization (originally developed by [Dmitry Khudorozhkov](http://www.codeproject.com/KB/scripting/jvk.aspx) and we provide the Arabic customization for it)
   
 * Pack an Arabic and English list of Arab countries currencies in both XML and SQLite format.
 
 * Convert Private properties in all sub classes into Protected for more flexibility when class extended.
   
 * Update examples by add a link to related section in the class documentation in each example file.
+
+[Top](#arphp-library---change-log)
 
 
 ## What's new in ArPHP 2.5.1 _(release date: Aug 19, 2009)_
@@ -346,8 +364,10 @@ Many people reported problems in the ArGlyphs_GD example, it's a bug in PHP 5.3.
 
 * Fix charset conversion of the "swap_ae" method input in the "ArKeySwap" sub class. 
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 2.5 _(release date: Aug 5, 2009)_
+
+## What's new in ArPHP 2.5.0 _(release date: Aug 5, 2009)_
 
 * Add "ArStandard" sub class, it has "standard" method which standardize Arabic text to follow writing standards (just like magazine rules).
   
@@ -373,10 +393,12 @@ Many people reported problems in the ArGlyphs_GD example, it's a bug in PHP 5.3.
 
 * Check compatibility with PHP 6.0.0-dev, MySQL 6.0.4-alpha, and cloud computing.
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 2.0 _(release date: Jul 7, 2009)_
 
-_Many thanks to all Arab Techies Code Sprint participants who provides valuable assist and advices: http://www.arabtechies.net/participants/codesprint_
+## What's new in ArPHP 2.0.0 _(release date: Jul 7, 2009)_
+
+> _Many thanks to all Arab Techies Code Sprint participants who provides valuable assist and advices: http://www.arabtechies.net/participants/codesprint_
 
 * "ArStrToTime" sub class supports now Hijri date format.
 
@@ -412,8 +434,10 @@ _Many thanks to all Arab Techies Code Sprint participants who provides valuable 
 
 * No need to have "./" in the PHP include_path (to be ready for large scale applications and clustering).
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 1.8 _(release date: Feb 15, 2009)_
+
+## What's new in ArPHP 1.8.0 _(release date: Feb 15, 2009)_
 
 * Core Arabic charset converter become 4 times faster and used only 70% of RAM comparing to the previous version, we are using now iconv function instead of ArCharsetC sub class when it is possible.
 
@@ -429,8 +453,10 @@ _Many thanks to all Arab Techies Code Sprint participants who provides valuable 
 
 * Update the class documentation and examples to show how you can optimize classes load by specify the functionality you are looking for; this will reduce RAM usage to 25% in average and reduce execution time by 10% in average.
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 1.7 _(release date: Jan 5, 2009)_
+
+## What's new in ArPHP 1.7.0 _(release date: Jan 5, 2009)_
 
 * Convert all of "ArTransliteration", "EnTransliteration", "ArGender", "ArKeySwap", "ArWordTag", "ArStrToTime", and "ArCompressStr" into Static classes for better performance and memory utilize.
 
@@ -456,8 +482,10 @@ _Many thanks to all Arab Techies Code Sprint participants who provides valuable 
 
 * Cleaner code generates much less PHP Notices.
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 1.6 _(release date: Aug 25, 2008)_
+
+## What's new in ArPHP 1.6.0 _(release date: Aug 25, 2008)_
 
 * Core Arabic charset converter becomes 35% faster and takes only 40% of RAM comparing to the previous version.
 
@@ -481,8 +509,10 @@ _Many thanks to all Arab Techies Code Sprint participants who provides valuable 
 
 * Fix strip slashes issue in the "ArKeySwap" sub class (affect Arabic tah letter). 
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 1.4 _(release date: Jul 23, 2008)_
+
+## What's new in ArPHP 1.4.0 _(release date: Jul 23, 2008)_
 
 * Add new "StrToTime" sub class to implement the similar PHP functionality for Arabic language.
 
@@ -502,15 +532,19 @@ _Many thanks to all Arab Techies Code Sprint participants who provides valuable 
 
 * Change library license to LGPL instead of GPL.
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 1.3 _(release date: May 18, 2008)_
+
+## What's new in ArPHP 1.3.0 _(release date: May 18, 2008)_
 
 * Class size now is 75% of previous version and ArCharset sub class will not be loaded unless we need it.
   
 * More optimization for memory usage.
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 1.2 _(release date: Apr 8, 2008)_
+
+## What's new in ArPHP 1.2.0 _(release date: Apr 8, 2008)_
 
 * Implement Saleh Al-Matrafe <mr.saphp@gmail.com> update on ArQuery sub class by using "CASE WHEN" statement in ORDER BY section for more relevant ordering.
   
@@ -520,15 +554,19 @@ _Many thanks to all Arab Techies Code Sprint participants who provides valuable 
   
 * Start working on fix library script standards to implement PEAR coding style.
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 1.1 _(release date: Mar 10, 2008)_
+
+## What's new in ArPHP 1.1.0 _(release date: Mar 10, 2008)_
 
 * Reflects new updates on system documentation and examples.
 
 * You can define now the bgcolor in highlight procedure in both ArAutoSummaries and ArWordTag sub classes.
 
+[Top](#arphp-library---change-log)
 
-## What's new in ArPHP 1.0 _(release date: Feb 24, 2008)_
+
+## What's new in ArPHP 1.0.0 _(release date: Feb 24, 2008)_
 
 * First beta code of this Arabic class which is collection of sub classes published before in phpclasses.org repository: http://kshamaa.users.phpclasses.org/browse/author/189864.html but this has more comments in code block as well as standard code format and better character set handles for input and output. The strategic aim of this is to rich PEAR standards to add this class into that library.
 
@@ -537,3 +575,5 @@ _Many thanks to all Arab Techies Code Sprint participants who provides valuable 
 * Add examples scripts.
 
 * Add the first draft of standard documentation.
+
+[Top](#arphp-library---change-log)
