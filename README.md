@@ -28,6 +28,12 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 
 [[LGPL](http://www.gnu.org/licenses/lgpl-3.0.html), [GNU FAQ](http://www.gnu.org/licenses/gpl-faq.html)]
 
+### History
+* PHP 4 at [PHPClasses.org](phpclasses.org/browse/author/189864.html) 2006-2008.
+* PHP 5 at [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
+* PHP 7 at [GitHub.com](https://github.com/khaled-alshamaa/ar-php) starting in 2020.
+* [PHP and Arabic Language](https://darshoaa.com/pHP-and-Arabic-language/) book, 2007.
+
 ## _Main Functionalities_
 * [English-Arabic Transliteration](#english-arabic-transliteration)
 * [Spell Numbers in the Arabic Idiom](#spell-numbers-in-the-arabic-idiom)

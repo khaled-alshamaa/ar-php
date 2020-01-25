@@ -1,0 +1,30 @@
+{
+	"name": "khaled.alshamaa/ar-php",
+	"description": "Set of functionalities enable Arabic website developers to serve professional search, present and process Arabic content in PHP",
+	"type": "library",
+	"license": "LGPL-3.0",
+	"homepage": "https://github.com/khaled-alshamaa/ar-php",
+
+	"keywords": [
+		"Arabic", "Hijri", "Islamic"
+	],
+	
+	"authors": [
+		{
+			"name": "Khaled Al-Sham'aa",
+			"email": "khaled@ar-php.org",
+			"homepage":"http://www.ar-php.org"
+		}
+	],
+
+	"require": {
+		"php": ">=5.3.0",
+		"ext-mbstring": "*"
+	},
+
+	"autoload": {
+		"psr-4": {
+			"ArPHP\\I18N\\": "src"
+		}
+	}
+}
