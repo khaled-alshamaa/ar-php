@@ -26,9 +26,9 @@
 * While str_replace is faster than preg_replace, the strtr function is four times faster than str_replace.
 
 ## Good Resources
-* [PHP Framework Interop Group](https://www.php-fig.org/).
-* [PHP - The Right Way](https://phptherightway.com/).
-* [PHP - The Wrong Way](https://phpthewrongway.com/).
+* [PHP Framework Interop Group](https://www.php-fig.org/)
+* [PHP - The Right Way](https://phptherightway.com/)
+* [PHP - The Wrong Way](https://phpthewrongway.com/)
 
 ## Logistics
 
@@ -92,3 +92,11 @@ phpcs --config-set installed_paths C:\xampp\PHPCompatibility
 
 phpcs -p arabic.php --standard=PHPCompatibility --runtime-set testVersion 5.3-
 ```
+
+### _phpDocumentor_
+[phpDocumentor](https://www.phpdoc.org/) analyzes your code to create great documentation.
+Install it as a PHAR file format, all you need to do is download the phar binary from [here](http://phpdoc.org/phpDocumentor.phar), then save it in an arbitrary directory (e.g. inside c:\XAMPP).
+
+```bash
+php C:\xampp\phpDocumentor.phar -f arabic.php -t ../docs/
+``` 
