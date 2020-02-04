@@ -3,10 +3,6 @@
 
 * PSR-5: [PHPDoc Standard](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md).
 
-* Deprecate sub-classes are: 
-
-	_Stemmer, WordTag, CharsetD, CompressStr, Hiero, Identifier, Normalise, Phoenician._
-
 * Error handle, convert into exceptions (set_error_handler: try/catch)!
 
 * Enhance example scripts by call the following functions: 
