@@ -55,6 +55,13 @@ git commit -m "modification message"
 git push origin master
 ```
 
+Create and push a new release tag:
+
+```bash
+git tag -a v5.0 -m "Ar-PHP Version 5.0"
+git push --tags
+```
+
 Create and push a new branch:
 
 ```bash

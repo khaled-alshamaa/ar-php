@@ -698,9 +698,9 @@ class Arabic
     /**
      * This will convert given Hijri date (Islamic calendar) into Gregorian date
      *
-     * @param integer $Y Hijri year (Islamic calendar)
-     * @param integer $M Hijri month (Islamic calendar)
-     * @param integer $D Hijri day (Islamic calendar)
+     * @param integer $y Hijri year (Islamic calendar)
+     * @param integer $m Hijri month (Islamic calendar)
+     * @param integer $d Hijri day (Islamic calendar)
      *
      * @return array Gregorian date [int Year, int Month, int Day]
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
