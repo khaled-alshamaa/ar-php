@@ -1504,7 +1504,7 @@ class Arabic
                 }
             }
 
-            if ($segment[$key] != '') {
+            if (isset($segment[$key])) {
                 $segment[$key] = trim($segment[$key]);
             }
         }
