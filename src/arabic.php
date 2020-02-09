@@ -2851,10 +2851,10 @@ class Arabic
             // Re-init $arg variable (It will contain the rest of $arg except phrases).
             $arg = '';
             for ($i = 0; $i < count($phrase); $i++) {
-                if ($i % 2 == 0 && $phrase[$i] != '') {
+                if ($i % 2 == 0 && isset($phrase[$i])) {
                     // Re-build $arg variable after restricting phrases
                     $arg .= $phrase[$i];
-                } elseif ($i % 2 == 1 && $phrase[$i] != '') {
+                } elseif ($i % 2 == 1 && isset($phrase[$i])) {
                     // Handle phrases using reqular LIKE matching in MySQL
                     $wordOrder[] = $this->getWordLike($phrase[$i]);
                 }
