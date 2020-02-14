@@ -156,3 +156,13 @@ Install it as a PHAR file format, all you need to do is download the phar binary
 ```bash
 php C:\xampp\phpDocumentor.phar -f arabic.php -t ../docs/
 ``` 
+
+### _Benchmarking Tool_
+
+[ab](https://httpd.apache.org/docs/current/programs/ab.html) is a tool for benchmarking your Apache Hyper-Text Transfer Protocol (HTTP) server. This especially shows you how many requests per second your script on current Apache installation is capable of serving. 
+
+The following command line shows an example call of 1000 requests for numbers test code (50 requests in concurrency) and report related stats:
+
+```bash
+\path\to\apache\bin\ab -n 1000 -c 50 http://localhost/ar-php/tests/numbers.php
+```   
