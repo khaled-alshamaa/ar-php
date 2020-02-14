@@ -135,6 +135,7 @@ require 'phar://path/to/ArPHP.phar/arabic.php';
 
 $obj = new \ArPHP\I18N\Arabic();
 
+echo $obj->version;
 echo $obj->int2str(1975);
 ```
 

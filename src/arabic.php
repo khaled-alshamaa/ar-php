@@ -57,6 +57,8 @@ namespace ArPHP\I18N;
  
 class Arabic
 {
+    public  $version = '5.0';
+    
     private $arStandardPatterns     = array();
     private $arStandardReplacements = array();
     
