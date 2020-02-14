@@ -100,6 +100,44 @@ phpcs --config-set installed_paths C:\xampp\PHPCompatibility
 phpcs -p arabic.php --standard=PHPCompatibility --runtime-set testVersion 5.3-
 ```
 
+### _PHP Archive (phar)_
+
+The [phar](https://www.php.net/manual/en/intro.phar.php) extension provides a way to put entire PHP applications into a single file called a "phar" (PHP Archive) for easy distribution and installation.
+
+In  order to create and modify Phar files, the _php.ini_ setting `phar.readonly` must be set to __Off__, then we have to change the first line in the Arabic **__construct** method to set the root directory private property in a proper way:
+
+```php
+$this->rootDirectory = 'phar://ArPHP.phar';
+```
+
+Instead of the following original line of code:
+
+```php
+$this->rootDirectory = dirname(__FILE__);
+``` 
+
+After this small change, we can create the "ArPHP.phar" file using the following code:
+
+```php
+$p = new Phar('ArPHP.phar', 0, 'ArPHP.phar');
+
+$p->startBuffering();
+
+$p->buildFromDirectory('\path\to\ArPHP\src');
+
+$p->stopBuffering();
+```
+
+Finally, you can include this library into your script like this:
+
+```php
+require 'phar://path/to/ArPHP.phar/arabic.php';
+
+$obj = new \ArPHP\I18N\Arabic();
+
+echo $obj->int2str(1975);
+```
+
 ### _phpDocumentor_
 [phpDocumentor](https://www.phpdoc.org/) analyzes your code to create great documentation.
 Install it as a PHAR file format, all you need to do is download the phar binary from [here](http://phpdoc.org/phpDocumentor.phar), then save it in an arbitrary directory (e.g. inside c:\XAMPP).

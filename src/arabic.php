@@ -161,13 +161,17 @@ class Arabic
 
     private $arSummaryCommonWords    = array();
     private $arSummaryImportantWords = array();
+    
+    private $rootDirectory;
 
 
     public function __construct()
     {
-        $this->arFemaleNames = array_map('trim', file(dirname(__FILE__) . '/data/ar_female.txt'));
-        $this->umAlqoura     = file_get_contents(dirname(__FILE__) . '/data/um_alqoura.txt');
-        $this->arDateXML     = simplexml_load_file(dirname(__FILE__) . '/data/ar_date.xml');
+        // in Phar version it should be = phar://ArPHP.phar
+        $this->rootDirectory = dirname(__FILE__);
+        $this->arFemaleNames = array_map('trim', file($this->rootDirectory . '/data/ar_female.txt'));
+        $this->umAlqoura     = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
+        $this->arDateXML     = simplexml_load_file($this->rootDirectory . '/data/ar_date.xml');
         
         $this->arStandardInit();
         $this->arStrToTimeInit();
@@ -259,7 +263,7 @@ class Arabic
     
     private function arStrToTimeInit()
     {
-        $xml = simplexml_load_file(dirname(__FILE__) . '/data/ar_strtotime.xml');
+        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_strtotime.xml');
         
         foreach ($xml->xpath("//str_replace[@function='strtotime']/pair") as $pair) {
             array_push($this->strToTimeSearch, (string)$pair->search);
@@ -280,7 +284,7 @@ class Arabic
     
     private function arTransliterateInit()
     {
-        $xml = simplexml_load_file(dirname(__FILE__) . '/data/ar_transliteration.xml');
+        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_transliteration.xml');
         
         foreach ($xml->xpath("//preg_replace[@function='ar2en']/pair") as $pair) {
             array_push($this->ar2enPregSearch, (string)$pair->search);
@@ -327,7 +331,7 @@ class Arabic
     
     private function arNumbersInit()
     {
-        $xml = simplexml_load_file(dirname(__FILE__) . '/data/ar_numbers.xml');
+        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_numbers.xml');
         
         foreach ($xml->xpath("//individual/number[@gender='male']") as $num) {
             if (isset($num['grammar'])) {
@@ -382,7 +386,7 @@ class Arabic
             $this->arNumberSpell[$str] = (int)$num['value'];
         }
         
-        $xml = simplexml_load_file(dirname(__FILE__) . '/data/ar_countries.xml');
+        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_countries.xml');
         
         foreach ($xml->xpath("//currency") as $info) {
             $money_ar = $info->money->arabic;
@@ -399,14 +403,14 @@ class Arabic
     
     private function arKeySwapInit()
     {
-        $xml = simplexml_load_file(dirname(__FILE__) . '/data/arabizi.xml');
+        $xml = simplexml_load_file($this->rootDirectory . '/data/arabizi.xml');
         
         foreach ($xml->transliteration->item as $item) {
             $index = $item['id'];
             $this->arabizi["$index"] = (string)$item;
         }
         
-        $xml = simplexml_load_file(dirname(__FILE__) . '/data/ar_keyswap.xml');
+        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_keyswap.xml');
         
         foreach ($xml->arabic->key as $key) {
             $index = (int)$key['id'];
@@ -423,13 +427,13 @@ class Arabic
             $this->frKeyboard[$index] = (string)$key;
         }
         
-        $this->arLogodd = file(dirname(__FILE__) . '/data/logodd_ar.php');
-        $this->enLogodd = file(dirname(__FILE__) . '/data/logodd_en.php');
+        $this->arLogodd = file($this->rootDirectory . '/data/logodd_ar.php');
+        $this->enLogodd = file($this->rootDirectory . '/data/logodd_en.php');
     }
     
     private function arSoundexInit()
     {
-        $xml = simplexml_load_file(dirname(__FILE__) . '/data/ar_soundex.xml');
+        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_soundex.xml');
         
         foreach ($xml->arSoundexCode->item as $item) {
             $index = $item['id'];
@@ -523,7 +527,7 @@ class Arabic
 
     private function arQueryInit()
     {
-        $xml = simplexml_load_file(dirname(__FILE__) . '/data/ar_query.xml');
+        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_query.xml');
 
         foreach ($xml->xpath("//preg_replace[@function='__construct']/pair") as $pair) {
             array_push($this->arQueryLexPatterns, (string)$pair->search);
@@ -534,8 +538,8 @@ class Arabic
     private function arSummaryInit()
     {
         // This common words used in cleanCommon method
-        $words    = file(dirname(__FILE__) . '/data/ar_stopwords.txt');
-        $en_words = file(dirname(__FILE__) . '/data/en_stopwords.txt');
+        $words    = file($this->rootDirectory . '/data/ar_stopwords.txt');
+        $en_words = file($this->rootDirectory . '/data/en_stopwords.txt');
 
         $words = array_merge($words, $en_words);
         $words = array_map('trim', $words);
@@ -543,7 +547,7 @@ class Arabic
         $this->arSummaryCommonWords = $words;
         
         // This important words used in rankSentences method
-        $words = file(dirname(__FILE__) . '/data/important_words.txt');
+        $words = file($this->rootDirectory . '/data/important_words.txt');
         $words = array_map('trim', $words);
 
         $this->arSummaryImportantWords = $words;
@@ -3376,7 +3380,7 @@ class Arabic
      */
     public function arSummaryLoadExtra()
     {
-        $extra_words = file(dirname(__FILE__) . '/data/ar_stopwords_extra.txt');
+        $extra_words = file($this->rootDirectory . '/data/ar_stopwords_extra.txt');
         $extra_words = array_map('trim', $extra_words);
 
         $this->arSummaryCommonWords = array_merge($this->arSummaryCommonWords, $extra_words);
