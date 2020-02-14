@@ -139,6 +139,16 @@ echo $obj->version;
 echo $obj->int2str(1975);
 ```
 
+### _Simple PHP Minifier_
+
+Strip comments, whitespaces, and preserve newlines. Compressed library file is ideal for production environments since it typically reduce the size of the file by ~50%.
+
+You can use the following [sed](https://www.gnu.org/software/sed/) (Linux stream editor) command to create a minified version of `arabic.php` main script:
+
+```bash
+sed "/^\s*\*/d" arabic.php | sed "/^\s*\/\//d" | sed "/^\s*\/\*/d" | sed "/^\s*$/d" | sed -e "s/\s*=\s*/=/g" | sed -e "s/^\s*//g" > arabic.min.php
+```
+
 ### _phpDocumentor_
 [phpDocumentor](https://www.phpdoc.org/) analyzes your code to create great documentation.
 Install it as a PHAR file format, all you need to do is download the phar binary from [here](http://phpdoc.org/phpDocumentor.phar), then save it in an arbitrary directory (e.g. inside c:\XAMPP).

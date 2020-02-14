@@ -759,12 +759,10 @@ class Arabic
             $year  = $year + 1;
         }
 
-        /*
-        Just to mimic the PHP JDToGregorian output
-        If year is less than 1, subtract one to convert from
-        a zero based date system to the common era system in
-        which the year -1 (1 B.C.E) is followed by year 1 (1 C.E.)
-        */
+        // Just to mimic the PHP JDToGregorian output
+        // If year is less than 1, subtract one to convert from
+        // a zero based date system to the common era system in
+        // which the year -1 (1 B.C.E) is followed by year 1 (1 C.E.)
 
         if ($year < 1) {
             $year--;
