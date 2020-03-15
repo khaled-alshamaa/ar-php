@@ -100,6 +100,9 @@ phpcs --config-set installed_paths C:\xampp\PHPCompatibility
 phpcs -p arabic.php --standard=PHPCompatibility --runtime-set testVersion 5.3-
 ```
 
+### _Insphpect: Smarter code reviews_
+[Insphpect](https://insphpect.com/) is an automated code review tool which identifies inflexibilities in PHP code and helps you write better software.
+
 ### _PHP Archive (phar)_
 
 The [phar](https://www.php.net/manual/en/intro.phar.php) extension provides a way to put entire PHP applications into a single file called a "phar" (PHP Archive) for easy distribution and installation.
