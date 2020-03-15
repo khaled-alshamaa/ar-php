@@ -2552,17 +2552,12 @@ class Arabic
      */
     private function arGlyphsDecodeEntities($text, $exclude = array())
     {
-        static $table;
-
-        // We store named entities in a table for quick processing.
-        if (!isset($table)) {
-            // Get all named HTML entities.
-            $table = array_flip(get_html_translation_table(HTML_ENTITIES));
-            // PHP gives us ISO-8859-1 data, we need UTF-8.
-            $table = array_map('utf8_encode', $table);
-            // Add apostrophe (XML)
-            $table['&apos;'] = "'";
-        }
+        // Get all named HTML entities.
+        $table = array_flip(get_html_translation_table(HTML_ENTITIES));
+        // PHP gives us ISO-8859-1 data, we need UTF-8.
+        $table = array_map('utf8_encode', $table);
+        // Add apostrophe (XML)
+        $table['&apos;'] = "'";
 
         $newtable = array_diff($table, $exclude);
         // Use a regexp to select all entities in one pass, to avoid decoding
