@@ -17,6 +17,7 @@ error_reporting(E_STRICT);
 $time_start = microtime(true);
 
 date_default_timezone_set('GMT');
+$time = time();
 
 echo date('l j F Y h:i:s A', $time);
 echo '<br /><br />';
