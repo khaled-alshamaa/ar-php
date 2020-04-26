@@ -22,6 +22,11 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
+<!--
+## What's new in ArPHP 5.0.1 _(release date: xxx ##, 2020)_
+
+* Handle the complement day of Hijri month in a proper way when $correction value is not 0. Thanks to Mohamed Abdallah <treviews7@gmail.com>.
+-->
 
 ## What's new in ArPHP 5.0.0 _(release date: Jan 25, 2020)_
 

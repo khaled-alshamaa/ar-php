@@ -57,7 +57,7 @@ namespace ArPHP\I18N;
  
 class Arabic
 {
-    public  $version = '5.0';
+    public $version = '5.0';
     
     private $arStandardPatterns     = array();
     private $arStandardReplacements = array();
@@ -1046,10 +1046,24 @@ class Arabic
                 $str = $this->arDateEn2ar($str);
             }
 
+            /*
             $timestamp = $timestamp + 3600 * 24 * $correction;
 
             list($y, $m, $d) = explode(' ', date('Y m d', $timestamp));
             list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic($y, $m, $d);
+            */
+            
+            list($y, $m, $d) = explode(' ', date('Y m d', $timestamp));
+            list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic($y, $m, $d);
+            
+            $hj_d += $correction;
+            
+            if ($hj_d <= 0) {
+                $hj_d = 30;
+                list($hj_y, $hj_m, $temp) = $this->arDateGregToIslamic($y, $m, $d + $correction);
+            } elseif ($hj_d > 30) {
+                list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic($y, $m, $d + $correction);
+            }
 
             $patterns     = array();
             $replacements = array();
