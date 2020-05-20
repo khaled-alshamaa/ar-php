@@ -265,7 +265,6 @@ class Arabic
     
     private function arStrToTimeInit()
     {
-        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_strtotime.xml');
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_strtotime.json'), true);
         
         foreach ($json['str_replace']['pair'] as $pair) {
@@ -287,48 +286,46 @@ class Arabic
     
     private function arTransliterateInit()
     {
-        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_transliteration.xml');
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
         
-        foreach ($xml->xpath("//preg_replace[@function='ar2en']/pair") as $pair) {
-            array_push($this->ar2enPregSearch, (string)$pair->search);
-            array_push($this->ar2enPregReplace, (string)$pair->replace);
+        foreach ($json['preg_replace_ar2en']['pair'] as $pair) {
+            array_push($this->ar2enPregSearch, (string)$pair['search']);
+            array_push($this->ar2enPregReplace, (string)$pair['replace']);
         }
         
-        foreach (
-            $xml->xpath("//str_replace[@function='diaritical']/pair") as $pair
-        ) {
-            array_push($this->diariticalSearch, (string)$pair->search);
-            array_push($this->diariticalReplace, (string)$pair->replace);
+        foreach ($json['str_replace_diaritical'] as $pair) {
+            array_push($this->diariticalSearch, (string)$pair['search']);
+            array_push($this->diariticalReplace, (string)$pair['replace']);
         }
         
-        foreach ($xml->xpath("//str_replace[@function='ISO233']/pair") as $pair) {
-            array_push($this->iso233Search, (string)$pair->search);
-            array_push($this->iso233Replace, (string)$pair->replace);
+        foreach ($json['str_replace_ISO233'] as $pair) {
+            array_push($this->iso233Search, (string)$pair['search']);
+            array_push($this->iso233Replace, (string)$pair['replace']);
         }
         
-        foreach ($xml->xpath("//str_replace[@function='RJGC']/pair") as $pair) {
-            array_push($this->rjgcSearch, (string)$pair->search);
-            array_push($this->rjgcReplace, (string)$pair->replace);
+        foreach ($json['str_replace_RJGC'] as $pair) {
+            array_push($this->rjgcSearch, (string)$pair['search']);
+            array_push($this->rjgcReplace, (string)$pair['replace']);
         }
         
-        foreach ($xml->xpath("//str_replace[@function='SES']/pair") as $pair) {
-            array_push($this->sesSearch, (string)$pair->search);
-            array_push($this->sesReplace, (string)$pair->replace);
+        foreach ($$json['str_replace_SES'] as $pair) {
+            array_push($this->sesSearch, (string)$pair['search']);
+            array_push($this->sesReplace, (string)$pair['replace']);
         }
         
-        foreach ($xml->xpath("//str_replace[@function='ar2en']/pair") as $pair) {
-            array_push($this->ar2enStrSearch, (string)$pair->search);
-            array_push($this->ar2enStrReplace, (string)$pair->replace);
+        foreach ($json['str_replace_ar2en'] as $pair) {
+            array_push($this->ar2enStrSearch, (string)$pair['search']);
+            array_push($this->ar2enStrReplace, (string)$pair['replace']);
         }
         
-        foreach ($xml->xpath("//preg_replace[@function='en2ar']/pair") as $pair) {
-            array_push($this->en2arPregSearch, (string)$pair->search);
-            array_push($this->en2arPregReplace, (string)$pair->replace);
+        foreach ($json['preg_replace_en2ar'] as $pair) {
+            array_push($this->en2arPregSearch, (string)$pair['search']);
+            array_push($this->en2arPregReplace, (string)$pair['replace']);
         }
         
-        foreach ($xml->xpath("//str_replace[@function='en2ar']/pair") as $pair) {
-            array_push($this->en2arStrSearch, (string)$pair->search);
-            array_push($this->en2arStrReplace, (string)$pair->replace);
+        foreach ($json['str_replace_en2ar'] as $pair) {
+            array_push($this->en2arStrSearch, (string)$pair['search']);
+            array_push($this->en2arStrReplace, (string)$pair['replace']);
         }
     }
     
