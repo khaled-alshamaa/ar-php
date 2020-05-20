@@ -99,7 +99,7 @@ class Arabic
     private $sesReplace = array();
     
     private $arDateMode = 1;
-    private $arDateXML;
+    private $arDateJSON;
     
     private $arNumberIndividual    = array();
     private $arNumberComplications = array();
@@ -173,7 +173,7 @@ class Arabic
         $this->rootDirectory = dirname(__FILE__);
         $this->arFemaleNames = array_map('trim', file($this->rootDirectory . '/data/ar_female.txt'));
         $this->umAlqoura     = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
-        $this->arDateXML     = simplexml_load_file($this->rootDirectory . '/data/ar_date.xml');
+        $this->arDateJSON    = json_decode(file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
         
         $this->arStandardInit();
         $this->arStrToTimeInit();
@@ -266,13 +266,14 @@ class Arabic
     private function arStrToTimeInit()
     {
         $xml = simplexml_load_file($this->rootDirectory . '/data/ar_strtotime.xml');
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_strtotime.json'), true);
         
-        foreach ($xml->xpath("//str_replace[@function='strtotime']/pair") as $pair) {
-            array_push($this->strToTimeSearch, (string)$pair->search);
-            array_push($this->strToTimeReplace, (string)$pair->replace);
+        foreach ($json['str_replace']['pair'] as $pair) {
+            array_push($this->strToTimeSearch, (string)$pair['search']);
+            array_push($this->strToTimeReplace, (string)$pair['replace']);
         }
         
-        foreach ($xml->hj_month->month as $month) {
+        foreach ($this->arDateJSON['ar_hj_month'] as $month) {
             array_push($this->hj, (string)$month);
         }
         
@@ -1003,14 +1004,16 @@ class Arabic
     {
         if ($this->arDateMode == 1 || $this->arDateMode == 8) {
             if ($this->arDateMode == 1) {
-                foreach ($this->arDateXML->ar_hj_month->month as $month) {
-                    $hj_txt_month["{$month['id']}"] = (string)$month;
+                foreach ($this->arDateJSON['ar_hj_month'] as $id=>$month) {
+                    $id++;
+                    $hj_txt_month["$id"] = (string)$month;
                 }
             }
 
             if ($this->arDateMode == 8) {
-                foreach ($this->arDateXML->en_hj_month->month as $month) {
-                    $hj_txt_month["{$month['id']}"] = (string)$month;
+                foreach ($this->arDateJSON['en_hj_month'] as $id=>$month) {
+                    $id++;
+                    $hj_txt_month["$id"] = (string)$month;
                 }
             }
 
@@ -1116,37 +1119,37 @@ class Arabic
 
         $str = strtolower($str);
 
-        foreach ($this->arDateXML->xpath("//en_day/mode[@id='full']/search") as $day) {
+        foreach ($this->arDateJSON['en_day']['mode_full'] as $day) {
             array_push($patterns, (string)$day);
         }
 
-        foreach ($this->arDateXML->ar_day->replace as $day) {
+        foreach ($this->arDateJSON['ar_day'] as $day) {
             array_push($replacements, (string)$day);
         }
 
-        foreach ($this->arDateXML->xpath("//en_month/mode[@id='full']/search") as $month) {
+        foreach ($this->arDateJSON['en_month']['mode_full'] as $month) {
             array_push($patterns, (string)$month);
         }
 
         $replacements = array_merge($replacements, $this->arDateArabicMonths($this->arDateMode));
 
-        foreach ($this->arDateXML->xpath("//en_day/mode[@id='short']/search") as $day) {
+        foreach ($this->arDateJSON['en_day']['mode_short'] as $day) {
             array_push($patterns, (string)$day);
         }
 
-        foreach ($this->arDateXML->ar_day->replace as $day) {
+        foreach ($this->arDateJSON['ar_day'] as $day) {
             array_push($replacements, (string)$day);
         }
 
-        foreach ($this->arDateXML->xpath("//en_month/mode[@id='short']/search") as $m) {
+        foreach ($this->arDateJSON['en_month']['mode_short'] as $m) {
             array_push($patterns, (string)$m);
         }
 
         $replacements = array_merge($replacements, $this->arDateArabicMonths($this->arDateMode));
 
-        foreach ($this->arDateXML->xpath("//preg_replace[@function='en2ar']/pair") as $p) {
-            array_push($patterns, (string)$p->search);
-            array_push($replacements, (string)$p->replace);
+        foreach ($this->arDateJSON['preg_replace_en2ar'] as $p) {
+            array_push($patterns, (string)$p['search']);
+            array_push($replacements, (string)$p['replace']);
         }
 
         $str = str_replace($patterns, $replacements, $str);
@@ -1172,7 +1175,7 @@ class Arabic
     {
         $replacements = array();
 
-        foreach ($this->arDateXML->xpath("//ar_month/mode[@id=$mode]/replace") as $month) {
+        foreach ($this->arDateJSON['ar_month']["mode_$mode"] as $month) {
             array_push($replacements, (string)$month);
         }
 
