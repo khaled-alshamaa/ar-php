@@ -527,11 +527,11 @@ class Arabic
 
     private function arQueryInit()
     {
-        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_query.xml');
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_query.json'), true);
 
-        foreach ($xml->xpath("//preg_replace[@function='__construct']/pair") as $pair) {
-            array_push($this->arQueryLexPatterns, (string)$pair->search);
-            array_push($this->arQueryLexReplacements, (string)$pair->replace);
+        foreach ($json['preg_replace']['pair'] as $pair) {
+            array_push($this->arQueryLexPatterns, (string)$pair['search']);
+            array_push($this->arQueryLexReplacements, (string)$pair['replace']);
         }
     }
 
