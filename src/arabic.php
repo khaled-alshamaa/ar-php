@@ -433,23 +433,21 @@ class Arabic
     
     private function arSoundexInit()
     {
-        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_soundex.xml');
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_soundex.json'), true);
         
-        foreach ($xml->arSoundexCode->item as $item) {
-            $index = $item['id'];
-            $value = (string) $item;
-            $this->arSoundexCode["$value"] = $index;
+        foreach ($json['arSoundexCode'] as $item) {
+            $index = $item['search'];
+            $this->arSoundexCode["$index"] = (string)$item['replace'];
         }
         
-        foreach ($xml->arPhonixCode->item as $item) {
-            $index = $item['id'];
-            $value = (string) $item;
-            $this->arPhonixCode["$value"] = $index;
+        foreach ($json['arPhonixCode'] as $item) {
+            $index = $item['search'];
+            $this->arPhonixCode["$index"] = (string)$item['replace'];
         }
         
-        foreach ($xml->soundexTransliteration->item as $item) {
-            $index = $item['id'];
-            $this->soundexTransliteration["$index"] = (string)$item;
+        foreach ($json['soundexTransliteration'] as $item) {
+            $index = $item['search'];
+            $this->soundexTransliteration["$index"] = (string)$item['replace'];
         }
         
         $this->soundexMap = $this->arSoundexCode;
