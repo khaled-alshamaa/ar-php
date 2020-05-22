@@ -7,11 +7,9 @@
 
 * Enhance example scripts by call the following functions: 
 
-	_arSummaryLoadExtra, dms2dd, setQueryArrFields, setSoundexCode, setSoundexLang, setSoundexLen, swapAf._
+	_arSummaryLoadExtra, dms2dd, setQueryArrFields, setSoundexCode, setSoundexLang, setSoundexLen, swapAf, arabizi._
 
 * Add function dd2dms.
-
-* Use JSON instead of XML for data files for better performance.
 
 * Replace foreach loop by array functions (map, filter, walk, etc) whenever possible.
 

@@ -23,7 +23,9 @@
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
 <!--
-## What's new in ArPHP 5.0.1 _(release date: xxx ##, 2020)_
+## What's new in ArPHP 5.1.0 _(release date: xxx ##, 2020)_
+
+* Use JSON instead of XML for data files to improve the performance.
 
 * Handle the complement day of Hijri month in a proper way when $correction value is not 0. Thanks to Mohamed Abdallah <treviews7@gmail.com>.
 -->
