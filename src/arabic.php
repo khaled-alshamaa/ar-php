@@ -415,13 +415,13 @@ class Arabic
     
     private function arKeySwapInit()
     {
-        $xml = simplexml_load_file($this->rootDirectory . '/data/arabizi.xml');
-        
-        foreach ($xml->transliteration->item as $item) {
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/arabizi.json'), true);
+
+        foreach ($json['transliteration'] as $item) {
             $index = $item['id'];
-            $this->arabizi["$index"] = (string)$item;
+            $this->arabizi["$index"] = (string)$item['text'];
         }
-        
+
         $xml = simplexml_load_file($this->rootDirectory . '/data/ar_keyswap.xml');
         
         foreach ($xml->arabic->key as $key) {
