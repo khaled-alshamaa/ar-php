@@ -331,58 +331,70 @@ class Arabic
     
     private function arNumbersInit()
     {
-        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_numbers.xml');
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_numbers.json'), true);
         
-        foreach ($xml->xpath("//individual/number[@gender='male']") as $num) {
+        foreach ($json['individual']['male'] as $num) {
             if (isset($num['grammar'])) {
                 $grammar = $num['grammar'];
-                $this->arNumberIndividual["{$num['value']}"][1]["$grammar"] = (string)$num;
+                $this->arNumberIndividual["{$num['value']}"][1]["$grammar"] = (string)$num['text'];
             } else {
-                $this->arNumberIndividual["{$num['value']}"][1] = (string)$num;
+                $this->arNumberIndividual["{$num['value']}"][1] = (string)$num['text'];
             }
         }
         
-        foreach ($xml->xpath("//individual/number[@gender='female']") as $num) {
+        foreach ($json['individual']['female'] as $num) {
             if (isset($num['grammar'])) {
                 $grammar = $num['grammar'];
-                $this->arNumberIndividual["{$num['value']}"][2]["$grammar"] = (string)$num;
+                $this->arNumberIndividual["{$num['value']}"][2]["$grammar"] = (string)$num['text'];
             } else {
-                $this->arNumberIndividual["{$num['value']}"][2] = (string)$num;
+                $this->arNumberIndividual["{$num['value']}"][2] = (string)$num['text'];
             }
         }
         
-        foreach ($xml->xpath("//individual/number[@value>19]") as $num) {
+        foreach ($json['individual']['gt19'] as $num) {
             if (isset($num['grammar'])) {
                 $grammar = $num['grammar'];
-                $this->arNumberIndividual["{$num['value']}"]["$grammar"] = (string)$num;
+                $this->arNumberIndividual["{$num['value']}"]["$grammar"] = (string)$num['text'];
             } else {
-                $this->arNumberIndividual["{$num['value']}"] = (string)$num;
+                $this->arNumberIndividual["{$num['value']}"] = (string)$num['text'];
             }
         }
-        
-        foreach ($xml->complications->number as $num) {
+
+        foreach ($json['complications'] as $num) {
             $scale  = $num['scale'];
             $format = $num['format'];
-            $this->arNumberComplications["$scale"]["$format"] = (string)$num;
+            $this->arNumberComplications["$scale"]["$format"] = (string)$num['text'];
         }
         
-        foreach ($xml->arabicIndic->number as $html) {
+        foreach ($json['arabicIndic'] as $html) {
             $value  = $html['value'];
-            $this->arNumberArabicIndic["$value"] = $html;
+            $this->arNumberArabicIndic["$value"] = $html['text'];
         }
         
-        foreach ($xml->xpath("//order/number[@gender='male']") as $num) {
-            $this->arNumberOrdering["{$num['value']}"][1] = (string)$num;
+        foreach ($json['order']['male'] as $num) {
+            $this->arNumberOrdering["{$num['value']}"][1] = (string)$num['text'];
         }
         
-        foreach ($xml->xpath("//order/number[@gender='female']") as $num) {
-            $this->arNumberOrdering["{$num['value']}"][2] = (string)$num;
+        foreach ($json['order']['female'] as $num) {
+            $this->arNumberOrdering["{$num['value']}"][2] = (string)$num['text'];
+        }
+
+        foreach ($json['individual']['male'] as $num) {
+            if ($num['value'] < 11) {
+                $str = str_replace(array('أ','إ','آ'), 'ا', (string)$num['text']);
+                $this->arNumberSpell[$str] = (int)$num['value'];
+            }
         }
         
-        $expression = "//individual/number[@value<11 or @value>19]";
+        foreach ($json['individual']['female'] as $num) {
+            if ($num['value'] < 11) {
+                $str = str_replace(array('أ','إ','آ'), 'ا', (string)$num['text']);
+                $this->arNumberSpell[$str] = (int)$num['value'];
+            }
+        }
         
-        foreach ($xml->xpath($expression) as $num) {
-            $str = str_replace(array('أ','إ','آ'), 'ا', (string)$num);
+        foreach ($json['individual']['gt19'] as $num) {
+            $str = str_replace(array('أ','إ','آ'), 'ا', (string)$num['text']);
             $this->arNumberSpell[$str] = (int)$num['value'];
         }
         
@@ -1533,7 +1545,6 @@ class Arabic
 
         foreach ($segment as $scale => $str) {
             $str = " $str ";
-
             foreach ($this->arNumberSpell as $word => $value) {
                 if (strpos($str, "$word ") !== false) {
                     $str = str_replace("$word ", ' ', $str);
