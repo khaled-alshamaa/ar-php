@@ -174,7 +174,7 @@ class Arabic
         $this->arFemaleNames = array_map('trim', file($this->rootDirectory . '/data/ar_female.txt'));
         $this->umAlqoura     = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
         $this->arDateJSON    = json_decode(file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
-        
+
         $this->arStandardInit();
         $this->arStrToTimeInit();
         $this->arTransliterateInit();
@@ -3363,12 +3363,12 @@ class Arabic
 
     /**
      * Convert coordinates presented in degrees, minutes and seconds
-     * (i.e. 12°34'56"S formula) into usual float number in degree unit scale
-     * (i.e. -12.5822 value)
+     * (e.g. 12°34'56"S formula) into usual float number in degree unit scale
+     * (e.g. -12.5822 value)
      *
-     * @param string $value Coordinate presented in degrees, minutes and seconds (i.e. 12°34'56"S formula)
+     * @param string $value Coordinate presented in degrees, minutes and seconds (e.g. 12°34'56"S formula)
      *
-     * @return float Equivalent float number in degree unit scale (i.e. -12.5822 value)
+     * @return float Equivalent float number in degree unit scale (e.g. -12.5822 value)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function dms2dd($value)
@@ -3386,6 +3386,47 @@ class Arabic
         }
 
         return $degree;
+    }
+
+    /**
+     * Convert coordinates presented in float number in degree unit scale
+     * (e.g. -12.5822 value) into degrees, minutes and seconds (e.g. -12°34'56" formula)
+     *
+     * @param float $value Coordinate presented in float number in degree unit scale (e.g. -12.5822 value)
+     *
+     * @return string Equivalent coordinate presented in degrees, minutes and seconds (e.g. -12°34'56" formula)
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function dd2dms($value)
+    {
+        if ($value < 0) {
+            $value = abs($value);
+            $dd    = '-';
+        } else {
+            $dd = '';
+        }
+        
+        $degrees = (int)$value;
+        $minutes = (int)(($value - $degrees) * 60);
+        $seconds = round(((($value - $degrees) * 60) - $minutes) * 60, 4);
+
+        if ($degrees > 0) {
+            $dd .= $degrees . '°';
+        }
+        
+        if ($minutes >= 10) {
+            $dd .= $minutes . '\'';
+        } else {
+            $dd .= '0' . $minutes . '\'';
+        }
+        
+        if ($seconds >= 10) {
+            $dd .= $seconds . '"';
+        } else {
+            $dd .= '0' . $seconds . '"';
+        }
+
+        return $dd;
     }
 
 

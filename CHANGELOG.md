@@ -25,7 +25,9 @@
 <!--
 ## What's new in ArPHP 5.1.0 _(release date: xxx ##, 2020)_
 
-* Use JSON instead of XML for data files to improve the performance.
+* Use JSON instead of XML for data files to improve the performance (this version can handle 175% of requests per seconds comparing to version 5.0.0).
+
+* Add "dd2dms" method to convert coordinates from decimal degrees to degrees, minutes, seconds format.
 
 * Handle the complement day of Hijri month in a proper way when $correction value is not 0. Thanks to Mohamed Abdallah <treviews7@gmail.com>.
 -->
