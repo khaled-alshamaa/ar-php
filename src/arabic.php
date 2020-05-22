@@ -875,7 +875,7 @@ class Arabic
 
         foreach ($words as $word) {
             $word = preg_replace($this->en2arPregSearch, $this->en2arPregReplace, $word);
-            $word = str_replace($this->en2arStrSearch, $this->en2arStrReplace, $word);
+            $word = strtr($word, array_combine($this->en2arStrSearch, $this->en2arStrReplace));
 
             $string .= ' ' . $word;
         }
@@ -901,26 +901,26 @@ class Arabic
         $string = '';
 
         for ($i = 0; $i < count($words) - 1; $i++) {
-            $words[$i] = str_replace('ة', 'ت', $words[$i]);
+            $words[$i] = strtr($words[$i], 'ة', 'ت');
         }
 
         foreach ($words as $word) {
             $temp = $word;
 
             if ($standard == 'UNGEGN+') {
-                $temp = str_replace($this->diariticalSearch, $this->diariticalReplace, $temp);
+                $temp = strtr($temp, array_combine($this->diariticalSearch, $this->diariticalReplace));
             } elseif ($standard == 'RJGC') {
-                $temp = str_replace($this->diariticalSearch, $this->diariticalReplace, $temp);
-                $temp = str_replace($this->rjgcSearch, $this->rjgcReplace, $temp);
+                $temp = strtr($temp, array_combine($this->diariticalSearch, $this->diariticalReplace));
+                $temp = strtr($temp, array_combine($this->rjgcSearch, $this->rjgcReplace));
             } elseif ($standard == 'SES') {
-                $temp = str_replace($this->diariticalSearch, $this->diariticalReplace, $temp);
-                $temp = str_replace($this->sesSearch, $this->sesReplace, $temp);
+                $temp = strtr($temp, array_combine($this->diariticalSearch, $this->diariticalReplace));
+                $temp = strtr($temp, array_combine($this->sesSearch, $this->sesReplace));
             } elseif ($standard == 'ISO233') {
-                $temp = str_replace($this->iso233Search, $this->iso233Replace, $temp);
+                $temp = strtr($temp, array_combine($this->iso233Search, $this->iso233Replace));
             }
 
             $temp = preg_replace($this->ar2enPregSearch, $this->ar2enPregReplace, $temp);
-            $temp = str_replace($this->ar2enStrSearch, $this->ar2enStrReplace, $temp);
+            $temp = strtr($temp, array_combine($this->ar2enStrSearch, $this->ar2enStrReplace));
             $temp = preg_replace($this->arFinePatterns, $this->arFineReplacements, $temp);
 
             if (preg_match('/[a-z]/', mb_substr($temp, 0, 1, 'UTF-8'))) {
@@ -1049,7 +1049,7 @@ class Arabic
                 array_push($replacements, '');
             }
 
-            $format = str_replace($patterns, $replacements, $format);
+            $format = strtr($format, array_combine($patterns, $replacements));
             $str    = date($format, $timestamp);
 
             if ($this->arDateMode == 1) {
@@ -1093,7 +1093,7 @@ class Arabic
             array_push($patterns, 'x7');
             array_push($replacements, sprintf('%02d', $hj_d));
 
-            $str = str_replace($patterns, $replacements, $str);
+            $str = strtr($str, array_combine($patterns, $replacements));
         } elseif ($this->arDateMode == 5) {
             $year  = date('Y', $timestamp);
             $year -= 632;
@@ -1159,7 +1159,7 @@ class Arabic
             array_push($replacements, (string)$p['replace']);
         }
 
-        $str = str_replace($patterns, $replacements, $str);
+        $str = strtr($str, array_combine($patterns, $replacements));
 
         return $str;
     }
