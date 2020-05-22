@@ -422,21 +422,21 @@ class Arabic
             $this->arabizi["$index"] = (string)$item['text'];
         }
 
-        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_keyswap.xml');
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_keyswap.json'), true);
         
-        foreach ($xml->arabic->key as $key) {
+        foreach ($json['arabic'] as $key) {
             $index = (int)$key['id'];
-            $this->arKeyboard[$index] = (string)$key;
+            $this->arKeyboard[$index] = (string)$key['text'];
+        }
+
+        foreach ($json['english'] as $key) {
+            $index = (int)$key['id'];
+            $this->enKeyboard[$index] = (string)$key['text'];
         }
         
-        foreach ($xml->english->key as $key) {
+        foreach ($json['french'] as $key) {
             $index = (int)$key['id'];
-            $this->enKeyboard[$index] = (string)$key;
-        }
-        
-        foreach ($xml->french->key as $key) {
-            $index = (int)$key['id'];
-            $this->frKeyboard[$index] = (string)$key;
+            $this->frKeyboard[$index] = (string)$key['text'];
         }
         
         $this->arLogodd = file($this->rootDirectory . '/data/logodd_ar.php');
