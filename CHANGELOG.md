@@ -30,6 +30,8 @@
 * Add "dd2dms" method to convert coordinates from decimal degrees to degrees, minutes, seconds format.
 
 * Handle the complement day of Hijri month in a proper way when $correction value is not 0. Thanks to Mohamed Abdallah <treviews7@gmail.com>.
+
+* Improve English soundex example using metaphone function as it knows the basic rules of English pronunciation (e.g. C of Clinton Pronounces K).
 -->
 
 ## What's new in ArPHP 5.0.0 _(release date: Jan 25, 2020)_

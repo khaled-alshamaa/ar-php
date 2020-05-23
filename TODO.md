@@ -7,7 +7,7 @@
 
 * Enhance example scripts by call the following functions: 
 
-	_arSummaryLoadExtra, dms2dd, setQueryArrFields, setSoundexCode, setSoundexLang, setSoundexLen, swapAf, arabizi._
+	_arSummaryLoadExtra, dms2dd, setQueryArrFields, swapAf, arabizi._
 
 * Replace foreach loop by array functions (map, filter, walk, etc) whenever possible.
 
