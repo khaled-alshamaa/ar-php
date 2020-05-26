@@ -43,19 +43,19 @@ END;
 echo '<tr>
         <td bgcolor=#f5f5f5>PHP soundex function</td>
         <td bgcolor=#f5f5f5>Clinton</td>
-        <td bgcolor=#f5f5f5>' . soundex('Clinton') . '</td>
+        <td bgcolor=#f5f5f5>' . soundex(metaphone('Clinton')) . '</td>
       </tr>';
 
 foreach ($Clinton as $name) {
     echo '<tr>
-            <td bgcolor=#f5f5f5>ArSoundex Method</td>
+            <td bgcolor=#f5f5f5>Arabic Soundex Method</td>
             <td bgcolor=#f5f5f5>' . $name . '</td>
             <td bgcolor=#f5f5f5>' . $Arabic->soundex($name) . '</td>
           </tr>';
 }
 
 echo '<tr>
-        <td bgcolor=#f5f5c5>ArSoundex Method</td>
+        <td bgcolor=#f5f5c5>Arabic Soundex Method</td>
         <td bgcolor=#f5f5c5>كلينزمان</td>
         <td bgcolor=#f5f5c5>' . $Arabic->soundex('كلينزمان') . '</td>
       </tr>';
@@ -83,23 +83,32 @@ $Milosevic = array('ميلوسيفيتش', 'ميلوسفيتش', 'ميلوزفي
 echo '<tr>
         <td bgcolor=#f5f5f5>PHP soundex function</td>
         <td bgcolor=#f5f5f5>Milosevic</td>
-        <td bgcolor=#f5f5f5>' . soundex('Milosevic') . '</td>
+        <td bgcolor=#f5f5f5>' . soundex(metaphone('Milosevic')) . '</td>
       </tr>';
                    
 foreach ($Milosevic as $name) {
     echo '<tr>
-            <td bgcolor=#f5f5f5>ArSoundex Method</td>
+            <td bgcolor=#f5f5f5>Arabic Soundex Method</td>
             <td bgcolor=#f5f5f5>' . $name . '</td>
             <td bgcolor=#f5f5f5>' . $Arabic->soundex($name) . '</td>
           </tr>';
 }
 
 echo '<tr>
-        <td bgcolor=#f5f5c5>ArSoundex Method</td>
+        <td bgcolor=#f5f5c5>Arabic Soundex Method</td>
         <td bgcolor=#f5f5c5>ميلينيوم</td>
         <td bgcolor=#f5f5c5>' . $Arabic->soundex('ميلينيوم') . '</td>
-      </tr></table>';
+      </tr>';
+
+$Arabic->setSoundexLen(5);
+$Arabic->setSoundexLang('ar');
+
+echo '<tr><td colspan=3><i><small>
+        Arabic Soundex Method (set Len=5 and Lang=ar) for "ميلوسيفيتش" word is: ' . 
+        $Arabic->soundex('ميلوسيفيتش') . 
+     '</small></i></td></tr></table>';
 ?>
+
 </div><br />
 <div class="Paragraph">
 <h2>Example Code:</h2>
@@ -126,19 +135,19 @@ END;
 echo '<tr>
         <td bgcolor=#f5f5f5>PHP soundex function</td>
         <td bgcolor=#f5f5f5>Clinton</td>
-        <td bgcolor=#f5f5f5>' . soundex('Clinton') . '</td>
+        <td bgcolor=#f5f5f5>' . soundex(metaphone('Clinton')) . '</td>
       </tr>';
 
 foreach (\$Clinton as \$name) {
     echo '<tr>
-            <td bgcolor=#f5f5f5>ArSoundex Method</td>
+            <td bgcolor=#f5f5f5>Arabic Soundex Method</td>
             <td bgcolor=#f5f5f5>' . \$name . '</td>
             <td bgcolor=#f5f5f5>' . \$Arabic->soundex(\$name) . '</td>
           </tr>';
 }
 
 echo '<tr>
-        <td bgcolor=#f5f5c5>ArSoundex Method</td>
+        <td bgcolor=#f5f5c5>Arabic Soundex Method</td>
         <td bgcolor=#f5f5c5>كلينزمان</td>
         <td bgcolor=#f5f5c5>' . \$Arabic->soundex('كلينزمان') . '</td>
       </tr>';
@@ -165,22 +174,30 @@ END;
     echo '<tr>
             <td bgcolor=#f5f5f5>PHP soundex function</td>
             <td bgcolor=#f5f5f5>Milosevic</td>
-            <td bgcolor=#f5f5f5>' . soundex('Milosevic') . '</td>
+            <td bgcolor=#f5f5f5>' . soundex(metaphone('Milosevic')) . '</td>
           </tr>';
                        
     foreach (\$Milosevic as \$name) {
         echo '<tr>
-                <td bgcolor=#f5f5f5>ArSoundex Method</td>
+                <td bgcolor=#f5f5f5>Arabic Soundex Method</td>
                 <td bgcolor=#f5f5f5>' . \$name . '</td>
                 <td bgcolor=#f5f5f5>' . \$Arabic->soundex(\$name) . '</td>
               </tr>';
     }
 
     echo '<tr>
-            <td bgcolor=#f5f5c5>ArSoundex Method</td>
+            <td bgcolor=#f5f5c5>Arabic Soundex Method</td>
             <td bgcolor=#f5f5c5>ميلينيوم</td>
             <td bgcolor=#f5f5c5>' . \$Arabic->soundex('ميلينيوم') . '</td>
-          </tr></table>';
+          </tr>';
+
+    \$Arabic->setSoundexLen(5);
+    \$Arabic->setSoundexLang('ar');
+
+    echo '<tr><td colspan=3><i><small>
+            Arabic Soundex Method (set Len=5 and Lang=ar) for "ميلوسيفيتش" word is: ' . 
+            \$Arabic->soundex('ميلوسيفيتش') . 
+         '</small></i></td></tr></table>';
 ENDALL;
 
 highlight_string($code);
