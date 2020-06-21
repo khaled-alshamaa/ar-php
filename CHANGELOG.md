@@ -31,6 +31,8 @@
 
 * Handle the complement day of Hijri month in a proper way when $correction value is not 0. Thanks to Mohamed Abdallah <treviews7@gmail.com>.
 
+* Fix the "int2str" method bug in the output of ordering numbers for values 2-10, 20, 30, etc. Thanks to Said Bakr <@saidbakr>.
+
 * Improve English soundex example using metaphone function as it knows the basic rules of English pronunciation (e.g. C of Clinton Pronounces K).
 -->
 

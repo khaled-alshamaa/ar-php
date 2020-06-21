@@ -1608,28 +1608,16 @@ class Arabic
                 if ($text) {
                     if ($number == 1 && $i != 0) {
                         $text = $this->arNumberComplications[$i][4];
-
-                        if ($this->arNumberOrder == 2) {
-                            $text = 'ال' . $text;
-                        }
                     } elseif ($number == 2 && $i != 0) {
                         $text = $this->arNumberComplications[$i][$this->arNumberFormat];
-
-                        if ($this->arNumberOrder == 2) {
-                            $text = 'ال' . $text;
-                        }
                     } elseif ($number > 2 && $number < 11 && $i != 0) {
                         $text .= ' ' . $this->arNumberComplications[$i][3];
-
-                        if ($this->arNumberOrder == 2) {
-                            $text = 'ال' . $text;
-                        }
                     } elseif ($i != 0) {
                         $text .= ' ' . $this->arNumberComplications[$i][4];
-
-                        if ($this->arNumberOrder == 2) {
-                            $text = 'ال' . $text;
-                        }
+                    }
+                    
+                    if ($this->arNumberOrder == 2 && ($number > 1 && $number < 11)) {
+                        $text = 'ال' . $text;
                     }
 
                     //--- by Jnom: handle left zero
@@ -1703,7 +1691,9 @@ class Arabic
                     $ones = $number % 10;
                     $tens = floor($number / 10) * 10;
 
-                    array_push($items, 'ال' . $this->arNumberOrdering[$ones][$this->arNumberFeminine]);
+                    if ($ones > 0) {
+                        array_push($items, 'ال' . $this->arNumberOrdering[$ones][$this->arNumberFeminine]);
+                    }
                     array_push($items, 'ال' . $this->arNumberIndividual[$tens][$this->arNumberFormat]);
                 }
             } else {
