@@ -288,7 +288,7 @@ class Arabic
     {
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
         
-        foreach ($json['preg_replace_ar2en']['pair'] as $pair) {
+        foreach ($json['preg_replace_ar2en'] as $pair) {
             array_push($this->ar2enPregSearch, (string)$pair['search']);
             array_push($this->ar2enPregReplace, (string)$pair['replace']);
         }
@@ -308,7 +308,7 @@ class Arabic
             array_push($this->rjgcReplace, (string)$pair['replace']);
         }
         
-        foreach ($$json['str_replace_SES'] as $pair) {
+        foreach ($json['str_replace_SES'] as $pair) {
             array_push($this->sesSearch, (string)$pair['search']);
             array_push($this->sesReplace, (string)$pair['replace']);
         }
