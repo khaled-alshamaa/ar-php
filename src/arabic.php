@@ -2567,17 +2567,19 @@ class Arabic
     {
         // Get all named HTML entities.
         $table = array_flip(get_html_translation_table(HTML_ENTITIES));
+        
         // PHP gives us ISO-8859-1 data, we need UTF-8.
         $table = array_map('utf8_encode', $table);
+        
         // Add apostrophe (XML)
         $table['&apos;'] = "'";
 
         $newtable = array_diff($table, $exclude);
+        
         // Use a regexp to select all entities in one pass, to avoid decoding
         // double-escaped entities twice.
-        //return preg_replace('/&(#x?)?([A-Za-z0-9]+);/e',
-        //                    '$this->decodeEntities2("$1", "$2", "$0", $newtable,
-        //                                             $exclude)', $text);
+        //$text = preg_replace('/&(#x?)?([A-Za-z0-9]+);/e', $this->arGlyphsDecodeEntities2("$1", "$2", "$0", $newtable, $exclude), $text);
+        
         $pieces = explode('&', $text);
         $text   = array_shift($pieces);
 
@@ -2595,7 +2597,13 @@ class Arabic
             $end   = mb_strpos($piece, ';', 0, 'UTF-8');
             $start = mb_strlen($one, 'UTF-8');
             $two   = mb_substr($piece, $start, $end - $start, 'UTF-8');
-            $zero  = '&' . $one . $two . ';';
+            
+            if ($one == '' && $two == '') {
+                $zero = '&';
+            } else {
+                $zero  = '&' . $one . $two . ';';
+            }
+            
             $text .= $this->arGlyphsDecodeEntities2($one, $two, $zero, $newtable, $exclude) .
                      mb_substr($piece, $end + 1, mb_strlen($piece, 'UTF-8'), 'UTF-8');
         }
