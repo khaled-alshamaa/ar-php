@@ -21,6 +21,7 @@ This line of code replaced all the following varieties of new constructor calls 
 |$Arabic = new I18N_Arabic('Date');|
 |$Arabic = new I18N_Arabic('Gender');|
 |$Arabic = new I18N_Arabic('Glyphs');|
+|$Arabic = new I18N_Arabic('Identifier');|
 |$Arabic = new I18N_Arabic('KeySwap');|
 |$Arabic = new I18N_Arabic('Mktime');|
 |$Arabic = new I18N_Arabic('Numbers');|
@@ -30,7 +31,6 @@ This line of code replaced all the following varieties of new constructor calls 
 |$Arabic = new I18N_Arabic('Standard');|
 |$Arabic = new I18N_Arabic('StrToTime');|
 |$Arabic = new I18N_Arabic('Transliteration');|
-|$Arabic = new I18N_Arabic('Identifier');|
 
 > *Version 5.0 has no static methods anymore, so if you have any call of type `I18N_Arabic::methodName();` then you have to replace it by `$Arabic->methodName();` after creating an object instance like the way mentioned before.*
 
