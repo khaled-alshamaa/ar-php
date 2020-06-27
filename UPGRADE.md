@@ -30,6 +30,7 @@ This line of code replaced all the following varieties of new constructor calls 
 |$Arabic = new I18N_Arabic('Standard');|
 |$Arabic = new I18N_Arabic('StrToTime');|
 |$Arabic = new I18N_Arabic('Transliteration');|
+|$Arabic = new I18N_Arabic('Identifier');|
 
 > *Version 5.0 has no static methods anymore, so if you have any call of type `I18N_Arabic::methodName();` then you have to replace it by `$Arabic->methodName();` after creating an object instance like the way mentioned before.*
 
@@ -114,16 +115,21 @@ Once you update the way of constructing your Arabic object, the rest of your cod
 |$Arabic->highlightSummary($str, $int, $keywords, $style);|$Arabic->arSummary($str, $keywords, $int, 1, 2, $style);|
 |$Arabic->highlightRateSummary($str, $rate, $keywords, $style);|$Arabic->arSummary($str, $keywords, $int, 2, 2, $style);|
 
+### *Changes in the Identifier methods:*
+
+| Version 4.0 | Version 5.1 |
+|-------------|:------------|
+|$Arabic->identify($str);|$Arabic->arIdentify($str);|
+
 ### *Deprecated sub-classes:*
 
-| Version 4.0 | Version 5.0 |
+| Version 4.0 | Version 5.1 |
 |-------------|:------------|
 |$Arabic = new I18N_Arabic('Stemmer');|~~Deprecated~~|
 |$Arabic = new I18N_Arabic('WordTag');|~~Deprecated~~|
 |$Arabic = new I18N_Arabic('CharsetD');|~~Deprecated~~|
 |$Arabic = new I18N_Arabic('CompressStr');|~~Deprecated~~|
 |$Arabic = new I18N_Arabic('Hiero');|~~Deprecated~~|
-|$Arabic = new I18N_Arabic('Identifier');|~~Deprecated~~|
 |$Arabic = new I18N_Arabic('Normalise');|~~Deprecated~~|
 |$Arabic = new I18N_Arabic('Phoenician');|~~Deprecated~~|
 

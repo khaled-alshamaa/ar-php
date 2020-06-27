@@ -29,9 +29,9 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 [[LGPL](http://www.gnu.org/licenses/lgpl-3.0.html), [GNU FAQ](http://www.gnu.org/licenses/gpl-faq.html)]
 
 ### History
-* PHP 4 at [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
-* PHP 5 at [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
 * PHP 7 at [GitHub.com](https://github.com/khaled-alshamaa/ar-php) starting in 2020.
+* PHP 5 at [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
+* PHP 4 at [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
 * [PHP and Arabic Language](https://darshoaa.com/pHP-and-Arabic-language/) book, 2007.
 
 ## _Main Functionalities_
@@ -49,6 +49,7 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 * [Arabic StrToTime](#arabic-strtotime)
 * [Arabic Text Standardize](#arabic-text-standardize)
 * [Arabic Auto Summarize](#arabic-auto-summarize)
+* [Arabic Segments Identifier](#arabic-segments-identifier)
 
 
 ### English-Arabic Transliteration
@@ -469,6 +470,28 @@ echo '<h2>Full Text:</h2><p dir="rtl" align="justify">'.$content.'</p>';
 ```
 
 [Back to the list](#main-functionalities)
+
+### Arabic Segments Identifier
+This method will identify Arabic text in a given UTF-8 multi-language document and return an array of start and end positions for Arabic text segments.
+
+Understanding the language and encoding of a given document is an essential step in working with unstructured multilingual text. Without this basic knowledge, applications such as information retrieval and text mining cannot accurately process data, and important information may be completely missed or misrouted.
+
+Any application that works with Arabic in multiple languages documents can benefit from this functionality. Applications can use it to take a fully automated approach to process Arabic text by quickly and accurately determining Arabic text segments within multiple languages document.
+
+```php
+$obj = new \ArPHP\I18N\Arabic();
+
+$p = $obj->arIdentify($html);
+
+for ($i = count($p)-1; $i >= 0; $i-=2) {
+    $arbic   = substr($html, $p[$i-1], $p[$i] - $p[$i-1]);
+    $replace = '<span style="background-color: #EEEE80">' . $arabic . '</span>';
+    $html    = substr_replace($html, $replace, $p[$i-1], $p[$i] - $p[$i-1]);
+}
+```
+
+[Back to the list](#main-functionalities)
+
 
 ## _How to Contribute?_
 We always welcome new contributors – especially new programmers. But no matter what your skills and interests are, there is a place where you can participate to improve Ar-PHP project:

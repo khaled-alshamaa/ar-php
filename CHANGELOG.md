@@ -1,5 +1,6 @@
 # ArPHP Library - Change Log
 
+* Version [5.1.0](#whats-new-in-arphp-510-release-date-jun-27-2020) _(release date: Jun 27, 2020)_
 * Version [5.0.0](#whats-new-in-arphp-500-release-date-jan-25-2020) _(release date: Jan 25, 2020)_
 * Version [4.0.0](#whats-new-in-arphp-400-release-date-jan-8-2016) _(release date: Jan 8, 2016)_
 * Version [3.6.0](#whats-new-in-arphp-360-release-date-jan-20-2013) _(release date: Jan 20, 2013)_
@@ -22,10 +23,11 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
-<!--
-## What's new in ArPHP 5.1.0 _(release date: xxx ##, 2020)_
+## What's new in ArPHP 5.1.0 _(release date: Jun 27, 2020)_
 
 * Use JSON instead of XML for data files to improve the performance (this version can handle 175% of requests per seconds comparing to version 5.0.0).
+
+* Migrate the arIdentify method from version 4.0.0 to extract the Arabic text segments in a given UTF-8 multi language document.
 
 * Add "dd2dms" method to convert coordinates from decimal degrees to degrees, minutes, seconds format.
 
@@ -36,7 +38,9 @@
 * Fix the issue of replacing & by &; in the utf8Glyphs method. Thanks to Ramon Leenders <https://github.com/ramonleenders>.
 
 * Improve English soundex example using metaphone function as it knows the basic rules of English pronunciation (e.g. C of Clinton Pronounces K).
--->
+
+[Top](#arphp-library---change-log)
+
 
 ## What's new in ArPHP 5.0.0 _(release date: Jan 25, 2020)_
 
