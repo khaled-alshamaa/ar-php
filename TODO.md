@@ -1,4 +1,6 @@
 ## To-Do List
+* Continuous Integration with GitHub Actions and PHPUnit (e.g. [php-actions/phpunit](https://github.com/php-actions/example-phpunit)).
+
 * PSR-4: [Autoloading Standard](https://www.php-fig.org/psr/psr-4/).
 
 * PSR-5: [PHPDoc Standard](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md).
