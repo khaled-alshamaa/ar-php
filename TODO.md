@@ -167,3 +167,23 @@ The following command line shows an example call of 1000 requests for numbers te
 ```bash
 \path\to\apache\bin\ab -n 1000 -c 50 http://localhost/ar-php/tests/numbers.php
 ```   
+
+### _Test Against QA Releases (e.g., PHP 8.0 RC2)_
+
+* Get the binary build of PHP (e.g. for Windows: [https://windows.php.net/qa](https://windows.php.net/qa)), then un-zip it in the directory of your choice.
+
+* Rename the "php.ini-development" file to be "php.ini", and then edit it to enable the "mbstring" extension:
+
+```
+extension=./ext/php_mbstring.dll
+```
+
+* Open your shell (e.g. CMD or PowerShell), change the directory to be inside your unzipped PHP folder, then start the PHP built-in web server (the -t parameter to specify the document root directory):
+
+```bash
+php -S localhost:8000 -t C:\xampp\htdocs\
+```
+
+> _**Note:** If you get an error message tells you that VC run time is not compatible with this PHP build, then make sure to install the required version of the Microsoft Visual C++ Redistributable package (e.g. for PHP 8.0 you need the Visual Studio 2019 package which can be downloaded from [here](https://visualstudio.microsoft.com/downloads/#microsoft-visual-c-redistributable-for-visual-studio-2019))._
+
+* Open your browser and visit the URL of your script (e.g. http://localhost:8000/ar-php/tests/soundex.php).
