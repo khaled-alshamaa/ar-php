@@ -101,7 +101,7 @@ phpcs -p arabic.php --standard=PHPCompatibility --runtime-set testVersion 5.3-
 ### _PHPUnit Testing Framework_
 [PHPUnit](https://phpunit.de/) is a programmer-oriented testing framework for PHP. It is an instance of the xUnit architecture for unit testing frameworks.
 
-Simply download the PHAR distribution of PHPUnit 9 from [here](https://phar.phpunit.de/phpunit-9.phar) then copy it inside the root directory of the library.
+Simply download the PHAR distribution of PHPUnit 9 from [here](https://phar.phpunit.de/phpunit-9.phar), then copy it inside the root directory of the library.
 
 The following command line will execute all the automated tests:
 
