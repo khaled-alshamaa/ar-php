@@ -133,6 +133,7 @@ highlight_string($code);
 <h2 dir="ltr">Example Output 4: العملات العربية</h2>
 <?php
     $Arabic->setNumberFeminine(1);
+    $Arabic->setNumberFormat(1);
 
     $number = 24.7;
     $text   = $Arabic->money2str($number, 'KWD', 'ar');
@@ -147,6 +148,9 @@ highlight_string($code);
 $code = <<< END
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
+
+    \$Arabic->setNumberFeminine(1);
+    \$Arabic->setNumberFormat(1);
     
     \$number = 24.7;
     \$text   = \$Arabic->money2str(\$number, 'KWD', 'ar');
