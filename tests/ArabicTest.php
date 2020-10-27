@@ -115,4 +115,139 @@ final class ArabicTest extends TestCase
             $integer
         );
     }
+
+    public function testDateOfHijriFormatInIslamicCalendar(): void
+    {
+        date_default_timezone_set('GMT');
+        $time = 1502656150;
+        
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $correction = $Arabic->dateCorrection ($time);
+        $date = $Arabic->date('l j F Y h:i:s A', $time, $correction);
+    
+        $this->assertEquals(
+            'الأحد 20 ذو القعدة 1438 08:29:10 مساءً',
+            $date
+        );
+    }
+
+    public function testDateOfHijriFormatInIslamicCalendarInEnglish(): void
+    {
+        date_default_timezone_set('GMT');
+        $time = 1502656150;
+        
+        $Arabic = new \ArPHP\I18N\Arabic();
+        $Arabic->setDateMode(8);
+        
+        $correction = $Arabic->dateCorrection ($time);
+        $date = $Arabic->date('l j F Y h:i:s A', $time, $correction);
+    
+        $this->assertEquals(
+            "Sunday 20 Dhu al-Qi'dah 1438 08:29:10 PM",
+            $date
+        );
+    }
+
+    public function testDateOfArabicMonthNamesUsedInMiddleEastCountries(): void
+    {
+        date_default_timezone_set('GMT');
+        $time = 1502656150;
+        
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $Arabic->setDateMode(2);
+        
+        $date = $Arabic->date('l j F Y h:i:s A', $time);
+    
+        $this->assertEquals(
+            'الأحد 13 آب 2017 08:29:10 مساءً',
+            $date
+        );
+    }
+
+    public function testDateOfArabicTransliterationOfGregorianMonthNames(): void
+    {
+        date_default_timezone_set('GMT');
+        $time = 1502656150;
+        
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $Arabic->setDateMode(3);
+        
+        $date = $Arabic->date('l j F Y h:i:s A', $time);
+    
+        $this->assertEquals(
+            'الأحد 13 أغسطس 2017 08:29:10 مساءً',
+            $date
+        );
+    }
+
+    public function testDateOfArabicMonthNamesAndGregorianTransliterationTogether(): void
+    {
+        date_default_timezone_set('GMT');
+        $time = 1502656150;
+        
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $Arabic->setDateMode(4);
+        
+        $date = $Arabic->date('l j F Y h:i:s A', $time);
+    
+        $this->assertEquals(
+            'الأحد 13 آب/أغسطس 2017 08:29:10 مساءً',
+            $date
+        );
+    }
+
+    public function testDateOfLibyanWay(): void
+    {
+        date_default_timezone_set('GMT');
+        $time = 1502656150;
+        
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $Arabic->setDateMode(5);
+        
+        $date = $Arabic->date('l j F Y h:i:s A', $time);
+    
+        $this->assertEquals(
+            'الأحد 13 هانيبال 1385 08:29:10 مساءً',
+            $date
+        );
+    }
+
+    public function testDateOfAlgeriaAndTunisStyle(): void
+    {
+        date_default_timezone_set('GMT');
+        $time = 1502656150;
+        
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $Arabic->setDateMode(6);
+        
+        $date = $Arabic->date('l j F Y h:i:s A', $time);
+    
+        $this->assertEquals(
+            'الأحد 13 أوت 2017 08:29:10 مساءً',
+            $date
+        );
+    }
+
+    public function testDateOfMoroccoStyle(): void
+    {
+        date_default_timezone_set('GMT');
+        $time = 1502656150;
+        
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $Arabic->setDateMode(7);
+        
+        $date = $Arabic->date('l j F Y h:i:s A', $time);
+    
+        $this->assertEquals(
+            'الأحد 13 غشت 2017 08:29:10 مساءً',
+            $date
+        );
+    }
 }
