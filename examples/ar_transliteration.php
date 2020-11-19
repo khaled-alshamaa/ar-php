@@ -24,7 +24,7 @@ $time_start = microtime(true);
 require '../src/arabic.php';
 $Arabic = new \ArPHP\I18N\Arabic();
 
-$en_terms = array('George Bush, Paul Wolfowitz', 'Silvio Berlusconi?',
+$en_terms = array('George Bush', 'Paul Wolfowitz', 'Silvio Berlusconi?',
     'Guantanamo', 'Arizona', 'Maryland', 'Oracle', 'Yahoo', 'Google',
     'Formula1', 'Boeing', 'Caviar', 'Telephone', 'Internet', "Côte d'Ivoire");
 
@@ -66,7 +66,7 @@ $code = <<< ENDALL
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
 
-    \$en_terms = array('George Bush, Paul Wolfowitz', 'Silvio Berlusconi?',
+    \$en_terms = array('George Bush', 'Paul Wolfowitz', 'Silvio Berlusconi?',
         'Guantanamo', 'Arizona', 'Maryland', 'Oracle', 'Yahoo', 'Google',
         'Formula1', 'Boeing', 'Caviar', 'Telephone', 'Internet', "Côte d'Ivoire");
 
