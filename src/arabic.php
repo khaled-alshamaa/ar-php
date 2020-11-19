@@ -3845,7 +3845,7 @@ class Arabic
             // ignore ! " # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 :
             // If it come in the Arabic context
             if ($cDec >= 33 && $cDec <= 58) {
-                continue;
+                #continue;
             }
             
             if (!$probAr && ($cDec == 216 || $cDec == 217)) {
