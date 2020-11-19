@@ -48,6 +48,7 @@ git pull origin master
 Create and push a new commit:
 
 ```bash
+git pull origin master
 git add .
 git commit -m "modification message"
 git push origin master
