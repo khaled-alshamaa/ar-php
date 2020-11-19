@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
-# date, numbers, ar_transliteration, en_transliteration
+# covered examples: date, numbers, ar_transliteration, en_transliteration, gender, keyswap 
+# glyphs, mktime, salat, standard, strtotime, soundex
 
 use PHPUnit\Framework\TestCase;
 
@@ -371,6 +372,149 @@ final class ArabicTest extends TestCase
         $this->assertEquals(
             $fixed,
             ['ببطئ لكن بثبات', 'ببطئ لكن بثبات', 'Slowly ghut surely', 'Slowly but surely']
+        );
+    }
+
+    public function testArabicGlyphs(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $str = 'بسم الله الرحمن الرحيم';
+    
+        $this->assertEquals(
+            $Arabic->utf8Glyphs($str),
+            'ﻢﻴﺣﺮﻟﺍ ﻦﻤﺣﺮﻟﺍ ﻪﻠﻟﺍ ﻢﺴﺑ'
+        );
+    }
+
+    public function testHijriDateMakeTime(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $correction = $Arabic->mktimeCorrection(9, 1429);
+        $time = $Arabic->mktime(0, 0, 0, 9, 1, 1429, $correction);
+    
+        $this->assertEquals(
+            $time,
+            1220227200
+        );
+    }
+
+    public function testDaysCountOfHijriMonth(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $days = $Arabic->hijriMonthDays(9, 1429);
+    
+        $this->assertEquals(
+            $days,
+            30
+        );
+    }
+
+    public function testGetQiblaDirection(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $Arabic->setSalatLocation(33.52, 36.31);
+        $direction = $Arabic->getQibla();
+    
+        $this->assertEquals(
+            $direction,
+            164.70473621919
+        );
+    }
+
+    public function testMuslimPrayerTimes(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $Arabic->setSalatLocation(33.52, 36.31, 3, 691);
+        $Arabic->setSalatDate(11, 19, 2020);
+        $Arabic->setSalatConf('Shafi', -0.833333, -17.5, -19.5, 'Sunni');
+    
+        $this->assertEquals(
+            $Arabic->getPrayTime(),
+            ["5:36","7:05","12:20","15:10","17:37","18:54","17:35","0:20","5:26",
+            [1605764160.0,1605769500.0,1605788400.0,1605798600.0,1605807420.0,1605812040.0,1605807300.0,1605831600.0,1605763560.0]]
+        );
+    }
+
+    public function testArabicTextStandardize(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+$content = <<<END
+هذا نص عربي ، و فيه علامات ترقيم بحاجة إلى ضبط و معايرة !و كذلك نصوص( بين 
+أقواس )أو حتى مؤطرة"بإشارات إقتباس "أو- علامات إعتراض -الخ......
+<br>
+لذا ستكون هذه المكتبة أداة و وسيلة لمعالجة مثل هكذا حالات، بما فيها الواحدات 1 
+Kg أو مثلا MB 16 وسواها حتى النسب المؤية مثل 20% أو %50 وهكذا ...
+END;
+
+$check = <<<END
+هذا نص عربي، وفيه علامات ترقيم بحاجة إلى ضبط ومعايرة! وكذلك نصوص (بين 
+أقواس) أو حتى مؤطرة "بإشارات إقتباس" أو -علامات إعتراض- الخ...
+<br>
+لذا ستكون هذه المكتبة أداة و وسيلة لمعالجة مثل هكذا حالات، بما فيها الواحدات 1 
+Kg أو مثلا <span dir="ltr">16 MB</span> وسواها حتى النسب المؤية مثل %20 أو %50 وهكذا...
+END;
+
+        $this->assertEquals(
+            $Arabic->standard($content),
+            $check
+        );
+    }
+
+    public function testArabicStringToTime7Cases(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $time  = 1605793969;
+        $dates = array('الخميس القادم', 'الأحد الماضي', 'بعد أسبوع و ثلاثة أيام', 'منذ تسعة أيام', 
+                          'قبل إسبوعين', '2 آب 1975', '1 رمضان 1429');
+        
+        $timestamp = array();
+        
+        foreach ($dates as $date){
+            array_push($timestamp, $Arabic->strtotime($date, $time));
+        }
+    
+        $this->assertEquals(
+            [1606348800,1605398400,1606657969,1605016369,1604584369,176169600,1220227200],
+            $timestamp
+        );
+    }
+
+    public function testArabicSoundex14Cases(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $words = array('كلينتون', 'كلينتن', 'كلينطون', 'كلنتن', 'كلنتون', 'كلاينتون', 'كلينزمان',
+                       'ميلوسيفيتش', 'ميلوسفيتش', 'ميلوزفيتش', 'ميلوزيفيتش', 'ميلسيفيتش', 'ميلوسيفتش', 'ميلينيوم');
+        
+        $indices = array();
+        
+        foreach ($words as $word){
+            array_push($indices, $Arabic->soundex($word));
+        }
+    
+        $this->assertEquals(
+            ['K453','K453','K453','K453','K453','K453','K452','M421','M421','M421','M421','M421','M421','M455'],
+            $indices
+        );
+    }
+
+    public function testArabicSoundexInArabicLength5(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $Arabic->setSoundexLen(5);
+        $Arabic->setSoundexLang('ar');
+    
+        $this->assertEquals(
+            $Arabic->soundex('ميلوسيفيتش'),
+            'م4213'
         );
     }
 }
