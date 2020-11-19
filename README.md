@@ -45,7 +45,7 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 * [Muslim Prayer Times](#muslim-prayer-times)
 * [Qibla Determination](#qibla-determination)
 * [Arabic/Hijri Date](#arabichijri-date)
-* [Arabic/Hijri Maketime](#arabichijri-mktime)
+* [Arabic/Hijri Maketime](#arabichijri-maketime)
 * [Arabic StrToTime](#arabic-strtotime)
 * [Arabic Text Standardize](#arabic-text-standardize)
 * [Arabic Auto Summarize](#arabic-auto-summarize)
