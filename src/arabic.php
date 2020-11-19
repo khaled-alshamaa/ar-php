@@ -722,7 +722,7 @@ class Arabic
     private function arDateIslamicToGreg($y, $m, $d)
     {
         if (function_exists('GregorianToJD')) {
-            $str = JDToGregorian($this->arDateIslamicToJd($y, $m, $d));
+            $str = jdtogregorian($this->arDateIslamicToJd($y, $m, $d));
         } else {
             $str = $this->arDateJdToGreg($this->arDateIslamicToJd($y, $m, $d));
         }
@@ -737,7 +737,7 @@ class Arabic
      *
      * @param integer $julian A julian day number as integer
      *
-     * @return integer The gregorian date as a string in the form "month/day/year"
+     * @return string The gregorian date as a string in the form "month/day/year"
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arDateJdToGreg($julian)
@@ -798,7 +798,7 @@ class Arabic
             $m = substr($this->umAlqoura, $offset + 3, 2);
             $y = substr($this->umAlqoura, $offset + 6, 4);
 
-            $real = mktime(0, 0, 0, $m, $d, $y);
+            $real = mktime(0, 0, 0, (int)$m, (int)$d, (int)$y);
             $diff = (int)(($real - $calc) / (3600 * 24));
         } else {
             $diff = 0;
@@ -1010,6 +1010,8 @@ class Arabic
     public function date($format, $timestamp, $correction = 0)
     {
         if ($this->arDateMode == 1 || $this->arDateMode == 8) {
+            $hj_txt_month = array();
+            
             if ($this->arDateMode == 1) {
                 foreach ($this->arDateJSON['ar_hj_month'] as $id => $month) {
                     $id++;
@@ -1064,15 +1066,15 @@ class Arabic
             */
             
             list($y, $m, $d) = explode(' ', date('Y m d', $timestamp));
-            list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic($y, $m, $d);
+            list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d);
             
             $hj_d += $correction;
             
             if ($hj_d <= 0) {
                 $hj_d = 30;
-                list($hj_y, $hj_m, $temp) = $this->arDateGregToIslamic($y, $m, $d + $correction);
+                list($hj_y, $hj_m, $temp) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d + $correction);
             } elseif ($hj_d > 30) {
-                list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic($y, $m, $d + $correction);
+                list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d + $correction);
             }
 
             $patterns     = array();
@@ -1099,7 +1101,7 @@ class Arabic
             $year -= 632;
             $yr    = substr("$year", -2);
 
-            $format = str_replace('Y', $year, $format);
+            $format = str_replace('Y', (string)$year, $format);
             $format = str_replace('y', $yr, $format);
 
             $str = date($format, $timestamp);
@@ -1201,8 +1203,8 @@ class Arabic
      */
     private function arDateGregToIslamic($y, $m, $d)
     {
-        if (function_exists('GregorianToJD')) {
-            $jd = GregorianToJD($m, $d, $y);
+        if (function_exists('gregoriantojd')) {
+            $jd = gregoriantojd($m, $d, $y);
         } else {
             $jd = $this->arDateGregToJd($m, $d, $y);
         }
@@ -1279,8 +1281,9 @@ class Arabic
         }
 
         $jd = (int)(365.25 * ($y + 4716)) + (int)(30.6001 * ($m + 1)) + $d + $b - 1524.5;
+        $jd = round($jd);
 
-        return round($jd);
+        return (int)$jd;
     }
 
     /**
@@ -1293,17 +1296,17 @@ class Arabic
      */
     public function dateCorrection($time)
     {
-        $calc = $time - $this->date('j', $time) * 3600 * 24;
+        $calc = $time - (int)$this->date('j', $time) * 3600 * 24;
 
         $y      = $this->date('Y', $time);
         $m      = $this->date('n', $time);
-        $offset = (($y - 1420) * 12 + $m) * 11;
+        $offset = (((int)$y - 1420) * 12 + (int)$m) * 11;
 
         $d = substr($this->umAlqoura, $offset, 2);
         $m = substr($this->umAlqoura, $offset + 3, 2);
         $y = substr($this->umAlqoura, $offset + 6, 4);
 
-        $real = mktime(0, 0, 0, $m, $d, $y);
+        $real = mktime(0, 0, 0, (int)$m, (int)$d, (int)$y);
         $diff = (int)(($calc - $real) / (3600 * 24));
 
         return $diff;
@@ -1415,17 +1418,17 @@ class Arabic
         } else {
             if ($number < 0) {
                 $string = 'سالب ';
-                $number = (string) -1 * $number;
+                $number = (string) (-1 * $number);
             } else {
                 $string = '';
             }
 
-            $temp = explode('.', $number);
+            $temp = explode('.', (string)$number);
 
-            $string .= $this->arNumbersSubStr($temp[0]);
+            $string .= $this->arNumbersSubStr((int)$temp[0]);
 
             if (!empty($temp[1])) {
-                $dec     = $this->arNumbersSubStr($temp[1]);
+                $dec     = $this->arNumbersSubStr((int)$temp[1]);
                 $string .= ' فاصلة ' . $dec;
             }
         }
@@ -1453,7 +1456,7 @@ class Arabic
         $string = '';
 
         if ($temp[0] != 0) {
-            $string .= $this->arNumbersSubStr($temp[0]);
+            $string .= $this->arNumbersSubStr((int)$temp[0]);
             $string .= ' ' . $this->arNumberCurrency[$iso][$lang]['basic'];
         }
 
@@ -1567,7 +1570,7 @@ class Arabic
      * Spell integer number in Arabic idiom
      *
      * @param integer $number The number you want to spell in Arabic idiom
-     * @param logical $zero   Present leading zero if true [default is true]
+     * @param boolean $zero   Present leading zero if true [default is true]
      *
      * @return string The Arabic idiom that spells inserted number
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
@@ -1578,7 +1581,7 @@ class Arabic
         $items  = array();
         $zeros  = '';
         $string = '';
-        $number = ($zero != false) ? trim($number) : trim((float)$number);
+        $number = ($zero != false) ? trim((string)$number) : trim((string)(float)$number);
 
         if ($number > 0) {
             //--- by Jnom: handle left zero
@@ -1602,8 +1605,8 @@ class Arabic
             $blocks_num = count($blocks) - 1;
 
             for ($i = $blocks_num; $i >= 0; $i--) {
-                $number = floor($blocks[$i]);
-                $text   = $this->arNumberWrittenBlock($number);
+                $number = floor((float)$blocks[$i]);
+                $text   = $this->arNumberWrittenBlock((int)$number);
 
                 if ($text) {
                     if ($number == 1 && $i != 0) {
@@ -1827,6 +1830,9 @@ class Arabic
         $output = '';
         $text   = stripslashes($text);
         $max    = mb_strlen($text, 'UTF-8');
+        
+        $inputMap  = array();
+        $outputMap = array();
 
         switch ($in) {
             case 'ar':
@@ -1976,26 +1982,27 @@ class Arabic
         $capital = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $small   = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+        $strCaps   = strtr($str, $capital, $small);
+        $arStrCaps = $this->swapEa($strCaps);
+
         if ($arNum > $nonArNum) {
             $arStr = $str;
             $enStr = $this->swapAe($str);
             $isAr  = true;
+
+            $enRank = $this->checkEn($enStr);
+            $arRank = $this->checkAr($arStr);
+
+            $arCapsRank = $arRank;
         } else {
             $arStr = $this->swapEa($str);
             $enStr = $str;
 
-            $strCaps   = strtr($str, $capital, $small);
-            $arStrCaps = $this->swapEa($strCaps);
-
             $isAr = false;
-        }
 
-        $enRank = $this->checkEn($enStr);
-        $arRank = $this->checkAr($arStr);
+            $enRank = $this->checkEn($enStr);
+            $arRank = $this->checkAr($arStr);
 
-        if ($arNum > $nonArNum) {
-            $arCapsRank = $arRank;
-        } else {
             $arCapsRank = $this->checkAr($arStrCaps);
         }
 
@@ -2252,6 +2259,7 @@ class Arabic
         $prevChar = null;
         $nextChar = null;
         $output   = '';
+        $chars    = array();
 
         $_temp = mb_strlen($str, 'UTF-8');
 
@@ -2441,9 +2449,11 @@ class Arabic
         }
 
         // need more work to fix lines starts by English words
-        if (isset($en_start)) {
+        $en_start = false;
+        if ($en_start) {
             $last = true;
             $from = 0;
+            $key  = 0;
 
             foreach ($en_words as $key => $value) {
                 if ($last !== $value) {
@@ -2618,8 +2628,8 @@ class Arabic
      * @param string $prefix    Prefix
      * @param string $codepoint Codepoint
      * @param string $original  Original
-     * @param array  &$table    Store named entities in a table
-     * @param array  &$exclude  An array of characters which should not be decoded
+     * @param array  $table     Store named entities in a table
+     * @param array  $exclude   An array of characters which should not be decoded
      *
      * @return string
      */
@@ -2639,21 +2649,23 @@ class Arabic
             $codepoint = base_convert($codepoint, 16, 10);
         }
 
+        $str = '';
+        
         // Encode codepoint as UTF-8 bytes
         if ($codepoint < 0x80) {
-            $str = chr($codepoint);
+            $str = chr((int)$codepoint);
         } elseif ($codepoint < 0x800) {
-            $str = chr(0xC0 | ($codepoint >> 6)) . chr(0x80 | ($codepoint & 0x3F));
+            $str = chr(0xC0 | ((int)$codepoint >> 6)) . chr(0x80 | ((int)$codepoint & 0x3F));
         } elseif ($codepoint < 0x10000) {
-            $str = chr(0xE0 | ($codepoint >> 12)) . chr(0x80 | (($codepoint >> 6) & 0x3F)) .
-                   chr(0x80 | ($codepoint & 0x3F));
+            $str = chr(0xE0 | ((int)$codepoint >> 12)) . chr(0x80 | (((int)$codepoint >> 6) & 0x3F)) .
+                   chr(0x80 | ((int)$codepoint & 0x3F));
         } elseif ($codepoint < 0x200000) {
-            $str = chr(0xF0 | ($codepoint >> 18)) . chr(0x80 | (($codepoint >> 12) & 0x3F)) .
-                   chr(0x80 | (($codepoint >> 6) & 0x3F)) . chr(0x80 | ($codepoint & 0x3F));
+            $str = chr(0xF0 | ((int)$codepoint >> 18)) . chr(0x80 | (((int)$codepoint >> 12) & 0x3F)) .
+                   chr(0x80 | (((int)$codepoint >> 6) & 0x3F)) . chr(0x80 | ((int)$codepoint & 0x3F));
         }
 
         // Check for excluded characters
-        if (in_array($str, $exclude)) {
+        if (in_array($str, $exclude, true)) {
             return $original;
         } else {
             return $str;
@@ -2866,8 +2878,11 @@ class Arabic
      */
     public function arQueryOrderBy($arg)
     {
+        $wordOrder = array();
+        
         // Check if there are phrases in $arg should handle as it is
         $phrase = explode("\"", $arg);
+        
         if (count($phrase) > 2) {
             // Re-init $arg variable (It will contain the rest of $arg except phrases).
             $arg = '';
@@ -2916,7 +2931,7 @@ class Arabic
      *
      * @param string $word String that user search for
      *
-     * @return string list of most possible Arabic lexical forms for a given word
+     * @return array list of most possible Arabic lexical forms for a given word
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arQueryAllWordForms($word)
@@ -3064,8 +3079,8 @@ class Arabic
     /**
      * Setting location information for Salat calculation
      *
-     * @param decimal $l1 Latitude of location you want to calculate Salat time in
-     * @param decimal $l2 Longitude of location you want to calculate Salat time in
+     * @param float   $l1 Latitude of location you want to calculate Salat time in
+     * @param float   $l2 Longitude of location you want to calculate Salat time in
      * @param integer $z  Time Zone, offset from UTC (see also Greenwich Mean Time)
      * @param integer $e  Elevation, it is the observer's height in meters.
      *
@@ -3108,11 +3123,11 @@ class Arabic
      * (*) Isha angle is not explicitly defined in Tehran method
      * Fajr Angle = $fajrArc, Isha Angle = $ishaArc
      *
-     * @param string  $sch        [Shafi|Hanafi] to define Muslims Salat calculation method (affect Asr time)
-     * @param decimal $sunriseArc Sun rise arc (default value is -0.833333)
-     * @param decimal $ishaArc    Isha arc (default value is -18)
-     * @param decimal $fajrArc    Fajr arc (default value is -18)
-     * @param string  $view       [Sunni|Shia] to define Muslims Salat calculation method
+     * @param string $sch        [Shafi|Hanafi] to define Muslims Salat calculation method (affect Asr time)
+     * @param float  $sunriseArc Sun rise arc (default value is -0.833333)
+     * @param float  $ishaArc    Isha arc (default value is -18)
+     * @param float  $fajrArc    Fajr arc (default value is -18)
+     * @param string $view       [Sunni|Shia] to define Muslims Salat calculation method
      *                            (affect Maghrib and Midnight time)
      *
      * @return object $this to build a fluent interface
@@ -3642,8 +3657,8 @@ class Arabic
      *
      * @param string $str Input Arabic document as a string
      *
-     * @return hash Associated array where document words referred by index and
-     *              those words ranks referred by values of those array items.
+     * @return array Associated array where document words referred by index and
+     *               those words ranks referred by values of those array items.
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arSummaryRankWords($str)
@@ -3701,7 +3716,7 @@ class Arabic
 
             if ($first == "\n") {
                 $w += 3;
-            } elseif (in_array($first, $this->arSeparators)) {
+            } elseif (in_array($first, $this->arSeparators, true)) {
                 $w += 2;
             } else {
                 $w += 1;
@@ -3709,7 +3724,7 @@ class Arabic
 
             if ($last == "\n") {
                 $w += 3;
-            } elseif (in_array($last, $this->arSeparators)) {
+            } elseif (in_array($last, $this->arSeparators, true)) {
                 $w += 2;
             } else {
                 $w += 1;
@@ -3724,7 +3739,7 @@ class Arabic
             $_sentence = mb_substr($sentence, 0, -1, 'UTF-8');
             $sentence  = mb_substr($_sentence, 1, mb_strlen($_sentence, 'UTF-8'), 'UTF-8');
 
-            if (!in_array($first, $this->arSeparators)) {
+            if (!in_array($first, $this->arSeparators, true)) {
                 $sentence = $first . $sentence;
             }
 
@@ -3779,6 +3794,7 @@ class Arabic
         rsort($arr, SORT_NUMERIC);
 
         $totalChars = 0;
+        $minRank = 0;
 
         for ($i = 0; $i <= $int; $i++) {
             if (!isset($arr[$i])) {
