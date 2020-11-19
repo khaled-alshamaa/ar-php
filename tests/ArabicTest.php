@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+# date, numbers, ar_transliteration, en_transliteration
 
 use PHPUnit\Framework\TestCase;
 
@@ -248,6 +249,128 @@ final class ArabicTest extends TestCase
         $this->assertEquals(
             'الأحد 13 غشت 2017 08:29:10 مساءً',
             $date
+        );
+    }
+
+    public function testEnglishToArabicTransliteration15Cases(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $en_terms = array('George Bush', 'Paul Wolfowitz', 'Silvio Berlusconi?', 'Guantanamo', 
+                          'Arizona', 'Maryland', 'Oracle', 'Yahoo', 'Google', 'Formula1', 
+                          'Boeing', 'Caviar', 'Telephone', 'Internet', "Côte d'Ivoire");
+        
+        $ar_terms = array();
+        
+        foreach ($en_terms as $term){
+            array_push($ar_terms, trim($Arabic->en2ar($term)));
+        }
+    
+        $this->assertEquals(
+            ['جورج بوش','باول وولفوويتز','سيلفيو برلوسكوني','غوانتانامو','اريزونه','ماريلاند','اوراكل','ياهو','غوغل','فورمولا1','بوينغ','كافيار','تلفون','انترنت','كوت ديفوير'],
+            $ar_terms
+        );
+    }
+
+    public function testArabicToEnglishTransliteration19Cases(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $ar_terms = array('خالِد الشَمعَة', 'جُبران خَليل جُبران', 'كاظِم الساهِر',
+            'ماجِدَة الرُومِي', 'نِزار قَبَّانِي', 'سُوق الحَمِيدِيَّة؟', 'مَغارَة جَعِيتَا', 
+            'غُوطَة دِمَشق', 'حَلَب الشَهبَاء', 'جَزيرَة أَرواد', 'بِلاد الرافِدَين',
+            'أهرامات الجِيزَة', 'دِرْع', 'عِيد', 'عُود', 'رِدْء', 'إِيدَاء', 'هِبَة الله', 'قاضٍ');
+            
+        $en_terms = array();
+        
+        foreach ($ar_terms as $term){
+            array_push($en_terms, trim($Arabic->ar2en($term)));
+        }
+    
+        $this->assertEquals(
+            ["Khalid Ash-Sham'ah","Jubran Khalyl Jubran","Kazim As-Sahir","Majidat Ar-Roumi","Nizar Qab'bani","Souq Al-Hameidei'iah?","Magharat Ja'eita","Ghoutat Dimashq","Halab Ash-Shahba'a","Jazyrat Aarwad","Bilad Ar-Rafidan","Ahramat Al-Jeizah","Dira","Eid","Oud","Rid'a","Eida'a","Hibat Al-Lh","Qadin"],
+            $en_terms
+        );
+    }
+
+    public function testGenderGuessForArabicNames35Cases(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $names = array('أحمد بشتو','أحمد منصور','الحبيب الغريبي','المعز بو لحية',
+                          'توفيق طه','جلنار موسى','جمال  ريان','جمانة نمور',
+                          'جميل عازر','حسن جمول','حيدر عبد الحق','خالد صالح',
+                          'خديجة بن قنة','ربى خليل','رشا عارف','روزي عبده',
+                          'سمير سمرين','صهيب الملكاوي','عبد الصمد ناصر','علي الظفيري',
+                          'فرح البرقاوي','فيروز زياني','فيصل القاسم','لونه الشبل',
+                          'ليلى الشايب','لينا زهر الدين','محمد البنعلي',
+                          'محمد الكواري','محمد خير البوريني','محمد كريشان',
+                          'منقذ العلي','منى سلمان','ناجي سليمان','نديم الملاح',
+                          'وهيبة بوحلايس');
+
+        $gender = array();
+        
+        foreach ($names as $name){
+            array_push($gender, $Arabic->isFemale($name));
+        }
+    
+        $this->assertEquals(
+            [false,false,false,false,false,true,false,true,false,false,false,false,true,true,true,false,false,false,false,false,true,true,false,true,true,true,false,false,false,false,false,true,false,false,true],
+            $gender
+        );
+    }
+
+    public function testSwapEnglishKeyboardToArabic(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $str = "Hpf lk hgkhs hglj'vtdkK Hpf hg`dk dldg,k f;gdjil Ygn ,p]hkdm hgHl,v tb drt,k ljv]]dk fdk krdqdk>";
+    
+        $this->assertEquals(
+            $Arabic->swapEa($str),
+            'أحب من الناس المتطرفين، أحب الذين يميلون بكليتهم إلى وحدانية الأمور فلا يقفون مترددين بين نقيضين.'
+        );
+    }
+
+    public function testSwapFrenchKeyboardToArabic(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $str = 'Hpf lk hgkhs hgljùvtdkK Hpf hg²dk dldg;k fmgdjil Ygn ;p$hkd, hgHl;v tb drt;k ljv$$dk fdk krdadk/';
+    
+        $this->assertEquals(
+            $Arabic->swapFa($str),
+            'أحب من الناس المتطرفين، أحب الذين يميلون بكليتهم إلى وحدانية الأمور فلا يقفون مترددين بين نقيضين.'
+        );
+    }
+
+    public function testSwapArabicKeyboardToEnglish(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $str = "ِىغ هىفثممهلثىف بخخم ؤشى ةشنث فاهىلس لاهللثق ةخقث ؤخةحمثء شىي ةخقث رهخمثىفز ÷ف فشنثس ش فخعؤا خب لثىهعس شىي ش مخف خب ؤخعقشلث فخ ةخرث هى فاث خححخسهفث يهقثؤفهخىز";
+    
+        $this->assertEquals(
+            $Arabic->swapAe($str),
+            'Any intelligent fool can make things ghigger more complex and more violent. It takes a touch of genius and a lot of courage to move in the opposite direction.'
+        );
+    }
+
+    public function testAutoDetectAndFixKeyboardLanguage4Cases(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $examples = array("ff'z g;k fefhj", "FF'Z G;K FEFHJ", 'ٍمخصمغ لاعف سعقثمغ', 'sLOWLY BUT SURELY');
+
+        $fixed = array();
+        
+        foreach ($examples as $example){
+            array_push($fixed, $Arabic->fixKeyboardLang($example));
+        }
+    
+        $this->assertEquals(
+            $fixed,
+            ['ببطئ لكن بثبات', 'ببطئ لكن بثبات', 'Slowly ghut surely', 'Slowly but surely']
         );
     }
 }
