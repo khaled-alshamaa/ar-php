@@ -1,3 +1,8 @@
+<img src="https://img.shields.io/github/languages/top/khaled-alshamaa/ar-php"/> <img src="https://img.shields.io/packagist/php-v/khaled.alshamaa/ar-php"/> <img src="https://img.shields.io/github/v/release/khaled-alshamaa/ar-php"/> <img src="https://img.shields.io/github/release-date/khaled-alshamaa/ar-php"/> <img src="https://img.shields.io/packagist/l/khaled.alshamaa/ar-php"/> <img src="https://img.shields.io/packagist/dt/khaled.alshamaa/ar-php"/> <img src="https://img.shields.io/packagist/stars/khaled.alshamaa/ar-php"/>
+
+<img src="https://img.shields.io/github/issues-raw/khaled-alshamaa/ar-php"/> <img src="https://img.shields.io/github/languages/code-size/khaled-alshamaa/ar-php"/> <img src="https://img.shields.io/github/commit-activity/m/khaled-alshamaa/ar-php"/> <img src="https://img.shields.io/github/last-commit/khaled-alshamaa/ar-php"/> <img src="https://img.shields.io/github/forks/khaled-alshamaa/ar-php?style=social"/>
+
+
 # Ar-PHP Project ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _PHP Speaks Arabic - Be Ready!_
 _Copyright © 2006-2020 Khaled Al-Sham'aa._
