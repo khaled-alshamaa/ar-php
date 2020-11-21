@@ -110,6 +110,15 @@ The following command line will execute all the automated tests:
 php phpunit.phar --bootstrap ./src/arabic.php --testdox tests
 ```
 
+### _Xdebug: Debugging tool for PHP_
+[Xdebug](https://xdebug.org/) is an extension for PHP to assist with debugging and development. It contains a [profiler](https://xdebug.org/docs/profiler) and provides [code coverage](https://xdebug.org/docs/code_coverage) functionality for use with PHPUnit. Follow [these instructions](https://xdebug.org/wizard) to get Xdebug installed.
+
+The following command line will telling PHPUnit to include the code coverage report ([more info](https://phpunit.readthedocs.io/en/9.3/code-coverage-analysis.html)):
+
+```bash
+php phpunit.phar --bootstrap ./src/arabic.php --testdox tests --coverage-filter ./src/arabic.php --coverage-html coverage
+```
+
 ### _Insphpect: Smarter code reviews_
 [Insphpect](https://insphpect.com/) is an automated code review tool which identifies inflexibilities in PHP code and helps you write better software.
 
@@ -167,7 +176,7 @@ sed "/^\s*\*/d" arabic.php | sed "/^\s*\/\//d" | sed "/^\s*\/\*/d" | sed "/^\s*$
 Install it as a PHAR file format, all you need to do is download the phar binary from [here](http://phpdoc.org/phpDocumentor.phar), then save it in an arbitrary directory (e.g. inside c:\XAMPP).
 
 ```bash
-php C:\xampp\phpDocumentor.phar -f arabic.php -t ../docs/
+php C:\xampp\phpDocumentor.phar -f arabic.php -t ../docs/ --visibility="public" --title="Ar-PHP"
 ``` 
 
 ### _Benchmarking Tool_
