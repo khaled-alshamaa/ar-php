@@ -171,7 +171,7 @@ class Arabic
     {
         // in Phar version it should be = phar://ArPHP.phar
         $this->rootDirectory = dirname(__FILE__);
-        $this->arFemaleNames = array_map('trim', file($this->rootDirectory . '/data/ar_female.txt'));
+        $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
         $this->umAlqoura     = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
         $this->arDateJSON    = json_decode(file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
 
@@ -265,12 +265,19 @@ class Arabic
     
     private function arStrToTimeInit()
     {
+/*
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_strtotime.json'), true);
-        
+
         foreach ($json['str_replace']['pair'] as $pair) {
             array_push($this->strToTimeSearch, (string)$pair['search']);
             array_push($this->strToTimeReplace, (string)$pair['replace']);
         }
+
+file_put_contents($this->rootDirectory . '/data/strtotime_search.txt', implode("\r\n",$this->strToTimeSearch));
+file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode("\r\n",$this->strToTimeReplace));
+*/
+        $this->strToTimeSearch = file($this->rootDirectory . '/data/strtotime_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->strToTimeReplace = file($this->rootDirectory . '/data/strtotime_replace.txt', FILE_IGNORE_NEW_LINES);
         
         foreach ($this->arDateJSON['ar_hj_month'] as $month) {
             array_push($this->hj, (string)$month);
@@ -286,47 +293,29 @@ class Arabic
     
     private function arTransliterateInit()
     {
-        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
-        
-        foreach ($json['preg_replace_ar2en'] as $pair) {
-            array_push($this->ar2enPregSearch, (string)$pair['search']);
-            array_push($this->ar2enPregReplace, (string)$pair['replace']);
-        }
-        
-        foreach ($json['str_replace_diaritical'] as $pair) {
-            array_push($this->diariticalSearch, (string)$pair['search']);
-            array_push($this->diariticalReplace, (string)$pair['replace']);
-        }
-        
-        foreach ($json['str_replace_ISO233'] as $pair) {
-            array_push($this->iso233Search, (string)$pair['search']);
-            array_push($this->iso233Replace, (string)$pair['replace']);
-        }
-        
-        foreach ($json['str_replace_RJGC'] as $pair) {
-            array_push($this->rjgcSearch, (string)$pair['search']);
-            array_push($this->rjgcReplace, (string)$pair['replace']);
-        }
-        
-        foreach ($json['str_replace_SES'] as $pair) {
-            array_push($this->sesSearch, (string)$pair['search']);
-            array_push($this->sesReplace, (string)$pair['replace']);
-        }
-        
-        foreach ($json['str_replace_ar2en'] as $pair) {
-            array_push($this->ar2enStrSearch, (string)$pair['search']);
-            array_push($this->ar2enStrReplace, (string)$pair['replace']);
-        }
-        
-        foreach ($json['preg_replace_en2ar'] as $pair) {
-            array_push($this->en2arPregSearch, (string)$pair['search']);
-            array_push($this->en2arPregReplace, (string)$pair['replace']);
-        }
-        
-        foreach ($json['str_replace_en2ar'] as $pair) {
-            array_push($this->en2arStrSearch, (string)$pair['search']);
-            array_push($this->en2arStrReplace, (string)$pair['replace']);
-        }
+        $this->en2arStrSearch = file($this->rootDirectory . '/data/transliteration/en2ar_str_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->en2arStrReplace = file($this->rootDirectory . '/data/transliteration/en2ar_str_replace.txt', FILE_IGNORE_NEW_LINES);
+
+        $this->en2arPregSearch = file($this->rootDirectory . '/data/transliteration/en2ar_preg_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->en2arPregReplace = file($this->rootDirectory . '/data/transliteration/en2ar_preg_replace.txt', FILE_IGNORE_NEW_LINES);
+
+        $this->ar2enStrSearch = file($this->rootDirectory . '/data/transliteration/ar2en_str_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->ar2enStrReplace = file($this->rootDirectory . '/data/transliteration/ar2en_str_replace.txt', FILE_IGNORE_NEW_LINES);
+
+        $this->sesSearch = file($this->rootDirectory . '/data/transliteration/ses_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->sesReplace = file($this->rootDirectory . '/data/transliteration/ses_replace.txt', FILE_IGNORE_NEW_LINES);
+
+        $this->rjgcSearch = file($this->rootDirectory . '/data/transliteration/rjgc_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->rjgcReplace = file($this->rootDirectory . '/data/transliteration/rjgc_replace.txt', FILE_IGNORE_NEW_LINES);
+
+        $this->diariticalSearch = file($this->rootDirectory . '/data/transliteration/diaritical_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->diariticalReplace = file($this->rootDirectory . '/data/transliteration/diaritical_replace.txt', FILE_IGNORE_NEW_LINES);
+
+        $this->ar2enPregSearch = file($this->rootDirectory . '/data/transliteration/ar2en_preg_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->ar2enPregReplace = file($this->rootDirectory . '/data/transliteration/ar2en_preg_replace.txt', FILE_IGNORE_NEW_LINES);
+
+        $this->iso233Search = file($this->rootDirectory . '/data/transliteration/iso233_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->iso233Replace = file($this->rootDirectory . '/data/transliteration/iso233_replace.txt', FILE_IGNORE_NEW_LINES);
     }
     
     private function arNumbersInit()
@@ -548,17 +537,15 @@ class Arabic
     private function arSummaryInit()
     {
         // This common words used in cleanCommon method
-        $words    = file($this->rootDirectory . '/data/ar_stopwords.txt');
-        $en_words = file($this->rootDirectory . '/data/en_stopwords.txt');
+        $words    = file($this->rootDirectory . '/data/ar_stopwords.txt', FILE_IGNORE_NEW_LINES);
+        $en_words = file($this->rootDirectory . '/data/en_stopwords.txt', FILE_IGNORE_NEW_LINES);
 
         $words = array_merge($words, $en_words);
-        $words = array_map('trim', $words);
         
         $this->arSummaryCommonWords = $words;
         
         // This important words used in rankSentences method
-        $words = file($this->rootDirectory . '/data/important_words.txt');
-        $words = array_map('trim', $words);
+        $words = file($this->rootDirectory . '/data/important_words.txt', FILE_IGNORE_NEW_LINES);
 
         $this->arSummaryImportantWords = $words;
     }
@@ -613,14 +600,12 @@ class Arabic
         $last       = mb_substr($str, -1, 1, 'UTF-8');
         $beforeLast = mb_substr($str, -2, 1, 'UTF-8');
 
-        if (
-            $last == 'ة' || $last == 'ه' || $last == 'ى' || $last == 'ا'
+        if ($last == 'ة' || $last == 'ه' || $last == 'ى' || $last == 'ا'
             || ($last == 'ء' && $beforeLast == 'ا')
         ) {
             $female = true;
-        } elseif (
-            preg_match("/^[اإ].{2}ا.$/u", $str)
-            || preg_match("/^[إا].ت.ا.+$/u", $str)
+        } elseif (preg_match("/^[اإ].{2}ا.$/u", $str)
+                  || preg_match("/^[إا].ت.ا.+$/u", $str)
         ) {
             // الأسماء على وزن إفتعال و إفعال
             $female = true;
@@ -1498,8 +1483,7 @@ class Arabic
         $str = str_replace($ptr, 'اثنان', $str);
         $str = trim($str);
 
-        if (
-            strpos($str, 'ناقص') === false
+        if (strpos($str, 'ناقص') === false
             && strpos($str, 'سالب') === false
         ) {
             $negative = false;
@@ -2306,16 +2290,14 @@ class Arabic
                 continue;
             }
 
-            if (
-                $crntChar == 'ل' && isset($chars[$i + 1])
+            if ($crntChar == 'ل' && isset($chars[$i + 1])
                 && (mb_strpos('آأإا', $chars[$i + 1], 0, 'UTF-8') !== false)
             ) {
                 continue;
             }
 
             if ($crntChar && mb_strpos($this->arGlyphsVowel, $crntChar, 0, 'UTF-8') !== false) {
-                if (
-                    isset($chars[$i + 1])
+                if (isset($chars[$i + 1])
                     && (mb_strpos($this->arGlyphsNextLink, $chars[$i + 1], 0, 'UTF-8') !== false)
                     && (mb_strpos($this->arGlyphsPrevLink, $prevChar, 0, 'UTF-8') !== false)
                 ) {
@@ -2328,8 +2310,7 @@ class Arabic
 
             $form = 0;
 
-            if (
-                ($prevChar == 'لا' || $prevChar == 'لآ' || $prevChar == 'لأ'
+            if (($prevChar == 'لا' || $prevChar == 'لآ' || $prevChar == 'لأ'
                 || $prevChar == 'لإ' || $prevChar == 'ل')
                 && (mb_strpos('آأإا', $crntChar, 0, 'UTF-8') !== false)
             ) {
@@ -2996,8 +2977,7 @@ class Arabic
             $wordForms[] = $str2;
         }
 
-        if (
-            ($len >= 4 && ($last1 == 'ة' || $last1 == 'ه' || $last1 == 'ت'))
+        if (($len >= 4 && ($last1 == 'ة' || $last1 == 'ه' || $last1 == 'ت'))
             || ($len >= 5 && $last2 == 'ات')
         ) {
             $wordForms[] = $str1;
