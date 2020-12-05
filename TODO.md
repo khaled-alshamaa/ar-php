@@ -118,6 +118,22 @@ The following command line will telling PHPUnit to include the code coverage rep
 ```bash
 php phpunit.phar --bootstrap ./src/arabic.php --testdox tests --coverage-filter ./src/arabic.php --coverage-html coverage
 ```
+Setup the Xdebug profiler by add the following lines in the php.ini file:
+
+```bash
+xdebug.profiler_enable_trigger = 1
+xdebug.profiler_output_dir = \path\to\save\profiles
+xdebug.profiler_output_name = callgrind.out.%u.%H_%R
+```
+
+You can then selectively enable the profiler by adding "XDEBUG_PROFILE=1" to the example URL, for example:
+
+```bash
+http://localhost/ar-php/examples/strtotime.php?XDEBUG_PROFILE=1
+```
+
+After a profile information file has been generated you can open it with the [KCacheGrind](https://kcachegrind.github.io/html/Home.html) tool for Linux users or [QCacheGrind](https://sourceforge.net/projects/qcachegrindwin/) for Windows users.
+
 
 ### _Insphpect: Smarter code reviews_
 [Insphpect](https://insphpect.com/) is an automated code review tool which identifies inflexibilities in PHP code and helps you write better software.
@@ -186,7 +202,7 @@ php C:\xampp\phpDocumentor.phar -f arabic.php -t ../docs/ --visibility="public" 
 The following command line shows an example call of 1000 requests for numbers test code (50 requests in concurrency) and report related stats:
 
 ```bash
-\path\to\apache\bin\ab -n 1000 -c 50 http://localhost/ar-php/tests/numbers.php
+\path\to\apache\bin\ab -n 1000 -c 50 http://localhost/ar-php/examples/numbers.php
 ```   
 
 ### _Test Against QA Releases (e.g., PHP 8.0 RC2)_
