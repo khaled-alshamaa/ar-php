@@ -706,62 +706,11 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
      */
     private function arDateIslamicToGreg($y, $m, $d)
     {
-        if (function_exists('GregorianToJD')) {
-            $str = jdtogregorian($this->arDateIslamicToJd($y, $m, $d));
-        } else {
-            $str = $this->arDateJdToGreg($this->arDateIslamicToJd($y, $m, $d));
-        }
+        $str = jdtogregorian($this->arDateIslamicToJd($y, $m, $d));
 
         list($month, $day, $year) = explode('/', $str);
 
         return array($year, $month, $day);
-    }
-
-    /**
-     * Converts Julian Day Count to Gregorian date
-     *
-     * @param integer $julian A julian day number as integer
-     *
-     * @return string The gregorian date as a string in the form "month/day/year"
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    private function arDateJdToGreg($julian)
-    {
-        $julian = $julian - 1721119;
-
-        $calc1  = 4 * $julian - 1;
-        $year   = floor($calc1 / 146097);
-        $julian = floor($calc1 - 146097 * $year);
-        $day    = floor($julian / 4);
-
-        $calc2  = 4 * $day + 3;
-        $julian = floor($calc2 / 1461);
-        $day    = $calc2 - 1461 * $julian;
-        $day    = floor(($day + 4) / 4);
-
-        $calc3  = 5 * $day - 3;
-        $month  = floor($calc3 / 153);
-        $day    = $calc3 - 153 * $month;
-        $day    = floor(($day + 5) / 5);
-        $year   = 100 * $year + $julian;
-
-        if ($month < 10) {
-            $month = $month + 3;
-        } else {
-            $month = $month - 9;
-            $year  = $year + 1;
-        }
-
-        // Just to mimic the PHP JDToGregorian output
-        // If year is less than 1, subtract one to convert from
-        // a zero based date system to the common era system in
-        // which the year -1 (1 B.C.E) is followed by year 1 (1 C.E.)
-
-        if ($year < 1) {
-            $year--;
-        }
-
-        return $month . '/' . $day . '/' . $year;
     }
 
     /**
@@ -1188,11 +1137,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
      */
     private function arDateGregToIslamic($y, $m, $d)
     {
-        if (function_exists('gregoriantojd')) {
-            $jd = gregoriantojd($m, $d, $y);
-        } else {
-            $jd = $this->arDateGregToJd($m, $d, $y);
-        }
+        $jd = gregoriantojd($m, $d, $y);
 
         list($year, $month, $day) = $this->arDateJdToIslamic($jd);
 
@@ -1238,37 +1183,6 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         $jd = (int)((11 * $y + 3) / 30) + (int)(354 * $y) + (int)(30 * $m) - (int)(($m - 1) / 2) + $d + 1948440 - 385;
 
         return $jd;
-    }
-
-    /**
-     * Converts a Gregorian date to Julian Day Count
-     *
-     * @param integer $m The month as a number from 1 (for January) to 12 (for December)
-     * @param integer $d The day as a number from 1 to 31
-     * @param integer $y The year as a number between -4714 and 9999
-     *
-     * @return integer The julian day for the given gregorian date as an integer
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    private function arDateGregToJd($m, $d, $y)
-    {
-        if ($m < 3) {
-            $y--;
-            $m += 12;
-        }
-
-        if (($y < 1582) || ($y == 1582 && $m < 10) || ($y == 1582 && $m == 10 && $d <= 15)) {
-            // This is ignored in the GregorianToJD PHP function!
-            $b = 0;
-        } else {
-            $a = (int)($y / 100);
-            $b = 2 - $a + (int)($a / 4);
-        }
-
-        $jd = (int)(365.25 * ($y + 4716)) + (int)(30.6001 * ($m + 1)) + $d + $b - 1524.5;
-        $jd = round($jd);
-
-        return (int)$jd;
     }
 
     /**
