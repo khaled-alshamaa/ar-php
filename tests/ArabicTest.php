@@ -4,6 +4,32 @@ use PHPUnit\Framework\TestCase;
 
 final class ArabicTest extends TestCase
 {  
+    public function testTheInternalInitializedProperties(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $status = array();
+        $status[] = $Arabic->getDateMode();
+        $status[] = $Arabic->getNumberFeminine();
+        $status[] = $Arabic->getNumberFormat();
+        $status[] = $Arabic->getNumberOrder();
+        $status[] = $Arabic->getSoundexLen();
+        $status[] = $Arabic->getSoundexLang();
+        $status[] = $Arabic->getSoundexCode();
+        $status[] = $Arabic->getQueryMode();
+        
+        $Arabic->setQueryStrFields('abc,xyz');
+        $status[] = $Arabic->getQueryArrFields();
+        
+        $Arabic->setQueryArrFields(['foo','bar']);
+        $status[] = $Arabic->getQueryStrFields();
+
+        $this->assertEquals(
+            [1, 1, 1, 1, 4, 'en', 'soundex', 0, ['abc','xyz'], 'foo,bar'],
+            $status
+        );
+    }
+
     public function testSpellNumbersInTheArabicIdiomExample1(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
@@ -292,7 +318,7 @@ final class ArabicTest extends TestCase
         );
     }
 
-    public function testGenderGuessForArabicNames35Cases(): void
+    public function testGenderGuessForArabicNames36Cases(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
         
@@ -306,6 +332,9 @@ final class ArabicTest extends TestCase
                           'محمد الكواري','محمد خير البوريني','محمد كريشان',
                           'منقذ العلي','منى سلمان','ناجي سليمان','نديم الملاح',
                           'وهيبة بوحلايس');
+        
+        // to improve the code coverage of this unit test
+        $names[] = 'إسعاد يونس';
 
         $gender = array();
         
@@ -314,7 +343,7 @@ final class ArabicTest extends TestCase
         }
     
         $this->assertEquals(
-            [false,false,false,false,false,true,false,true,false,false,false,false,true,true,true,false,false,false,false,false,true,true,false,true,true,true,false,false,false,false,false,true,false,false,true],
+            [false,false,false,false,false,true,false,true,false,false,false,false,true,true,true,false,false,false,false,false,true,true,false,true,true,true,false,false,false,false,false,true,false,false,true,true],
             $gender
         );
     }
@@ -354,6 +383,19 @@ final class ArabicTest extends TestCase
             'Any intelligent fool can make things ghigger more complex and more violent. It takes a touch of genius and a lot of courage to move in the opposite direction.'
         );
     }
+    
+    public function testSwapArabicKeyboardToFrench(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $str = "}ث شعه ىعهف ض م'عى يعهف ض م'ضعفقث";
+        
+        $this->assertEquals(
+            $Arabic->swapAf($str),
+            "Ce qui nuit a l'un duit a l'autre"
+        );
+    }
+        
 
     public function testAutoDetectAndFixKeyboardLanguage4Cases(): void
     {
@@ -407,6 +449,22 @@ final class ArabicTest extends TestCase
         $this->assertEquals(
             $days,
             30
+        );
+    }
+
+    public function testDecimalDegreeAndDegreeMinuteSecondConversion(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $v1 = -12.5822;
+        $v2 = '12°34\'30"S';
+
+        $dms = $Arabic->dd2dms($v1);
+        $dd  = $Arabic->dms2dd($v2);
+
+        $this->assertEquals(
+            [$dms, $dd],
+            ['-12°34\'55.92"', -12.575]
         );
     }
 
@@ -496,9 +554,13 @@ END;
         foreach ($words as $word){
             array_push($indices, $Arabic->soundex($word));
         }
+        
+        // to improve the code coverage of this unit test
+        $Arabic->setSoundexCode('phonix');
+        $indices[] = $Arabic->soundex('كلينزمان');
     
         $this->assertEquals(
-            ['K453','K453','K453','K453','K453','K453','K452','M421','M421','M421','M421','M421','M421','M455'],
+            ['K453','K453','K453','K453','K453','K453','K452','M421','M421','M421','M421','M421','M421','M455','K458'],
             $indices
         );
     }
@@ -552,16 +614,16 @@ END;
         $Arabic = new \ArPHP\I18N\Arabic();
         
         $this->assertEquals(
-            $Arabic->arQueryAllForms('فلسطينيون'),
-            'فلسطينيون فلسطيني فلسطينية فلسطينيتين فلسطينيين فلسطينيان فلسطينيات فلسطينيوا'
+            $Arabic->arQueryAllForms('عرب فلسطينيون'),
+            'عرب فلسطينيون فلسطيني فلسطينية فلسطينيتين فلسطينيين فلسطينيان فلسطينيات فلسطينيوا'
         );
     }
 
-    public function testArabicQuearyGetSqlStatement(): void
+    public function testArabicQuearyGetSqlStatementByFieldsStr(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
 
-        $keyword = 'فلسطينيون';
+        $keyword = 'فلسطينيون "أصيلون"';
 
         $Arabic->setQueryStrFields('field');
         $Arabic->setQueryMode(0);
@@ -573,7 +635,42 @@ END;
         
         $this->assertEquals(
             $StrSQL,
-            "SELECT `field` FROM `table` WHERE ( REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?') ORDER BY ((CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?' THEN 1 ELSE 0 END)) DESC"
+            "SELECT `field` FROM `table` WHERE (field LIKE 'أصيلون\') OR ( REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?') OR ( REPLACE(field, 'ـ', '') REGEXP '\') ORDER BY ((field LIKE 'أصيلون') + (CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?' THEN 1 ELSE 0 END)) DESC"
+        );
+    }
+
+    public function testArabicQuearyGetSqlStatementByFieldsArray(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $keyword = 'عرب فلسطينيون';
+
+        $Arabic->setQueryArrFields(['field']);
+        $Arabic->setQueryMode(0);
+
+        $strCondition = $Arabic->arQueryWhereCondition($keyword);
+        $strOrderBy   = $Arabic->arQueryOrderBy($keyword);
+
+        $StrSQL = "SELECT `field` FROM `table` WHERE $strCondition ORDER BY $strOrderBy";
+        
+        $this->assertEquals(
+            $StrSQL,
+            "SELECT `field` FROM `table` WHERE ( REPLACE(field, 'ـ', '') REGEXP 'عرب') OR ( REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?') ORDER BY ((CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'عرب' THEN 1 ELSE 0 END) + (CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?' THEN 1 ELSE 0 END)) DESC"
+        );
+    }
+    
+    public function testIsArabicFunction(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $test = array();
+        
+        $test[] = $Arabic->isArabic('خالد الشمعة');
+        $test[] = $Arabic->isArabic('Khaled Al-Shamaa');
+        
+        $this->assertEquals(
+            $test,
+            [true, false]
         );
     }
 
@@ -685,9 +782,6 @@ END;
         );
     }
 
-#######################
-
-
     public function testArabicAutoSummarizeForSpecificWord(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
@@ -796,5 +890,61 @@ END;
         );
     }
 
+    public function testArabicAutoSummarizeKeywords(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $rate = 25;
+$fulltext = <<<END
+قال علماء في مركز أبحاث الفيزياء التابع للمنظمة الأوروبية للابحاث النووية يوم الجمعة
+أنهم حققوا تصادما بين جسيمات بكثافة قياسية في إنجاز مهم في برنامجهم لكشف أسرار الكون. 
+وجاء التطور في الساعات الأولى بعد تغذية مصادم الهدرونات الكبير بحزمة أشعة بها 
+جسيمات أكثر بحوالي ستة في المئة لكل وحدة بالمقارنة مع المستوى القياسي السابق 
+الذي سجله مصادم تيفاترون التابع لمختبر فرميلاب الأمريكي العام الماضي. 
+وكل تصادم في النفق الدائري لمصادم الهدرونات البالغ طوله 27 كيلومترا تحت الأرض 
+بسرعة أقل من سرعة الضوء يحدث محاكاة للانفجار العظيم الذي يفسر به علماء نشوء الكون 
+قبل 13.7 مليار سنة. وكلما زادت "كثافة الحزمة" أو ارتفع عدد الجسيمات فيها زاد 
+عدد التصادمات التي تحدث وزادت أيضا المادة التي يكون على العلماء تحليلها. 
+ويجري فعليا انتاج ملايين كثيرة من هذه "الانفجارات العظيمة المصغرة" يوميا. 
+وقال رولف هوير المدير العام للمنظمة الاوروبية للأبحاث النووية ومقرها على الحدود 
+الفرنسية السويسرية قرب جنيف أن "كثافة الحزمة هي الأساس لنجاح مصادم الهدرونات الكبير 
+ولذا فهذه خطوة مهمة جدا"، وأضاف "الكثافة الأعلى تعني مزيدا من البيانات، ومزيد 
+من البيانات يعني إمكانية أكبر للكشف." وقال سيرجيو برتولوتشي مدير الأبحاث في المنظمة 
+"يوجد إحساس ملموس بأننا على أعتاب كشف جديد". وفي حين زاد الفيزيائيون والمهندسون 
+في المنظمة كثافة حزم الأشعة على مدى الأسبوع المنصرم قال جيمس جيليه المتحدث باسم المنظمة 
+أنهم جمعوا معلومات تزيد على ما جمعوه على مدى تسعة أشهر من عمل مصادم الهدرونات في 2010. 
+وتخزن تلك المعلومات على آلاف من أقراص الكمبيوتر. ويمثل المصادم البالغة تكلفته 
+عشرة مليارات دولار أكبر تجربة علمية منفردة في العالم وقد بدأ تشغيله في نهاية 
+مارس آذار 2010. وبعد الإغلاق الدائم لمصادم تيفاترون في الخريف القادم سيصبح 
+مصادم الهدرونات المصادم الكبير الوحيد الموجود في العالم. ومن بين أهداف 
+مصادم الهدرونات الكبير معرفة ما إذا كان الجسيم البسيط المعروف بإسم جسيم هيجز 
+أو بوزون هيجز موجود فعليا. ويحمل الجسيم إسم العالم البريطاني بيتر هيجز 
+الذي كان أول من افترض وجوده كعامل أعطي الكتلة للجسيمات بعد الإنفجار العظيم. 
+ومن خلال متابعة التصادمات على أجهزة الكمبيوتر في المنظمة الأوروبية للأبحاث النووية 
+وفي معامل في أنحاء العالم مرتبطة بها يأمل العلماء أيضا أن يجدوا دليلا قويا على 
+وجود المادة المعتمة التي يعتقد أنها تشكل حوالي ربع الكون المعروف وربما الطاقة المعتمة 
+التي يعتقد أنها تمثل حوالي 70 في المئة من الكون. ويقول علماء الفلك أن تجارب 
+المنظمة الأوروبية للأبحاث النووية قد تلقي الضوء أيضا على نظريات جديدة بازغة 
+تشير إلى أن الكون المعروف هو مجرد جزء من نظام لأكوان كثيرة غير مرئية لبعضها البعض 
+ولا توجد وسائل للتواصل بينها. ويأملون أيضا أن يقدم مصادم الهدرونات الكبير 
+الذي سيبقى يعمل على مدى عقد بعد توقف فني لمدة عام في 2013 بعض الدعم 
+لدلائل يتعقبها باحثون آخرون على أن الكون المعروف سبقه كون آخر قبل الانفجار العظيم. 
+وبعد التوقف عام 2013 يهدف علماء المنظمة الأوروبية للأبحاث النووية إلى زيادة 
+الطاقة الكلية لكل تصادم بين الجسيمات من الحد الاقصى الحالي البالغ 7 تيرا الكترون فولت 
+إلى 14 تيرا الكترون فولت. وسيزيد ذلك أيضا من فرصة التوصل لاكتشافات جديدة فيما تصفه 
+المنظمة بأنه "الفيزياء الجديدة" بما يدفع المعرفة لتجاوز ما يسمى النموذج المعياري 
+المعتمد على نظريات العالم البرت اينشتاين في اوائل القرن العشرين.
+END;
+        $fulltext = str_replace("\n", '', $fulltext);
+        
+        $Arabic->arSummaryLoadExtra();
+        
+        $keywords = $Arabic->arSummaryKeywords($fulltext, 10);
+    
+        $this->assertEquals(
+            $keywords,
+            '2010، 2013'
+        );
+    }
 
 }
