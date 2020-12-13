@@ -1,8 +1,6 @@
 {
   "@file": "ArQuery",
-  "preg_replace": {
-    "@function": "__construct",
-    "pair": [
+  "preg_replace": [
       {
         "search": "/^ال/",
         "replace": "(ال)?"
@@ -144,5 +142,4 @@
         "replace": "(ا|أ|إ|آ)"
       }
     ]
-  }
 }
