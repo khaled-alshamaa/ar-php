@@ -190,8 +190,13 @@ class Arabic
     
     private function arStandardInit()
     {
-        array_push($this->arStandardPatterns, '/\r\n/u', '/([^\@])\n([^\@])/u', '/\r/u');
-        array_push($this->arStandardReplacements, "\n@@@\n", "\\1\n&&&\n\\2", "\n###\n");
+        $this->arStandardPatterns[] = '/\r\n/u';
+        $this->arStandardPatterns[] = '/([^\@])\n([^\@])/u';
+        $this->arStandardPatterns[] = '/\r/u';
+        
+        $this->arStandardReplacements[] = "\n@@@\n";
+        $this->arStandardReplacements[] = "\\1\n&&&\n\\2";
+        $this->arStandardReplacements[] = "\n###\n";
         
         /**
          * النقطة، الفاصلة، الفاصلة المنقوطة،
@@ -200,25 +205,26 @@ class Arabic
          * يترك فراغ واحد بعدها جميعا
          * دون أي فراغ قبلها
          */
-        array_push($this->arStandardPatterns, '/\s*([\.\،\؛\:\!\؟])\s*/u');
-        array_push($this->arStandardReplacements, '\\1 ');
+        $this->arStandardPatterns[] = '/\s*([\.\،\؛\:\!\؟])\s*/u';
+        $this->arStandardReplacements[] = '\\1 ';
         
         /**
          * النقاط المتتالية عددها 3 فقط
          * (ليست نقطتان وليست أربع أو أكثر)
          */
-        array_push($this->arStandardPatterns, '/(\. ){2,}/u');
-        array_push($this->arStandardReplacements, '...');
+        $this->arStandardPatterns[] = '/(\. ){2,}/u';
+        $this->arStandardReplacements[] = '...';
         
         /**
          * الأقواس ( ) [ ] { } يترك قبلها وبعدها فراغ
          * وحيد، فيما لا يوجد بينها وبين ما بداخلها
          * أي فراغ
          */
-        array_push($this->arStandardPatterns, '/\s*([\(\{\[])\s*/u');
-        array_push($this->arStandardReplacements, ' \\1');
-        array_push($this->arStandardPatterns, '/\s*([\)\}\]])\s*/u');
-        array_push($this->arStandardReplacements, '\\1 ');
+        $this->arStandardPatterns[] = '/\s*([\(\{\[])\s*/u';
+        $this->arStandardPatterns[] = '/\s*([\)\}\]])\s*/u';
+        
+        $this->arStandardReplacements[] = ' \\1';
+        $this->arStandardReplacements[] = '\\1 ';
         
         /**
          * علامات الاقتباس "..."
@@ -226,8 +232,8 @@ class Arabic
          * وحيد، فيما لا يوجد بينها
          * وبين ما بداخلها أي فراغ
          */
-        array_push($this->arStandardPatterns, '/\s*\"\s*(.+)((?<!\s)\"|\s+\")\s*/u');
-        array_push($this->arStandardReplacements, ' "\\1" ');
+        $this->arStandardPatterns[] = '/\s*\"\s*(.+)((?<!\s)\"|\s+\")\s*/u';
+        $this->arStandardReplacements[] = ' "\\1" ';
         
         /**
          * علامات الإعتراض -...-
@@ -235,89 +241,87 @@ class Arabic
          * وحيد، فيما لا يوجد بينها
          * وبين ما بداخلها أي فراغ
          */
-        array_push($this->arStandardPatterns, '/\s*\-\s*(.+)((?<!\s)\-|\s+\-)\s*/u');
-        array_push($this->arStandardReplacements, ' -\\1- ');
+        $this->arStandardPatterns[] = '/\s*\-\s*(.+)((?<!\s)\-|\s+\-)\s*/u';
+        $this->arStandardReplacements[] = ' -\\1- ';
         
         /**
          * لا يترك فراغ بين حرف العطف الواو وبين
          * الكلمة التي تليه
          * إلا إن كانت تبدأ بحرف الواو
          */
-        array_push($this->arStandardPatterns, '/\sو\s+([^و])/u');
-        array_push($this->arStandardReplacements, ' و\\1');
+        $this->arStandardPatterns[] = '/\sو\s+([^و])/u';
+        $this->arStandardReplacements[] = ' و\\1';
         
         /**
          * الواحدات الإنجليزية توضع
          * على يمين الرقم مع ترك فراغ
          */
-        array_push($this->arStandardPatterns, '/\s+(\w+)\s*(\d+)\s+/');
-        array_push($this->arStandardReplacements, ' <span dir="ltr">\\2 \\1</span> ');
-        array_push($this->arStandardPatterns, '/\s+(\d+)\s*(\w+)\s+/');
-        array_push($this->arStandardReplacements, ' <span dir="ltr">\\1 \\2</span> ');
+        $this->arStandardPatterns[] = '/\s+(\w+)\s*(\d+)\s+/';
+        $this->arStandardPatterns[] = '/\s+(\d+)\s*(\w+)\s+/';
+        
+        $this->arStandardReplacements[] = ' <span dir="ltr">\\2 \\1</span> ';
+        $this->arStandardReplacements[] = ' <span dir="ltr">\\1 \\2</span> ';
         
         /**
          * النسبة المؤية دائما إلى يسار الرقم
          * وبدون أي فراغ يفصل بينهما 40% مثلا
          */
-        array_push($this->arStandardPatterns, '/\s+(\d+)\s*\%\s+/u');
-        array_push($this->arStandardReplacements, ' %\\1 ');
-        array_push($this->arStandardPatterns, '/\n?@@@\n?/u', '/\n?&&&\n?/u', '/\n?###\n?/u');
-        array_push($this->arStandardReplacements, "\r\n", "\n", "\r");
+        $this->arStandardPatterns[] = '/\s+(\d+)\s*\%\s+/u';
+        $this->arStandardPatterns[] = '/\n?@@@\n?/u';
+        $this->arStandardPatterns[] = '/\n?&&&\n?/u';
+        $this->arStandardPatterns[] = '/\n?###\n?/u';
+        
+        $this->arStandardReplacements[] = ' %\\1 ';
+        $this->arStandardReplacements[] = "\r\n";
+        $this->arStandardReplacements[] = "\n";
+        $this->arStandardReplacements[] = "\r";
     }
     
     private function arStrToTimeInit()
     {
-/*
-        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_strtotime.json'), true);
-
-        foreach ($json['str_replace']['pair'] as $pair) {
-            array_push($this->strToTimeSearch, (string)$pair['search']);
-            array_push($this->strToTimeReplace, (string)$pair['replace']);
-        }
-
-file_put_contents($this->rootDirectory . '/data/strtotime_search.txt', implode("\r\n",$this->strToTimeSearch));
-file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode("\r\n",$this->strToTimeReplace));
-*/
         $this->strToTimeSearch = file($this->rootDirectory . '/data/strtotime_search.txt', FILE_IGNORE_NEW_LINES);
         $this->strToTimeReplace = file($this->rootDirectory . '/data/strtotime_replace.txt', FILE_IGNORE_NEW_LINES);
         
         foreach ($this->arDateJSON['ar_hj_month'] as $month) {
-            array_push($this->hj, (string)$month);
+            $this->hj[] = (string)$month;
         }
         
-        array_push($this->strToTimePatterns, '/َ|ً|ُ|ٌ|ِ|ٍ|ْ|ّ/');
-        array_push($this->strToTimeReplacements, '');
-        array_push($this->strToTimePatterns, '/\s*ال(\S{3,})\s+ال(\S{3,})/');
-        array_push($this->strToTimeReplacements, ' \\2 \\1');
-        array_push($this->strToTimePatterns, '/\s*ال(\S{3,})/');
-        array_push($this->strToTimeReplacements, ' \\1');
+        $this->strToTimePatterns[] = '/َ|ً|ُ|ٌ|ِ|ٍ|ْ|ّ/';
+        $this->strToTimePatterns[] = '/\s*ال(\S{3,})\s+ال(\S{3,})/';
+        $this->strToTimePatterns[] = '/\s*ال(\S{3,})/';
+        
+        $this->strToTimeReplacements[] = '';
+        $this->strToTimeReplacements[] = ' \\2 \\1';
+        $this->strToTimeReplacements[] = ' \\1';
     }
     
     private function arTransliterateInit()
     {
-        $this->en2arStrSearch = file($this->rootDirectory . '/data/transliteration/en2ar_str_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->en2arStrReplace = file($this->rootDirectory . '/data/transliteration/en2ar_str_replace.txt', FILE_IGNORE_NEW_LINES);
+        $path = $this->rootDirectory . '/data/transliteration';
+        
+        $this->en2arStrSearch = file($path . '/en2ar_str_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->en2arStrReplace = file($path . '/en2ar_str_replace.txt', FILE_IGNORE_NEW_LINES);
 
-        $this->en2arPregSearch = file($this->rootDirectory . '/data/transliteration/en2ar_preg_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->en2arPregReplace = file($this->rootDirectory . '/data/transliteration/en2ar_preg_replace.txt', FILE_IGNORE_NEW_LINES);
+        $this->en2arPregSearch = file($path . '/en2ar_preg_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->en2arPregReplace = file($path . '/en2ar_preg_replace.txt', FILE_IGNORE_NEW_LINES);
 
-        $this->ar2enStrSearch = file($this->rootDirectory . '/data/transliteration/ar2en_str_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->ar2enStrReplace = file($this->rootDirectory . '/data/transliteration/ar2en_str_replace.txt', FILE_IGNORE_NEW_LINES);
+        $this->ar2enStrSearch = file($path . '/ar2en_str_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->ar2enStrReplace = file($path . '/ar2en_str_replace.txt', FILE_IGNORE_NEW_LINES);
 
-        $this->sesSearch = file($this->rootDirectory . '/data/transliteration/ses_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->sesReplace = file($this->rootDirectory . '/data/transliteration/ses_replace.txt', FILE_IGNORE_NEW_LINES);
+        $this->sesSearch = file($path . '/ses_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->sesReplace = file($path . '/ses_replace.txt', FILE_IGNORE_NEW_LINES);
 
-        $this->rjgcSearch = file($this->rootDirectory . '/data/transliteration/rjgc_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->rjgcReplace = file($this->rootDirectory . '/data/transliteration/rjgc_replace.txt', FILE_IGNORE_NEW_LINES);
+        $this->rjgcSearch = file($path . '/rjgc_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->rjgcReplace = file($path . '/rjgc_replace.txt', FILE_IGNORE_NEW_LINES);
 
-        $this->diariticalSearch = file($this->rootDirectory . '/data/transliteration/diaritical_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->diariticalReplace = file($this->rootDirectory . '/data/transliteration/diaritical_replace.txt', FILE_IGNORE_NEW_LINES);
+        $this->diariticalSearch = file($path . '/diaritical_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->diariticalReplace = file($path . '/diaritical_replace.txt', FILE_IGNORE_NEW_LINES);
 
-        $this->ar2enPregSearch = file($this->rootDirectory . '/data/transliteration/ar2en_preg_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->ar2enPregReplace = file($this->rootDirectory . '/data/transliteration/ar2en_preg_replace.txt', FILE_IGNORE_NEW_LINES);
+        $this->ar2enPregSearch = file($path . '/ar2en_preg_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->ar2enPregReplace = file($path . '/ar2en_preg_replace.txt', FILE_IGNORE_NEW_LINES);
 
-        $this->iso233Search = file($this->rootDirectory . '/data/transliteration/iso233_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->iso233Replace = file($this->rootDirectory . '/data/transliteration/iso233_replace.txt', FILE_IGNORE_NEW_LINES);
+        $this->iso233Search = file($path . '/iso233_search.txt', FILE_IGNORE_NEW_LINES);
+        $this->iso233Replace = file($path . '/iso233_replace.txt', FILE_IGNORE_NEW_LINES);
     }
     
     private function arNumbersInit()
@@ -597,12 +601,14 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         $last       = mb_substr($str, -1, 1);
         $beforeLast = mb_substr($str, -2, 1);
 
-        if ($last == 'ة' || $last == 'ه' || $last == 'ى' || $last == 'ا'
+        if (
+            $last == 'ة' || $last == 'ه' || $last == 'ى' || $last == 'ا'
             || ($last == 'ء' && $beforeLast == 'ا')
         ) {
             $female = true;
-        } elseif (preg_match("/^[اإ].{2}ا.$/u", $str)
-                  || preg_match("/^[إا].ت.ا.+$/u", $str)
+        } elseif (
+            preg_match("/^[اإ].{2}ا.$/u", $str)
+            || preg_match("/^[إا].ت.ا.+$/u", $str)
         ) {
             // الأسماء على وزن إفتعال و إفعال
             $female = true;
@@ -960,26 +966,27 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             $patterns     = array();
             $replacements = array();
 
-            array_push($patterns, 'Y');
-            array_push($replacements, 'x1');
-            array_push($patterns, 'y');
-            array_push($replacements, 'x2');
-            array_push($patterns, 'M');
-            array_push($replacements, 'x3');
-            array_push($patterns, 'F');
-            array_push($replacements, 'x3');
-            array_push($patterns, 'n');
-            array_push($replacements, 'x4');
-            array_push($patterns, 'm');
-            array_push($replacements, 'x5');
-            array_push($patterns, 'j');
-            array_push($replacements, 'x6');
-            array_push($patterns, 'd');
-            array_push($replacements, 'x7');
+            $patterns[] = 'Y';
+            $patterns[] = 'y';
+            $patterns[] = 'M';
+            $patterns[] = 'F';
+            $patterns[] = 'n';
+            $patterns[] = 'm';
+            $patterns[] = 'j';
+            $patterns[] = 'd';
+
+            $replacements[] = 'x1';
+            $replacements[] = 'x2';
+            $replacements[] = 'x3';
+            $replacements[] = 'x3';
+            $replacements[] = 'x4';
+            $replacements[] = 'x5';
+            $replacements[] = 'x6';
+            $replacements[] = 'x7';
 
             if ($this->arDateMode == 8) {
-                array_push($patterns, 'S');
-                array_push($replacements, '');
+                $patterns[] = 'S';
+                $replacements[] = '';
             }
 
             $format = strtr($format, array_combine($patterns, $replacements));
@@ -1011,20 +1018,21 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             $patterns     = array();
             $replacements = array();
 
-            array_push($patterns, 'x1');
-            array_push($replacements, $hj_y);
-            array_push($patterns, 'x2');
-            array_push($replacements, substr($hj_y, -2));
-            array_push($patterns, 'x3');
-            array_push($replacements, $hj_txt_month[$hj_m]);
-            array_push($patterns, 'x4');
-            array_push($replacements, $hj_m);
-            array_push($patterns, 'x5');
-            array_push($replacements, sprintf('%02d', $hj_m));
-            array_push($patterns, 'x6');
-            array_push($replacements, $hj_d);
-            array_push($patterns, 'x7');
-            array_push($replacements, sprintf('%02d', $hj_d));
+            $patterns[] = 'x1';
+            $patterns[] = 'x2';
+            $patterns[] = 'x3';
+            $patterns[] = 'x4';
+            $patterns[] = 'x5';
+            $patterns[] = 'x6';
+            $patterns[] = 'x7';
+            
+            $replacements[] = $hj_y;
+            $replacements[] = substr($hj_y, -2);
+            $replacements[] = $hj_txt_month[$hj_m];
+            $replacements[] = $hj_m;
+            $replacements[] = sprintf('%02d', $hj_m);
+            $replacements[] = $hj_d;
+            $replacements[] = sprintf('%02d', $hj_d);
 
             $str = strtr($str, array_combine($patterns, $replacements));
         } elseif ($this->arDateMode == 5) {
@@ -1060,36 +1068,36 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         $str = strtolower($str);
 
         foreach ($this->arDateJSON['en_day']['mode_full'] as $day) {
-            array_push($patterns, (string)$day);
+            $patterns[] = (string)$day;
         }
 
         foreach ($this->arDateJSON['ar_day'] as $day) {
-            array_push($replacements, (string)$day);
+            $replacements[] = (string)$day;
         }
 
         foreach ($this->arDateJSON['en_month']['mode_full'] as $month) {
-            array_push($patterns, (string)$month);
+            $patterns[] = (string)$month;
         }
 
         $replacements = array_merge($replacements, $this->arDateArabicMonths($this->arDateMode));
 
         foreach ($this->arDateJSON['en_day']['mode_short'] as $day) {
-            array_push($patterns, (string)$day);
+            $patterns[] = (string)$day;
         }
 
         foreach ($this->arDateJSON['ar_day'] as $day) {
-            array_push($replacements, (string)$day);
+            $replacements[] = (string)$day;
         }
 
         foreach ($this->arDateJSON['en_month']['mode_short'] as $m) {
-            array_push($patterns, (string)$m);
+            $patterns[] = (string)$m;
         }
 
         $replacements = array_merge($replacements, $this->arDateArabicMonths($this->arDateMode));
 
         foreach ($this->arDateJSON['preg_replace_en2ar'] as $p) {
-            array_push($patterns, (string)$p['search']);
-            array_push($replacements, (string)$p['replace']);
+            $patterns[] = (string)$p['search'];
+            $replacements[] = (string)$p['replace'];
         }
 
         $str = strtr($str, array_combine($patterns, $replacements));
@@ -1116,7 +1124,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         $replacements = array();
 
         foreach ($this->arDateJSON['ar_month']["mode_$mode"] as $month) {
-            array_push($replacements, (string)$month);
+            $replacements[] = (string)$month;
         }
 
         return $replacements;
@@ -1394,9 +1402,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         $str = str_replace($ptr, 'اثنان', $str);
         $str = trim($str);
 
-        if (strpos($str, 'ناقص') === false
-            && strpos($str, 'سالب') === false
-        ) {
+        if (strpos($str, 'ناقص') === false && strpos($str, 'سالب') === false) {
             $negative = false;
         } else {
             $negative = true;
@@ -1492,11 +1498,11 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             //---/
 
             while (strlen($number) > 3) {
-                array_push($blocks, substr($number, -3));
+                $blocks[] = substr($number, -3);
                 $number = substr($number, 0, strlen($number) - 3);
             }
 
-            array_push($blocks, $number);
+            $blocks[] = $number;
             $blocks_num = count($blocks) - 1;
 
             for ($i = $blocks_num; $i >= 0; $i--) {
@@ -1525,7 +1531,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                     };
                     //---/
 
-                    array_push($items, $text);
+                    $items[] = $text;
                 }
             }
 
@@ -1561,19 +1567,16 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             }
 
             if ($hundred == 200) {
-                array_push(
-                    $items,
-                    $pre . $this->arNumberIndividual[$hundred][$this->arNumberFormat]
-                );
+                $items[] = $pre . $this->arNumberIndividual[$hundred][$this->arNumberFormat];
             } else {
-                array_push($items, $pre . $this->arNumberIndividual[$hundred]);
+                $items[] = $pre . $this->arNumberIndividual[$hundred];
             }
         }
 
         if ($number != 0) {
             if ($this->arNumberOrder == 2) {
                 if ($number <= 10) {
-                    array_push($items, $this->arNumberOrdering[$number][$this->arNumberFeminine]);
+                    $items[] = $this->arNumberOrdering[$number][$this->arNumberFeminine];
                 } elseif ($number < 20) {
                     $number -= 10;
                     $item    = 'ال' . $this->arNumberOrdering[$number][$this->arNumberFeminine];
@@ -1584,38 +1587,32 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                         $item .= ' عشرة';
                     }
 
-                    array_push($items, $item);
+                    $items[] = $item;
                 } else {
                     $ones = $number % 10;
                     $tens = floor($number / 10) * 10;
 
                     if ($ones > 0) {
-                        array_push($items, 'ال' . $this->arNumberOrdering[$ones][$this->arNumberFeminine]);
+                        $items[] = 'ال' . $this->arNumberOrdering[$ones][$this->arNumberFeminine];
                     }
-                    array_push($items, 'ال' . $this->arNumberIndividual[$tens][$this->arNumberFormat]);
+                    $items[] = 'ال' . $this->arNumberIndividual[$tens][$this->arNumberFormat];
                 }
             } else {
                 if ($number == 2 || $number == 12) {
-                    array_push(
-                        $items,
-                        $this->arNumberIndividual[$number][$this->arNumberFeminine][$this->arNumberFormat]
-                    );
+                    $items[] = $this->arNumberIndividual[$number][$this->arNumberFeminine][$this->arNumberFormat];
                 } elseif ($number < 20) {
-                    array_push($items, $this->arNumberIndividual[$number][$this->arNumberFeminine]);
+                    $items[] = $this->arNumberIndividual[$number][$this->arNumberFeminine];
                 } else {
                     $ones = $number % 10;
                     $tens = floor($number / 10) * 10;
 
                     if ($ones == 2) {
-                        array_push(
-                            $items,
-                            $this->arNumberIndividual[2][$this->arNumberFeminine][$this->arNumberFormat]
-                        );
+                        $items[] = $this->arNumberIndividual[2][$this->arNumberFeminine][$this->arNumberFormat];
                     } elseif ($ones > 0) {
-                        array_push($items, $this->arNumberIndividual[$ones][$this->arNumberFeminine]);
+                        $items[] = $this->arNumberIndividual[$ones][$this->arNumberFeminine];
                     }
 
-                    array_push($items, $this->arNumberIndividual[$tens][$this->arNumberFormat]);
+                    $items[] = $this->arNumberIndividual[$tens][$this->arNumberFormat];
                 }
             }
         }
@@ -2201,14 +2198,16 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                 continue;
             }
 
-            if ($crntChar == 'ل' && isset($chars[$i + 1])
+            if (
+                $crntChar == 'ل' && isset($chars[$i + 1])
                 && (mb_strpos('آأإا', $chars[$i + 1], 0) !== false)
             ) {
                 continue;
             }
 
             if ($crntChar && mb_strpos($this->arGlyphsVowel, $crntChar, 0) !== false) {
-                if (isset($chars[$i + 1])
+                if (
+                    isset($chars[$i + 1])
                     && (mb_strpos($this->arGlyphsNextLink, $chars[$i + 1], 0) !== false)
                     && (mb_strpos($this->arGlyphsPrevLink, $prevChar, 0) !== false)
                 ) {
@@ -2221,7 +2220,8 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
 
             $form = 0;
 
-            if (($prevChar == 'لا' || $prevChar == 'لآ' || $prevChar == 'لأ'
+            if (
+                ($prevChar == 'لا' || $prevChar == 'لآ' || $prevChar == 'لأ'
                 || $prevChar == 'لإ' || $prevChar == 'ل')
                 && (mb_strpos('آأإا', $crntChar, 0) !== false)
             ) {
@@ -2309,7 +2309,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                 }
 
                 $words[$i] = strrev($words[$i]);
-                array_push($english, $words[$i]);
+                $english[] = $words[$i];
 
                 if ($en_index == -1) {
                     $en_index = $i;
@@ -2350,14 +2350,14 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             foreach ($en_words as $key => $value) {
                 if ($last !== $value) {
                     $to = $key - 1;
-                    array_push($en_stack, array($from, $to));
+                    $en_stack[] = array($from, $to);
                     $from = $key;
                 }
 
                 $last = $value;
             }
 
-            array_push($en_stack, array($from, $key));
+            $en_stack[] = array($from, $key);
             $new_words = array();
 
             while (list($from, $to) = array_pop($en_stack)) {
@@ -2376,31 +2376,31 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                 if (mb_strpos($words[$i], "\n", 0) !== false) {
                     $words_nl = explode("\n", $words[$i]);
 
-                    array_push($c_words, $words_nl[0]);
-                    array_push($lines, implode(' ', $c_words));
+                    $c_words[] = $words_nl[0];
+                    $lines[] = implode(' ', $c_words);
 
                     $nl_num = count($words_nl) - 1;
 
                     for ($j = 1; $j < $nl_num; $j++) {
-                        array_push($lines, $words_nl[$j]);
+                        $lines[] = $words_nl[$j];
                     }
 
                     $c_words = array($words_nl[$nl_num]);
                     $c_chars = mb_strlen($words_nl[$nl_num]) + 1;
                 } else {
-                    array_push($c_words, $words[$i]);
+                    $c_words[] = $words[$i];
 
                     $c_chars += $w_len;
                 }
             } else {
-                array_push($lines, implode(' ', $c_words));
+                $lines[] = implode(' ', $c_words);
 
                 $c_words = array($words[$i]);
                 $c_chars = $w_len;
             }
         }
 
-        array_push($lines, implode(' ', $c_words));
+        $lines[] = implode(' ', $c_words);
 
         $maxLine = count($lines);
         $output  = '';
@@ -2888,7 +2888,8 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             $wordForms[] = $str2;
         }
 
-        if (($len >= 4 && ($last1 == 'ة' || $last1 == 'ه' || $last1 == 'ت'))
+        if (
+            ($len >= 4 && ($last1 == 'ة' || $last1 == 'ه' || $last1 == 'ت'))
             || ($len >= 5 && $last2 == 'ات')
         ) {
             $wordForms[] = $str1;
@@ -3442,8 +3443,9 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         $replacements = array();
         $metaKeywords = '';
 
-        array_push($patterns, '/\.|\n|\،|\؛|\(|\[|\{|\)|\]|\}|\,|\;/u');
-        array_push($replacements, ' ');
+        $patterns[]     = '/\.|\n|\،|\؛|\(|\[|\{|\)|\]|\}|\,|\;/u';
+        $replacements[] = ' ';
+        
         $str = preg_replace($patterns, $replacements, $str);
 
         $normalizedStr = $this->arNormalize($str);
@@ -3623,7 +3625,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
 
             foreach ($this->arSummaryImportantWords as $word) {
                 if ($word != '') {
-                    $w += mb_substr_count($sentence, $word);
+                    $w += substr_count($sentence, $word);
                 }
             }
 
@@ -3652,8 +3654,8 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                 $wordsRank     = $totalWordsRank / $totalWords;
                 $sentenceRanks = $w * $wordsRank;
 
-                array_push($sentenceArr, $sentence . $last);
-                array_push($rankArr, $sentenceRanks);
+                $sentenceArr[] = $sentence . $last;
+                $rankArr[]     = $sentenceRanks;
             }
         }
 
