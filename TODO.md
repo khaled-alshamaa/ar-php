@@ -96,7 +96,7 @@ Get [PHP Compatibility Coding Standard](https://github.com/PHPCompatibility/PHPC
 ```bash
 phpcs --config-set installed_paths C:\xampp\PHPCompatibility
 
-phpcs -p arabic.php --standard=PHPCompatibility --runtime-set testVersion 5.3-
+phpcs -p arabic.php --standard=PHPCompatibility --runtime-set testVersion 5.6-
 ```
 
 ### _PHPUnit Testing Framework_
