@@ -7,19 +7,15 @@
 
 * Error handle, convert into exceptions (set_error_handler: try/catch)!
 
+* Improve the performance of checkAr, checkEn, arIdentify, and arSummaryRankSentences methods.
+
 * Enhance example scripts by call the following functions: 
 
 	_arSummaryLoadExtra, dms2dd, setQueryArrFields, swapAf, arabizi._
 
 * Replace foreach loop by array functions (map, filter, walk, etc) whenever possible.
 
-* Use switch statements instead of else if and multi if statements.
-
 * Writing $row[’id’] processes 7 times faster than $row[id] ;-)
-
-* Stick with single quotes whenever possible.
-
-* Since === only checks for a closed range, it is faster than using == for comparisons.
 
 * While str_replace is faster than preg_replace, the strtr function is four times faster than str_replace.
 
