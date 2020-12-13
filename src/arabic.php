@@ -169,6 +169,8 @@ class Arabic
 
     public function __construct()
     {
+        mb_internal_encoding('UTF-8');
+        
         // in Phar version it should be = phar://ArPHP.phar
         $this->rootDirectory = dirname(__FILE__);
         $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
@@ -387,18 +389,13 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             $this->arNumberSpell[$str] = (int)$num['value'];
         }
         
-        $xml = simplexml_load_file($this->rootDirectory . '/data/ar_countries.xml');
-        
-        foreach ($xml->xpath("//currency") as $info) {
-            $money_ar = $info->money->arabic;
-            $money_en = $info->money->english;
+        foreach ($json['currency'] as $money) {
+            $this->arNumberCurrency[$money['iso']]['ar']['basic']    = $money['ar_basic'];
+            $this->arNumberCurrency[$money['iso']]['ar']['fraction'] = $money['ar_fraction'];
+            $this->arNumberCurrency[$money['iso']]['en']['basic']    = $money['ar_basic'];
+            $this->arNumberCurrency[$money['iso']]['en']['fraction'] = $money['en_fraction'];
             
-            $this->arNumberCurrency["{$info->iso}"]['ar']['basic']    = $money_ar->basic;
-            $this->arNumberCurrency["{$info->iso}"]['ar']['fraction'] = $money_ar->fraction;
-            $this->arNumberCurrency["{$info->iso}"]['en']['basic']    = $money_en->basic;
-            $this->arNumberCurrency["{$info->iso}"]['en']['fraction'] = $money_en->fraction;
-            
-            $this->arNumberCurrency["{$info->iso}"]['decimals'] = $info->money->decimals;
+            $this->arNumberCurrency[$money['iso']]['decimals'] = $money['decimals'];
         }
     }
     
@@ -528,9 +525,9 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
     {
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_query.json'), true);
 
-        foreach ($json['preg_replace']['pair'] as $pair) {
-            array_push($this->arQueryLexPatterns, (string)$pair['search']);
-            array_push($this->arQueryLexReplacements, (string)$pair['replace']);
+        foreach ($json['preg_replace'] as $pair) {
+            $this->arQueryLexPatterns[] = (string)$pair['search'];
+            $this->arQueryLexReplacements[] = (string)$pair['replace'];
         }
     }
 
@@ -597,8 +594,8 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
 
         $str = str_replace(array('أ','إ','آ'), 'ا', $str);
 
-        $last       = mb_substr($str, -1, 1, 'UTF-8');
-        $beforeLast = mb_substr($str, -2, 1, 'UTF-8');
+        $last       = mb_substr($str, -1, 1);
+        $beforeLast = mb_substr($str, -2, 1);
 
         if ($last == 'ة' || $last == 'ه' || $last == 'ى' || $last == 'ا'
             || ($last == 'ء' && $beforeLast == 'ا')
@@ -857,14 +854,14 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             $temp = strtr($temp, array_combine($this->ar2enStrSearch, $this->ar2enStrReplace));
             $temp = preg_replace($this->arFinePatterns, $this->arFineReplacements, $temp);
 
-            if (preg_match('/[a-z]/', mb_substr($temp, 0, 1, 'UTF-8'))) {
+            if (preg_match('/[a-z]/', mb_substr($temp, 0, 1))) {
                 $temp = ucwords($temp);
             }
 
             $pos  = strpos($temp, '-');
 
             if ($pos > 0) {
-                if (preg_match('/[a-z]/', mb_substr($temp, $pos + 1, 1, 'UTF-8'))) {
+                if (preg_match('/[a-z]/', mb_substr($temp, $pos + 1, 1))) {
                     $temp2  = substr($temp, 0, $pos);
                     $temp2 .= '-' . strtoupper($temp[$pos + 1]);
                     $temp2 .= substr($temp, $pos + 2);
@@ -1727,7 +1724,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
     {
         $output = '';
         $text   = stripslashes($text);
-        $max    = mb_strlen($text, 'UTF-8');
+        $max    = mb_strlen($text);
         
         $inputMap  = array();
         $outputMap = array();
@@ -1757,7 +1754,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         }
 
         for ($i = 0; $i < $max; $i++) {
-            $chr = mb_substr($text, $i, 1, 'UTF-8');
+            $chr = mb_substr($text, $i, 1);
             $key = array_search($chr, $inputMap);
 
             if ($key === false) {
@@ -1797,13 +1794,13 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             }
         }
 
-        $str  = mb_strtolower($str, 'UTF-8');
-        $max  = mb_strlen($str, 'UTF-8');
+        $str  = mb_strtolower($str);
+        $max  = mb_strlen($str);
         $rank = 0;
 
         for ($i = 1; $i < $max; $i++) {
-            $first  = mb_substr($str, $i - 1, 1, 'UTF-8');
-            $second = mb_substr($str, $i, 1, 'UTF-8');
+            $first  = mb_substr($str, $i - 1, 1);
+            $second = mb_substr($str, $i, 1);
 
             if (isset($logodd["$first"]["$second"])) {
                 $rank += $logodd["$first"]["$second"];
@@ -1842,12 +1839,12 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             }
         }
 
-        $max  = mb_strlen($str, 'UTF-8');
+        $max  = mb_strlen($str);
         $rank = 0;
 
         for ($i = 1; $i < $max; $i++) {
-            $first  = mb_substr($str, $i - 1, 1, 'UTF-8');
-            $second = mb_substr($str, $i, 1, 'UTF-8');
+            $first  = mb_substr($str, $i - 1, 1);
+            $second = mb_substr($str, $i, 1);
 
             if (isset($logodd["$first"]["$second"])) {
                 $rank += $logodd["$first"]["$second"];
@@ -1875,7 +1872,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         preg_match_all("/([\x{0600}-\x{06FF}])/u", $str, $matches);
 
         $arNum    = count($matches[0]);
-        $nonArNum = mb_strlen(str_replace(' ', '', $str), 'UTF-8') - $arNum;
+        $nonArNum = mb_strlen(str_replace(' ', '', $str)) - $arNum;
 
         $capital = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $small   = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -2042,10 +2039,10 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
     private function arSoundexMapCode($word)
     {
         $encodedWord = '';
-        $max         = mb_strlen($word, 'UTF-8');
+        $max         = mb_strlen($word);
 
         for ($i = 0; $i < $max; $i++) {
-            $char = mb_substr($word, $i, 1, 'UTF-8');
+            $char = mb_substr($word, $i, 1);
 
             if (isset($this->soundexMap["$char"])) {
                 $encodedWord .= $this->soundexMap["$char"];
@@ -2069,10 +2066,10 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
     {
         $lastChar  = null;
         $cleanWord = null;
-        $max       = mb_strlen($word, 'UTF-8');
+        $max       = mb_strlen($word);
 
         for ($i = 0; $i < $max; $i++) {
-            $char = mb_substr($word, $i, 1, 'UTF-8');
+            $char = mb_substr($word, $i, 1);
 
             if ($char != $lastChar) {
                 $cleanWord .= $char;
@@ -2096,8 +2093,8 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
      */
     public function soundex($word)
     {
-        $soundex = mb_substr($word, 0, 1, 'UTF-8');
-        $rest    = mb_substr($word, 1, mb_strlen($word, 'UTF-8'), 'UTF-8');
+        $soundex = mb_substr($word, 0, 1);
+        $rest    = mb_substr($word, 1, mb_strlen($word));
 
         if ($this->soundexLang == 'en') {
             $soundex = $this->soundexTransliteration[$soundex];
@@ -2108,10 +2105,10 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
 
         $soundex .= $cleanEncodedRest;
         $soundex  = str_replace('0', '', $soundex);
-        $totalLen = mb_strlen($soundex, 'UTF-8');
+        $totalLen = mb_strlen($soundex);
 
         if ($totalLen > $this->soundexLen) {
-            $soundex = mb_substr($soundex, 0, $this->soundexLen, 'UTF-8');
+            $soundex = mb_substr($soundex, 0, $this->soundexLen);
         } else {
             $soundex .= str_repeat('0', $this->soundexLen - $totalLen);
         }
@@ -2132,7 +2129,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
      */
     private function getArGlyphs($char, $type)
     {
-        $pos = mb_strpos($this->arGlyphs, $char, 0, 'UTF-8');
+        $pos = mb_strpos($this->arGlyphs, $char, 0);
 
         if ($pos > 49) {
             $pos = ($pos - 49) / 2 + 49;
@@ -2159,10 +2156,10 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         $output   = '';
         $chars    = array();
 
-        $_temp = mb_strlen($str, 'UTF-8');
+        $_temp = mb_strlen($str);
 
         for ($i = 0; $i < $_temp; $i++) {
-            $chars[] = mb_substr($str, $i, 1, 'UTF-8');
+            $chars[] = mb_substr($str, $i, 1);
         }
 
         $max = count($chars);
@@ -2175,10 +2172,10 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                 $prevChar = $chars[$i - 1];
             }
 
-            if ($prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0, 'UTF-8') !== false) {
+            if ($prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false) {
                 $prevChar = $chars[$i - 2];
 
-                if ($prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0, 'UTF-8') !== false) {
+                if ($prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false) {
                     $prevChar = $chars[$i - 3];
                 }
             }
@@ -2187,15 +2184,15 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             $flip_arr    = ')]>}';
             $ReversedChr = '([<{';
 
-            if ($crntChar && mb_strpos($flip_arr, $crntChar, 0, 'UTF-8') !== false) {
-                $crntChar = $ReversedChr[mb_strpos($flip_arr, $crntChar, 0, 'UTF-8')];
+            if ($crntChar && mb_strpos($flip_arr, $crntChar, 0) !== false) {
+                $crntChar = $ReversedChr[mb_strpos($flip_arr, $crntChar, 0)];
                 $Reversed = true;
             } else {
                 $Reversed = false;
             }
 
-            if ($crntChar && !$Reversed && (mb_strpos($ReversedChr, $crntChar, 0, 'UTF-8') !== false)) {
-                $crntChar = $flip_arr[mb_strpos($ReversedChr, $crntChar, 0, 'UTF-8')];
+            if ($crntChar && !$Reversed && (mb_strpos($ReversedChr, $crntChar, 0) !== false)) {
+                $crntChar = $flip_arr[mb_strpos($ReversedChr, $crntChar, 0)];
             }
 
             if (ord($crntChar) < 128) {
@@ -2205,15 +2202,15 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             }
 
             if ($crntChar == 'ل' && isset($chars[$i + 1])
-                && (mb_strpos('آأإا', $chars[$i + 1], 0, 'UTF-8') !== false)
+                && (mb_strpos('آأإا', $chars[$i + 1], 0) !== false)
             ) {
                 continue;
             }
 
-            if ($crntChar && mb_strpos($this->arGlyphsVowel, $crntChar, 0, 'UTF-8') !== false) {
+            if ($crntChar && mb_strpos($this->arGlyphsVowel, $crntChar, 0) !== false) {
                 if (isset($chars[$i + 1])
-                    && (mb_strpos($this->arGlyphsNextLink, $chars[$i + 1], 0, 'UTF-8') !== false)
-                    && (mb_strpos($this->arGlyphsPrevLink, $prevChar, 0, 'UTF-8') !== false)
+                    && (mb_strpos($this->arGlyphsNextLink, $chars[$i + 1], 0) !== false)
+                    && (mb_strpos($this->arGlyphsPrevLink, $prevChar, 0) !== false)
                 ) {
                     $output .= '&#x' . $this->getArGlyphs($crntChar, 1) . ';';
                 } else {
@@ -2226,13 +2223,13 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
 
             if (($prevChar == 'لا' || $prevChar == 'لآ' || $prevChar == 'لأ'
                 || $prevChar == 'لإ' || $prevChar == 'ل')
-                && (mb_strpos('آأإا', $crntChar, 0, 'UTF-8') !== false)
+                && (mb_strpos('آأإا', $crntChar, 0) !== false)
             ) {
-                if (mb_strpos($this->arGlyphsPrevLink, $chars[$i - 2], 0, 'UTF-8') !== false) {
+                if (mb_strpos($this->arGlyphsPrevLink, $chars[$i - 2], 0) !== false) {
                     $form++;
                 }
 
-                if (mb_strpos($this->arGlyphsVowel, $chars[$i - 1], 0, 'UTF-8')) {
+                if (mb_strpos($this->arGlyphsVowel, $chars[$i - 1], 0)) {
                     $output .= '&#x';
                     $output .= $this->getArGlyphs($crntChar, $form) . ';';
                 } else {
@@ -2244,11 +2241,11 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                 continue;
             }
 
-            if ($prevChar && mb_strpos($this->arGlyphsPrevLink, $prevChar, 0, 'UTF-8') !== false) {
+            if ($prevChar && mb_strpos($this->arGlyphsPrevLink, $prevChar, 0) !== false) {
                 $form++;
             }
 
-            if ($nextChar && mb_strpos($this->arGlyphsNextLink, $nextChar, 0, 'UTF-8') !== false) {
+            if ($nextChar && mb_strpos($this->arGlyphsNextLink, $nextChar, 0) !== false) {
                 $form += 2;
             }
 
@@ -2304,11 +2301,11 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
 
             if (preg_match($pattern, $words[$i], $matches)) {
                 if ($matches[1]) {
-                    $words[$i] = mb_substr($words[$i], 1, mb_strlen($words[$i], 'UTF-8'), 'UTF-8') . $matches[1];
+                    $words[$i] = mb_substr($words[$i], 1, mb_strlen($words[$i])) . $matches[1];
                 }
 
                 if ($matches[2]) {
-                    $words[$i] = $matches[2] . mb_substr($words[$i], 0, -1, 'UTF-8');
+                    $words[$i] = $matches[2] . mb_substr($words[$i], 0, -1);
                 }
 
                 $words[$i] = strrev($words[$i]);
@@ -2373,10 +2370,10 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         }
 
         for ($i = 0; $i < $w_count; $i++) {
-            $w_len = mb_strlen($words[$i], 'UTF-8') + 1;
+            $w_len = mb_strlen($words[$i]) + 1;
 
             if ($c_chars + $w_len < $max_chars) {
-                if (mb_strpos($words[$i], "\n", 0, 'UTF-8') !== false) {
+                if (mb_strpos($words[$i], "\n", 0) !== false) {
                     $words_nl = explode("\n", $words[$i]);
 
                     array_push($c_words, $words_nl[0]);
@@ -2389,7 +2386,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                     }
 
                     $c_words = array($words_nl[$nl_num]);
-                    $c_chars = mb_strlen($words_nl[$nl_num], 'UTF-8') + 1;
+                    $c_chars = mb_strlen($words_nl[$nl_num]) + 1;
                 } else {
                     array_push($c_words, $words[$i]);
 
@@ -2500,9 +2497,9 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
                 $one = '';
             }
 
-            $end   = mb_strpos($piece, ';', 0, 'UTF-8');
-            $start = mb_strlen($one, 'UTF-8');
-            $two   = mb_substr($piece, $start, $end - $start, 'UTF-8');
+            $end   = mb_strpos($piece, ';', 0);
+            $start = mb_strlen($one);
+            $two   = mb_substr($piece, $start, $end - $start);
             
             if ($one == '' && $two == '') {
                 $zero = '&';
@@ -2511,7 +2508,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             }
             
             $text .= $this->arGlyphsDecodeEntities2($one, $two, $zero, $newtable, $exclude) .
-                     mb_substr($piece, $end + 1, mb_strlen($piece, 'UTF-8'), 'UTF-8');
+                     mb_substr($piece, $end + 1, mb_strlen($piece));
         }
 
         return $text;
@@ -2836,21 +2833,21 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         $postfix1 = array('كم', 'كن', 'نا', 'ها', 'هم', 'هن');
         $postfix2 = array('ين', 'ون', 'ان', 'ات', 'وا');
 
-        $len = mb_strlen($word, 'UTF-8');
+        $len = mb_strlen($word);
 
-        if (mb_substr($word, 0, 2, 'UTF-8') == 'ال') {
-            $word = mb_substr($word, 2, mb_strlen($word, 'UTF-8'), 'UTF-8');
+        if (mb_substr($word, 0, 2) == 'ال') {
+            $word = mb_substr($word, 2, mb_strlen($word));
         }
 
         $wordForms[] = $word;
 
-        $str1 = mb_substr($word, 0, -1, 'UTF-8');
-        $str2 = mb_substr($word, 0, -2, 'UTF-8');
-        $str3 = mb_substr($word, 0, -3, 'UTF-8');
+        $str1 = mb_substr($word, 0, -1);
+        $str2 = mb_substr($word, 0, -2);
+        $str3 = mb_substr($word, 0, -3);
 
-        $last1 = mb_substr($word, -1, mb_strlen($word, 'UTF-8'), 'UTF-8');
-        $last2 = mb_substr($word, -2, mb_strlen($word, 'UTF-8'), 'UTF-8');
-        $last3 = mb_substr($word, -3, mb_strlen($word, 'UTF-8'), 'UTF-8');
+        $last1 = mb_substr($word, -1, mb_strlen($word));
+        $last2 = mb_substr($word, -2, mb_strlen($word));
+        $last3 = mb_substr($word, -3, mb_strlen($word));
 
         if ($len >= 6 && $last3 == 'تين') {
             $wordForms[] = $str3;
@@ -3373,7 +3370,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
 
         if ($mode == 1) {
             $str            = preg_replace("/\s{2,}/u", ' ', $str);
-            $totalChars     = mb_strlen($str, 'UTF-8');
+            $totalChars     = mb_strlen($str);
             $totalSentences = count($_sentences);
 
             $maxChars = round($int * $totalChars / 100);
@@ -3491,7 +3488,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             }
         }
 
-        $metaKeywords = mb_substr($metaKeywords, 0, -2, 'UTF-8');
+        $metaKeywords = mb_substr($metaKeywords, 0, -2);
 
         return $metaKeywords;
     }
@@ -3571,8 +3568,8 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         }
 
         foreach ($wordsRanks as $wordRank => $total) {
-            if (mb_substr($wordRank, 0, 1, 'UTF-8') == 'و') {
-                $subWordRank = mb_substr($wordRank, 1, mb_strlen($wordRank, 'UTF-8') - 1, 'UTF-8');
+            if (mb_substr($wordRank, 0, 1) == 'و') {
+                $subWordRank = mb_substr($wordRank, 1, mb_strlen($wordRank) - 1);
                 if (isset($wordsRanks[$subWordRank])) {
                     unset($wordsRanks[$wordRank]);
                     $wordsRanks[$subWordRank] += $total;
@@ -3605,8 +3602,8 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
             $sentence = $sentences[$i];
 
             $w     = 0;
-            $first = mb_substr($sentence, 0, 1, 'UTF-8');
-            $last  = mb_substr($sentence, -1, 1, 'UTF-8');
+            $first = mb_substr($sentence, 0, 1);
+            $last  = mb_substr($sentence, -1, 1);
 
             if ($first == "\n") {
                 $w += 3;
@@ -3626,19 +3623,19 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
 
             foreach ($this->arSummaryImportantWords as $word) {
                 if ($word != '') {
-                    $w += mb_substr_count($sentence, $word, 'UTF-8');
+                    $w += mb_substr_count($sentence, $word);
                 }
             }
 
-            $_sentence = mb_substr($sentence, 0, -1, 'UTF-8');
-            $sentence  = mb_substr($_sentence, 1, mb_strlen($_sentence, 'UTF-8'), 'UTF-8');
+            $_sentence = mb_substr($sentence, 0, -1);
+            $sentence  = mb_substr($_sentence, 1, mb_strlen($_sentence));
 
             if (!in_array($first, $this->arSeparators, true)) {
                 $sentence = $first . $sentence;
             }
 
             $stemStr = $stemmedSentences[$i];
-            $stemStr = mb_substr($stemStr, 0, -1, 'UTF-8');
+            $stemStr = mb_substr($stemStr, 0, -1);
 
             $words = preg_split("/[\s,]+/u", $stemStr);
 
@@ -3682,7 +3679,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
         $len = array();
 
         foreach ($str as $line) {
-            $len[] = mb_strlen($line, 'UTF-8');
+            $len[] = mb_strlen($line);
         }
 
         rsort($arr, SORT_NUMERIC);
@@ -3721,7 +3718,7 @@ file_put_contents($this->rootDirectory . '/data/strtotime_replace.txt', implode(
     {
         $accept = true;
 
-        if (mb_strlen($word, 'UTF-8') < 3) {
+        if (mb_strlen($word) < 3) {
             $accept = false;
         }
 
