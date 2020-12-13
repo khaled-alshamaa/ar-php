@@ -135,8 +135,9 @@ http://localhost/ar-php/examples/strtotime.php?XDEBUG_PROFILE=1
 After a profile information file has been generated you can open it with the [KCacheGrind](https://kcachegrind.github.io/html/Home.html) tool for Linux users or [QCacheGrind](https://sourceforge.net/projects/qcachegrindwin/) for Windows users.
 
 
-### _Insphpect: Smarter code reviews_
-[Insphpect](https://insphpect.com/) is an automated code review tool which identifies inflexibilities in PHP code and helps you write better software.
+### _Extra Utilities for Code Reviews_
+* [Insphpect](https://insphpect.com/) is an automated code review tool which identifies inflexibilities in PHP code and helps you write better software.
+* [PHPStan](https://phpstan.org/) is a PHP static analysis tool finds bugs In your code without writing tests! 
 
 ### _PHP Archive (phar)_
 
