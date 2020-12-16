@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace ArPHP\I18N\Test;
+
 use PHPUnit\Framework\TestCase;
 
 final class ArabicTest extends TestCase
