@@ -9,7 +9,7 @@ namespace ArPHP\I18N;
  *
  * http://www.ar-php.org
  *
- * PHP Version 5
+ * PHP Version >= 5.6
  *
  * ----------------------------------------------------------------------
  *
@@ -51,13 +51,13 @@ namespace ArPHP\I18N;
  * @copyright 2006-2020 Khaled Al-Shamaa
  *
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
- * @version   5.0 released in Jan 8, 2020
+ * @version   5.5 released in Dec 18, 2020
  * @link      http://www.ar-php.org
  */
  
 class Arabic
 {
-    public $version = '5.0';
+    public $version = '5.5';
     
     private $arStandardPatterns     = array();
     private $arStandardReplacements = array();
@@ -2833,21 +2833,21 @@ class Arabic
         $postfix1 = array('كم', 'كن', 'نا', 'ها', 'هم', 'هن');
         $postfix2 = array('ين', 'ون', 'ان', 'ات', 'وا');
 
-        $len = mb_strlen($word);
-
         if (mb_substr($word, 0, 2) == 'ال') {
             $word = mb_substr($word, 2, mb_strlen($word));
         }
 
+        $len = mb_strlen($word);
+        
         $wordForms[] = $word;
 
         $str1 = mb_substr($word, 0, -1);
         $str2 = mb_substr($word, 0, -2);
         $str3 = mb_substr($word, 0, -3);
 
-        $last1 = mb_substr($word, -1, mb_strlen($word));
-        $last2 = mb_substr($word, -2, mb_strlen($word));
-        $last3 = mb_substr($word, -3, mb_strlen($word));
+        $last1 = mb_substr($word, -1, $len);
+        $last2 = mb_substr($word, -2, $len);
+        $last3 = mb_substr($word, -3, $len);
 
         if ($len >= 6 && $last3 == 'تين') {
             $wordForms[] = $str3;
