@@ -31,10 +31,4 @@
 			"ArPHP\\I18N\\": "src"
 		}
 	}
-
-	"autoload-dev": {
-		"psr-4": {
-			"ArPHP\\I18N\\Test\\": "tests"
-		}
-	}
 }
