@@ -1,5 +1,6 @@
 # ArPHP Library - Change Log
 
+* Version [5.5.0](#whats-new-in-arphp-550-release-date-dec-18-2020) _(release date: Dec 18, 2020)_
 * Version [5.1.0](#whats-new-in-arphp-510-release-date-jun-27-2020) _(release date: Jun 27, 2020)_
 * Version [5.0.0](#whats-new-in-arphp-500-release-date-jan-25-2020) _(release date: Jan 25, 2020)_
 * Version [4.0.0](#whats-new-in-arphp-400-release-date-jan-8-2016) _(release date: Jan 8, 2016)_
@@ -22,6 +23,23 @@
 * Version [1.2.0](#whats-new-in-arphp-120-release-date-apr-8-2008) _(release date: Apr 8, 2008)_
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
+
+## What's new in ArPHP 5.5.0 _(release date: Dec 18, 2020)_
+
+* Profiling the library script using (Xdebug)[https://xdebug.org], that helps in detect and resolve a bottleneck in the __construct method. It now takes only %25 of processing time on loading/initialize the library, and it is 15% faster comparing to the previous version.
+
+* Write unit tests in the tests/ArabicTest.php script that covers all examples functionalities using the [PHPUnit](https://phpunit.de) framework.
+
+* Add class documentation in the docs folder using the [phpDocumentor](https://www.phpdoc.org) documentation application for PHP projects.
+
+* Improve the code quality by fix all errors reported in the [PHPStan.org](https://phpstan.org) (PHP Static Analysis Tool) up to the rule level 5 (https://phpstan.org/user-guide/rule-levels).
+
+* Pass the compatibility testing with the new version of PHP 8.0 (released on Nov 26, 2020) successfully.
+
+* Move demo scripts to the examples folder instead of the tests folder.
+
+[Top](#arphp-library---change-log)
+
 
 ## What's new in ArPHP 5.1.0 _(release date: Jun 27, 2020)_
 
