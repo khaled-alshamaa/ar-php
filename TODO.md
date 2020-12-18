@@ -1,17 +1,20 @@
 ## To-Do List
 * Continuous Integration with GitHub Actions and PHPUnit (e.g. [php-actions/phpunit](https://github.com/php-actions/example-phpunit)).
 
-* PSR-4: [Autoloading Standard](https://www.php-fig.org/psr/psr-4/).
-
-* PSR-5: [PHPDoc Standard](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md).
+* Insure coding standards in Autoloading ([PSR-4](https://www.php-fig.org/psr/psr-4/)) and Documentation ([PSR-5](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md)).
 
 * Error handle, convert into exceptions (set_error_handler: try/catch)!
 
-* Improve the performance of checkAr, checkEn, arIdentify, and arSummaryRankSentences methods.
+* Improve the performance of _checkAr, checkEn, arIdentify, and arSummaryRankSentences_ methods.
 
-* Enhance example scripts by call the following functions: 
+* Enhance example scripts by call the following functions: _arSummaryLoadExtra, dms2dd, setQueryArrFields, swapAf, arabizi._
 
-	_arSummaryLoadExtra, dms2dd, setQueryArrFields, swapAf, arabizi._
+### _Performance Improvement Tips (lessons learned)_
+* json_decode parser is faster than SimpleXML since JSON is only a description of nested string sequences, without the need to offer a DOM interface and attributes parsing.
+
+* If you use array_push() to add one element to the array it's better to use $array[] = because in that way there is no overhead of calling a function.
+
+* Set internal character encoding before call any MBstring functions is much faster than pass encoding parameter if you are using PHP version < 7.3! ([bug report](https://bugs.php.net/bug.php?id=74933))
 
 * Replace foreach loop by array functions (map, filter, walk, etc) whenever possible.
 
