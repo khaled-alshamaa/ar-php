@@ -44,7 +44,7 @@ final class ArabicTest extends TestCase
         $text = $Arabic->int2str($integer);
         
         $this->assertEquals(
-            'مئة و واحد و أربعون مليار و خمسمئة و إثنان و تسعون مليون و ستمئة و ثلاث و خمسون ألف و خمسمئة و تسع و ثمانون',
+            'مئة و واحد و أربعون مليار و خمسمئة و اثنان و تسعون مليون و ستمئة و ثلاثة و خمسون ألف و خمسمئة و تسعة و ثمانون',
             $text
         );
     }
@@ -61,7 +61,7 @@ final class ArabicTest extends TestCase
         $text = $Arabic->int2str($integer);
     
         $this->assertEquals(
-            'مئة و واحدة و أربعين مليار و خمسمئة و إثنتين و تسعين مليون و ستمئة و ثلاثة و خمسين ألف و خمسمئة و تسعة و ثمانين',
+            'مئة و واحدة و أربعين مليار و خمسمئة و اثنتين و تسعين مليون و ستمئة و ثلاث و خمسين ألف و خمسمئة و تسع و ثمانين',
             $text
         );
     }
@@ -78,7 +78,7 @@ final class ArabicTest extends TestCase
         $text = $Arabic->int2str($integer);
     
         $this->assertEquals(
-            'سالب ألفين و سبعمئة و تسعة و أربعين فاصلة ثلاثمئة و سبعة عشر',
+            'سالب ألفين و سبعمئة و تسع و أربعين فاصلة ثلاثمئة و سبع عشرة',
             $text
         );
     }
@@ -94,7 +94,7 @@ final class ArabicTest extends TestCase
         $text   = $Arabic->money2str($number, 'KWD', 'ar');
     
         $this->assertEquals(
-            'أربع و عشرون دينار و سبعمئة فلس',
+            'أربعة و عشرون دينار و سبعمئة فلس',
             $text
         );
     }
