@@ -817,7 +817,7 @@ class Arabic
             $string .= ' ' . $word;
         }
 
-        return $string;
+        return trim($string);
     }
 
     /**
@@ -881,7 +881,7 @@ class Arabic
             $string .= ' ' . $temp2;
         }
 
-        return $string;
+        return trim($string);
     }
 
 

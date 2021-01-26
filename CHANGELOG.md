@@ -25,6 +25,13 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
+<!--
+## What's new in ArPHP 5.6.0 _(release date: ??? ##, 2021)_
+
+* Fix the issue of extra space at the end of returned string in the ar2en and en2ar methods. Thanks to [Hamoud Alhoqbani](https://github.com/alhoqbani).
+
+-->
+
 ## What's new in ArPHP 5.5.2 _(release date: Jan 26, 2021)_
 
 * Rename the class file to comply with the Autoloading [PSR-4](https://www.php-fig.org/psr/psr-4/) standards to support Composer 2.0 and fix [this](https://github.com/khaled-alshamaa/ar-php/issues/4) reported issue. Thanks to [bagisto](https://github.com/bagisto/bagisto) team.
