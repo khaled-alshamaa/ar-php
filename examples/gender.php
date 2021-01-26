@@ -21,7 +21,7 @@ $time_start = microtime(true);
   require_once __DIR__ . '/../vendor/autoload.php';
 */
 
-require '../src/arabic.php';
+require '../src/Arabic.php';
 $Arabic = new \ArPHP\I18N\Arabic();
 
 $names = array('أحمد بشتو','أحمد منصور','الحبيب الغريبي','المعز بو لحية',
