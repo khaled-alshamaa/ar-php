@@ -90,6 +90,12 @@ phpcs Arabic.php --standard=PSR1
 phpcs Arabic.php --standard=PSR12
 ```
 
+> __Note:__ You can use the `phpcbf` command to automatically correct coding standard violations when possible.
+> ```bash
+> phpcbf Arabic.php --standard=PSR1
+> phpcbf Arabic.php --standard=PSR12
+> ```
+
 Get [PHP Compatibility Coding Standard](https://github.com/PHPCompatibility/PHPCompatibility) for PHP CodeSniffer by download the latest release from [here](https://github.com/PHPCompatibility/PHPCompatibility/releases), then unzip it into an arbitrary directory (e.g. inside c:\XAMPP).
 
 ```bash
