@@ -86,8 +86,8 @@ Check for standards and compatibility using [PHP Code Sniffer](https://github.co
 ```bash
 composer global require squizlabs/php_codesniffer --dev
 
-phpcs arabic.php --standard=PSR1
-phpcs arabic.php --standard=PSR12
+phpcs Arabic.php --standard=PSR1
+phpcs Arabic.php --standard=PSR12
 ```
 
 Get [PHP Compatibility Coding Standard](https://github.com/PHPCompatibility/PHPCompatibility) for PHP CodeSniffer by download the latest release from [here](https://github.com/PHPCompatibility/PHPCompatibility/releases), then unzip it into an arbitrary directory (e.g. inside c:\XAMPP).
@@ -95,7 +95,7 @@ Get [PHP Compatibility Coding Standard](https://github.com/PHPCompatibility/PHPC
 ```bash
 phpcs --config-set installed_paths C:\xampp\PHPCompatibility
 
-phpcs -p arabic.php --standard=PHPCompatibility --runtime-set testVersion 5.6-
+phpcs -p Arabic.php --standard=PHPCompatibility --runtime-set testVersion 5.6-
 ```
 
 ### _PHPUnit Testing Framework_
@@ -106,7 +106,7 @@ Simply download the PHAR distribution of PHPUnit 9 from [here](https://phar.phpu
 The following command line will execute all the automated tests:
 
 ```bash
-php phpunit.phar --bootstrap ./src/arabic.php --testdox tests
+php phpunit.phar --bootstrap ./src/Arabic.php --testdox tests
 ```
 
 ### _Xdebug: Debugging tool for PHP_
@@ -115,7 +115,7 @@ php phpunit.phar --bootstrap ./src/arabic.php --testdox tests
 The following command line will telling PHPUnit to include the code coverage report ([more info](https://phpunit.readthedocs.io/en/9.3/code-coverage-analysis.html)):
 
 ```bash
-php phpunit.phar --bootstrap ./src/arabic.php --testdox tests --coverage-filter ./src/arabic.php --coverage-html coverage
+php phpunit.phar --bootstrap ./src/Arabic.php --testdox tests --coverage-filter ./src/Arabic.php --coverage-html coverage
 ```
 Setup the Xdebug profiler by add the following lines in the php.ini file:
 
@@ -169,7 +169,7 @@ $p->stopBuffering();
 Finally, you can include this library into your script like this:
 
 ```php
-require 'phar://path/to/ArPHP.phar/arabic.php';
+require 'phar://path/to/ArPHP.phar/Arabic.php';
 
 $obj = new \ArPHP\I18N\Arabic();
 
@@ -184,7 +184,7 @@ Strip comments, whitespaces, and preserve newlines. Compressed library file is i
 You can use the following [sed](https://www.gnu.org/software/sed/) (Linux stream editor) command to create a minified version of `arabic.php` main script:
 
 ```bash
-sed "/^\s*\*/d" arabic.php | sed "/^\s*\/\//d" | sed "/^\s*\/\*/d" | sed "/^\s*$/d" | sed -e "s/\s*=\s*/=/g" | sed -e "s/^\s*//g" > arabic.min.php
+sed "/^\s*\*/d" Arabic.php | sed "/^\s*\/\//d" | sed "/^\s*\/\*/d" | sed "/^\s*$/d" | sed -e "s/\s*=\s*/=/g" | sed -e "s/^\s*//g" > Arabic.min.php
 ```
 
 ### _phpDocumentor_
@@ -192,7 +192,7 @@ sed "/^\s*\*/d" arabic.php | sed "/^\s*\/\//d" | sed "/^\s*\/\*/d" | sed "/^\s*$
 Install it as a PHAR file format, all you need to do is download the phar binary from [here](http://phpdoc.org/phpDocumentor.phar), then save it in an arbitrary directory (e.g. inside c:\XAMPP).
 
 ```bash
-php C:\xampp\phpDocumentor.phar -f arabic.php -t ../docs/ --visibility="public" --title="Ar-PHP"
+php C:\xampp\phpDocumentor.phar -f Arabic.php -t ../docs/ --visibility="public" --title="Ar-PHP"
 ``` 
 
 ### _Benchmarking Tool_
