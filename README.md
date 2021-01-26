@@ -19,12 +19,12 @@ This project provides a set of tools that enable Arabic website developers to se
 > [Professional Support](#professional-support)
 
 ### Arabic Language
-Worldwide Internet use has grown tremendously in recent years, most rapidly in non-English speaking regions especially in Arab world. For example, from 2000 to 2019, the online populations grew by more than 8,900 %. Meanwhile, Arabic Web content was estimated to be doubling every year. Such growth has created demand for better websites developing resources in Arabic language. However, existing websites developing resources may be unable to meet it because they primarily serve English-speaking users.
+Worldwide Internet use has grown tremendously in recent years, most rapidly in non-English speaking regions especially in Arab world. For example, from 2000 to 2020, the online populations grew by more than 9,300 %. Meanwhile, Arabic Web content was estimated to be doubling every year. Such growth has created demand for better websites developing resources in Arabic language. However, existing websites developing resources may be unable to meet it because they primarily serve English-speaking users.
 
 [[Arabic language](https://en.wikipedia.org/wiki/Arabic), [Internet world stats](https://www.internetworldstats.com/stats7.htm)]
 
 ### PHP
-PHP is a widely-used general-purpose scripting language that is especially suited for web development and can be embedded into HTML. PHP runs more than 75% of all the top 10 million worldwide web sites a few very good examples are Facebook and Wikipedia.
+PHP is a widely-used general-purpose scripting language that is especially suited for web development and can be embedded into HTML. PHP runs more than 79% of all the top 10 million worldwide web sites a few very good examples are Facebook and Wikipedia.
 
 [[PHP language](https://www.php.net/), [Server-side languages report](https://w3techs.com/technologies/overview/programming_language)]
 
