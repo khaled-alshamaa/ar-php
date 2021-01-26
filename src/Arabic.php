@@ -5,7 +5,7 @@ namespace ArPHP\I18N;
 /**
  * ----------------------------------------------------------------------
  *
- * Copyright (c) 2006-2020 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2021 Khaled Al-Sham'aa.
  *
  * http://www.ar-php.org
  *
@@ -48,16 +48,16 @@ namespace ArPHP\I18N;
  *         soundex, Hijri calendar, spell numbers, keyboard language, and more...
  *
  * @author    Khaled Al-Shamaa <khaled@ar-php.org>
- * @copyright 2006-2020 Khaled Al-Shamaa
+ * @copyright 2006-2021 Khaled Al-Shamaa
  *
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
- * @version   5.5 released in Dec 18, 2020
+ * @version   5.5.2 released in Jan 26, 2021
  * @link      http://www.ar-php.org
  */
  
 class Arabic
 {
-    public $version = '5.5';
+    public $version = '5.5.2';
     
     private $arStandardPatterns     = array();
     private $arStandardReplacements = array();
