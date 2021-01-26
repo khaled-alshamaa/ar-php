@@ -1,6 +1,7 @@
 # ArPHP Library - Change Log
 
-* Version [5.5.0](#whats-new-in-arphp-550-release-date-dec-18-2020) _(release date: Dec 18, 2020)_
+* Version [5.5.2](#whats-new-in-arphp-552-release-date-jan-26-2021) _(release date: Jan 26, 2021)_
+* Version [5.5.1](#whats-new-in-arphp-551-release-date-dec-18-2020) _(release date: Dec 18, 2020)_
 * Version [5.1.0](#whats-new-in-arphp-510-release-date-jun-27-2020) _(release date: Jun 27, 2020)_
 * Version [5.0.0](#whats-new-in-arphp-500-release-date-jan-25-2020) _(release date: Jan 25, 2020)_
 * Version [4.0.0](#whats-new-in-arphp-400-release-date-jan-8-2016) _(release date: Jan 8, 2016)_
@@ -24,9 +25,15 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
-## What's new in ArPHP 5.5.0 _(release date: Dec 18, 2020)_
+## What's new in ArPHP 5.5.2 _(release date: Jan 26, 2021)_
 
-* Profiling the library script using (Xdebug)[https://xdebug.org], that helps in detect and resolve a bottleneck in the __construct method. It now takes only %25 of processing time on loading/initialize the library, and it is 15% faster comparing to the previous version.
+* Rename the class file to comply with the PSR-4 standards to support version 2.0 of Composer and fix [this](https://github.com/khaled-alshamaa/ar-php/issues/4) reported issue. Thanks to [bagisto](https://github.com/bagisto/bagisto) team.
+
+* Fix the issue in spell numbers in the Arabic idiom that reported [here](https://github.com/khaled-alshamaa/ar-php/issues/2). Thanks to [ATablas](https://github.com/ATablas).
+
+## What's new in ArPHP 5.5.1 _(release date: Dec 18, 2020)_
+
+* Profiling the library script using [Xdebug](https://xdebug.org), that helps in detect and resolve a bottleneck in the __construct method. It now takes only %25 of processing time on loading/initialize the library, and it is 15% faster comparing to the previous version.
 
 * Write unit tests in the tests/ArabicTest.php script that covers all examples functionalities using the [PHPUnit](https://phpunit.de) framework.
 
