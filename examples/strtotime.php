@@ -27,7 +27,7 @@ echo '<br /><br />';
   require_once __DIR__ . '/../vendor/autoload.php';
 */
 
-require '../src/arabic.php';
+require '../src/Arabic.php';
 $Arabic = new \ArPHP\I18N\Arabic();
 
 $str  = 'الخميس القادم';

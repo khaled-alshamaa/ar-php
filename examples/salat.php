@@ -23,7 +23,7 @@ date_default_timezone_set('UTC');
   require_once __DIR__ . '/../vendor/autoload.php';
 */
 
-require '../src/arabic.php';
+require '../src/Arabic.php';
 $Arabic = new \ArPHP\I18N\Arabic();
 
 // Latitude, Longitude, Zone, and Elevation

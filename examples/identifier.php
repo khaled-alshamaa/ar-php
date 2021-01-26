@@ -69,7 +69,7 @@ just as well with respect and communication.  The Internet Internationalization
 </dl>
 END;
 
-require '../src/arabic.php';
+require '../src/Arabic.php';
 $Arabic = new \ArPHP\I18N\Arabic();
 
 $p = $Arabic->arIdentify($html);

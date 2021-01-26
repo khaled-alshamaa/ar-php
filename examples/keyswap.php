@@ -20,7 +20,7 @@ $time_start = microtime(true);
   require_once __DIR__ . '/../vendor/autoload.php';
 */
 
-require '../src/arabic.php';
+require '../src/Arabic.php';
 $Arabic = new \ArPHP\I18N\Arabic();
 
 $str = "Hpf lk hgkhs hglj'vtdkK Hpf hg`dk dldg,k f;gdjil Ygn

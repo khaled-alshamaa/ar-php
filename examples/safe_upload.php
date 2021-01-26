@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
       require_once __DIR__ . '/../vendor/autoload.php';
     */
 
-    include '../src/arabic.php';
+    include '../src/Arabic.php';
     $Arabic = new \ArPHP\I18N\Arabic();
     
     // Continue only if the file was uploaded via HTTP POST
