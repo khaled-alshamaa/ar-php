@@ -3815,4 +3815,109 @@ class Arabic
         
         return $isArabic;
     }
+    
+    /**
+     * Encode a location coordinates (latitude and longitude in WGS84) into Open Location Code
+     * Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md
+     *
+     * @param float   $latitude   Coordinate presented in float number in degree unit scale (e.g. 34.67175)
+     * @param float   $longitude  Coordinate presented in float number in degree unit scale (e.g. 36.263625)
+     * @param integer $codeLength Code length, default value is 10 (this provides an area that is
+     *                            1/8000 x 1/8000 degree in size, roughly 14x14 meters)
+     *
+     * @return string Open Location Code string (e.g. 8G6RM7C7+PF)
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function dd2olc($latitude, $longitude, $codeLength = 10)
+    {
+        $codeLength = $codeLength / 2;
+        $validChars = '23456789CFGHJMPQRVWX';
+        
+        $latitude  = $latitude + 90;
+        $longitude = $longitude + 180;
+        
+        $latitude  = round($latitude * pow(20, $codeLength - 2), 0);
+        $longitude = round($longitude * pow(20, $codeLength - 2), 0);
+        
+        for ($i = 1; $i <= $codeLength; $i++) {
+            $x = $longitude % 20;
+            $y = $latitude % 20;
+            
+            $longitude = floor($longitude / 20);
+            $latitude  = floor($latitude / 20);
+            
+            $olc = substr($validChars, $y, 1) . substr($validChars, $x, 1) . $olc;
+            
+            if ($i == 1) {
+                $olc = '+' . $olc;
+            }
+        }
+        
+        return $olc;
+    }
+    
+    /**
+     * Decode an Open Location Code string into its location coordinates in decimal degrees.
+     * Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md
+     *
+     * @param strin   $olc        Open Location Code string (e.g. 8G6RM7C7+PF)
+     * @param integer $codeLength Code length, default value is 10 (this provides an area that is
+     *                            1/8000 x 1/8000 degree in size, roughly 14x14 meters)
+     *
+     * @return array Location coordinates in decimal degrees [latitude, longitude] in WGS84
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function olc2dd($olc, $codeLength = 10)
+    {
+        $coordinates = array();
+        
+        if ($this->volc($olc, $codeLength)) {
+            $codeLength = $codeLength / 2;
+            $validChars = '23456789CFGHJMPQRVWX';
+            
+            $olc = strtoupper(str_replace('+', '', $olc));
+
+            $latitude  = 0;
+            $longitude = 0;
+
+            for ($i = 1; $i <= $codeLength; $i++) {
+                $latitude  = $latitude + strpos($validChars, substr($olc, 2 * $i - 2, 1)) * pow(20, 2 - $i);
+                $longitude = $longitude + strpos($validChars, substr($olc, 2 * $i - 1, 1)) * pow(20, 2 - $i);
+            }
+
+            $coordinates[] = $latitude - 90;
+            $coordinates[] = $longitude - 180;
+        } else {
+            $coordinates[] = null;
+            $coordinates[] = null;
+        }
+        
+        return $coordinates;
+    }
+    
+    /**
+     * Determine if an Open Location Code is valid.
+     * Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md
+     *
+     * @param strin   $olc        Open Location Code string (e.g. 8G6RM7C7+PF)
+     * @param integer $codeLength Code length, default value is 10 (this provides an area that is
+     *                            1/8000 x 1/8000 degree in size, roughly 14x14 meters)
+     *
+     * @return boolean String represents a valid Open Location Code.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function volc($olc, $codeLength = 10)
+    {
+        if (strlen($olc) != $codeLength + 1) {
+            $isValid = false;
+        } elseif (substr($olc, -3, 1) != '+') {
+            $isValid = false;
+        } elseif (preg_match('/[^2-9CFGHJMPQRVWX+]/', strtoupper($olc))) {
+            $isValid = false;
+        } else {
+            $isValid = true;
+        }
+        
+        return $isValid;
+    }
 }
