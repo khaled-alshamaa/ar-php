@@ -26,9 +26,11 @@
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
 <!--
-## What's new in ArPHP 5.6.0 _(release date: ??? ##, 2021)_
+## What's new in ArPHP 5.5.3 _(release date: Feb ##, 2021)_
 
 * Fix the issue of extra space at the end of returned string in the ar2en and en2ar methods. Thanks to [Hamoud Alhoqbani](https://github.com/alhoqbani).
+
+* Fix the issue of ignoring the punctuation marks when coming in the Arabic text context for more robust segmentation using the arIdentify method. Thanks to [Fahad Khan](https://github.com/bagisto/bagisto/pull/4462#issuecomment-765555768) notification.
 
 * Add methods dd2olc, olc2dd, and volc to encode, decode, and validate location coordinates (latitude and longitude in WGS84) in the [Open Location Code](https://github.com/google/open-location-code/blob/master/docs/specification.md) format.
 
