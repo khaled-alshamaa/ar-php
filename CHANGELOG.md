@@ -38,7 +38,7 @@
 
 ## What's new in ArPHP 5.5.2 _(release date: Jan 26, 2021)_
 
-* Rename the class file to comply with the Autoloading [PSR-4](https://www.php-fig.org/psr/psr-4/) standards to support Composer 2.0 and fix [this](https://github.com/khaled-alshamaa/ar-php/issues/4) reported issue. Thanks to [bagisto](https://github.com/bagisto/bagisto) team.
+* Rename the class file to comply with the [PSR-4 for Autoloading Standards](https://www.php-fig.org/psr/psr-4/) to support Composer 2.0 and fix [this](https://github.com/khaled-alshamaa/ar-php/issues/4) reported issue. Thanks to [bagisto](https://github.com/bagisto/bagisto) team.
 
 * Fix the issue in spell numbers in the Arabic idiom that reported [here](https://github.com/khaled-alshamaa/ar-php/issues/2). Thanks to [ATablas](https://github.com/ATablas).
 
@@ -53,7 +53,7 @@
 
 * Add class documentation in the docs folder using the [phpDocumentor](https://www.phpdoc.org) documentation application for PHP projects.
 
-* Improve the code quality by fix all errors reported in the [PHPStan.org](https://phpstan.org) (PHP Static Analysis Tool) up to the rule level 5 (https://phpstan.org/user-guide/rule-levels).
+* Improve the code quality by fix all errors reported in the [PHPStan.org](https://phpstan.org) (PHP Static Analysis Tool) up to the [rule level 5](https://phpstan.org/user-guide/rule-levels).
 
 * Pass the compatibility testing with the new version of PHP 8.0 (released on Nov 26, 2020) successfully.
 
