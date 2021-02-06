@@ -22,6 +22,14 @@ This project provides a set of tools that enable Arabic website developers to se
 
 * [Bagisto](https://github.com/bagisto/bagisto/blob/master/README.md): Laravel package for e-commerce. [[check it out](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)].
 
+<!--
+Windows PowerShell: Get-ChildItem -Recurse | Select-String "I18N_Arabic" -List | Select Path
+https://github.com/LimeSurvey/LimeSurvey/blob/master/README.md
+https://github.com/LimeSurvey/LimeSurvey/tree/master/application/third_party/ar-php
+https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L134
+https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L133
+-->
+
 ### Arabic Language
 Worldwide Internet use has grown tremendously in recent years, most rapidly in non-English speaking regions especially in Arab world. For example, from 2000 to 2020, the online populations grew by more than 9,300 %. Meanwhile, Arabic Web content was estimated to be doubling every year. Such growth has created demand for better websites developing resources in Arabic language. However, existing websites developing resources may be unable to meet it because they primarily serve English-speaking users.
 

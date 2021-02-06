@@ -462,60 +462,43 @@ class Arabic
         $this->arGlyphsNextLink .= 'سشصضطظعغفقكلمنهوىي';
         $this->arGlyphsVowel     = 'ًٌٍَُِّْ';
         
-        /*
-         $this->arGlyphs['ً'] = array('FE70','FE71');
-         $this->arGlyphs['ٌ'] = array('FE72','FE72');
-         $this->arGlyphs['ٍ'] = array('FE74','FE74');
-         $this->arGlyphs['َ'] = array('FE76','FE77');
-         $this->arGlyphs['ُ'] = array('FE78','FE79');
-         $this->arGlyphs['ِ'] = array('FE7A','FE7B');
-         $this->arGlyphs['ّ'] = array('FE7C','FE7D');
-         $this->arGlyphs['ْ'] = array('FE7E','FE7E');
-         */
-         
         $this->arGlyphs     = 'ًٌٍَُِّْٰ';
-        $this->arGlyphsHex  = '064B064B064B064B064C064C064C064C064D064D064D064D064E064E';
-        $this->arGlyphsHex .= '064E064E064F064F064F064F06500650065006500651065106510651';
-        $this->arGlyphsHex .= '06520652065206520670067006700670';
+        $this->arGlyphsHex  = '064B064B064B064B064C064C064C064C064D064D064D064D064E064E064E064E';
+        $this->arGlyphsHex .= '064F064F064F064F065006500650065006510651065106510652065206520652';
+        $this->arGlyphsHex .= '0670067006700670';
         
         $this->arGlyphs    .= 'ءآأؤإئاب';
-        $this->arGlyphsHex .= 'FE80FE80FE80FE80FE81FE82FE81FE82FE83FE84FE83FE84FE85FE86';
-        $this->arGlyphsHex .= 'FE85FE86FE87FE88FE87FE88FE89FE8AFE8BFE8CFE8DFE8EFE8DFE8E';
-        $this->arGlyphsHex .= 'FE8FFE90FE91FE92';
+        $this->arGlyphsHex .= 'FE80FE80FE80FE80FE81FE82FE81FE82FE83FE84FE83FE84FE85FE86FE85FE86';
+        $this->arGlyphsHex .= 'FE87FE88FE87FE88FE89FE8AFE8BFE8CFE8DFE8EFE8DFE8EFE8FFE90FE91FE92';
         
         $this->arGlyphs    .= 'ةتثجحخدذ';
-        $this->arGlyphsHex .= 'FE93FE94FE93FE94FE95FE96FE97FE98FE99FE9AFE9BFE9CFE9DFE9E';
-        $this->arGlyphsHex .= 'FE9FFEA0FEA1FEA2FEA3FEA4FEA5FEA6FEA7FEA8FEA9FEAAFEA9FEAA';
-        $this->arGlyphsHex .= 'FEABFEACFEABFEAC';
+        $this->arGlyphsHex .= 'FE93FE94FE93FE94FE95FE96FE97FE98FE99FE9AFE9BFE9CFE9DFE9EFE9FFEA0';
+        $this->arGlyphsHex .= 'FEA1FEA2FEA3FEA4FEA5FEA6FEA7FEA8FEA9FEAAFEA9FEAAFEABFEACFEABFEAC';
         
         $this->arGlyphs    .= 'رزسشصضطظ';
-        $this->arGlyphsHex .= 'FEADFEAEFEADFEAEFEAFFEB0FEAFFEB0FEB1FEB2FEB3FEB4FEB5FEB6';
-        $this->arGlyphsHex .= 'FEB7FEB8FEB9FEBAFEBBFEBCFEBDFEBEFEBFFEC0FEC1FEC2FEC3FEC4';
-        $this->arGlyphsHex .= 'FEC5FEC6FEC7FEC8';
+        $this->arGlyphsHex .= 'FEADFEAEFEADFEAEFEAFFEB0FEAFFEB0FEB1FEB2FEB3FEB4FEB5FEB6FEB7FEB8';
+        $this->arGlyphsHex .= 'FEB9FEBAFEBBFEBCFEBDFEBEFEBFFEC0FEC1FEC2FEC3FEC4FEC5FEC6FEC7FEC8';
         
         $this->arGlyphs    .= 'عغفقكلمن';
-        $this->arGlyphsHex .= 'FEC9FECAFECBFECCFECDFECEFECFFED0FED1FED2FED3FED4FED5FED6';
-        $this->arGlyphsHex .= 'FED7FED8FED9FEDAFEDBFEDCFEDDFEDEFEDFFEE0FEE1FEE2FEE3FEE4';
-        $this->arGlyphsHex .= 'FEE5FEE6FEE7FEE8';
-        
+        $this->arGlyphsHex .= 'FEC9FECAFECBFECCFECDFECEFECFFED0FED1FED2FED3FED4FED5FED6FED7FED8';
+        $this->arGlyphsHex .= 'FED9FEDAFEDBFEDCFEDDFEDEFEDFFEE0FEE1FEE2FEE3FEE4FEE5FEE6FEE7FEE8';
+
         $this->arGlyphs    .= 'هوىيـ،؟؛';
-        $this->arGlyphsHex .= 'FEE9FEEAFEEBFEECFEEDFEEEFEEDFEEEFEEFFEF0FEEFFEF0FEF1FEF2';
-        $this->arGlyphsHex .= 'FEF3FEF40640064006400640060C060C060C060C061F061F061F061F';
-        $this->arGlyphsHex .= '061B061B061B061B';
+        $this->arGlyphsHex .= 'FEE9FEEAFEEBFEECFEEDFEEEFEEDFEEEFEEFFEF0FEEFFEF0FEF1FEF2FEF3FEF4';
+        $this->arGlyphsHex .= '0640064006400640060C060C060C060C061F061F061F061F061B061B061B061B';
         
         // Support 5 Persian letters (Peh), (Tcheh), (Jeh), (Gaf), and (Yeh)
+        // DejaVuSans.ttf font
+        // $text = 'نمونة قلم: لاگچ ژافپ';
         $this->arGlyphs    .= 'پچژگی';
         $this->arGlyphsHex .= 'FB56FB57FB58FB59FB7AFB7BFB7CFB7DFB8AFB8BFB8AFB8B';
         $this->arGlyphsHex .= 'FB92FB93FB94FB95FBFCFBFDFBFEFBFF';
         
         $this->arGlyphsPrevLink .= 'پچگی';
         $this->arGlyphsNextLink .= 'پچژگی';
-        
-        $this->arGlyphs    .= '';
-        $this->arGlyphsHex .= '';
+
         $this->arGlyphs    .= 'لآلألإلا';
-        $this->arGlyphsHex .= 'FEF5FEF6FEF5FEF6FEF7FEF8FEF7FEF8FEF9FEFAFEF9FEFAFEFBFEFC';
-        $this->arGlyphsHex .= 'FEFBFEFC';
+        $this->arGlyphsHex .= 'FEF5FEF6FEF5FEF6FEF7FEF8FEF7FEF8FEF9FEFAFEF9FEFAFEFBFEFCFEFBFEFC';
     }
 
     private function arQueryInit()
@@ -677,7 +660,7 @@ class Arabic
      * @param integer $correction To apply correction factor (+/- 1-2) to standard Hijri calendar
      *
      * @return integer Returns the current time measured in the number of
-     *                seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)
+     *                 seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function mktime($hour, $minute, $second, $hj_month, $hj_day, $hj_year, $correction = 0)
@@ -1641,7 +1624,7 @@ class Arabic
      * @param string $text Odd Arabic string
      *
      * @return string Normal English string
-     * @author Khaled Al-Sham'aa
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function swapAe($text)
     {
@@ -1657,7 +1640,7 @@ class Arabic
      * @param string $text Odd English string
      *
      * @return string Normal Arabic string
-     * @author Khaled Al-Sham'aa
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function swapEa($text)
     {
@@ -1673,7 +1656,7 @@ class Arabic
      * @param string $text Odd Arabic string
      *
      * @return string Normal French string
-     * @author Khaled Al-Sham'aa
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function swapAf($text)
     {
@@ -1689,7 +1672,7 @@ class Arabic
      * @param string $text Odd French string
      *
      * @return string Normal Arabic string
-     * @author Khaled Al-Sham'aa
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function swapFa($text)
     {
@@ -1708,7 +1691,7 @@ class Arabic
      * @param string $out  Output language [ar|en|fr]
      *
      * @return string Normal string
-     * @author Khaled Al-Sham'aa
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function swapCore($text, $in, $out)
     {
@@ -1763,7 +1746,7 @@ class Arabic
      * @param string $str Inserted string from the keyboard
      *
      * @return float Calculated score for input string as English language
-     * @author Khaled Al-Sham'aa
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function checkEn($str)
     {
@@ -1808,7 +1791,7 @@ class Arabic
      * @param string $str Inserted string from the keyboard
      *
      * @return float Calculated score for input string as Arabic language
-     * @author Khaled Al-Sham'aa
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function checkAr($str)
     {
@@ -1855,7 +1838,7 @@ class Arabic
      * @param string $str Inserted string from the keyboard
      *
      * @return string Fixed string language and letter case to the better guess
-     * @author Khaled Al-Sham'aa
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function fixKeyboardLang($str)
     {
@@ -2110,19 +2093,45 @@ class Arabic
     /////////////////////////////////////// Glyphs ////////////////////////////////////////////////
 
     /**
+     * Add extra glyphs
+     *
+     * @param string  $char     Char to be added
+     * @param string  $hex      String of 16 hexadecimals digits refers to the letter unicode 
+     *                          in the following order
+     *                          ISOLATED FORM, FINAL FORM, INITIAL FORM, MEDIAL FORM 
+     *                          (e.g. for Arabic letter HEH 'FEE9FEEAFEEBFEEC')
+     * @param boolean $prevLink If TRUE (default), when this letter be previous, then next will be linked to it
+     * @param boolean $nextLink If TRUE (default), when this letter be next, then previous will be linked to it
+     *
+     * @return void
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function addGlyphs($char, $hex, $prevLink = TRUE, $nextLink = TRUE)
+    {
+        if($prevLink) $this->arGlyphsPrevLink  = $char . $this->arGlyphsPrevLink;
+        if($nextLink) $this->arGlyphsNextLink  = $char . $this->arGlyphsNextLink;
+        
+        $this->arGlyphs    = $char . $this->arGlyphs;
+        $this->arGlyphsHex = $hex . $this->arGlyphsHex;
+    }
+    
+    /**
      * Get glyphs
      *
      * @param string  $char Char
      * @param integer $type Type
      *
      * @return string
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function getArGlyphs($char, $type)
     {
         $pos = mb_strpos($this->arGlyphs, $char, 0);
+        
+        $lastSimpleCharOffset = mb_strlen($this->arGlyphs) - 8;
 
-        if ($pos > 54) {
-            $pos = ($pos - 54) / 2 + 54;
+        if ($pos > $lastSimpleCharOffset) {
+            $pos = ($pos - $lastSimpleCharOffset) / 2 + $lastSimpleCharOffset;
         }
 
         $pos = $pos * 16 + $type * 4;
@@ -2257,7 +2266,7 @@ class Arabic
     }
 
     /**
-     * Convert Arabic Windows-1256 charset string into glyph joining in UTF-8
+     * Convert Arabic charset string into glyph joining in UTF-8
      * hexadecimals stream (take care of whole the document including English
      * sections as well as numbers and arcs etc...)
      *
@@ -2457,6 +2466,7 @@ class Arabic
      *                        both named and numerical entities.
      *
      * @return string
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arGlyphsDecodeEntities($text, $exclude = array())
     {
@@ -2517,6 +2527,7 @@ class Arabic
      * @param array  $exclude   An array of characters which should not be decoded
      *
      * @return string
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arGlyphsDecodeEntities2($prefix, $codepoint, $original, &$table, &$exclude)
     {
@@ -2760,6 +2771,7 @@ class Arabic
      *
      * @return string sub SQL ORDER BY section
      * @author Saleh AlMatrafe <saleh@saleh.cc>
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function arQueryOrderBy($arg)
     {
@@ -3335,6 +3347,7 @@ class Arabic
      * Load enhanced Arabic stop words list
      *
      * @return void
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function arSummaryLoadExtra()
     {

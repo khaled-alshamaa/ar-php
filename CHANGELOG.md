@@ -36,6 +36,8 @@
 
 * Add support for 5 extra Persian letters (Peh), (Tcheh), (Jeh), (Gaf), and (Yeh) to the utf8Glyphs method. Thanks to Yossi Beck <yosbeck@gmail.com>.
 
+* Add a new addGlyphs method to insert any new / not supported letter into the existing Glyphs rules.
+
 [Top](#arphp-library---change-log)
 -->
 
