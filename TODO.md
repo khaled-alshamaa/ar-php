@@ -1,7 +1,7 @@
 ## To-Do List
 * Continuous Integration with GitHub Actions and PHPUnit (e.g. [php-actions/phpunit](https://github.com/php-actions/example-phpunit)).
 
-* Insure coding standards in Autoloading ([PSR-4](https://www.php-fig.org/psr/psr-4/)) and Documentation ([PSR-5](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md)).
+* Insure coding standards in Documentation ([PSR-5](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md)).
 
 * Error handle, convert into exceptions (set_error_handler: try/catch)!
 
@@ -47,9 +47,9 @@ git pull origin master
 Create and push a new commit:
 
 ```bash
-git pull origin master
 git add .
 git commit -m "modification message"
+git pull origin master
 git push origin master
 ```
 

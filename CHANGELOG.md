@@ -34,6 +34,9 @@
 
 * Add methods dd2olc, olc2dd, and volc to encode, decode, and validate location coordinates (latitude and longitude in WGS84) in the [Open Location Code](https://github.com/google/open-location-code/blob/master/docs/specification.md) format.
 
+* Add support for 5 extra Persian letters (Peh), (Tcheh), (Jeh), (Gaf), and (Yeh) to the utf8Glyphs method. Thanks to Yossi Beck <yosbeck@gmail.com>.
+
+[Top](#arphp-library---change-log)
 -->
 
 ## What's new in ArPHP 5.5.2 _(release date: Jan 26, 2021)_

@@ -503,20 +503,13 @@ class Arabic
         $this->arGlyphsHex .= 'FEF3FEF40640064006400640060C060C060C060C061F061F061F061F';
         $this->arGlyphsHex .= '061B061B061B061B';
         
-        /*
-        // Support the extra 4 Persian letters (p), (ch), (zh) and (g)
-        // This needs value in getGlyphs function to be 52 instead of 48
-        $this->arGlyphs    .= chr(129).chr(141).chr(142).chr(144);
-        $this->arGlyphsHex .= 'FB56FB57FB58FB59FB7AFB7BFB7CFB7DFB8AFB8BFB8AFB8BFB92';
-        $this->arGlyphsHex .= 'FB93FB94FB95';
-
-        $this->arGlyphsPrevLink .= chr(129).chr(141).chr(142).chr(144);
-        $this->arGlyphsNextLink .= chr(129).chr(141).chr(142).chr(144);
-
-        // Example:     $text = 'نمونة قلم: لاگچ ژافپ';
-        // Email Yossi Beck <yosbeck@gmail.com> ask him to save that example
-        // string using ANSI encoding in Notepad
-        */
+        // Support 5 Persian letters (Peh), (Tcheh), (Jeh), (Gaf), and (Yeh)
+        $this->arGlyphs    .= 'پچژگی';
+        $this->arGlyphsHex .= 'FB56FB57FB58FB59FB7AFB7BFB7CFB7DFB8AFB8BFB8AFB8B';
+        $this->arGlyphsHex .= 'FB92FB93FB94FB95FBFCFBFDFBFEFBFF';
+        
+        $this->arGlyphsPrevLink .= 'پچگی';
+        $this->arGlyphsNextLink .= 'پچژگی';
         
         $this->arGlyphs    .= '';
         $this->arGlyphsHex .= '';
@@ -2128,8 +2121,8 @@ class Arabic
     {
         $pos = mb_strpos($this->arGlyphs, $char, 0);
 
-        if ($pos > 49) {
-            $pos = ($pos - 49) / 2 + 49;
+        if ($pos > 54) {
+            $pos = ($pos - 54) / 2 + 54;
         }
 
         $pos = $pos * 16 + $type * 4;
