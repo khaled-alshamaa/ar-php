@@ -34,6 +34,8 @@
 
 * Add the new arPlural method to get proper plural form depends on the item count. Thanks to [Arabeyes](https://arabeyes.org/Plural_Forms) Wiki.
 
+* Improve the plural form of the currancy name in the money2str method.
+
 * Adding support for 5 extra Persian letters (Peh), (Tcheh), (Jeh), (Gaf), and (Yeh) to the utf8Glyphs method. Thanks to Yossi Beck <yosbeck@gmail.com>.
 
 * Add the new addGlyphs method to insert any new / not supported letter into the existing Glyphs rules.

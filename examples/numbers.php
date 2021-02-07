@@ -135,7 +135,7 @@ highlight_string($code);
     $Arabic->setNumberFeminine(1);
     $Arabic->setNumberFormat(1);
 
-    $number = 24.7;
+    $number = 7.25;
     $text   = $Arabic->money2str($number, 'KWD', 'ar');
     
     echo "<p dir=ltr align=center>$number<br />$text</p>";

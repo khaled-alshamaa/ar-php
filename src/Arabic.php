@@ -1331,6 +1331,29 @@ class Arabic
 
         return $string;
     }
+    
+    /**
+     * Spell integer number in Arabic idiom followed by plural form of the counted item
+     *
+     * @param integer $count The number you want to spell in Arabic idiom
+     * @param string  $word  The counted item
+     *
+     * @return string The Arabic idiom that spells inserted number followed by plural form of the counted item.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function int2strItem($count, $word)
+    {
+        $feminine = $this->isFemale($word) ? 2 : 1;
+        
+        $this->setNumberFeminine($feminine);
+        
+        $str1 = $this->int2str($count);
+        $str2 = $this->arPlural($word, $count);
+        
+        $string = str_replace('%d', $str1, $str2);
+
+        return $string;
+    }
 
     /**
      * Spell number in Arabic idiom as money
@@ -1352,8 +1375,7 @@ class Arabic
         $string = '';
 
         if ($temp[0] != 0) {
-            $string .= $this->arNumbersSubStr((int)$temp[0]);
-            $string .= ' ' . $this->arNumberCurrency[$iso][$lang]['basic'];
+            $string .= $this->int2strItem((int)$temp[0], $this->arNumberCurrency[$iso][$lang]['basic']);
         }
 
         if (!empty($temp[1]) && $temp[1] != 0) {
@@ -1365,15 +1387,9 @@ class Arabic
                 }
             }
 
-            $string .= $this->arNumbersSubStr((int)$temp[1]);
-            $string .= ' ' . $this->arNumberCurrency[$iso][$lang]['fraction'];
+            $string .= $this->int2strItem((int)$temp[1], $this->arNumberCurrency[$iso][$lang]['fraction']);
         }
         
-        /*
-        $key = $this->arNumberCurrency[$iso][$lang]['fraction'];
-        $string = $this->arPluralsForm2['دينار'];
-        */
-
         return $string;
     }
 
@@ -3968,7 +3984,11 @@ class Arabic
      */
     public function arPlural($singular, $count, $plural2 = NULL, $plural3 = NULL, $plural4 = NULL, $plural5 = NULL)
     {
-        if ($count == 2) {
+        if ($count == 0) {
+            $plural = is_null($plural2) ? $this->arPluralsForm0[$singular] : 'صفر ' . $singular;        
+        } elseif ($count == 1) {
+            $plural = is_null($plural2) ? $this->arPluralsForm1[$singular] : $singular . ' واحد';        
+        } elseif ($count == 2) {
             $plural = is_null($plural2) ? $this->arPluralsForm2[$singular] : $plural2;
         } elseif ($count % 100 >= 3 && $count % 100 <= 10) {
             $plural = is_null($plural3) ? $this->arPluralsForm3[$singular] : $plural3;        
@@ -3977,8 +3997,6 @@ class Arabic
         } else {
             $plural = is_null($plural5) ? $this->arPluralsForm5[$singular] : $plural5;            
         }
-        
-        $plural = str_replace('%d ', '', $plural);
         
         return $plural;
     }
