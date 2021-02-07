@@ -1,0 +1,4 @@
+/vendor/
+/coverage/
+/phpunit.phar
+/.phpunit.result.cache

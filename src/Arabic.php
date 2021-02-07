@@ -601,21 +601,13 @@ class Arabic
         $last       = mb_substr($str, -1, 1);
         $beforeLast = mb_substr($str, -2, 1);
 
-        if (
-            $last == 'ة' || $last == 'ه' || $last == 'ى' || $last == 'ا'
-            || ($last == 'ء' && $beforeLast == 'ا')
-        ) {
+        if ($last == 'ة' || $last == 'ى' || ($last == 'ء' && $beforeLast == 'ا')) {
             $female = true;
-        } elseif (
-            preg_match("/^[اإ].{2}ا.$/u", $str)
-            || preg_match("/^[إا].ت.ا.+$/u", $str)
-        ) {
+        } elseif (preg_match("/^[اإ].{2}ا.$/u", $str) || preg_match("/^[إا].ت.ا.+$/u", $str)) {
             // الأسماء على وزن إفتعال و إفعال
             $female = true;
-        } else {
-            if (array_search($str, $this->arFemaleNames) > 0) {
-                $female = true;
-            }
+        } elseif (array_search($str, $this->arFemaleNames) > 0) {
+            $female = true;
         }
 
         return $female;
