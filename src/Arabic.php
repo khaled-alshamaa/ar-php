@@ -164,6 +164,13 @@ class Arabic
     private $arSummaryCommonWords    = array();
     private $arSummaryImportantWords = array();
     
+    private $arPluralsForm0 = array();
+    private $arPluralsForm1 = array();
+    private $arPluralsForm2 = array();
+    private $arPluralsForm3 = array();
+    private $arPluralsForm4 = array();
+    private $arPluralsForm5 = array();
+    
     private $rootDirectory;
 
 
@@ -186,6 +193,7 @@ class Arabic
         $this->arGlyphsInit();
         $this->arQueryInit();
         $this->arSummaryInit();
+        $this->arPluralsInit();
     }
     
     private function arStandardInit()
@@ -525,6 +533,22 @@ class Arabic
         $words = file($this->rootDirectory . '/data/important_words.txt', FILE_IGNORE_NEW_LINES);
 
         $this->arSummaryImportantWords = $words;
+    }
+
+    private function arPluralsInit()
+    {
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_plurals.json'), true);
+
+        foreach ($json['arPluralsForms'] as $forms) {
+            $key = str_replace('%d ', '', $forms[5]);
+            
+            $this->arPluralsForm0[$key] = (string)$forms['0'];
+            $this->arPluralsForm1[$key] = (string)$forms['1'];
+            $this->arPluralsForm2[$key] = (string)$forms['2'];
+            $this->arPluralsForm3[$key] = (string)$forms['3'];
+            $this->arPluralsForm4[$key] = (string)$forms['4'];
+            $this->arPluralsForm5[$key] = (string)$forms['5'];
+        }
     }
 
     /////////////////////////////////////// Standard //////////////////////////////////////////////
@@ -1352,6 +1376,11 @@ class Arabic
             $string .= $this->arNumbersSubStr((int)$temp[1]);
             $string .= ' ' . $this->arNumberCurrency[$iso][$lang]['fraction'];
         }
+        
+        /*
+        $key = $this->arNumberCurrency[$iso][$lang]['fraction'];
+        $string = $this->arPluralsForm2['دينار'];
+        */
 
         return $string;
     }
@@ -3925,5 +3954,40 @@ class Arabic
         }
         
         return $isValid;
+    }
+    
+    /**
+     * Get proper Arabic plural form
+     * There are 4 plural forms in Arabic language:
+     * - Form for 2
+     * - Form for numbers that end with a number between 3 and 10 (like: 103, 1405, 23409)
+     * - Form for numbers that end with a number between 11 and 99 (like: 1099, 278)
+     * - Form for numbers above 100 ending with 0, 1 or 2 (like: 100, 232, 3001)
+     *
+     * @param string  $singular Singular word (e.g., عنصر).
+     * @param integer $count    The number (e.g. item count) to determine the proper plural form.
+     * @param string  $plural2  Plural form 2 (e.g., عنصران). If NULL [default] retrive from internal JSON dataset.
+     * @param string  $plural3  Plural form 3 (e.g., عناصر). If NULL [default] retrive from internal JSON dataset. 
+     * @param string  $plural4  Plural form 4 (e.g., عنصرا). If NULL [default] retrive from internal JSON dataset.
+     * @param string  $plural5  Plural form 5 (e.g., عنصر). If NULL [default] retrive from internal JSON dataset.
+     *
+     * @return string Proper plural form of the given singular form
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function arPlural($singular, $count, $plural2 = NULL, $plural3 = NULL, $plural4 = NULL, $plural5 = NULL)
+    {
+        if ($count == 2) {
+            $plural = is_null($plural2) ? $this->arPluralsForm2[$singular] : $plural2;
+        } elseif ($count % 100 >= 3 && $count % 100 <= 10) {
+            $plural = is_null($plural3) ? $this->arPluralsForm3[$singular] : $plural3;        
+        } elseif ($count % 100 >= 11) {
+            $plural = is_null($plural4) ? $this->arPluralsForm4[$singular] : $plural4;            
+        } else {
+            $plural = is_null($plural5) ? $this->arPluralsForm5[$singular] : $plural5;            
+        }
+        
+        $plural = str_replace('%d ', '', $plural);
+        
+        return $plural;
     }
 }
