@@ -3977,25 +3977,24 @@ class Arabic
      * @param string  $plural2  Plural form 2 (e.g., عنصران). If NULL [default] retrive from internal JSON dataset.
      * @param string  $plural3  Plural form 3 (e.g., عناصر). If NULL [default] retrive from internal JSON dataset. 
      * @param string  $plural4  Plural form 4 (e.g., عنصرا). If NULL [default] retrive from internal JSON dataset.
-     * @param string  $plural5  Plural form 5 (e.g., عنصر). If NULL [default] retrive from internal JSON dataset.
      *
      * @return string Proper plural form of the given singular form
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function arPlural($singular, $count, $plural2 = NULL, $plural3 = NULL, $plural4 = NULL, $plural5 = NULL)
+    public function arPlural($singular, $count, $plural2 = NULL, $plural3 = NULL, $plural4 = NULL)
     {
         if ($count == 0) {
-            $plural = is_null($plural2) ? $this->arPluralsForm0[$singular] : 'صفر ' . $singular;        
+            $plural = is_null($plural2) ? $this->arPluralsForm0[$singular] : "لا $plural3";        
         } elseif ($count == 1) {
-            $plural = is_null($plural2) ? $this->arPluralsForm1[$singular] : $singular . ' واحد';        
+            $plural = is_null($plural2) ? $this->arPluralsForm1[$singular] : "$singular واحد";        
         } elseif ($count == 2) {
             $plural = is_null($plural2) ? $this->arPluralsForm2[$singular] : $plural2;
         } elseif ($count % 100 >= 3 && $count % 100 <= 10) {
-            $plural = is_null($plural3) ? $this->arPluralsForm3[$singular] : $plural3;        
+            $plural = is_null($plural2) ? $this->arPluralsForm3[$singular] : "%d $plural3";        
         } elseif ($count % 100 >= 11) {
-            $plural = is_null($plural4) ? $this->arPluralsForm4[$singular] : $plural4;            
+            $plural = is_null($plural2) ? $this->arPluralsForm4[$singular] : "%d $plural4";            
         } else {
-            $plural = is_null($plural5) ? $this->arPluralsForm5[$singular] : $plural5;            
+            $plural = is_null($plural2) ? $this->arPluralsForm5[$singular] : "%d $singular";            
         }
         
         return $plural;

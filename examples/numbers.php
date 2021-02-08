@@ -138,7 +138,7 @@ highlight_string($code);
     $number = 7.25;
     $text   = $Arabic->money2str($number, 'KWD', 'ar');
     
-    echo "<p dir=ltr align=center>$number<br />$text</p>";
+    echo "<p align=center>$number<br />$text</p>";
 ?>
 
 </div><br />
@@ -152,10 +152,10 @@ $code = <<< END
     \$Arabic->setNumberFeminine(1);
     \$Arabic->setNumberFormat(1);
     
-    \$number = 24.7;
+    \$number = 7.25;
     \$text   = \$Arabic->money2str(\$number, 'KWD', 'ar');
     
-    echo "<p dir=ltr align=center>\$number<br />\$text</p>";
+    echo "<p align=center>\$number<br />\$text</p>";
 END;
 
 highlight_string($code);
@@ -164,12 +164,19 @@ highlight_string($code);
 </div><br />
 
 <div class="Paragraph" dir="rtl">
-<h2 dir="ltr">Example Output 5: الأرقام الهندية</h2>
+<h2 dir="ltr">Example Output 5: صيغ الجمع</h2>
 <?php
-    $text1 = '1975/8/2 9:43 صباحا';
-    $text2 = $Arabic->int2indic($text1);
+    $number = 9;
+    $text   = $Arabic->arPlural('تعليق', $number);
+    $text   = str_replace('%d', $number, $text);
     
-    echo "<p dir=ltr align=center>$text1<br />$text2</p>";
+    echo "<p align=center>$text</p>";
+    
+    $number = 16;
+    $text   = $Arabic->arPlural('صندوق', $number, 'صندوقان', 'صناديق', 'صندوقا');
+    $text   = str_replace('%d', $number, $text);
+
+    echo "<p align=center>$text</p>";
 ?>
 
 </div><br />
@@ -179,11 +186,18 @@ highlight_string($code);
 $code = <<< END
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
+
+    \$number = 9;
+    \$text   = \$Arabic->arPlural('تعليق', \$number);
+    \$text   = str_replace('%d', \$number, \$text);
     
-    \$text1 = '1975/8/2 9:43 صباحا';
-    \$text2 = \$Arabic->int2indic(\$text1);
+    echo "<p align=center>\$text</p>";
     
-    echo "<p dir=ltr align=center>\$text1<br />\$text2</p>";
+    \$number = 16;
+    \$text   = \$Arabic->arPlural('صندوق', \$number, 'صندوقان', 'صناديق', 'صندوقا');
+    \$text   = str_replace('%d', \$number, \$text);
+
+    echo "<p align=center>\$text</p>";
 END;
 
 highlight_string($code);
@@ -192,7 +206,35 @@ highlight_string($code);
 </div><br />
 
 <div class="Paragraph" dir="rtl">
-<h2 dir="ltr">Example Output 6: ترتيب لمعدود مؤنث منصوب أو مجرور</h2>
+<h2 dir="ltr">Example Output 6: الأرقام الهندية</h2>
+<?php
+    $text1 = '1975/8/2 9:43 صباحا';
+    $text2 = $Arabic->int2indic($text1);
+    
+    echo "<p align=center>$text1<br />$text2</p>";
+?>
+
+</div><br />
+<div class="Paragraph">
+<h2>Example Code 6:</h2>
+<?php
+$code = <<< END
+<?php
+	\$Arabic = new \\ArPHP\\I18N\\Arabic();
+    
+    \$text1 = '1975/8/2 9:43 صباحا';
+    \$text2 = \$Arabic->int2indic(\$text1);
+    
+    echo "<p align=center>\$text1<br />\$text2</p>";
+END;
+
+highlight_string($code);
+
+?>
+</div><br />
+
+<div class="Paragraph" dir="rtl">
+<h2 dir="ltr">Example Output 7: ترتيب لمعدود مؤنث منصوب أو مجرور</h2>
 <?php
     $Arabic->setNumberFeminine(2);
     $Arabic->setNumberFormat(2);
@@ -202,12 +244,12 @@ highlight_string($code);
     
     $text = $Arabic->int2str($integer);
     
-    echo "<p dir=ltr align=center>$integer<br />$text</p>";
+    echo "<p align=center>$integer<br />$text</p>";
 ?>
 
 </div><br />
 <div class="Paragraph">
-<h2>Example Code 6:</h2>
+<h2>Example Code 7:</h2>
 <?php
 $code = <<< END
 <?php
@@ -221,7 +263,7 @@ $code = <<< END
     
     \$text = \$Arabic->int2str(\$integer);
     
-    echo "<p dir=ltr align=center>\$integer<br />\$text</p>";
+    echo "<p align=center>\$integer<br />\$text</p>";
 END;
 
 highlight_string($code);
@@ -230,18 +272,18 @@ highlight_string($code);
 </div><br />
 
 <div class="Paragraph" dir="rtl">
-<h2 dir="ltr">Example Output 7: تحويل الرقم المكتوب إلى عدد صحيح من جديد</h2>
+<h2 dir="ltr">Example Output 8: تحويل الرقم المكتوب إلى عدد صحيح من جديد</h2>
 <?php
     $string  = 'مليار و مئتين و خمسة و ستين مليون و ثلاثمئة و ثمانية و خمسين ألف و تسعمئة و تسعة و سبعين';
 
     $integer = $Arabic->str2int($string);
     
-    echo "<p dir=ltr align=center>$string<br />$integer</p>";
+    echo "<p align=center>$string<br />$integer</p>";
 ?>
 
 </div><br />
 <div class="Paragraph">
-<h2>Example Code 7:</h2>
+<h2>Example Code 8:</h2>
 <?php
 $code = <<< END
 <?php
@@ -251,7 +293,7 @@ $code = <<< END
 
     \$integer = \$Arabic->str2int(\$string);
     
-    echo "<p dir=ltr align=center>\$string<br />\$integer</p>";
+    echo "<p align=center>\$string<br />\$integer</p>";
 END;
 
 highlight_string($code);
