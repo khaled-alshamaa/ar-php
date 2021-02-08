@@ -164,12 +164,7 @@ class Arabic
     private $arSummaryCommonWords    = array();
     private $arSummaryImportantWords = array();
     
-    private $arPluralsForm0 = array();
-    private $arPluralsForm1 = array();
-    private $arPluralsForm2 = array();
-    private $arPluralsForm3 = array();
-    private $arPluralsForm4 = array();
-    private $arPluralsForm5 = array();
+    private $arPluralsForms = array();
     
     private $rootDirectory;
 
@@ -184,6 +179,9 @@ class Arabic
         $this->umAlqoura     = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
         $this->arDateJSON    = json_decode(file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
 
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_plurals.json'), true);
+        $this->arPluralsForms = $json['arPluralsForms'];
+
         $this->arStandardInit();
         $this->arStrToTimeInit();
         $this->arTransliterateInit();
@@ -193,7 +191,6 @@ class Arabic
         $this->arGlyphsInit();
         $this->arQueryInit();
         $this->arSummaryInit();
-        $this->arPluralsInit();
     }
     
     private function arStandardInit()
@@ -533,22 +530,6 @@ class Arabic
         $words = file($this->rootDirectory . '/data/important_words.txt', FILE_IGNORE_NEW_LINES);
 
         $this->arSummaryImportantWords = $words;
-    }
-
-    private function arPluralsInit()
-    {
-        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_plurals.json'), true);
-
-        foreach ($json['arPluralsForms'] as $forms) {
-            $key = str_replace('%d ', '', $forms[5]);
-            
-            $this->arPluralsForm0[$key] = (string)$forms['0'];
-            $this->arPluralsForm1[$key] = (string)$forms['1'];
-            $this->arPluralsForm2[$key] = (string)$forms['2'];
-            $this->arPluralsForm3[$key] = (string)$forms['3'];
-            $this->arPluralsForm4[$key] = (string)$forms['4'];
-            $this->arPluralsForm5[$key] = (string)$forms['5'];
-        }
     }
 
     /////////////////////////////////////// Standard //////////////////////////////////////////////
@@ -3984,17 +3965,17 @@ class Arabic
     public function arPlural($singular, $count, $plural2 = NULL, $plural3 = NULL, $plural4 = NULL)
     {
         if ($count == 0) {
-            $plural = is_null($plural2) ? $this->arPluralsForm0[$singular] : "لا $plural3";        
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][0] : "لا $plural3";       
         } elseif ($count == 1) {
-            $plural = is_null($plural2) ? $this->arPluralsForm1[$singular] : "$singular واحد";        
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحد";        
         } elseif ($count == 2) {
-            $plural = is_null($plural2) ? $this->arPluralsForm2[$singular] : $plural2;
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][2] : $plural2;
         } elseif ($count % 100 >= 3 && $count % 100 <= 10) {
-            $plural = is_null($plural2) ? $this->arPluralsForm3[$singular] : "%d $plural3";        
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][3] : "%d $plural3";        
         } elseif ($count % 100 >= 11) {
-            $plural = is_null($plural2) ? $this->arPluralsForm4[$singular] : "%d $plural4";            
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][4] : "%d $plural4";            
         } else {
-            $plural = is_null($plural2) ? $this->arPluralsForm5[$singular] : "%d $singular";            
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][5] : "%d $singular";            
         }
         
         return $plural;
