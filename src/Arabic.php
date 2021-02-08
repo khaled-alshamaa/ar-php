@@ -3996,7 +3996,7 @@ class Arabic
     public function stripHarakat($text, $tatweel = TRUE, $tanwen = TRUE, $shadda = TRUE, $last = TRUE)
     {
         $shortHarakat = array('َ', 'ُ', 'ِ', 'ْ');
-        $lastHarakat  = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u');
+        $lastHarakat  = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u', '/ْ(\S)/u');
         $allTanwen    = array('ً', 'ٍ', 'ٌ');
         
         if ($last) {
