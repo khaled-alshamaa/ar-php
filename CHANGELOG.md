@@ -36,6 +36,8 @@
 
 * Improve the plural form of the currancy name in the money2str method.
 
+* Add the new stripHarakat method to clean given Arabic string from Harakat. You can include/exclude Tatweel, Tanwen, Shadda, and Last Harakat.
+
 * Adding support for 5 extra Persian letters (Peh), (Tcheh), (Jeh), (Gaf), and (Yeh) to the utf8Glyphs method. Thanks to Yossi Beck <yosbeck@gmail.com>.
 
 * Add the new addGlyphs method to insert any new / not supported letter into the existing Glyphs rules.

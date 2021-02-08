@@ -3980,4 +3980,43 @@ class Arabic
         
         return $plural;
     }
+    
+    /**
+     * Strip Harakat
+     *
+     * @param string  $text    Arabic text you would like to strip Harakat from it.
+     * @param boolean $tatweel Strip Tatweel (default is TRUE).
+     * @param boolean $tanwen  Strip Tanwen (default is TRUE).
+     * @param boolean $shadda  Strip Shadda (default is TRUE). 
+     * @param boolean $last    Strip last Harakat (default is TRUE).
+     *
+     * @return string Arabic string clean from selected Harakat
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function stripHarakat($text, $tatweel = TRUE, $tanwen = TRUE, $shadda = TRUE, $last = TRUE)
+    {
+        $shortHarakat = array('َ', 'ُ', 'ِ', 'ْ');
+        $lastHarakat  = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u');
+        $allTanwen    = array('ً', 'ٍ', 'ٌ');
+        
+        if ($last) {
+            $text = str_replace($shortHarakat, '', $text);
+        } else {
+            $text = preg_replace($lastHarakat, '\\1', $text);
+        }
+        
+        if ($tatweel) {
+            $text = str_replace('ـ', '', $text);
+        }
+        
+        if ($tanwen) {
+            $text = str_replace($allTanwen, '', $text);
+        }
+        
+        if ($shadda) {
+            $text = str_replace('ّ', '', $text);
+        }
+        
+        return $text;
+    }
 }

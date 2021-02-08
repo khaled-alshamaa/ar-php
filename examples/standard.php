@@ -70,6 +70,75 @@ END;
 ENDALL;
 
 highlight_string($code);
+?>
+</div><br />
+
+<div class="Paragraph" dir="rtl">
+<h2 dir="ltr">Example Output:</h2>
+<?php
+$content = <<<END
+إذا رُمتَ أنْ تَحيا سَليماً مِن الأذى
+...
+وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِنُّ
+<br />
+لِســـــــانُكَ لا تَذكُرْ بِهِ عَورَةَ امرئٍ
+...
+فَكُلُّكَ عَوراتٌ وللنّاسِ ألسُنُ
+END;
+    
+    echo '<b>Origenal</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $content . '</p>';
+
+    $str1 = $Arabic->stripHarakat($content);
+    
+    echo '<hr /><b>Strip All Harakat</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $str1 . '</p>';
+
+    $str2 = $Arabic->stripHarakat($content, FALSE, FALSE, FALSE, FALSE);
+    
+    echo '<hr /><b>Strip Harakat but Tatweel, Tanwen, Shadda, and Last Harakat</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $str2 . '</p>';
+?>
+
+</div><br />
+<div class="Paragraph">
+<h2>Example Code:</h2>
+<?php
+$code = <<< ENDALL
+<?php
+	\$Arabic = new \\ArPHP\\I18N\\Arabic();
+    
+\$content = <<<END
+إذا رُمتَ أنْ تَحيا سَليماً مِن الأذى
+...
+وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِنُّ
+<br />
+لِســـــــانُكَ لا تَذكُرْ بِهِ عَورَةَ امرئٍ
+...
+فَكُلُّكَ عَوراتٌ وللنّاسِ ألسُنُ
+END;
+    
+    echo '<b>Origenal</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$content . '</p>';
+
+    \$str1 = \$Arabic->stripHarakat(\$content);
+    
+    echo '<hr /><b>Strip All Harakat</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$str1 . '</p>';
+
+    \$str2 = \$Arabic->stripHarakat(\$content, FALSE, FALSE, FALSE, FALSE);
+    
+    echo '<hr /><b>Strip Harakat but Tatweel, Tanwen, Shadda, and Last Harakat</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$str2 . '</p>';
+ENDALL;
+
+highlight_string($code);
 
 $time_end = microtime(true);
 $time = $time_end - $time_start;
