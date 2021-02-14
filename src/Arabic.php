@@ -607,7 +607,7 @@ class Arabic
         $last       = mb_substr($str, -1, 1);
         $beforeLast = mb_substr($str, -2, 1);
 
-        if ($last == 'ة' || $last == 'ى' || ($last == 'ء' && $beforeLast == 'ا')) {
+        if ($last == 'ا' || $last == 'ة' || $last == 'ى' || ($last == 'ء' && $beforeLast == 'ا')) {
             $female = true;
         } elseif (preg_match("/^[اإ].{2}ا.$/u", $str) || preg_match("/^[إا].ت.ا.+$/u", $str)) {
             // الأسماء على وزن إفتعال و إفعال
@@ -3891,6 +3891,8 @@ class Arabic
         
         $latitude  = round($latitude * pow(20, $codeLength - 2), 0);
         $longitude = round($longitude * pow(20, $codeLength - 2), 0);
+        
+        $olc = '';
         
         for ($i = 1; $i <= $codeLength; $i++) {
             $x = $longitude % 20;
