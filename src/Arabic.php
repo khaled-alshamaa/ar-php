@@ -3906,7 +3906,7 @@ class Arabic
      * Decode an Open Location Code string into its location coordinates in decimal degrees.
      * Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md
      *
-     * @param strin   $olc        Open Location Code string (e.g. 8G6RM7C7+PF)
+     * @param string  $olc        Open Location Code string (e.g. 8G6RM7C7+PF)
      * @param integer $codeLength Code length, default value is 10 (this provides an area that is
      *                            1/8000 x 1/8000 degree in size, roughly 14x14 meters)
      *
@@ -3945,7 +3945,7 @@ class Arabic
      * Determine if an Open Location Code is valid.
      * Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md
      *
-     * @param strin   $olc        Open Location Code string (e.g. 8G6RM7C7+PF)
+     * @param string  $olc        Open Location Code string (e.g. 8G6RM7C7+PF)
      * @param integer $codeLength Code length, default value is 10 (this provides an area that is
      *                            1/8000 x 1/8000 degree in size, roughly 14x14 meters)
      *
@@ -4079,7 +4079,7 @@ class Arabic
         $text = preg_replace('/\\s+$/u', '', $text);
 
         # split string to words
-        $words = preg_split('/\s+/u', $text, null, PREG_SPLIT_NO_EMPTY);
+        $words = preg_split('/\s+/u', $text, -1, PREG_SPLIT_NO_EMPTY);
 
         # set initial scores
         $positiveScore = 0;
@@ -4088,7 +4088,7 @@ class Arabic
         # for each word
         foreach ($words as $word) {
             # split word to letters
-            $letters = preg_split('//u', $word, null, PREG_SPLIT_NO_EMPTY);
+            $letters = preg_split('//u', $word, -1, PREG_SPLIT_NO_EMPTY);
             
             $stems = array();
 
