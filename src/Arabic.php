@@ -541,20 +541,11 @@ class Arabic
     
     private function arSentimentInit()
     {
-        $this->allStems = file($this->rootDirectory . '/data/stems.txt', FILE_IGNORE_NEW_LINES);
+        $this->allStems   = file($this->rootDirectory . '/data/stems.txt', FILE_IGNORE_NEW_LINES);
+        $this->logOddStem = file($this->rootDirectory . '/data/logodd_stem.txt', FILE_IGNORE_NEW_LINES);;
 
-        $row = 1;
-        
-        if (($handle = fopen($this->rootDirectory . '/data/stem_matrix.csv', 'r')) !== false) {
-            while (($data = fgetcsv($handle)) !== false) {
-                $this->logOddPositive[$row] = (float)$data[0];
-                $this->logOddNegative[$row] = (float)$data[1];
-                $this->logOddStem[$row]     = (float)$data[2];
-                
-                $row++;
-            }
-            fclose($handle);
-        }
+        $this->logOddPositive = file($this->rootDirectory . '/data/logodd_positive.txt', FILE_IGNORE_NEW_LINES);;
+        $this->logOddNegative = file($this->rootDirectory . '/data/logodd_negative.txt', FILE_IGNORE_NEW_LINES);;
     }
     
     /////////////////////////////////////// Standard //////////////////////////////////////////////
@@ -4115,15 +4106,15 @@ class Arabic
             
             # get log odd for all word stems
             foreach ($stems as $key) {
-                $log_odds[] = $this->logOddStem[$key + 1];
+                $log_odds[] = $this->logOddStem[$key];
             }
             
             # select the most probable stem for current word
             $sel_stem = $stems[array_search(min($log_odds), $log_odds)];
 
             # retrive the positive and negative log odd scores and accumulate them
-            $positiveScore += $this->logOddPositive[$sel_stem + 1];
-            $negativeScore += $this->logOddNegative[$sel_stem + 1];
+            $positiveScore += $this->logOddPositive[$sel_stem];
+            $negativeScore += $this->logOddNegative[$sel_stem];
         }
         
         # claculate the sentiment score
