@@ -166,6 +166,11 @@ class Arabic
     
     private $arPluralsForms = array();
     
+    private $logOddPositive = array();
+    private $logOddNegative = array();
+    private $logOddStem     = array();
+    private $allStems       = array();
+    
     private $rootDirectory;
 
 
@@ -191,6 +196,7 @@ class Arabic
         $this->arGlyphsInit();
         $this->arQueryInit();
         $this->arSummaryInit();
+        $this->arSentimentInit();
     }
     
     private function arStandardInit()
@@ -532,6 +538,25 @@ class Arabic
         $this->arSummaryImportantWords = $words;
     }
 
+    
+    private function arSentimentInit()
+    {
+        $this->allStems = file($this->rootDirectory . '/data/stems.txt', FILE_IGNORE_NEW_LINES);
+
+        $row = 1;
+        
+        if (($handle = fopen($this->rootDirectory . '/data/stem_matrix.csv', 'r')) !== false) {
+            while (($data = fgetcsv($handle)) !== false) {
+                $this->logOddPositive[$row] = (float)$data[0];
+                $this->logOddNegative[$row] = (float)$data[1];
+                $this->logOddStem[$row]     = (float)$data[2];
+                
+                $row++;
+            }
+            fclose($handle);
+        }
+    }
+    
     /////////////////////////////////////// Standard //////////////////////////////////////////////
 
     /**
@@ -2114,9 +2139,9 @@ class Arabic
      * Add extra glyphs
      *
      * @param string  $char     Char to be added
-     * @param string  $hex      String of 16 hexadecimals digits refers to the letter unicode 
+     * @param string  $hex      String of 16 hexadecimals digits refers to the letter unicode
      *                          in the following order
-     *                          ISOLATED FORM, FINAL FORM, INITIAL FORM, MEDIAL FORM 
+     *                          ISOLATED FORM, FINAL FORM, INITIAL FORM, MEDIAL FORM
      *                          (e.g. for Arabic letter HEH 'FEE9FEEAFEEBFEEC')
      * @param boolean $prevLink If TRUE (default), when this letter be previous, then next will be linked to it
      * @param boolean $nextLink If TRUE (default), when this letter be next, then previous will be linked to it
@@ -2124,10 +2149,14 @@ class Arabic
      * @return void
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function addGlyphs($char, $hex, $prevLink = TRUE, $nextLink = TRUE)
+    public function addGlyphs($char, $hex, $prevLink = true, $nextLink = true)
     {
-        if($prevLink) $this->arGlyphsPrevLink  = $char . $this->arGlyphsPrevLink;
-        if($nextLink) $this->arGlyphsNextLink  = $char . $this->arGlyphsNextLink;
+        if ($prevLink) {
+            $this->arGlyphsPrevLink  = $char . $this->arGlyphsPrevLink;
+        }
+        if ($nextLink) {
+            $this->arGlyphsNextLink  = $char . $this->arGlyphsNextLink;
+        }
         
         $this->arGlyphs    = $char . $this->arGlyphs;
         $this->arGlyphsHex = $hex . $this->arGlyphsHex;
@@ -3956,26 +3985,26 @@ class Arabic
      * @param string  $singular Singular word (e.g., عنصر).
      * @param integer $count    The number (e.g. item count) to determine the proper plural form.
      * @param string  $plural2  Plural form 2 (e.g., عنصران). If NULL [default] retrive from internal JSON dataset.
-     * @param string  $plural3  Plural form 3 (e.g., عناصر). If NULL [default] retrive from internal JSON dataset. 
+     * @param string  $plural3  Plural form 3 (e.g., عناصر). If NULL [default] retrive from internal JSON dataset.
      * @param string  $plural4  Plural form 4 (e.g., عنصرا). If NULL [default] retrive from internal JSON dataset.
      *
      * @return string Proper plural form of the given singular form
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function arPlural($singular, $count, $plural2 = NULL, $plural3 = NULL, $plural4 = NULL)
+    public function arPlural($singular, $count, $plural2 = null, $plural3 = null, $plural4 = null)
     {
         if ($count == 0) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][0] : "لا $plural3";       
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][0] : "لا $plural3";
         } elseif ($count == 1) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحد";        
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحد";
         } elseif ($count == 2) {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][2] : $plural2;
         } elseif ($count % 100 >= 3 && $count % 100 <= 10) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][3] : "%d $plural3";        
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][3] : "%d $plural3";
         } elseif ($count % 100 >= 11) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][4] : "%d $plural4";            
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][4] : "%d $plural4";
         } else {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][5] : "%d $singular";            
+            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][5] : "%d $singular";
         }
         
         return $plural;
@@ -3987,13 +4016,13 @@ class Arabic
      * @param string  $text    Arabic text you would like to strip Harakat from it.
      * @param boolean $tatweel Strip Tatweel (default is TRUE).
      * @param boolean $tanwen  Strip Tanwen (default is TRUE).
-     * @param boolean $shadda  Strip Shadda (default is TRUE). 
+     * @param boolean $shadda  Strip Shadda (default is TRUE).
      * @param boolean $last    Strip last Harakat (default is TRUE).
      *
      * @return string Arabic string clean from selected Harakat
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function stripHarakat($text, $tatweel = TRUE, $tanwen = TRUE, $shadda = TRUE, $last = TRUE)
+    public function stripHarakat($text, $tatweel = true, $tanwen = true, $shadda = true, $last = true)
     {
         $shortHarakat = array('َ', 'ُ', 'ِ', 'ْ');
         $lastHarakat  = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u', '/ْ(\S)/u');
@@ -4018,5 +4047,85 @@ class Arabic
         }
         
         return $text;
+    }
+    
+    /**
+     * Arabic Sentiment Analysis
+     *
+     * @param string $text Arabic review string
+     *
+     * @return float Sentiment class [-1 Negative, and +1 Positive]
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function arSentiment($text)
+    {
+        # remove mentions
+        $text = preg_replace('/@\\S+/u', '', $text);
+
+        # remove hashtags
+        $text = preg_replace('/#\\S+/u', '', $text);
+
+        # normalise Alef
+        $text = preg_replace('/[أإآى]/u', 'ا', $text);
+
+        # normalise Hamza
+        $text = preg_replace('/[ؤئء]/u', 'ء', $text);
+
+        # replace taa marbouta by taa maftouha
+        $text = preg_replace('/ة/u', 'ت', $text);
+
+        # filter only Arabic text (white list)
+        $text = preg_replace('/[^ ءابتثجحخدذرزسشصضطظعغفقكلمنهوي]+/u', ' ', $text);
+
+        # exclude one letter words
+        $text = preg_replace('/\\b\\S{1}\\b/u', ' ', $text);
+
+        # remove extra spaces
+        $text = preg_replace('/\\s{2,}/u', ' ', $text);
+        $text = preg_replace('/^\\s+/u', '', $text);
+        $text = preg_replace('/\\s+$/u', '', $text);
+
+        # split string to words
+        $words = preg_split('/\s+/u', $text, null, PREG_SPLIT_NO_EMPTY);
+
+        # set initial scores
+        $positiveScore = 0;
+        $negativeScore = 0;
+
+        # for each word
+        foreach ($words as $word) {
+            # split word to letters
+            $letters = preg_split('//u', $word, null, PREG_SPLIT_NO_EMPTY);
+            
+            $stems = array();
+
+            $n = count($letters);
+
+            # get all possible 2 letters stems of current word
+            for ($i = 0; $i < $n - 1; $i++) {
+                for ($j = $i + 1; $j < $n; $j++) {
+                    # get stem key
+                    $stems[] = array_search($letters[$i] . $letters[$j], $this->allStems);
+                }
+            }
+
+            $log_odds = array();
+            
+            # get log odd for all word stems
+            foreach ($stems as $key) {
+                $log_odds[] = $this->logOddStem[$key + 1];
+            }
+            
+            # select the most probable stem for current word
+            $sel_stem = $stems[array_search(min($log_odds), $log_odds)];
+
+            # retrive the positive and negative log odd scores and accumulate them
+            $positiveScore += $this->logOddPositive[$sel_stem + 1];
+            $negativeScore += $this->logOddNegative[$sel_stem + 1];
+        }
+        
+        $sentiment = $positiveScore - $negativeScore;
+        
+        return $sentiment;
     }
 }
