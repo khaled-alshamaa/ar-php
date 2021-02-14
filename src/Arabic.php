@@ -4054,7 +4054,7 @@ class Arabic
      *
      * @param string $text Arabic review string
      *
-     * @return float Sentiment class [-1 Negative, and +1 Positive]
+     * @return float Sentiment score (less than 0 for Negative, and more than 0 for Positive)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function arSentiment($text)
@@ -4124,6 +4124,7 @@ class Arabic
             $negativeScore += $this->logOddNegative[$sel_stem + 1];
         }
         
+        # claculate the sentiment score
         $sentiment = $positiveScore - $negativeScore;
         
         return $sentiment;
