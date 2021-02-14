@@ -90,11 +90,11 @@ final class ArabicTest extends TestCase
         $Arabic->setNumberFeminine(1);
         $Arabic->setNumberFormat(1);
         
-        $number = 24.7;
+        $number = 7.25;
         $text   = $Arabic->money2str($number, 'KWD', 'ar');
     
         $this->assertEquals(
-            'أربعة و عشرون دينار و سبعمئة فلس',
+            'سبعة دنانير و مئتان و خمسون فلسا',
             $text
         );
     }
@@ -290,7 +290,7 @@ final class ArabicTest extends TestCase
         $ar_terms = array();
         
         foreach ($en_terms as $term){
-            array_push($ar_terms, trim($Arabic->en2ar($term)));
+            array_push($ar_terms, $Arabic->en2ar($term));
         }
     
         $this->assertEquals(
@@ -311,7 +311,7 @@ final class ArabicTest extends TestCase
         $en_terms = array();
         
         foreach ($ar_terms as $term){
-            array_push($en_terms, trim($Arabic->ar2en($term)));
+            array_push($en_terms, $Arabic->ar2en($term));
         }
     
         $this->assertEquals(
@@ -329,7 +329,7 @@ final class ArabicTest extends TestCase
                           'جميل عازر','حسن جمول','حيدر عبد الحق','خالد صالح',
                           'خديجة بن قنة','ربى خليل','رشا عارف','روزي عبده',
                           'سمير سمرين','صهيب الملكاوي','عبد الصمد ناصر','علي الظفيري',
-                          'فرح البرقاوي','فيروز زياني','فيصل القاسم','لونه الشبل',
+                          'فرح البرقاوي','فيروز زياني','فيصل القاسم','لونة الشبل',
                           'ليلى الشايب','لينا زهر الدين','محمد البنعلي',
                           'محمد الكواري','محمد خير البوريني','محمد كريشان',
                           'منقذ العلي','منى سلمان','ناجي سليمان','نديم الملاح',
@@ -607,7 +607,7 @@ END;
     
         $this->assertEquals(
             $mark,
-            [0, 18, 110, 146]
+            [0, 20, 110, 149]
         );
     }
 
@@ -948,5 +948,103 @@ END;
             '2010، 2013'
         );
     }
-
+    
+    public function testArabicPluralForms(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $test = array();
+        
+        $number = 9;
+        $text   = $Arabic->arPlural('تعليق', $number);
+        $test[] = str_replace('%d', $number, $text);
+        
+        $number = 16;
+        $text   = $Arabic->arPlural('صندوق', $number, 'صندوقان', 'صناديق', 'صندوقا');
+        $test[] = str_replace('%d', $number, $text);        
+        
+        $this->assertEquals(
+            $test,
+            ['9 تعليقات', '16 صندوقا']
+        );
+    }
+    
+    public function testStripArabicHarakat(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $expected = array();
+        $actual   = array();
+        
+        $text = 'إذا رُمتَ أنْ تَحيا سَليماً مِن الأذى ... وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِنُّ';
+        $expected[] = 'إذا رمت أن تحيا سليما من الأذى ... و دينك موفور وعرضك صين';
+        $actual[]   = $Arabic->stripHarakat($text);
+        
+        $text = 'لِســـــــانُكَ لا تَذكُرْ بِهِ عَورَةَ امرئٍ ... فَكُلُّكَ عَوراتٌ وللنّاسِ ألسُنُ';
+        $expected[] = 'لسانك لا تذكر به عورة امرئ ... فكلك عورات وللناس ألسن';
+        $actual[]   = $Arabic->stripHarakat($text);
+        
+        $text = 'إذا رُمتَ أنْ تَحيا سَليماً مِن الأذى ... وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِنُّ';
+        $expected[] = 'إذا رمتَ أنْ تحيا سليماً من الأذى ... وَ دينكَ موفورٌ وعرضكَ صينُّ';
+        $actual[]   = $Arabic->stripHarakat($text, false, false, false, false);
+        
+        $text = 'لِســـــــانُكَ لا تَذكُرْ بِهِ عَورَةَ امرئٍ ... فَكُلُّكَ عَوراتٌ وللنّاسِ ألسُنُ';
+        $expected[] = 'لســـــــانكَ لا تذكرْ بهِ عورةَ امرئٍ ... فكلّكَ عوراتٌ وللنّاسِ ألسنُ';
+        $actual[]   = $Arabic->stripHarakat($text, false, false, false, false);
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    public function testOpenLocationCode(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $expected = array();
+        $actual   = array();
+        
+        $expected[] = true;
+        $actual[]   = $Arabic->volc('8G6RM7C7+PF');
+        
+        $expected[] = false;
+        $actual[]   = $Arabic->volc('8G6RM7C7+PA');
+        
+        $expected[] = false;
+        $actual[]   = $Arabic->volc('8G6RM7C7+PF2');
+        
+        $expected[] = '8G6RM7C7+PF';
+        $actual[]   = $Arabic->dd2olc(34.67175, 36.263625);
+        
+        $expected[] = array(34.67175, 36.263625);
+        $actual[]   = $Arabic->olc2dd('8G6RM7C7+PF');
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    public function testArabicSentimentAnalysis(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $expected = array();
+        $actual   = array();
+        
+        $expected[] = false;
+        $actual[]   = $Arabic->arSentiment('الخدمة كانت بطيئة') > 0;
+        
+        $expected[] = true;
+        $actual[]   = $Arabic->arSentiment('الإطلالة رائعة والطعام لذيذ') > 0;
+        
+        $expected[] = false;
+        $actual[]   = $Arabic->arSentiment('التبريد لا يعمل والواي فاي ضعيفة') > 0;
+        
+        $expected[] = true;
+        $actual[]   = $Arabic->arSentiment('النظافة مميزة وموظفي الاستقبال متعاونين') > 0;
+        
+        $expected[] = false;
+        $actual[]   = $Arabic->arSentiment('جاءت القطعة مكسورة والعلبة مفتوحة') > 0;
+        
+        $expected[] =true;
+        $actual[]   = $Arabic->arSentiment('المنتج مطابق للمواصفات والتسليم سريع') > 0;
+        
+        $this->assertEquals($expected, $actual);
+    }
 }
