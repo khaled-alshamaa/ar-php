@@ -29,23 +29,23 @@
 
 ## What's new in ArPHP 6.0.0 _(release date: Feb 15, 2021)_
 
-* Add the new arSentiment method for Arabic sentiment analysis to determine the tone (i.e., positive or negative) of the text (e.g., comments, reviews, etc.).
+* Add the new "arSentiment" method for Arabic sentiment analysis to determine the tone (i.e., positive or negative) of the text (e.g., comments, reviews, etc.).
 
-* Fix the issue of extra space at the end of returned string in the ar2en and en2ar methods. Thanks to [Hamoud Alhoqbani](https://github.com/alhoqbani).
+* Fix the issue of extra space at the end of returned string in the "ar2en" and "en2ar" methods. Thanks to [Hamoud Alhoqbani](https://github.com/alhoqbani).
 
-* Fix the issue of ignoring the punctuation marks when coming in the Arabic text context for more robust segmentation using the arIdentify method. Thanks to [Fahad Khan](https://github.com/bagisto/bagisto/pull/4462#issuecomment-765555768) notification.
+* Fix the issue of ignoring the punctuation marks when coming in the Arabic text context for more robust segmentation using the "arIdentify" method. Thanks to [Fahad Khan](https://github.com/bagisto/bagisto/pull/4462#issuecomment-765555768) notification.
 
-* Add the new arPlural method to get proper plural form depends on the item count. Thanks to [Arabeyes](https://arabeyes.org/Plural_Forms) Wiki.
+* Add the new "arPlural" method to get proper plural form depends on the item count. Thanks to [Arabeyes](https://arabeyes.org/Plural_Forms) Wiki.
 
-* Improve the plural form of the currancy name in the money2str method.
+* Improve the plural form of the currancy name in the "money2str" method.
 
-* Add the new stripHarakat method to clean given Arabic string from Harakat. You can include/exclude Tatweel, Tanwen, Shadda, and Last Harakat.
+* Add the new "stripHarakat" method to clean given Arabic string from Harakat. You can include/exclude Tatweel, Tanwen, Shadda, and Last Harakat.
 
-* Adding support for 5 extra Persian letters (Peh), (Tcheh), (Jeh), (Gaf), and (Yeh) to the utf8Glyphs method. Thanks to Yossi Beck <yosbeck@gmail.com>.
+* Adding support for 5 extra Persian letters (Peh), (Tcheh), (Jeh), (Gaf), and (Yeh) to the "utf8Glyphs" method. Thanks to Yossi Beck <yosbeck@gmail.com>.
 
-* Add the new addGlyphs method to insert any new / not supported letter into the existing Glyphs rules.
+* Add the new "addGlyphs" method to insert any new / not supported letter into the existing Glyphs rules.
 
-* Add methods dd2olc, olc2dd, and volc to encode, decode, and validate location coordinates (latitude and longitude in WGS84) in the [Open Location Code](https://github.com/google/open-location-code/blob/master/docs/specification.md) format.
+* Add methods "dd2olc", "olc2dd", and "volc" to encode, decode, and validate location coordinates (latitude and longitude in WGS84) in the [Open Location Code](https://github.com/google/open-location-code/blob/master/docs/specification.md) format.
 
 * Review and simplify the isFemale method.
 
