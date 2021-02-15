@@ -50,6 +50,8 @@
 
 * Use the [Amiri font](https://www.amirifont.org/) in the glyphs example. Thanks to [Khaled Hosny](https://github.com/khaledhosny).
 
+* Remove the tests of execution time and memory allocated in all examples for more robust benchmarking reporting using the Apache ab tool.
+
 [Top](#arphp-library---change-log)
 -->
 

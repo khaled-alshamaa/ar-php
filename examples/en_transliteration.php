@@ -13,7 +13,6 @@
 <?php
 
 error_reporting(E_STRICT);
-$time_start = microtime(true);
 
 /*
   // Autoload files using Composer autoload
@@ -102,13 +101,6 @@ END;
 ENDALL;
 
 highlight_string($code);
-
-$time_end = microtime(true);
-$time = $time_end - $time_start;
-
-echo "<hr />Total execution time is $time seconds<br />\n";
-echo 'Amount of memory allocated to this script is ' . memory_get_usage() . ' bytes';
-
 ?>
 </div>
 </body>
