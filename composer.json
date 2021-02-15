@@ -6,7 +6,7 @@
 	"homepage": "https://github.com/khaled-alshamaa/ar-php",
 
 	"keywords": [
-		"Arabic", "Hijri", "Islamic"
+		"Arabic", "arabic-sentiment", "arabic-numbers", "arabic-glyphs", "arabic-calendar", "arabic-sql-query", "arabic-segments-identifier"
 	],
 	
 	"authors": [
