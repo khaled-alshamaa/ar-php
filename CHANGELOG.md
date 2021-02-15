@@ -1,5 +1,6 @@
 # ArPHP Library - Change Log
 
+* Version [6.0.0](#whats-new-in-arphp-600-release-date-feb-15-2021) _(release date: Feb 15, 2021)_
 * Version [5.5.2](#whats-new-in-arphp-552-release-date-jan-26-2021) _(release date: Jan 26, 2021)_
 * Version [5.5.1](#whats-new-in-arphp-551-release-date-dec-18-2020) _(release date: Dec 18, 2020)_
 * Version [5.1.0](#whats-new-in-arphp-510-release-date-jun-27-2020) _(release date: Jun 27, 2020)_
@@ -25,10 +26,10 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
-<!--
+
 ## What's new in ArPHP 6.0.0 _(release date: Feb 15, 2021)_
 
-* Add the new arSentiment method for Arabic sentiment analysis.
+* Add the new arSentiment method for Arabic sentiment analysis to determine the tone (i.e., positive or negative) of the text (e.g., comments, reviews, etc.).
 
 * Fix the issue of extra space at the end of returned string in the ar2en and en2ar methods. Thanks to [Hamoud Alhoqbani](https://github.com/alhoqbani).
 
@@ -53,7 +54,7 @@
 * Remove the tests of execution time and memory allocated in all examples for more robust benchmarking reporting using the Apache ab tool.
 
 [Top](#arphp-library---change-log)
--->
+
 
 ## What's new in ArPHP 5.5.2 _(release date: Jan 26, 2021)_
 
