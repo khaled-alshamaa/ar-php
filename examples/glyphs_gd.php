@@ -17,7 +17,7 @@ $path = substr(
     $_SERVER['SCRIPT_FILENAME'], 0, 
     strrpos($_SERVER['SCRIPT_FILENAME'], '/')
 );
-$font = $path.'/fonts/ae_AlHor.ttf';
+$font = $path.'/fonts/Amiri-Regular.ttf';
 
 // UTF-8 charset
 $text = 'بسم الله الرحمن الرحيم';

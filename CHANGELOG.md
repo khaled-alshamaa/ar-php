@@ -44,9 +44,11 @@
 
 * Add the new addGlyphs method to insert any new / not supported letter into the existing Glyphs rules.
 
+* Add methods dd2olc, olc2dd, and volc to encode, decode, and validate location coordinates (latitude and longitude in WGS84) in the [Open Location Code](https://github.com/google/open-location-code/blob/master/docs/specification.md) format.
+
 * Review and simplify the isFemale method.
 
-* Add methods dd2olc, olc2dd, and volc to encode, decode, and validate location coordinates (latitude and longitude in WGS84) in the [Open Location Code](https://github.com/google/open-location-code/blob/master/docs/specification.md) format.
+* Use the [Amiri font](https://www.amirifont.org/) in the glyphs example. Thanks to [Khaled Hosny](https://github.com/khaledhosny).
 
 [Top](#arphp-library---change-log)
 -->
