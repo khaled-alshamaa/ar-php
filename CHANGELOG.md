@@ -26,7 +26,7 @@
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
 <!--
-## What's new in ArPHP 6.0.0 _(release date: Feb ##, 2021)_
+## What's new in ArPHP 6.0.0 _(release date: Feb 15, 2021)_
 
 * Add the new arSentiment method for Arabic sentiment analysis.
 
