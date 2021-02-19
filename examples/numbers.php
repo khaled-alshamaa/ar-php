@@ -9,6 +9,26 @@
 
 <body>
 
+<div class="Paragraph">
+<h2>Spell Numbers in the Arabic Idiom:</h2>
+<p align="justified">Spell numbers in the Arabic idiom. This function is very useful for e-Commerce applications 
+in Arabic for example. It accepts almost any numeric value and convert it into an equivalent string of words in 
+written Arabic language and take care of feminine and Arabic grammar rules.</p>
+
+<p align="justified">If you ever have to create an Arabic PHP application built around invoicing or accounting, 
+you might find this method useful. Its sole reason for existence is to help you translate integers into their 
+spoken-word equivalents in Arabic language.How is this useful? Well, consider the typical invoice: In addition to 
+a description of the work done, the date, and the hourly or project cost, it always includes a total cost at the 
+end, the amount that the customer is expected to pay. To avoid any misinterpretation of the total amount, many 
+organizations (mine included) put the amount in both words and figures; for example, $1,200 becomes "one thousand 
+and two hundred dollars." You probably do the same thing every time you write a check.</p>
+
+<p align="justified">Now take this scenario to a Web-based invoicing system. The actual data used to generate the 
+invoice will be stored in a database as integers, both to save space and to simplify calculations. So when a printable 
+invoice is generated, your Web application will need to convert those integers into words, this is more clarity 
+and more personality.</p>
+</div><br />
+
 <div class="Paragraph" dir="rtl">
 <h2 dir="ltr">Example Output 1: المعدود مذكر مرفوع</h2>
 <?php

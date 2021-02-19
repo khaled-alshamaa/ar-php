@@ -10,6 +10,20 @@
 <body>
 
 <div class="Paragraph">
+<h2>Arabic Segments Identifier:</h2>
+<p align="justified">This method will identify Arabic text in a given UTF-8 multi-language document 
+and return an array of start and end positions for Arabic text segments. Understanding the language 
+and encoding of a given document is an essential step in working with unstructured multilingual text. 
+Without this basic knowledge, applications such as information retrieval and text mining cannot 
+accurately process data, and important information may be completely missed or misrouted.</p>
+
+<p align="justified">Any application that works with Arabic in multiple languages documents can 
+benefit from this functionality. Applications can use it to take a fully automated approach to 
+process Arabic text by quickly and accurately determining Arabic text segments within multiple 
+languages document.</p>
+</div><br />
+
+<div class="Paragraph">
 <h2 dir="ltr">Example Output:</h2>
 <?php
 

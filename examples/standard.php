@@ -9,6 +9,12 @@
 
 <body>
 
+<div class="Paragraph">
+<h2>Arabic Text Standardize:</h2>
+<p align="justified">Standardize Arabic text just like rules followed in magazines and newspapers like 
+spaces before and after punctuations, brackets and units etc ...</p>
+</div><br />
+
 <div class="Paragraph" dir="rtl">
 <h2 dir="ltr">Example Output:</h2>
 <?php

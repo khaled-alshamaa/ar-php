@@ -10,6 +10,33 @@
 <body>
 
 <div class="Paragraph">
+<h2>Arabic/Hijri Maketime:</h2>
+<p align="justified">Arabic and Islamic customization of PHP mktime function. It can convert Hijri date 
+into UNIX timestamp format.</p>
+
+<b><i>UNIX timestamp</i></b>
+<p align="justified">Development of the Unix operating system began at Bell Laboratories in 1969 by Dennis 
+Ritchie and Ken Thompson, with the first PDP-11 version becoming operational in February 1971. Unix wisely 
+adopted the convention that all internal dates and times (for example, the time of creation and last modification 
+of files) were kept in Universal Time, and converted to local time based on a per-user time zone specification. 
+This far-sighted choice has made it vastly easier to integrate Unix systems into far-flung networks without 
+a chaos of conflicting time settings.</p>
+
+<p align="justified">The machines on which Unix was developed and initially deployed could not support 
+arithmetic on integers longer than 32 bits without costly multiple-precision computation in software. The 
+internal representation of time was therefore chosen to be the number of seconds elapsed since 00:00 Universal 
+time on January 1, 1970 in the Gregorian calendar (Julian day 2440587.5), with time stored as a 32 bit signed 
+integer (long in the original C implementation).</p>
+
+<p align="justified">The influence of Unix time representation has spread well beyond Unix since most C and 
+C++ libraries on other systems provide Unix-compatible time and date functions. The major drawback of Unix 
+time representation is that, if kept as a 32 bit signed quantity, on January 19, 2038 it will go negative, 
+resulting in chaos in programs unprepared for this. Modern Unix and C implementations define the result of 
+the time() function as type time_t, which leaves the door open for remediation (by changing the definition 
+to a 64 bit integer, for example) before the clock ticks the dreaded doomsday second.</p>
+</div><br />
+
+<div class="Paragraph">
 <h2 dir="ltr">Example Output:</h2>
 
 <?php

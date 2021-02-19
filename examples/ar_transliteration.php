@@ -10,6 +10,23 @@
 <body>
 
 <div class="Paragraph">
+<h2>English-Arabic Transliteration:</h2>
+<p align="justified">Transliterate English words into Arabic by render them in the orthography of the Arabic language and vise versa.</p>
+
+<p align="justified">Out of vocabulary (OOV) words are a common source of errors in cross language information retrieval. Bilingual dictionaries 
+are often limited in their coverage of named entities, numbers, technical terms and acronyms. There is a need to generate 
+translations for these "on-the-fly" or at query time. A significant proportion of OOV words are named entities and technical 
+terms. Typical analyses finds around 50% of OOV words to be named entities. Yet these can be the most important words in the queries. 
+Cross language retrieval performance (average precision) reduced more than 50% when named entities in the queries were not translated.
+When the query language and the document language share the same alphabet it may be sufficient to use the OOV word as its 
+own translation. However, when the two languages have different alphabets, the query term must somehow be rendered in the 
+orthography of the other language. The process of converting a word from one orthography into another is called transliteration.</p>
+
+<p align="justified">Foreign words often occur in Arabic text as transliteration. This is the case for many categories of foreign words, not just 
+proper names but also technical terms such as caviar, telephone and internet.</p>
+</div><br />
+
+<div class="Paragraph">
 <h2>Example Output:</h2>
 <?php
 

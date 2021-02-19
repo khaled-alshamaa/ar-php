@@ -14,6 +14,43 @@
 
 <body>
 
+<div class="Paragraph">
+<h2>Arabic Auto Summarize:</h2>
+<p align="justified">Determines key points by analyzing Arabic document and assigning a score to each sentence. 
+Sentences that contain words used frequently in the document are given a higher score. You can then choose a 
+percentage of the highest-scoring sentences to display in the summary. It works best on well-structured 
+documents such as reports, articles, and scientific papers.</p>
+
+<p align="justified">It cuts wordy copy to the bone by counting words and ranking sentences. First, it 
+identifies the most common words in the document and assigns a "score" to each word, the more frequently 
+a word is used, the higher the score. Then, it "averages" each sentence by adding the scores of its words 
+and dividing the sum by the number of words in the sentence, the higher the average, the higher the rank 
+of the sentence. It can summarize texts to specific number of sentences or percentage of the original copy.</p>
+
+<p align="justified">We use statistical approach, with some attention apparently paid to:
+<ul>
+<li>Location: leading sentences of paragraph, title, introduction, and conclusion.</li>
+<li>Fixed phrases: in-text summaries.</li>
+<li>Frequencies of words, phrases, proper names.</li>
+<li>Contextual material: query, title, headline, initial paragraph.</li>
+</ul>
+</p>
+
+<p align="justified">The motivation for this class is the range of applications for key phrases:
+<ul>
+<li>Mini-summary: Automatic key phrase extraction can provide a quick mini-summary for a long document. 
+For example, it could be a feature in a web sites; just click the summarize button when browsing a long web page.</li>
+<li>Highlights: It can highlight key phrases in a long document, to facilitate skimming the document.</li>
+<li>Author Assistance: Automatic key phrase extraction can help an author or editor who wants to supply a list 
+of key phrases for a document. For example, the administrator of a web site might want to have a key phrase list 
+at the top of each web page. The automatically extracted phrases can be a starting point for further manual 
+refinement by the author or editor.</li>
+<li>Text Compression: On a device with limited display capacity or limited bandwidth, key phrases can 
+be a substitute for the full text. For example, a web page could be reduced for display on a Twitter post.</li>
+</ul>
+</p>
+</div><br />
+
 <div class="Paragraph" dir="rtl">
 <h2 dir="ltr">Example Output:</h2>
 <?php

@@ -10,6 +10,15 @@
 <body>
 
 <div class="Paragraph">
+<h2>Arabic Gender Guesser:</h2>
+<p align="justified">Attempts to guess the gender of Arabic names. Arabic nouns are either masculine or feminine. 
+Usually when referring to a male, a masculine noun is usually used and when referring to a female, a feminine noun is used. 
+In most cases the feminine noun is formed by adding a special characters to the end of the masculine noun. Its not just nouns 
+referring to people that have gender. Inanimate objects (doors, houses, cars, etc.) is either masculine or feminine. Whether 
+an inanimate noun is masculine or feminine is mostly arbitrary.</p>
+</div><br />
+
+<div class="Paragraph">
 <h2>Example Output:</h2>
 <?php
 

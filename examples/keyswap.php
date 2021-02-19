@@ -9,6 +9,24 @@
 
 <body>
 
+<div class="Paragraph">
+<h2>Arabic Keyboard Swapping Language:</h2>
+<p align="justified">Convert keyboard language between English/French and Arabic programmatically. This function can 
+be helpful in dual language forms when users miss change keyboard language while they are entering data.</p>
+
+<p align="justified">If you wrote an Arabic sentence while your keyboard stays in English mode by mistake, you will 
+get a non-sense English text on your screen. In that case you can use this method to make a kind of magic conversion 
+to swap that odd text by original Arabic sentence you meant when you type on your keyboard.</p>
+
+<p align="justified">Please note that magic conversion in the opposite direction (if you type English sentences while 
+your keyboard stays in Arabic mode) is also available, but it is not reliable as much as previous case because in Arabic 
+keyboard we have some keys provide a short-cut to type two chars in one click (these keys include: b, B, G and T).</p>
+
+<p align="justified">Well, we try to come over this issue by suppose that user used optimum way by using short-cut 
+keys when available instead of assemble chars using stand alone keys, but if (s)he does not then you may have some 
+typo chars in converted text.</p>
+</div><br />
+
 <div class="Paragraph" dir="rtl">
 <h2 dir="ltr">Example Output 1 (a):</h2>
 <?php
