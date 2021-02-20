@@ -20,6 +20,8 @@ This project provides a set of tools that enable Arabic website developers to se
 
 > [Change Log](https://github.com/khaled-alshamaa/ar-php/blob/master/CHANGELOG.md)
 
+> [Class Documentation](https://ar-php.org/github/docs/classes/ArPHP-I18N-Arabic.html)
+
 > [Migrating from Version 4.0](https://github.com/khaled-alshamaa/ar-php/blob/master/UPGRADE.md)
 
 > [Contributors Logistics](https://github.com/khaled-alshamaa/ar-php/blob/master/TODO.md)
