@@ -16,6 +16,8 @@ This project provides a set of tools that enable Arabic website developers to se
 
 > Download ([Latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest), [Composer/Packagist](https://packagist.org/packages/khaled.alshamaa/ar-php))
 
+> [List of Main Functionalities](#main-functionalities) 
+
 > [Change Log](https://github.com/khaled-alshamaa/ar-php/blob/master/CHANGELOG.md)
 
 > [Migrating from Version 4.0](https://github.com/khaled-alshamaa/ar-php/blob/master/UPGRADE.md)
