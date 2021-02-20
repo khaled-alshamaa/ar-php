@@ -9,7 +9,7 @@
 
 * Improve the performance of _checkAr, checkEn, arIdentify, and arSummaryRankSentences_ methods.
 
-* Enhance example scripts by call the following functions: _arSummaryLoadExtra, dms2dd, setQueryArrFields, swapAf, arabizi._
+* Enhance example scripts by call the following methods: _arSummaryLoadExtra, setQueryArrFields, swapAf, arabizi, dms2dd, dd2dms, dd2olc, olc2dd._
 
 ### _Performance Improvement Tips (lessons learned)_
 * json_decode parser is faster than SimpleXML since JSON is only a description of nested string sequences, without the need to offer a DOM interface and attributes parsing.
