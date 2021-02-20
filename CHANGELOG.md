@@ -26,6 +26,13 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
+<!--
+## What's new in ArPHP 6.1.0 _(release date: ??? ##, 2021)_
+
+* Improve "checkAr" and "checkEn" methods performance, they take now only %60 of processing time.
+
+[Top](#arphp-library---change-log)
+-->
 
 ## What's new in ArPHP 6.0.0 _(release date: Feb 15, 2021)_
 

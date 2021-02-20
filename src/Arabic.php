@@ -440,8 +440,8 @@ class Arabic
             $this->frKeyboard[$index] = (string)$key['text'];
         }
         
-        $this->arLogodd = file($this->rootDirectory . '/data/logodd_ar.php');
-        $this->enLogodd = file($this->rootDirectory . '/data/logodd_en.php');
+        $this->arLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_ar.txt'));
+        $this->enLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_en.txt'));
     }
     
     private function arSoundexInit()
@@ -1784,23 +1784,6 @@ class Arabic
      */
     private function checkEn($str)
     {
-        $lines  = $this->enLogodd;
-        $logodd = array();
-        $line   = array_shift($lines);
-        $line   = rtrim($line);
-        $second = preg_split("/\t/", $line);
-        $temp   = array_shift($second);
-
-        foreach ($lines as $line) {
-            $line   = rtrim($line);
-            $values = preg_split("/\t/", $line);
-            $first  = array_shift($values);
-
-            for ($i = 0; $i < 27; $i++) {
-                $logodd["$first"]["{$second[$i]}"] = $values[$i];
-            }
-        }
-
         $str  = mb_strtolower($str);
         $max  = mb_strlen($str);
         $rank = 0;
@@ -1809,8 +1792,8 @@ class Arabic
             $first  = mb_substr($str, $i - 1, 1);
             $second = mb_substr($str, $i, 1);
 
-            if (isset($logodd["$first"]["$second"])) {
-                $rank += $logodd["$first"]["$second"];
+            if (isset($this->enLogodd["$first"]["$second"])) {
+                $rank += $this->enLogodd["$first"]["$second"];
             } else {
                 $rank -= 10;
             }
@@ -1829,23 +1812,6 @@ class Arabic
      */
     private function checkAr($str)
     {
-        $lines  = $this->arLogodd;
-        $logodd = array();
-        $line   = array_shift($lines);
-        $line   = rtrim($line);
-        $second = preg_split("/\t/", $line);
-        $temp   = array_shift($second);
-
-        foreach ($lines as $line) {
-            $line   = rtrim($line);
-            $values = preg_split("/\t/", $line);
-            $first  = array_shift($values);
-
-            for ($i = 0; $i < 37; $i++) {
-                $logodd["$first"]["{$second[$i]}"] = $values[$i];
-            }
-        }
-
         $max  = mb_strlen($str);
         $rank = 0;
 
@@ -1853,8 +1819,8 @@ class Arabic
             $first  = mb_substr($str, $i - 1, 1);
             $second = mb_substr($str, $i, 1);
 
-            if (isset($logodd["$first"]["$second"])) {
-                $rank += $logodd["$first"]["$second"];
+            if (isset($this->arLogodd["$first"]["$second"])) {
+                $rank += $this->arLogodd["$first"]["$second"];
             } else {
                 $rank -= 10;
             }
