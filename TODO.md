@@ -1,9 +1,11 @@
 ## To-Do List
-* Continuous Integration with GitHub Actions and PHPUnit (e.g. [php-actions/phpunit](https://github.com/php-actions/example-phpunit)).
+* Develop an Arabic version of the PHP [similar_text](https://www.php.net/manual/en/function.similar-text.php) function to handle Harakat issue properly.
+
+* [Setup PHP in GitHub Actions](https://github.com/marketplace/actions/setup-php-action) for CI/CD (e.g. [php-actions/phpunit](https://github.com/php-actions/example-phpunit)).
 
 * Insure coding standards in Documentation ([PSR-5](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md)).
 
-* Error handle, convert into exceptions (set_error_handler: try/catch)!
+* Improve error handling by the switch to exceptions (set_error_handler: try/catch)!
 
 * Improve the performance of _checkAr, checkEn, arIdentify, and arSummaryRankSentences_ methods.
 
