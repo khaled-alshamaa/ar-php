@@ -80,6 +80,7 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 * Arabic Auto Summarize ([live demo](https://ar-php.org/github/examples/ar_summarize.php))
 * Arabic Segments Identifier ([live demo](https://ar-php.org/github/examples/identifier.php))
 
+[Top](#ar-php-project-ar-phporg)
 
 ## _How to Contribute?_
 We always welcome new contributors – especially new programmers. But no matter what your skills and interests are, there is a place where you can participate to improve Ar-PHP project:
