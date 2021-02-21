@@ -3756,11 +3756,12 @@ class Arabic
         $arFlag = false;
         $arRef  = array();
         $max    = strlen($str);
-        
+        $ascii  = unpack('C*', $str);
+
         $i = -1;
         while (++$i < $max) {
-            $cDec = ord($str[$i]);
-            
+            $cDec = $ascii[$i + 1];
+
             // ignore ! " # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 :
             // If it come in the Arabic context
             if ($cDec >= 33 && $cDec <= 58) {
@@ -3773,7 +3774,7 @@ class Arabic
             }
 
             if ($i > 0) {
-                $pDec = ord($str[$i - 1]);
+                $pDec = $ascii[$i];
             } else {
                 $pDec = null;
             }
