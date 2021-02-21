@@ -3607,6 +3607,7 @@ class Arabic
     {
         $sentenceArr = array();
         $rankArr     = array();
+        $importent   = implode('|', $this->arSummaryImportantWords);
 
         $max = count($sentences);
 
@@ -3633,11 +3634,8 @@ class Arabic
                 $w += 1;
             }
 
-            foreach ($this->arSummaryImportantWords as $word) {
-                if ($word != '') {
-                    $w += substr_count($sentence, $word);
-                }
-            }
+            preg_match_all('/('.$importent.')/', $sentence, $out);
+            $w += count($out[0]);
 
             $_sentence = mb_substr($sentence, 0, -1);
             $sentence  = mb_substr($_sentence, 1, mb_strlen($_sentence));

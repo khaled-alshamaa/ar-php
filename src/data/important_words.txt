@@ -40,7 +40,6 @@ new
 old
 high
 long
-
 هام
 ذات
 كل
