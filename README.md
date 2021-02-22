@@ -55,14 +55,13 @@ or in bibtex format
 
 * [Bagisto](https://github.com/bagisto/bagisto/blob/master/README.md): Laravel package for e-commerce. [[check it out](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
 
-<!--
-* [LimeSurvey](https://github.com/LimeSurvey/LimeSurvey/blob/master/README.md): Open-source survey software. [[check it out]()]
+* [LimeSurvey](https://github.com/LimeSurvey/LimeSurvey/blob/master/README.md): Open-source survey software. 
+[check it out [here](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L134) and 
+[here](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L133)]
 
+<!--
 Windows PowerShell: Get-ChildItem -Recurse | Select-String "I18N_Arabic" -List | Select Path
-https://github.com/LimeSurvey/LimeSurvey/blob/master/README.md
 https://github.com/LimeSurvey/LimeSurvey/tree/master/application/third_party/ar-php
-https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L134
-https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L133
 -->
 
 ### Arabic Language
