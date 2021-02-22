@@ -30,6 +30,27 @@ This project provides a set of tools that enable Arabic website developers to se
 
 > [Professional Support](#professional-support)
 
+### Citation
+
+If you would cite it in academic work, you can use this citation
+
+```
+K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
+https://github.com/khaled-alshamaa/ar-php, 2021
+```
+
+or in bibtex format
+
+```latex
+@misc{ar-php,
+  title={Ar-PHP, PHP library for website developers to process Arabic content},
+  author={Al-Shamaa, Khaled},
+  url={https://github.com/khaled-alshamaa/ar-php},
+  version = {6.0.0},
+  year={2021}
+}
+```
+
 ### Where it has been used?
 
 * [Bagisto](https://github.com/bagisto/bagisto/blob/master/README.md): Laravel package for e-commerce. [[check it out](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
