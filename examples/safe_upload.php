@@ -134,5 +134,6 @@ END;
 highlight_string($code);
 ?>
 </div>
+<footer><i><a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, an open-source library for website developers to process Arabic content</i></footer>
 </body>
 </html>

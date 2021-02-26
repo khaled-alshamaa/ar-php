@@ -140,5 +140,6 @@ echo 'Amount of memory allocated to this script is ' . memory_get_usage() . ' by
 ?>
 
 </div>
+<footer><i><a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, an open-source library for website developers to process Arabic content</i></footer>
 </body>
 </html>

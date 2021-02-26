@@ -29,11 +29,9 @@
 <!--
 ## What's new in ArPHP 6.1.0 _(release date: ??? ##, 2021)_
 
-* Improve "arIdentify" method performance, it is now x10 faster as per Xdebug profiler.
+* Improve slow methods performance including "arIdentify", "arSummaryRankSentences", "checkAr" and "checkEn". They are now  faster as per Xdebug profiler (x10, x7, x4 and x4 respectively).
 
-* Improve "arSummaryRankSentences" method performance, it is now x7 faster as per Xdebug profiler.
-
-* Improve "checkAr" and "checkEn" methods performance, they are now x4 faster as per Xdebug profiler.
+* Improve examples by enhancing the associated description.
 
 [Top](#arphp-library---change-log)
 -->
