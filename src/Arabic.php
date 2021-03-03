@@ -2231,8 +2231,10 @@ class Arabic
                 || $prevChar == 'لإ' || $prevChar == 'ل')
                 && (mb_strpos('آأإا', $crntChar, 0) !== false)
             ) {
-                if (mb_strpos($this->arGlyphsPrevLink, $chars[$i - 2], 0) !== false) {
-                    $form++;
+                if ($i > 1) {
+                    if (mb_strpos($this->arGlyphsPrevLink, $chars[$i - 2], 0) !== false) {
+                        $form++;
+                    }
                 }
 
                 if (mb_strpos($this->arGlyphsVowel, $chars[$i - 1], 0)) {
@@ -2494,6 +2496,10 @@ class Arabic
         $text   = array_shift($pieces);
 
         foreach ($pieces as $piece) {
+            if ($piece == '') {
+                continue;
+            }
+
             if ($piece[0] == '#') {
                 if ($piece[1] == 'x') {
                     $one = '#x';

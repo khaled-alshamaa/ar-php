@@ -31,6 +31,8 @@
 
 * Improve slow methods performance including "arIdentify", "arSummaryRankSentences", "checkAr" and "checkEn". They are now  faster as per Xdebug profiler (x10, x7, x4 and x4 respectively).
 
+* Test the Arabic Glyphs algorithm against long text examples from Wikipedia and fix few small bugs that occur in some special cases (e.g., a string starts by Lam with Alef).
+
 * Improve examples by enhancing the associated description.
 
 [Top](#arphp-library---change-log)
