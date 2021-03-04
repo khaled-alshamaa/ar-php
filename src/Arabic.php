@@ -2157,6 +2157,7 @@ class Arabic
         $prevChar = null;
         $nextChar = null;
         $output   = '';
+        $number   = '';
         $chars    = array();
 
         $_temp = mb_strlen($str);
@@ -2173,6 +2174,14 @@ class Arabic
 
             if ($i > 0) {
                 $prevChar = $chars[$i - 1];
+            }
+
+            if (is_numeric($crntChar)) {
+                $number = $crntChar.$number;
+                continue;
+            } elseif (strlen($number) > 0) {
+                $output .= $number;
+                $number  = '';
             }
 
             if ($prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false) {
@@ -2459,6 +2468,34 @@ class Arabic
         }
 
         return $output;
+    }
+    
+    public function utf8Glyphs2($str, $html = true, $hindo = true){
+        $p = $this->arIdentify($str);
+
+        $nums   = array(
+            '0', '1', '2', '3', '4',
+            '5', '6', '7', '8', '9'
+        );
+
+        $arNums = array(
+            '٠', '١', '٢', '٣', '٤',
+            '٥', '٦', '٧', '٨', '٩'
+        );
+
+        for ($i = count($p)-1; $i >= 0; $i -= 2) {
+            $x = mb_strrpos(substr($str, 0, $p[$i-1]), '>');
+            $y = mb_strrpos(substr($str, 0, $p[$i-1]), '<');
+            if(!$html || $x > $y){
+                $utf8ar = $this->arGlyphsPreConvert(substr($str, $p[$i-1], $p[$i] - $p[$i-1]));
+                if ($hindo) {
+                    $utf8ar = str_replace($nums, $arNums, $utf8ar);
+                }
+                $str    = substr_replace($str, $utf8ar, $p[$i-1], $p[$i] - $p[$i-1]);
+            }
+        }
+
+        return $str;
     }
 
     /**
