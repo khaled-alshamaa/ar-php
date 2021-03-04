@@ -3844,7 +3844,11 @@ class Arabic
                 $arRef[] = $i;
             }
         }
-        
+
+        if ($arFlag) {
+            $arRef[] = $i;
+        }
+
         return $arRef;
     }
     
