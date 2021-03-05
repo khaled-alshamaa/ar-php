@@ -80,7 +80,8 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 * PHP 7 at [GitHub.com](https://github.com/khaled-alshamaa/ar-php) starting in 2020.
 * PHP 5 at [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
 * PHP 4 at [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
-* [PHP and Arabic Language](https://darshoaa.com/pHP-and-Arabic-language/) book, 2007.
+
+[Top](#ar-php-project-ar-phporg)
 
 ## _Quick Start_
 
