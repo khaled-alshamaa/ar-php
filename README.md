@@ -3,6 +3,8 @@
 <a href="https://github.com/khaled-alshamaa/ar-php/issues"><img src="https://img.shields.io/github/issues-raw/khaled-alshamaa/ar-php"/></a> <img src="https://img.shields.io/github/languages/code-size/khaled-alshamaa/ar-php"/> <a href="https://github.com/khaled-alshamaa/ar-php/commits/master"><img src="https://img.shields.io/github/commit-activity/m/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/commits/master"><img src="https://img.shields.io/github/last-commit/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/network/members"><img src="https://img.shields.io/github/forks/khaled-alshamaa/ar-php?style=social"/></a> <a href="https://twitter.com/arphp"><img src="https://img.shields.io/twitter/follow/arphp?style=social"></a>
 <!-- https://shields.io/ -->
 
+<img align="right" width="256" height="256" src="https://raw.githubusercontent.com/khaled-alshamaa/ar-php/master/ar-php_256.png">
+
 # Ar-PHP Project ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _PHP Speaks Arabic - Be Ready!_
 _Copyright © 2006-2021 Khaled Al-Sham'aa._
@@ -150,3 +152,5 @@ As the developers of Ar-PHP project, we can help your company leverage the maxim
 * __Training:__ Get comprehensive training for Ar-PHP.
 
 [Top](#ar-php-project-ar-phporg)
+
+<!-- If you find this project useful, please consider making a donation. Any funds donated will be used to help further development on this project. -->
