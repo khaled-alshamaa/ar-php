@@ -14,7 +14,7 @@ Our mission is to develop open source solutions and provides professional suppor
 
 This project provides a set of tools that enable Arabic website developers to serve professional search, present and process Arabic content in PHP.
 
-> Download ([Latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest), [Composer/Packagist](https://packagist.org/packages/khaled.alshamaa/ar-php))
+> [Easy Installation](#quick-start)
 
 > [List of Main Functionalities](#main-functionalities) 
 
@@ -80,7 +80,33 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 * PHP 4 at [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
 * [PHP and Arabic Language](https://darshoaa.com/pHP-and-Arabic-language/) book, 2007.
 
-## _Main Functionalities_
+## _Quick Start_
+
+### Install with Composer
+
+To install with [Composer](https://getcomposer.org/), simply require the latest version of this package.
+
+```bash
+composer require khaled.alshamaa/ar-php
+```
+
+Make sure that the autoload file from Composer is loaded.
+
+```php
+// somewhere early in your project's loading, require the Composer autoloader
+// see: http://getcomposer.org/doc/00-intro.md
+require 'vendor/autoload.php';
+```
+
+### Download and Install
+
+Download the [latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest) of Ar-PHP library and extract it into the directory where it will be used.
+
+```php
+require_once 'ar-php/src/Arabic.php';
+```
+
+### Main Functionalities
 * Arabic Sentiment Analysis ([live demo](https://ar-php.org/github/examples/ar_sentiment.php))
 * English-Arabic Transliteration ([live demo 1](https://ar-php.org/github/examples/ar_transliteration.php), [live demo 2](https://ar-php.org/github/examples/en_transliteration.php))
 * Spell Numbers in the Arabic Idiom ([live demo](https://ar-php.org/github/examples/numbers.php))
