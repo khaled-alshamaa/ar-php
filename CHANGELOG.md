@@ -35,6 +35,8 @@
 
 * Improve examples by enhancing the associated description.
 
+* Fix the [issue #5](https://github.com/khaled-alshamaa/ar-php/issues/5) that reported in the money2str method. Thanks to [Ahmed Fawky](https://github.com/ahmedfawky).
+
 [Top](#arphp-library---change-log)
 -->
 
