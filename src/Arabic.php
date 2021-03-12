@@ -407,7 +407,7 @@ class Arabic
         foreach ($json['currency'] as $money) {
             $this->arNumberCurrency[$money['iso']]['ar']['basic']    = $money['ar_basic'];
             $this->arNumberCurrency[$money['iso']]['ar']['fraction'] = $money['ar_fraction'];
-            $this->arNumberCurrency[$money['iso']]['en']['basic']    = $money['ar_basic'];
+            $this->arNumberCurrency[$money['iso']]['en']['basic']    = $money['en_basic'];
             $this->arNumberCurrency[$money['iso']]['en']['fraction'] = $money['en_fraction'];
             
             $this->arNumberCurrency[$money['iso']]['decimals'] = $money['decimals'];
