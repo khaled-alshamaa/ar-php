@@ -1372,7 +1372,11 @@ class Arabic
         $string = '';
 
         if ($temp[0] != 0) {
-            $string .= $this->int2strItem((int)$temp[0], $this->arNumberCurrency[$iso][$lang]['basic']);
+            if ($lang == 'ar') {
+                $string .= $this->int2strItem((int)$temp[0], $this->arNumberCurrency[$iso][$lang]['basic']);
+            } else {
+                $string .= $temp[0] . ' ' . $this->arNumberCurrency[$iso][$lang]['basic'];
+            }
         }
 
         if (!empty($temp[1]) && $temp[1] != 0) {
@@ -1384,7 +1388,11 @@ class Arabic
                 }
             }
 
-            $string .= $this->int2strItem((int)$temp[1], $this->arNumberCurrency[$iso][$lang]['fraction']);
+            if ($lang == 'ar') {
+                $string .= $this->int2strItem((int)$temp[1], $this->arNumberCurrency[$iso][$lang]['fraction']);
+            } else {
+                $string .= $temp[1] . ' ' . $this->arNumberCurrency[$iso][$lang]['fraction'];
+            }
         }
         
         return $string;
