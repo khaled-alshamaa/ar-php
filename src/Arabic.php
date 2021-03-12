@@ -2486,7 +2486,7 @@ class Arabic
         for ($i = count($p)-1; $i >= 0; $i -= 2) {
             $x = mb_strrpos(substr($str, 0, $p[$i-1]), '>');
             $y = mb_strrpos(substr($str, 0, $p[$i-1]), '<');
-            if(!$html || $x > $y){
+            if(!$html || $x > $y || $y === false){
                 $utf8ar = $this->arGlyphsPreConvert(substr($str, $p[$i-1], $p[$i] - $p[$i-1]));
                 if ($hindo) {
                     $utf8ar = str_replace($nums, $arNums, $utf8ar);
