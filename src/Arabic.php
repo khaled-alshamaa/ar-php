@@ -2477,34 +2477,6 @@ class Arabic
 
         return $output;
     }
-    
-    public function utf8Glyphs2($str, $html = true, $hindo = true){
-        $p = $this->arIdentify($str);
-
-        $nums   = array(
-            '0', '1', '2', '3', '4',
-            '5', '6', '7', '8', '9'
-        );
-
-        $arNums = array(
-            '٠', '١', '٢', '٣', '٤',
-            '٥', '٦', '٧', '٨', '٩'
-        );
-
-        for ($i = count($p)-1; $i >= 0; $i -= 2) {
-            $x = mb_strrpos(substr($str, 0, $p[$i-1]), '>');
-            $y = mb_strrpos(substr($str, 0, $p[$i-1]), '<');
-            if(!$html || $x > $y || $y === false){
-                $utf8ar = $this->arGlyphsPreConvert(substr($str, $p[$i-1], $p[$i] - $p[$i-1]));
-                if ($hindo) {
-                    $utf8ar = str_replace($nums, $arNums, $utf8ar);
-                }
-                $str    = substr_replace($str, $utf8ar, $p[$i-1], $p[$i] - $p[$i-1]);
-            }
-        }
-
-        return $str;
-    }
 
     /**
      * Decode all HTML entities (including numerical ones) to regular UTF-8 bytes.
