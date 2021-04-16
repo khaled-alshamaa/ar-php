@@ -2478,6 +2478,45 @@ class Arabic
         return $output;
     }
 
+    public function utf8Glyphs2($str,  $max_chars = 50, $hindo = true, $forcertl = false){
+        if($str != ''){
+            $num = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+
+            $arNum = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
+            
+            if($hindo == true) $str = str_replace($num, $arNum, $str);
+
+            $p = $this->arIdentify($str);
+            
+            if($forcertl == true || $p[0] == 0){ $rtl = true; }else{$rtl = false; }
+            
+            $block = array();
+            
+            if($p[0] != 0) $block[] = substr($str, 0, $p[0]-1);
+            $max = count($p);
+            
+            if($rtl == true){
+                for($i = 0; $i < $max; $i += 2){
+                    $p[$i] = strlen(preg_replace('/\)\s*$/', '', substr($str, 0, $p[$i])));
+                }
+            }
+            
+            for($i = 0; $i < $max; $i += 2) {
+                $block[] = $this->arGlyphsPreConvert(substr($str, $p[$i], $p[$i+1] - $p[$i]));
+                if($i+2 < $max) {
+                    $block[] = substr($str, $p[$i+1], $p[$i+2]-$p[$i+1]);
+                }elseif($p[$i+1] != strlen($str)){
+                    $block[] = substr($str, $p[$i+1], strlen($str)-$p[$i+1]);
+                }
+            }
+            
+            if($rtl == true) $block = array_reverse($block);
+            
+            $str = implode(' ', $block);
+        }
+        return $str;
+    }
+
     /**
      * Decode all HTML entities (including numerical ones) to regular UTF-8 bytes.
      * Double-escaped entities will only be decoded once
