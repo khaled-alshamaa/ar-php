@@ -3806,7 +3806,13 @@ class Arabic
                 if ($utfDecCode >= $minAr && $utfDecCode <= $maxAr) {
                     if (!$arFlag) {
                         $arFlag  = true;
-                        $arRef[] = $i - 1;
+                        // include the previous open bracket ( if it is exists
+                        $sp = strlen(rtrim(substr($str, 0, $i-1))) - 1;
+                        if($str[$sp] == '('){
+                            $arRef[] = $sp;
+                        }else{
+                            $arRef[] = $i - 1;
+                        }
                     }
                 } else {
                     if ($arFlag) {
@@ -3821,7 +3827,9 @@ class Arabic
             
             if ($arFlag && !preg_match("/^\s$/", $str[$i])) {
                 $arFlag  = false;
-                $arRef[] = $i;
+                // tag out the trailer spaces
+                $sp = $i - strlen(rtrim(substr($str, 0, $i))); 
+                $arRef[] = $i - $sp;
             }
         }
 
