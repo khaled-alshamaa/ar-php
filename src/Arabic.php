@@ -2289,196 +2289,21 @@ class Arabic
     }
 
     /**
-     * Convert Arabic charset string into glyph joining in UTF-8
+     * Convert Arabic string into glyph joining in UTF-8
      * hexadecimals stream (take care of whole the document including English
      * sections as well as numbers and arcs etc...)
      *
-     * @param string  $str       Arabic string in Windows-1256 charset
+     * @param string  $text      Arabic string
      * @param integer $max_chars Max number of chars you can fit in one line
      * @param boolean $hindo     If true use Hindo digits else use Arabic digits
+     * @param boolean $forcertl  If true forces RTL in the bidi algorithm
      *
      * @return string Arabic glyph joining in UTF-8 hexadecimals stream (take
      *                care of whole document including English sections as well
      *                as numbers and arcs etc...)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function utf8Glyphs($str, $max_chars = 50, $hindo = true)
-    {
-        $str = str_replace(array("\r\n", "\n", "\r"), " \n ", $str);
-        $str = str_replace("\t", "        ", $str);
-
-        $lines   = array();
-        $words   = explode(' ', $str);
-        $w_count = count($words);
-        $c_chars = 0;
-        $c_words = array();
-
-        $english  = array();
-        $en_index = -1;
-
-        $en_words = array();
-        $en_stack = array();
-
-        for ($i = 0; $i < $w_count; $i++) {
-            $pattern  = '/^(\n?)';
-            $pattern .= '[a-z\d\\/\@\#\$\%\^\&\*\(\)\_\~\"\'\[\]\{\}\;\,\|\-\.\:!]*';
-            $pattern .= '([\.\:\+\=\-\!،؟]?)$/i';
-
-            if (preg_match($pattern, $words[$i], $matches)) {
-                if ($matches[1]) {
-                    $words[$i] = mb_substr($words[$i], 1, mb_strlen($words[$i])) . $matches[1];
-                }
-
-                if ($matches[2]) {
-                    $words[$i] = $matches[2] . mb_substr($words[$i], 0, -1);
-                }
-
-                $words[$i] = strrev($words[$i]);
-                $english[] = $words[$i];
-
-                if ($en_index == -1) {
-                    $en_index = $i;
-                }
-
-                $en_words[] = true;
-            } elseif ($en_index != -1) {
-                $en_count = count($english);
-
-                for ($j = 0; $j < $en_count; $j++) {
-                    $words[$en_index + $j] = $english[$en_count - 1 - $j];
-                }
-
-                $en_index = -1;
-                $english  = array();
-
-                $en_words[] = false;
-            } else {
-                $en_words[] = false;
-            }
-        }
-
-        if ($en_index != -1) {
-            $en_count = count($english);
-
-            for ($j = 0; $j < $en_count; $j++) {
-                $words[$en_index + $j] = $english[$en_count - 1 - $j];
-            }
-        }
-
-        // need more work to fix lines starts by English words
-        $en_start = false;
-        if ($en_start) {
-            $last = true;
-            $from = 0;
-            $key  = 0;
-
-            foreach ($en_words as $key => $value) {
-                if ($last !== $value) {
-                    $to = $key - 1;
-                    $en_stack[] = array($from, $to);
-                    $from = $key;
-                }
-
-                $last = $value;
-            }
-
-            $en_stack[] = array($from, $key);
-            $new_words = array();
-
-            while (list($from, $to) = array_pop($en_stack)) {
-                for ($i = $from; $i <= $to; $i++) {
-                    $new_words[] = $words[$i];
-                }
-            }
-
-            $words = $new_words;
-        }
-
-        for ($i = 0; $i < $w_count; $i++) {
-            $w_len = mb_strlen($words[$i]) + 1;
-
-            if ($c_chars + $w_len < $max_chars) {
-                if (mb_strpos($words[$i], "\n", 0) !== false) {
-                    $words_nl = explode("\n", $words[$i]);
-
-                    $c_words[] = $words_nl[0];
-                    $lines[] = implode(' ', $c_words);
-
-                    $nl_num = count($words_nl) - 1;
-
-                    for ($j = 1; $j < $nl_num; $j++) {
-                        $lines[] = $words_nl[$j];
-                    }
-
-                    $c_words = array($words_nl[$nl_num]);
-                    $c_chars = mb_strlen($words_nl[$nl_num]) + 1;
-                } else {
-                    $c_words[] = $words[$i];
-
-                    $c_chars += $w_len;
-                }
-            } else {
-                $lines[] = implode(' ', $c_words);
-
-                $c_words = array($words[$i]);
-                $c_chars = $w_len;
-            }
-        }
-
-        $lines[] = implode(' ', $c_words);
-
-        $maxLine = count($lines);
-        $output  = '';
-
-        for ($j = $maxLine - 1; $j >= 0; $j--) {
-            $output .= $lines[$j] . "\n";
-        }
-
-        $output = rtrim($output);
-        $output = $this->arGlyphsPreConvert($output);
-
-        if ($hindo) {
-            $nums   = array(
-                '0', '1', '2', '3', '4',
-                '5', '6', '7', '8', '9'
-            );
-
-            $arNums = array(
-                '٠', '١', '٢', '٣', '٤',
-                '٥', '٦', '٧', '٨', '٩'
-            );
-
-            foreach ($nums as $k => $v) {
-                $p_nums[$k] = '/' . $v . '/ui';
-            }
-
-            $output = preg_replace($p_nums, $arNums, $output);
-
-            foreach ($arNums as $k => $v) {
-                $p_arNums[$k] = '/([a-z-\d]+)' . $v . '/ui';
-            }
-
-            foreach ($nums as $k => $v) {
-                $r_nums[$k] = '${1}' . $v;
-            }
-
-            $output = preg_replace($p_arNums, $r_nums, $output);
-
-            foreach ($arNums as $k => $v) {
-                $p_arNums[$k] = '/' . $v . '([a-z-\d]+)/ui';
-            }
-
-            foreach ($nums as $k => $v) {
-                $r_nums[$k] = $v . '${1}';
-            }
-
-            $output = preg_replace($p_arNums, $r_nums, $output);
-        }
-
-        return $output;
-    }
-
-    public function utf8Glyphs2($text,  $max_chars = 50, $hindo = true, $forcertl = false){
+    public function utf8Glyphs($text, $max_chars = 50, $hindo = true, $forcertl = false){
         $lines = array();
         
         // process by line required for bidi in RTL case

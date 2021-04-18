@@ -12,11 +12,6 @@
 <div class="Paragraph">
 <h2>Arabic Sentiment Analysis:</h2>
 
-
-
-
-
-
 <p>Sentiment analysis is one of the most useful Natural Language Processing (NLP) functionalities 
 that can determine the tone (positive, negative) of the text (e.g., product reviews, comments, etc.).</p>
 

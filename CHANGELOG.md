@@ -29,13 +29,15 @@
 <!--
 ## What's new in ArPHP 6.1.0 _(release date: ??? ##, 2021)_
 
+* Improved version of the utf8Glyphs method using arIdentify for better bidi handling logic.
+
 * Improve slow methods performance including "arIdentify", "arSummaryRankSentences", "checkAr" and "checkEn". They are now  faster as per Xdebug profiler (x10, x7, x4 and x4 respectively).
+
+* Fix the [issue #5](https://github.com/khaled-alshamaa/ar-php/issues/5) that reported in the money2str method. Thanks to [Ahmed Fawky](https://github.com/ahmedfawky).
 
 * Test the Arabic Glyphs algorithm against long text examples from Wikipedia and fix few small bugs that occur in some special cases (e.g., [issue #6](https://github.com/khaled-alshamaa/ar-php/issues/6) of a string starts by Lam with Alef).
 
 * Improve examples by enhancing the associated description.
-
-* Fix the [issue #5](https://github.com/khaled-alshamaa/ar-php/issues/5) that reported in the money2str method. Thanks to [Ahmed Fawky](https://github.com/ahmedfawky).
 
 [Top](#arphp-library---change-log)
 -->
