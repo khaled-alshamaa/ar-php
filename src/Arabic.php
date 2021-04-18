@@ -2421,52 +2421,20 @@ class Arabic
     private function arGlyphsDecodeEntities($text, $exclude = array())
     {
         // Get all named HTML entities.
-        $table = array_flip(get_html_translation_table(HTML_ENTITIES));
+        $table = array_flip(get_html_translation_table(HTML_ENTITIES, ENT_COMPAT, 'UTF-8'));
         
         // PHP gives us ISO-8859-1 data, we need UTF-8.
-        $table = array_map('utf8_encode', $table);
+        //$table = array_map('utf8_encode', $table);
         
         // Add apostrophe (XML)
         $table['&apos;'] = "'";
 
         $newtable = array_diff($table, $exclude);
         
-        // Use a regexp to select all entities in one pass, to avoid decoding
-        // double-escaped entities twice.
-        //$text = preg_replace('/&(#x?)?([A-Za-z0-9]+);/e',
-        //                     $this->arGlyphsDecodeEntities2("$1", "$2", "$0", $newtable, $exclude), $text);
-        
-        $pieces = explode('&', $text);
-        $text   = array_shift($pieces);
-
-        foreach ($pieces as $piece) {
-            if ($piece == '') {
-                continue;
-            }
-
-            if ($piece[0] == '#') {
-                if ($piece[1] == 'x') {
-                    $one = '#x';
-                } else {
-                    $one = '#';
-                }
-            } else {
-                $one = '';
-            }
-
-            $end   = mb_strpos($piece, ';', 0);
-            $start = mb_strlen($one);
-            $two   = mb_substr($piece, $start, $end - $start);
-            
-            if ($one == '' && $two == '') {
-                $zero = '&';
-            } else {
-                $zero  = '&' . $one . $two . ';';
-            }
-            
-            $text .= $this->arGlyphsDecodeEntities2($one, $two, $zero, $newtable, $exclude) .
-                     mb_substr($piece, $end + 1, mb_strlen($piece));
-        }
+        // Use a regexp to select all entities in one pass, to avoid decoding double-escaped entities twice.
+        $text = preg_replace_callback('/&(#x?)?([A-Fa-f0-9]+);/u', function ($matches) {
+            return $this->arGlyphsDecodeEntities2($matches[1], $matches[2], $matches[0], $newtable, $exclude);
+            }, $text);
 
         return $text;
     }
