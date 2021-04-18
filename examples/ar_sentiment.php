@@ -10,6 +10,29 @@
 <body>
 
 <div class="Paragraph">
+<h2>Arabic Sentiment Analysis:</h2>
+
+
+
+
+
+
+<p>Sentiment analysis is one of the most useful Natural Language Processing (NLP) functionalities 
+that can determine the tone (positive, negative) of the text (e.g., product reviews, comments, etc.).</p>
+
+<p>This Machine Learning (ML) model was built using a dataset published on 
+<a href="https://www.kaggle.com/abedkhooli/arabic-100k-reviews" target="_blank">Kaggle</a> 
+and combines 100k Arabic reviews from hotels, books, movies, products, and a few airlines. 
+Text (reviews) were cleaned by removing Arabic diacritics and non-Arabic characters. 
+Predictions are calculated using the log-odds statistics, and method accuracy exceeds 75% 
+which is not a bad performance for a model sized less than 30 KB.</p>
+
+<p>For simplicity, we assumed that all the words in the first language spoken by the Semitic peoples consisted 
+of bi-radicals (i.e., two sounds/letters). Therefore, we can handle the majority of Arabic word roots as being 
+expanded by the addition of a third letter, with the resulting meaning having a semantic relation to the original bi-radical.</p>
+</div><br />
+
+<div class="Paragraph">
 <h2>Example Output:</h2>
 <?php
 
