@@ -542,10 +542,10 @@ class Arabic
     private function arSentimentInit()
     {
         $this->allStems   = file($this->rootDirectory . '/data/stems.txt', FILE_IGNORE_NEW_LINES);
-        $this->logOddStem = file($this->rootDirectory . '/data/logodd_stem.txt', FILE_IGNORE_NEW_LINES);;
+        $this->logOddStem = file($this->rootDirectory . '/data/logodd_stem.txt', FILE_IGNORE_NEW_LINES);
 
-        $this->logOddPositive = file($this->rootDirectory . '/data/logodd_positive.txt', FILE_IGNORE_NEW_LINES);;
-        $this->logOddNegative = file($this->rootDirectory . '/data/logodd_negative.txt', FILE_IGNORE_NEW_LINES);;
+        $this->logOddPositive = file($this->rootDirectory . '/data/logodd_positive.txt', FILE_IGNORE_NEW_LINES);
+        $this->logOddNegative = file($this->rootDirectory . '/data/logodd_negative.txt', FILE_IGNORE_NEW_LINES);
     }
     
     /////////////////////////////////////// Standard //////////////////////////////////////////////
@@ -2185,7 +2185,7 @@ class Arabic
             }
 
             if (is_numeric($crntChar)) {
-                $number = $crntChar.$number;
+                $number = $crntChar . $number;
                 continue;
             } elseif (strlen($number) > 0) {
                 $output .= $number;
@@ -2303,15 +2303,16 @@ class Arabic
      *                as numbers and arcs etc...)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function utf8Glyphs($text, $max_chars = 50, $hindo = true, $forcertl = false){
+    public function utf8Glyphs($text, $max_chars = 50, $hindo = true, $forcertl = false)
+    {
         $lines = array();
         
         // process by line required for bidi in RTL case
         $userLines = explode("\n", $text);
-        
-        foreach($userLines as $line){
+
+        foreach ($userLines as $line) {
             // wrape long lines for bidi in RTL case
-            while(mb_strlen($line) > $max_chars){
+            while (mb_strlen($line) > $max_chars) {
                 // find the last space before hit the max line length
                 $last = mb_strrpos(mb_substr($line, 0, $max_chars), ' ');
                 
@@ -2319,7 +2320,7 @@ class Arabic
                 $lines[] = mb_substr($line, 0, $last);
                 
                 // the rest of the line will be our new line now to iterate
-                $line = mb_substr($line, $last+1, mb_strlen($line)-$last);
+                $line = mb_substr($line, $last + 1, mb_strlen($line) - $last);
             }
         
             $lines[] = $line;
@@ -2327,51 +2328,59 @@ class Arabic
         
         $outLines = array();
         
-        foreach($lines as $str){
+        foreach ($lines as $str) {
             // identify Arabic fragments in the line for glyphs
             $p = $this->arIdentify($str);
 
             // check if current line has any Arabic fragment
-            if(count($p)>0){
+            if (count($p) > 0) {
                 // rtl if the current line starts by Arabic or the whole text is forced to be rtl
-                if($forcertl == true || $p[0] == 0){ $rtl = true; }else{$rtl = false; }
+                if ($forcertl == true || $p[0] == 0) {
+                    $rtl = true;
+                } else {
+                    $rtl = false;
+                }
                 
                 // block structure to save processed fragments
                 $block = array();
                 
                 // if line does not start by Arabic, then save first non-Arabic fragment in block structure
-                if($p[0] != 0) $block[] = substr($str, 0, $p[0]-1);
+                if ($p[0] != 0) {
+                    $block[] = substr($str, 0, $p[0] - 1);
+                }
                 
                 // get the last Arabic fragment identifier
                 $max = count($p);
                 
                 // if the bidi logic is rtl
-                if($rtl == true){
+                if ($rtl == true) {
                     // check the start for each Arabic fragment
-                    for($i = 0; $i < $max; $i += 2){
+                    for ($i = 0; $i < $max; $i += 2) {
                         // alter start position to include the prev. close bracket if exist
                         $p[$i] = strlen(preg_replace('/\)\s*$/', '', substr($str, 0, $p[$i])));
                     }
                 }
                 
                 // for each Arabic fragment
-                for($i = 0; $i < $max; $i += 2) {
+                for ($i = 0; $i < $max; $i += 2) {
                     // do glyphs pre-processing and save the result in the block structure
-                    $block[] = $this->arGlyphsPreConvert(substr($str, $p[$i], $p[$i+1] - $p[$i]));
+                    $block[] = $this->arGlyphsPreConvert(substr($str, $p[$i], $p[$i + 1] - $p[$i]));
                     
                     // if we still have another Arabic fragment
-                    if($i+2 < $max) {
+                    if ($i + 2 < $max) {
                         // get the in-between non-Arabic fragment as is and save it in the block structure
-                        $block[] = substr($str, $p[$i+1], $p[$i+2]-$p[$i+1]);
-                    }elseif($p[$i+1] != strlen($str)){
-                        // else, the whole fragment starts after the last Arabic fragment 
+                        $block[] = substr($str, $p[$i + 1], $p[$i + 2] - $p[$i + 1]);
+                    } elseif ($p[$i + 1] != strlen($str)) {
+                        // else, the whole fragment starts after the last Arabic fragment
                         // until the end of the string will be save as is (non-Arabic) in the block structure
-                        $block[] = substr($str, $p[$i+1], strlen($str)-$p[$i+1]);
+                        $block[] = substr($str, $p[$i + 1], strlen($str) - $p[$i + 1]);
                     }
                 }
                 
                 // if the logic is rtl, then reverse the blocks order before concatenate
-                if($rtl == true) $block = array_reverse($block);
+                if ($rtl == true) {
+                    $block = array_reverse($block);
+                }
                 
                 // concatenate the whole string blocks
                 $str = implode(' ', $block);
@@ -2389,7 +2398,9 @@ class Arabic
         $arNum = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
         
         // convert to hindo numbers if requested
-        if($hindo == true) $output = str_replace($num, $arNum, $output);
+        if ($hindo == true) {
+            $output = str_replace($num, $arNum, $output);
+        }
 
         return $output;
     }
@@ -3573,7 +3584,7 @@ class Arabic
                 $w += 1;
             }
 
-            preg_match_all('/('.$importent.')/', $sentence, $out);
+            preg_match_all('/(' . $importent . ')/', $sentence, $out);
             $w += count($out[0]);
 
             $_sentence = mb_substr($sentence, 0, -1);
@@ -3723,10 +3734,10 @@ class Arabic
                     if (!$arFlag) {
                         $arFlag  = true;
                         // include the previous open bracket ( if it is exists
-                        $sp = strlen(rtrim(substr($str, 0, $i-1))) - 1;
-                        if($str[$sp] == '('){
+                        $sp = strlen(rtrim(substr($str, 0, $i - 1))) - 1;
+                        if ($str[$sp] == '(') {
                             $arRef[] = $sp;
-                        }else{
+                        } else {
                             $arRef[] = $i - 1;
                         }
                     }
@@ -3744,7 +3755,7 @@ class Arabic
             if ($arFlag && !preg_match("/^\s$/", $str[$i])) {
                 $arFlag  = false;
                 // tag out the trailer spaces
-                $sp = $i - strlen(rtrim(substr($str, 0, $i))); 
+                $sp = $i - strlen(rtrim(substr($str, 0, $i)));
                 $arRef[] = $i - $sp;
             }
         }
