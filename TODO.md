@@ -218,3 +218,8 @@ php -S localhost:8000 -t C:\xampp\htdocs\
 > _**Note:** If you get an error message tells you that VC run time is not compatible with this PHP build, then make sure to install the required version of the Microsoft Visual C++ Redistributable package (e.g. for PHP 8.0 you need the Visual Studio 2019 package which can be downloaded from [here](https://visualstudio.microsoft.com/downloads/#microsoft-visual-c-redistributable-for-visual-studio-2019))._
 
 * Open your browser and visit the URL of your script (e.g. http://localhost:8000/ar-php/examples/soundex.php).
+
+### _Carbon website/service_
+
+Create and share beautiful images of your source code. Start typing or drop a file into the text area to get started.
+[https://carbon.now.sh](https://carbon.now.sh/?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=vscode&wt=none&l=text%2Fx-php&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%2524Arabic%2520%253D%2520new%2520%255CArPHP%255CI18N%255CArabic%28%29%253B%250A%250A%2524number%2520%253D%25207.25%253B%250A%2524text%2520%2520%2520%253D%2520%2524Arabic-%253Emoney2str%28%2524number%252C%2520%27KWD%27%252C%2520%27ar%27%29%253B%250A%250Aecho%2520%2524text%253B%2520%252F%252F%2520%25D8%25B3%25D8%25A8%25D8%25B9%25D8%25A9%2520%25D8%25AF%25D9%2586%25D8%25A7%25D9%2586%25D9%258A%25D8%25B1%2520%25D9%2588%2520%25D9%2585%25D8%25A6%25D8%25AA%25D8%25A7%25D9%2586%2520%25D9%2588%2520%25D8%25AE%25D9%2585%25D8%25B3%25D9%2588%25D9%2586%2520%25D9%2581%25D9%2584%25D8%25B3%25D8%25A7)
