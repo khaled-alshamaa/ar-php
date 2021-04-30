@@ -588,10 +588,10 @@ END;
         $mark = $Arabic->arIdentify($text);
         
         $word = substr($text, $mark[0], $mark[1]-$mark[0]);
-    
+
         $this->assertEquals(
             $mark,
-            [6, 15]
+            [6, 14]
         );
     }
 
@@ -599,7 +599,7 @@ END;
     {
         $Arabic = new \ArPHP\I18N\Arabic();
         
-        $text = 'فريد عدلي / Farid Adly, Editor in Chief, Italian-Arab News Agency ANBAMED (Notizie dal Mediterraneo - أنباء البحر المتوسط), Acquedolci (Italy)';
+        $text = 'فريد عدلي Farid Adly, Editor in Chief, Italian-Arab News Agency ANBAMED (Notizie dal Mediterraneo - أنباء البحر المتوسط), Acquedolci (Italy)';
         $mark = $Arabic->arIdentify($text);
         
         $word1 = substr($text, $mark[0], $mark[1]-$mark[0]);
@@ -607,7 +607,7 @@ END;
     
         $this->assertEquals(
             $mark,
-            [0, 20, 110, 149]
+            [0, 17, 108, 146]
         );
     }
 
@@ -1042,7 +1042,7 @@ END;
         $expected[] = false;
         $actual[]   = $Arabic->arSentiment('جاءت القطعة مكسورة والعلبة مفتوحة') > 0;
         
-        $expected[] =true;
+        $expected[] = true;
         $actual[]   = $Arabic->arSentiment('المنتج مطابق للمواصفات والتسليم سريع') > 0;
         
         $this->assertEquals($expected, $actual);
