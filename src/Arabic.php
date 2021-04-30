@@ -178,7 +178,6 @@ class Arabic
     {
         mb_internal_encoding('UTF-8');
         
-        // in Phar version it should be = phar://ArPHP.phar
         $this->rootDirectory = dirname(__FILE__);
         $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
         $this->umAlqoura     = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
