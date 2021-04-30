@@ -148,19 +148,7 @@ After a profile information file has been generated you can open it with the [KC
 
 The [phar](https://www.php.net/manual/en/intro.phar.php) extension provides a way to put entire PHP applications into a single file called a "phar" (PHP Archive) for easy distribution and installation.
 
-In  order to create and modify Phar files, the _php.ini_ setting `phar.readonly` must be set to __Off__, then we have to change the first line in the Arabic **__construct** method to set the root directory private property in a proper way:
-
-```php
-$this->rootDirectory = 'phar://ArPHP.phar';
-```
-
-Instead of the following original line of code:
-
-```php
-$this->rootDirectory = dirname(__FILE__);
-``` 
-
-After this small change, we can create the "ArPHP.phar" file using the following code:
+In  order to create and modify Phar files, the _php.ini_ setting `phar.readonly` must be set to __Off__, then we can create the "ArPHP.phar" file using the following code:
 
 ```php
 $p = new Phar('ArPHP.phar', 0, 'ArPHP.phar');
