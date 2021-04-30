@@ -106,6 +106,11 @@ Search.appendIndex(
             "summary": "Spell\u0020integer\u0020number\u0020in\u0020Arabic\u0020idiom",
             "url": "classes/ArPHP-I18N-Arabic.html#method_int2str"
         },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003Aint2strItem\u0028\u0029",
+            "name": "int2strItem",
+            "summary": "Spell\u0020integer\u0020number\u0020in\u0020Arabic\u0020idiom\u0020followed\u0020by\u0020plural\u0020form\u0020of\u0020the\u0020counted\u0020item",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_int2strItem"
+        },                {
             "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003Amoney2str\u0028\u0029",
             "name": "money2str",
             "summary": "Spell\u0020number\u0020in\u0020Arabic\u0020idiom\u0020as\u0020money",
@@ -181,9 +186,14 @@ Search.appendIndex(
             "summary": "Arabic\u0020soundex\u0020algorithm\u0020takes\u0020Arabic\u0020word\u0020as\u0020an\u0020input\u0020and\u0020produces\u0020a\ncharacter\u0020string\u0020which\u0020identifies\u0020a\u0020set\u0020words\u0020that\u0020are\u0020\u0028roughly\u0029\nphonetically\u0020alike.",
             "url": "classes/ArPHP-I18N-Arabic.html#method_soundex"
         },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AaddGlyphs\u0028\u0029",
+            "name": "addGlyphs",
+            "summary": "Add\u0020extra\u0020glyphs",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_addGlyphs"
+        },                {
             "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003Autf8Glyphs\u0028\u0029",
             "name": "utf8Glyphs",
-            "summary": "Convert\u0020Arabic\u0020Windows\u002D1256\u0020charset\u0020string\u0020into\u0020glyph\u0020joining\u0020in\u0020UTF\u002D8\nhexadecimals\u0020stream\u0020\u0028take\u0020care\u0020of\u0020whole\u0020the\u0020document\u0020including\u0020English\nsections\u0020as\u0020well\u0020as\u0020numbers\u0020and\u0020arcs\u0020etc...\u0029",
+            "summary": "Convert\u0020Arabic\u0020string\u0020into\u0020glyph\u0020joining\u0020in\u0020UTF\u002D8\nhexadecimals\u0020stream\u0020\u0028take\u0020care\u0020of\u0020whole\u0020the\u0020document\u0020including\u0020English\nsections\u0020as\u0020well\u0020as\u0020numbers\u0020and\u0020arcs\u0020etc...\u0029",
             "url": "classes/ArPHP-I18N-Arabic.html#method_utf8Glyphs"
         },                {
             "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AsetQueryArrFields\u0028\u0029",
@@ -290,6 +300,36 @@ Search.appendIndex(
             "name": "isArabic",
             "summary": "Find\u0020out\u0020if\u0020given\u0020string\u0020is\u0020Arabic\u0020text\u0020or\u0020not",
             "url": "classes/ArPHP-I18N-Arabic.html#method_isArabic"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003Add2olc\u0028\u0029",
+            "name": "dd2olc",
+            "summary": "Encode\u0020a\u0020location\u0020coordinates\u0020\u0028latitude\u0020and\u0020longitude\u0020in\u0020WGS84\u0029\u0020into\u0020Open\u0020Location\u0020Code\nRef\u003A\u0020https\u003A\/\/github.com\/google\/open\u002Dlocation\u002Dcode\/blob\/master\/docs\/specification.md",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_dd2olc"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003Aolc2dd\u0028\u0029",
+            "name": "olc2dd",
+            "summary": "Decode\u0020an\u0020Open\u0020Location\u0020Code\u0020string\u0020into\u0020its\u0020location\u0020coordinates\u0020in\u0020decimal\u0020degrees.",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_olc2dd"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003Avolc\u0028\u0029",
+            "name": "volc",
+            "summary": "Determine\u0020if\u0020an\u0020Open\u0020Location\u0020Code\u0020is\u0020valid.",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_volc"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AarPlural\u0028\u0029",
+            "name": "arPlural",
+            "summary": "Get\u0020proper\u0020Arabic\u0020plural\u0020form\nThere\u0020are\u00204\u0020plural\u0020forms\u0020in\u0020Arabic\u0020language\u003A\n\u002D\u0020Form\u0020for\u00202\n\u002D\u0020Form\u0020for\u0020numbers\u0020that\u0020end\u0020with\u0020a\u0020number\u0020between\u00203\u0020and\u002010\u0020\u0028like\u003A\u0020103,\u00201405,\u002023409\u0029\n\u002D\u0020Form\u0020for\u0020numbers\u0020that\u0020end\u0020with\u0020a\u0020number\u0020between\u002011\u0020and\u002099\u0020\u0028like\u003A\u00201099,\u0020278\u0029\n\u002D\u0020Form\u0020for\u0020numbers\u0020above\u0020100\u0020ending\u0020with\u00200,\u00201\u0020or\u00202\u0020\u0028like\u003A\u0020100,\u0020232,\u00203001\u0029",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_arPlural"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AstripHarakat\u0028\u0029",
+            "name": "stripHarakat",
+            "summary": "Strip\u0020Harakat",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_stripHarakat"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AarSentiment\u0028\u0029",
+            "name": "arSentiment",
+            "summary": "Arabic\u0020Sentiment\u0020Analysis",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_arSentiment"
         },                {
             "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003A\u0024version",
             "name": "version",

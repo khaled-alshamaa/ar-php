@@ -18,7 +18,6 @@
         <script defer src="js/searchIndex.js"></script>
     </head>
 <body id="top">
-
     <section data-search-form class="phpdocumentor-search">
     <label>
         <span class="visually-hidden">Search for</span>
@@ -29,17 +28,15 @@
         <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
     </label>
 </section>
+
     <main class="phpdocumentor">
         <div class="phpdocumentor-section">
             <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-
             <div class="phpdocumentor-column -eight phpdocumentor-content">
-    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Ar-PHP</a></h1>
-
-
+<h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Ar-PHP</a></h1>
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
     Arabic
@@ -49,7 +46,6 @@
     
     </h2>
 
-        
 
             <p class="phpdocumentor-summary">----------------------------------------------------------------------</p>
 
@@ -128,9 +124,9 @@ soundex, Hijri calendar, spell numbers, keyboard language, and more...</p>
                     <span class="phpdocumentor-tag__name">version</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">6.0.0</span>
+                                            <span class="phpdocumentor-tag-link">6.1.0</span>
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>released in Feb 15, 2021</p>
+                                                 <section class="phpdocumentor-description"><p>released in May 1, 2021</p>
 </section>
 
                                     </dd>
@@ -639,7 +635,7 @@ you meant when you type on your keyboard (if keyboard language was incorrect)</d
     <span>
                         &nbsp;: string    </span>
 </dt>
-<dd>Convert Arabic charset string into glyph joining in UTF-8
+<dd>Convert Arabic string into glyph joining in UTF-8
 hexadecimals stream (take care of whole the document including English
 sections as well as numbers and arcs etc...)</dd>
 
@@ -675,13 +671,12 @@ sections as well as numbers and arcs etc...)</dd>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
-
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$version</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;6.0.0&#039;</span></code>
+     = <span class="phpdocumentor-signature__default-value">&#039;6.1.0&#039;</span></code>
 
     
     
@@ -704,7 +699,6 @@ sections as well as numbers and arcs etc...)</dd>
         __construct()
         <a href="classes/ArPHP-I18N-Arabic.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -4653,24 +4647,24 @@ you meant when you type on your keyboard (if keyboard language was incorrect)</p
         <a href="classes/ArPHP-I18N-Arabic.html#method_utf8Glyphs" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
 
-        <p class="phpdocumentor-summary">Convert Arabic charset string into glyph joining in UTF-8
+        <p class="phpdocumentor-summary">Convert Arabic string into glyph joining in UTF-8
 hexadecimals stream (take care of whole the document including English
 sections as well as numbers and arcs etc...)</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">utf8Glyphs</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$str</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$max_chars</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">50</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hindo</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                <span class="phpdocumentor-signature__name">utf8Glyphs</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$max_chars</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">50</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hindo</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$forcertl</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$str</span>
+                <span class="phpdocumentor-signature__argument__name">$text</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Arabic string in Windows-1256 charset</p>
+                    <section class="phpdocumentor-description"><p>Arabic string</p>
 </section>
 
             </dd>
@@ -4689,6 +4683,15 @@ sections as well as numbers and arcs etc...)</p>
                  = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>If true use Hindo digits else use Arabic digits</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$forcertl</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>If true forces RTL in the bidi algorithm</p>
 </section>
 
             </dd>
