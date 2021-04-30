@@ -2432,7 +2432,7 @@ class Arabic
         $newtable = array_diff($table, $exclude);
 
         // Use a regexp to select all entities in one pass, to avoid decoding double-escaped entities twice.
-        $text = preg_replace_callback('/&(#x?)?([A-Fa-f0-9]+);/u', function ($matches) {
+        $text = preg_replace_callback('/&(#x?)?([A-Fa-f0-9]+);/u', function ($matches) use($newtable, $exclude) {
             return $this->arGlyphsDecodeEntities2($matches[1], $matches[2], $matches[0], $newtable, $exclude);
         }, $text);
 
