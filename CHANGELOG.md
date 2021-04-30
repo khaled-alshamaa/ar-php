@@ -491,7 +491,7 @@
 
 ## What's new in ArPHP 2.0.0 _(release date: Jul 7, 2009)_
 
-> _Many thanks to all Arab Techies Code Sprint participants who provides valuable assist and advices: http://www.arabtechies.net/participants/codesprint_
+> _Many thanks to all Arab Techies Code Sprint participants who provides valuable assist and advices: [http://www.arabtechies.net/participants/codesprint](https://web.archive.org/web/20090714054243/http://www.arabtechies.net/participants/codesprint)_
 
 * "ArStrToTime" sub class supports now Hijri date format.
 
