@@ -1,5 +1,6 @@
 # ArPHP Library - Change Log
 
+* Version [6.1.0](#whats-new-in-arphp-610-release-date-may-1-2021) _(release date: May 1, 2021)_
 * Version [6.0.0](#whats-new-in-arphp-600-release-date-feb-15-2021) _(release date: Feb 15, 2021)_
 * Version [5.5.2](#whats-new-in-arphp-552-release-date-jan-26-2021) _(release date: Jan 26, 2021)_
 * Version [5.5.1](#whats-new-in-arphp-551-release-date-dec-18-2020) _(release date: Dec 18, 2020)_
@@ -26,12 +27,12 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
-<!--
+
 ## What's new in ArPHP 6.1.0 _(release date: May 1, 2021)_
 
 * Rewrite the utf8Glyphs method using arIdentify for better performance and bidi handling logic.
 
-* Improve slow methods performance including "arIdentify", "arSummaryRankSentences", "checkAr" and "checkEn". They are now  faster as per Xdebug profiler (x10, x7, x4 and x4 respectively).
+* Improve slow methods performance including "arIdentify", "arSummaryRankSentences", "checkAr" and "checkEn". They are now faster as per Xdebug profiler (x10, x7, x4 and x4 respectively).
 
 * Fix the [issue #5](https://github.com/khaled-alshamaa/ar-php/issues/5) that reported in the money2str method. Thanks to [Ahmed Fawky](https://github.com/ahmedfawky).
 
@@ -40,7 +41,7 @@
 * Improve examples by enhancing the associated description.
 
 [Top](#arphp-library---change-log)
--->
+
 
 ## What's new in ArPHP 6.0.0 _(release date: Feb 15, 2021)_
 
