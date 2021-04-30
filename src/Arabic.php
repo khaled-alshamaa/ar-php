@@ -2430,11 +2430,11 @@ class Arabic
         $table['&apos;'] = "'";
 
         $newtable = array_diff($table, $exclude);
-        
+
         // Use a regexp to select all entities in one pass, to avoid decoding double-escaped entities twice.
         $text = preg_replace_callback('/&(#x?)?([A-Fa-f0-9]+);/u', function ($matches) {
             return $this->arGlyphsDecodeEntities2($matches[1], $matches[2], $matches[0], $newtable, $exclude);
-            }, $text);
+        }, $text);
 
         return $text;
     }
@@ -3745,14 +3745,14 @@ class Arabic
      */
     public function isArabic($str)
     {
-        $isArabic = false;
-        $arr      = $this->arIdentify($str);
-        
-        if (count($arr) == 1 && $arr[0] == 0) {
-            $isArabic = true;
+        $val = false;
+        $arr = $this->arIdentify($str);
+
+        if (count($arr) == 2 && $arr[0] == 0 && $arr[1] == strlen($str)) {
+            $val = true;
         }
         
-        return $isArabic;
+        return $val;
     }
     
     /**
