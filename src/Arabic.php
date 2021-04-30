@@ -2151,7 +2151,7 @@ class Arabic
     }
 
     /**
-     * Convert Arabic Windows-1256 charset string into glyph joining in UTF-8 hexadecimals stream
+     * Convert Arabic string into glyph joining in UTF-8 hexadecimals stream
      *
      * @param string $str Arabic string in Windows-1256 charset
      *
@@ -2421,9 +2421,6 @@ class Arabic
     {
         // Get all named HTML entities.
         $table = array_flip(get_html_translation_table(HTML_ENTITIES, ENT_COMPAT, 'UTF-8'));
-        
-        // PHP gives us ISO-8859-1 data, we need UTF-8.
-        //$table = array_map('utf8_encode', $table);
         
         // Add apostrophe (XML)
         $table['&apos;'] = "'";
