@@ -28,6 +28,13 @@
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
 
+<!--
+## What's new in ArPHP 6.2.0 _(release date: ??? ##, 2021)_
+
+* Big SVG files of country flags have been optimized using the [SVGO web app](https://jakearchibald.github.io/svgomg/) tool, which saved ~70 kb.
+
+-->
+
 ## What's new in ArPHP 6.1.0 _(release date: May 1, 2021)_
 
 * Rewrite the utf8Glyphs method using arIdentify for better performance and bidi handling logic.
