@@ -24,7 +24,8 @@ which is not a bad performance for a model sized less than 30 KB.</p>
 
 <p>For simplicity, we assumed that all the words in the first language spoken by the Semitic peoples consisted 
 of bi-radicals (i.e., two sounds/letters). Therefore, we can handle the majority of Arabic word roots as being 
-expanded by the addition of a third letter, with the resulting meaning having a semantic relation to the original bi-radical.</p>
+expanded by the addition of a third letter, with the resulting meaning having a semantic relation to the original bi-radical
+(Ref: <a href="https://repositories.lib.utexas.edu/handle/2152/13246" target="_blank">The biradical origin of semitic roots</a>).</p>
 </div><br />
 
 <div class="Paragraph">
