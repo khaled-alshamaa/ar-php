@@ -33,6 +33,8 @@
 
 * Big SVG files of country flags have been optimized using the [SVGO web app](https://jakearchibald.github.io/svgomg/) tool, which saved ~70 kb.
 
+* Remove extra space after waw letter (and) when spelling numbers in the Arabic idiom.
+
 -->
 
 ## What's new in ArPHP 6.1.0 _(release date: May 1, 2021)_

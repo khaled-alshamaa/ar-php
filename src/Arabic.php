@@ -1381,7 +1381,7 @@ class Arabic
         if (!empty($temp[1]) && $temp[1] != 0) {
             if ($string != '') {
                 if ($lang == 'ar') {
-                    $string .= ' و ';
+                    $string .= ' و';
                 } else {
                     $string .= ' and ';
                 }
@@ -1552,7 +1552,7 @@ class Arabic
                 }
             }
 
-            $string = implode(' و ', $items);
+            $string = implode(' و', $items);
         } else {
             $string = 'صفر';
         }
@@ -1635,7 +1635,7 @@ class Arabic
         }
 
         $items  = array_diff($items, array(''));
-        $string = implode(' و ', $items);
+        $string = implode(' و', $items);
 
         return $string;
     }
