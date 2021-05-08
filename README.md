@@ -63,6 +63,8 @@ or in bibtex format
 [[version 3.6.0](https://github.com/LimeSurvey/LimeSurvey/tree/master/application/third_party/ar-php), check it out [here](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L134) and 
 [here](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L133)]
 
+* [Laravel package for the Ar-PHP Project](https://github.com/atm-code/ar-php-laravel)
+
 ### Arabic Language
 Worldwide Internet use has grown tremendously in recent years, most rapidly in non-English speaking regions especially in Arab world. For example, from 2000 to 2020, the online populations grew by more than 9,300 %. Meanwhile, Arabic Web content was estimated to be doubling every year. Such growth has created demand for better websites developing resources in Arabic language. However, existing websites developing resources may be unable to meet it because they primarily serve English-speaking users.
 
