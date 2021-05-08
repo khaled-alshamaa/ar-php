@@ -3872,11 +3872,15 @@ class Arabic
      * @param string  $plural3  Plural form 3 (e.g., عناصر). If NULL [default] retrive from internal JSON dataset.
      * @param string  $plural4  Plural form 4 (e.g., عنصرا). If NULL [default] retrive from internal JSON dataset.
      *
-     * @return string Proper plural form of the given singular form
+     * @return string|\Exception Proper plural form of the given singular form, throw exiption if the $singular is not pre defiend and $plural is not passed
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function arPlural($singular, $count, $plural2 = null, $plural3 = null, $plural4 = null)
     {
+        if(!array_key_exists($singular, $this->arPluralsForms)){
+            throw new \Exception("Please Provide all plural forms for the word: $singular.");
+        }
+
         if ($count == 0) {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][0] : "لا $plural3";
         } elseif ($count == 1) {
