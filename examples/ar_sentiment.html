@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Arabic Sentiment Analysis</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
+        <script src="./ar_sentiment.js"></script>
+        <script>
+            function checkSentiment() {
+                var review = document.getElementById("review").value;
+                var [type, p] = arSentiment(review);
+                
+                p = Math.round(p * 1000) / 10;
+                p = p.toFixed(1);
+                
+                if (type) {
+                    document.getElementById("result").innerHTML = "إيجابي بنسبة %" + p;
+                } else {
+                    document.getElementById("result").innerHTML = "سلبي بنسبة %" + p;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="Paragraph" dir="rtl">
+            <h2>تحليل المشاعر</h2>
+            أدخل جملة معينة:
+            <input id="review" type="text" size="60" dir="rtl" />
+            <input type="button" value="صنّف!" onclick="checkSentiment();" />
+            <span id="result" dir="rtl"></span>
+        </div>
+        <footer>
+            <i>
+                <a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, 
+                an open-source library for website developers to process Arabic content
+            </i>
+        </footer>
+    </body>
+</html>
