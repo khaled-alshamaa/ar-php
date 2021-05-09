@@ -20,7 +20,10 @@ that can determine the tone (positive, negative) of the text (e.g., product revi
 and combines 100k Arabic reviews from hotels, books, movies, products, and a few airlines. 
 Text (reviews) were cleaned by removing Arabic diacritics and non-Arabic characters. 
 Predictions are calculated using the log-odds statistics, and method accuracy exceeds 75% 
-which is not a bad performance for a model sized less than 30 KB.</p>
+which is not a bad performance for a model sized 28.2 KB.</p>
+
+<i>It has been tested also with the <a href="" target="_blank">HARD: Hotel Arabic-Reviews Dataset</a>, 
+and it was able to achieve 82% on the balanced reviews dataset (in total 105,698 reviews).</i>
 
 <p>For simplicity, we assumed that all the words in the first language spoken by the Semitic peoples consisted 
 of bi-radicals (i.e., two sounds/letters). Therefore, we can handle the majority of Arabic word roots as being 
@@ -53,26 +56,35 @@ echo <<< END
 <center>
   <table border="0" cellspacing="2" cellpadding="5" width="60%">
     <tr>
-      <td bgcolor="#27509D" align="center" width="70%">
+      <td bgcolor="#27509D" align="center" width="50%">
         <b><font color="#ffffff">Arabic Review (sample input)</font></b>
       </td>
-      <td bgcolor="#27509D" align="center" width="30%">
+      <td bgcolor="#27509D" align="center" width="25%">
         <b><font color="#ffffff">Sentiment (auto generated)</font></b>
+      </td>
+      <td bgcolor="#27509D" align="center" width="25%">
+        <b><font color="#ffffff">Probability (auto generated)</font></b>
       </td>
     </tr>
 END;
 
 foreach ($reviews as $review) {
-    if ($Arabic->arSentiment($review) > 0) {
+    $analysis = $Arabic->arSentiment($review);
+    
+    if ($analysis['isPositive']) {
         $sentiment = 'Positive';
         $bgcolor   = '#E0F0FF';
     } else {
         $sentiment = 'Negative';
         $bgcolor   = '#FFF0FF';
     }
+    
+    $probability = sprintf('%0.1f', round(100 * $analysis['probability'], 1));
+    
     echo '<tr><td bgcolor="'.$bgcolor.'" align="right">';
     echo '<font face="Tahoma">'.$review.'</font></td>';
-    echo '<td bgcolor="'.$bgcolor.'" align="center">'.$sentiment.'</td></tr>';
+    echo '<td bgcolor="'.$bgcolor.'" align="center">'.$sentiment.'</td>';
+    echo '<td bgcolor="'.$bgcolor.'" align="center">'.$probability.'%</td></tr>';
 }
 
 echo '</table></center>';
@@ -96,26 +108,35 @@ $code = <<< ENDALL
 <center>
   <table border="0" cellspacing="2" cellpadding="5" width="60%">
     <tr>
-      <td bgcolor="#27509D" align="center" width="70%">
+      <td bgcolor="#27509D" align="center" width="50%">
         <b><font color="#ffffff">Arabic Review (sample input)</font></b>
       </td>
-      <td bgcolor="#27509D" align="center" width="30%">
+      <td bgcolor="#27509D" align="center" width="25%">
         <b><font color="#ffffff">Sentiment (auto generated)</font></b>
+      </td>
+      <td bgcolor="#27509D" align="center" width="25%">
+        <b><font color="#ffffff">Probability (auto generated)</font></b>
       </td>
     </tr>
 END;
 
     foreach (\$reviews as \$review) {
-        if (\$Arabic->arSentiment(\$review) > 0) {
+        \$analysis = \$Arabic->arSentiment(\$review);
+        
+        if (\$analysis['isPositive']) {
             \$sentiment = 'Positive';
             \$bgcolor   = '#E0F0FF';
         } else {
             \$sentiment = 'Negative';
             \$bgcolor   = '#FFF0FF';
         }
+
+        \$probability = sprintf('%0.1f', round(100 * \$analysis['probability'], 1));
+
         echo '<tr><td bgcolor="'.\$bgcolor.'" align="right">';
         echo '<font face="Tahoma">'.\$review.'</font></td>';
-        echo '<td bgcolor="'.\$bgcolor.'" align="center">'.\$sentiment.'</td></tr>';
+        echo '<td bgcolor="'.\$bgcolor.'" align="center">'.\$sentiment.'</td>';
+        echo '<td bgcolor="'.\$bgcolor.'" align="center">'.\$probability.'%</td></tr>';
     }
 
     echo '</table></center>';

@@ -31,6 +31,8 @@
 <!--
 ## What's new in ArPHP 6.2.0 _(release date: ??? ##, 2021)_
 
+* Improve the usability of the arSentiment method by changing the returned value to be an array of two elements: isPositive (boolean, positive if true and negative if false), and probability (float, ranged from 0 to 1). Thanks to [Zaid Alyafeai](https://github.com/zaidalyafeai) and fruitful brainstorming with [ARBML team](https://github.com/ARBML/Research/issues/1).
+
 * Big SVG files of country flags have been optimized using the [SVGO web app](https://jakearchibald.github.io/svgomg/) tool, which saved ~70 kb.
 
 * Remove extra space after waw letter (and) when spelling numbers in the Arabic idiom.

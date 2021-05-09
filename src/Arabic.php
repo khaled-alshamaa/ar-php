@@ -3938,7 +3938,7 @@ class Arabic
      *
      * @param string $text Arabic review string
      *
-     * @return float Sentiment score (less than 0 for Negative, and more than 0 for Positive)
+     * @return hash of 2 elements: boolean isPositive (negative if false), and float probability (range from 0 to 1)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function arSentiment($text)
@@ -4011,6 +4011,14 @@ class Arabic
         # claculate the sentiment score
         $sentiment = $positiveScore - $negativeScore;
         
-        return $sentiment;
+        if ($positiveScore > $negativeScore) {
+            $isPositive  = true;
+            $probability = exp($positiveScore) / (1 + exp($positiveScore));
+        } else {
+            $isPositive = false;
+            $probability = exp($negativeScore) / (1 + exp($negativeScore));            
+        }
+        
+        return array('isPositive' => $isPositive, 'probability' => $probability);
     }
 }
