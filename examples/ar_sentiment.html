@@ -3,31 +3,95 @@
     <head>
         <title>Arabic Sentiment Analysis</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amiri" />
+        
+        <style>
+            @page {
+                size: 7in 9.25in;
+                margin: 27mm 16mm 27mm 16mm;
+            }
+
+            body {
+                font-family: 'Amiri', Tahoma;
+                font-size: 150%;
+                background: #f2f2f2;
+                margin: 10;
+                padding: 0;
+                text-align: center;
+            }
+
+            .Paragraph  {
+                text-align: justify;
+                background: #fff;
+                border: 1px solid #ccc;
+                clear: both;
+                padding: .5em 1em;
+            }
+
+            h2 {
+                border-bottom: 2px solid #69c;
+                color: #333;
+                margin: 20px 5px;
+            }
+            
+            h3 {
+                padding: 0px;
+                margin: 0px;
+            }
+            
+            input, select, textarea, button {
+                font-family: inherit;
+                font-size: inherit;
+            }
+        </style>
+    
         <script src="./ar_sentiment.js"></script>
+        
         <script>
             function checkSentiment() {
                 var review = document.getElementById("review").value;
+                var result = document.getElementById("result");
                 var [type, p] = arSentiment(review);
                 
                 p = Math.round(p * 1000) / 10;
                 p = p.toFixed(1);
                 
                 if (type) {
-                    document.getElementById("result").innerHTML = "إيجابي بنسبة %" + p;
+                    result.innerHTML = "إيجابي بنسبة %" + p;
+                    result.style.backgroundColor = '#ded';
                 } else {
-                    document.getElementById("result").innerHTML = "سلبي بنسبة %" + p;
+                    result.innerHTML = "سلبي بنسبة %" + p;
+                    result.style.backgroundColor = '#fca';
                 }
+                
+                return false;
             }
         </script>
     </head>
     <body>
         <div class="Paragraph" dir="rtl">
             <h2>تحليل المشاعر</h2>
-            أدخل جملة معينة:
-            <input id="review" type="text" size="60" dir="rtl" />
-            <input type="button" value="صنّف!" onclick="checkSentiment();" />
-            <span id="result" dir="rtl"></span>
+            
+            <h3>الفكرة:</h3>
+            <p>
+                يقوم هذا النموذج بتحليل المشاعر باستخدام خوارزمية إحصائية تعتمد على حساب لوغاريتمات نسبة الأرجحية قائمة على نظرية الأصل الثنائي للجذور العربية.
+            </p>
+            
+            <h3>البيانات:</h3>
+            <p>
+                تم تدريب النموذج باستخدام مئة ألف من المراجعات والتقييمات العربية لفنادق وأفلام وكتب ومنتجات
+                <a href="https://www.kaggle.com/abedkhooli/arabic-100k-reviews" target="_blank">منشورة على Kaggle</a>
+            </p>
+            
+            <h3>التجربة:</h3>
+            <p>
+            <form onsubmit="return checkSentiment();">
+                أدخل جملة معينة (تقييم على سبيل المثال):
+                <input id="review" type="text" size="50" dir="rtl" />
+                <input type="submit" value="صنّف!" />
+                <span id="result" dir="rtl" style="padding: .1em .5em;"></span>
+            </form>
+            </p>
         </div>
         <footer>
             <i>
