@@ -1,7 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+    <!--
+        Related discussion thread with ARBML team at GitHub: https://github.com/ARBML/Research/issues/1
+        Arabic mobileBERT example by ARBML team: https://arbml.github.io/ARBML/Interfaces/Website/ArabicSentimentClassificationBert/index.html 
+    -->
     <head>
-        <title>Arabic Sentiment Analysis</title>
+        <title>Arabic Sentiment Analysis Demo</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amiri" />
         
@@ -21,17 +25,22 @@
             }
 
             .Paragraph  {
-                text-align: justify;
+                text-align: right;
                 background: #fff;
                 border: 1px solid #ccc;
                 clear: both;
                 padding: .5em 1em;
+
+                background-image: url('../ar-php_256.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-position: 20px 20px;
             }
 
             h2 {
                 border-bottom: 2px solid #69c;
                 color: #333;
-                margin: 20px 5px;
+                margin: 20px 5px 20px 250px;
             }
             
             h3 {
@@ -39,7 +48,7 @@
                 margin: 0px;
             }
             
-            input, select, textarea, button {
+            input {
                 font-family: inherit;
                 font-size: inherit;
             }
@@ -74,7 +83,8 @@
             
             <h3>الفكرة:</h3>
             <p>
-                يقوم هذا النموذج بتحليل المشاعر باستخدام خوارزمية إحصائية تعتمد على حساب لوغاريتمات نسبة الأرجحية قائمة على نظرية الأصل الثنائي للجذور العربية.
+                يقوم هذا النموذج بتحليل المشاعر باستخدام خوارزمية إحصائية تعتمد على حساب لوغاريتمات نسبة الأرجحية قائمة على نظرية 
+                <a href="https://repositories.lib.utexas.edu/handle/2152/13246" target="_blank">الأصل الثنائي للجذور العربية</a>.
             </p>
             
             <h3>البيانات:</h3>
@@ -85,13 +95,25 @@
             
             <h3>التجربة:</h3>
             <p>
-            <form onsubmit="return checkSentiment();">
                 أدخل جملة معينة (تقييم على سبيل المثال):
-                <input id="review" type="text" size="50" dir="rtl" />
-                <input type="submit" value="صنّف!" />
-                <span id="result" dir="rtl" style="padding: .1em .5em;"></span>
-            </form>
+                <form onsubmit="return checkSentiment();">
+                    <input id="review" type="text" dir="rtl" placeholder="اكتب هنا جملة مثلا : ضعيف التكييف سيء جدا" />
+                    <input type="submit" value="صنّف!" />
+                    <span id="result" dir="rtl" style="padding: .1em .5em;"></span>
+                </form>
             </p>
+
+            <h3>الأداء:</h3>
+            <p>
+                بحجم لا يتجاوز 30 كيلوبايت للنموذج استطعنا تحقيق نسبة إجابات صحيحة تبلغ %75 على بيانات التدريب، وكذلك %82 على 
+                <a href="" target="_blank">مجموعة بيانات التقييمات العربية للفنادق</a>
+                (بإجمالي 105698 تقييما لم يرها النموذج من قبل).
+            </p>
+
+            <center>
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-via="arphp" data-hashtags="Arabic,NLP,Sentiment" data-related="arphp" data-show-count="true">Tweet</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </center>
         </div>
         <footer>
             <i>
