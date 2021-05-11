@@ -114,7 +114,7 @@ require_once 'ar-php/src/Arabic.php';
 ```
 
 ### Main Functionalities
-* Arabic Sentiment Analysis ([live demo](https://ar-php.org/github/examples/ar_sentiment.php))
+* Arabic Sentiment Analysis ([live demo 1](https://ar-php.org/github/examples/ar_sentiment.php), [live demo 2](https://ar-php.org/github/examples/ar_sentiment.html))
 * English-Arabic Transliteration ([live demo 1](https://ar-php.org/github/examples/ar_transliteration.php), [live demo 2](https://ar-php.org/github/examples/en_transliteration.php))
 * Spell Numbers in the Arabic Idiom ([live demo](https://ar-php.org/github/examples/numbers.php))
 * Arabic Glyphs to Render Arabic Text ([live demo](https://ar-php.org/github/examples/ar_glyphs.php))
