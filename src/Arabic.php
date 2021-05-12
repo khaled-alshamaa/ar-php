@@ -4021,4 +4021,39 @@ class Arabic
         
         return array('isPositive' => $isPositive, 'probability' => $probability);
     }
+    
+    /**
+     * Strip Dots and Hamzat
+     *
+     * @param string $text Arabic text you would like to strip Dots and Hamzat from it.
+     *
+     * @return string Arabic text written using letters without dots and Hamzat
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function noDots($text)
+    {
+        $text = preg_replace('/ن(\b)/u', 'ں$1', $text);
+        $text = preg_replace('/[بتثن]/u', 'ٮ', $text);
+        $text = preg_replace('/ي/u', 'ى', $text);
+        
+        $text = preg_replace('/ف/u', 'ڡ', $text);
+        $text = preg_replace('/ق/u', 'ٯ', $text);
+
+        $text = preg_replace('/ك(\b)/u', 'لـﹳ$1', $text);
+
+        $text = preg_replace('/ش/u', 'س', $text);
+        $text = preg_replace('/غ/u', 'ع', $text);
+        $text = preg_replace('/ذ/u', 'د', $text);
+        $text = preg_replace('/ز/u', 'ر', $text);
+        $text = preg_replace('/ض/u', 'ص', $text);
+        $text = preg_replace('/ظ/u', 'ط', $text);
+        $text = preg_replace('/ة/u', 'ه', $text);
+        $text = preg_replace('/[جخ]/u', 'ح', $text);
+
+        $text = preg_replace('/[أإآ]/u', 'ا', $text);
+        $text = preg_replace('/ؤ/u', 'و', $text);
+        $text = preg_replace('/ئ/u', 'ى', $text);
+        
+        return $text;
+    }
 }

@@ -25,10 +25,10 @@ error_reporting(E_STRICT);
   require_once __DIR__ . '/../vendor/autoload.php';
 */
 
-require '../src/Arabic.php';
-$Arabic = new \ArPHP\I18N\Arabic();
+    require '../src/Arabic.php';
+    $Arabic = new \ArPHP\I18N\Arabic();
 
-$content = <<<END
+    $content = <<<END
 هذا نص عربي ، و فيه علامات ترقيم بحاجة إلى ضبط و معايرة !و كذلك نصوص( بين 
 أقواس )أو حتى مؤطرة"بإشارات إقتباس "أو- علامات إعتراض -الخ......
 <br>
@@ -81,7 +81,7 @@ highlight_string($code);
 <div class="Paragraph" dir="rtl">
 <h2 dir="ltr">Example Output:</h2>
 <?php
-$content = <<<END
+    $content = <<<END
 إذا رُمتَ أنْ تَحيا سَليماً مِن الأذى
 ...
 وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِنُّ
@@ -116,7 +116,7 @@ $code = <<< ENDALL
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
     
-\$content = <<<END
+    \$content = <<<END
 إذا رُمتَ أنْ تَحيا سَليماً مِن الأذى
 ...
 وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِنُّ
@@ -145,7 +145,56 @@ ENDALL;
 
 highlight_string($code);
 ?>
+</div><br />
+
+<div class="Paragraph" dir="rtl">
+<h2 dir="ltr">Example Output:</h2>
+<?php
+    $content = <<<END
+هل تعلم أن النقاط تم إختراعها للعجم وليس للعرب، 
+حتى أن العرب قديما كانوا لا يستخدمون النقاط 
+وأنت كذلك يمكنك أن تقرأ مقاطع كاملة بدون نقاط كما كان يفعل الأسلاف،
+وكانوا يفهمون الكلمات من سياق الجملة 
+وأبسط مثال على ذلك أنك تقرأ هذا المقطع من دون مشاكل.
+END;
+
+    echo '<b>Origenal</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $content . '</p>';
+
+    echo '<hr /><b>String With No Dots Nor Hamza</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $Arabic->noDots($content) . '</p>';
+?>
+</div><br />
+<div class="Paragraph">
+<h2>Example Code:</h2>
+<?php
+$code = <<< ENDALL
+<?php
+	\$Arabic = new \\ArPHP\\I18N\\Arabic();
+    
+    \$content = <<<END
+هل تعلم أن النقاط تم إختراعها للعجم وليس للعرب، 
+حتى أن العرب قديما كانوا لا يستخدمون النقاط 
+وأنت كذلك يمكنك أن تقرأ مقاطع كاملة بدون نقاط كما كان يفعل الأسلاف،
+وكانوا يفهمون الكلمات من سياق الجملة 
+وأبسط مثال على ذلك أنك تقرأ هذا المقطع من دون مشاكل.
+END;
+
+    echo '<b>Origenal</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$content . '</p>';
+
+    echo '<hr /><b>String With No Dots Nor Hamza</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$Arabic->noDots(\$content) . '</p>';
+ENDALL;
+
+highlight_string($code);
+?>
 </div>
+
 <footer><i><a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, an open-source library for website developers to process Arabic content</i></footer>
 </body>
 </html>
