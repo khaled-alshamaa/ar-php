@@ -3956,7 +3956,7 @@ class Arabic
         $text = preg_replace('/[ؤئء]/u', 'ء', $text);
 
         # replace taa marbouta by taa maftouha
-        $text = preg_replace('/ة/u', 'ت', $text);
+        $text = preg_replace('/ة/u', 'ه', $text);
 
         # filter only Arabic text (white list)
         $text = preg_replace('/[^ ءابتثجحخدذرزسشصضطظعغفقكلمنهوي]+/u', ' ', $text);
@@ -3975,6 +3975,10 @@ class Arabic
         # set initial scores
         $positiveScore = 0;
         $negativeScore = 0;
+
+        # add a simple rule-based mechanism to handle the negation words
+        $negationWords = array('لا', 'ليس', 'غير', 'ما', 'لم', 'لن');
+        $negationFlag  = false;
 
         # for each word
         foreach ($words as $word) {
@@ -4003,9 +4007,19 @@ class Arabic
             # select the most probable stem for current word
             $sel_stem = $stems[array_search(min($log_odds), $log_odds)];
 
-            # retrive the positive and negative log odd scores and accumulate them
-            $positiveScore += $this->logOddPositive[$sel_stem];
-            $negativeScore += $this->logOddNegative[$sel_stem];
+            if ($negationFlag) {
+                // switch positive/negative sentiment because of negation word effect
+                $positiveScore += -1 * $this->logOddPositive[$sel_stem];
+                $negativeScore += -1 * $this->logOddNegative[$sel_stem];
+                
+                $negationFlag = false;
+            } else {
+                # retrive the positive and negative log odd scores and accumulate them
+                $positiveScore += $this->logOddPositive[$sel_stem];
+                $negativeScore += $this->logOddNegative[$sel_stem];
+            }    
+
+            if (in_array($word, $negationWords)) $negationFlag = true;
         }
         
         # claculate the sentiment score

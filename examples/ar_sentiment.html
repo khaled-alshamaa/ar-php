@@ -10,11 +10,6 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amiri" />
         
         <style>
-            @page {
-                size: 7in 9.25in;
-                margin: 27mm 16mm 27mm 16mm;
-            }
-
             body {
                 font-family: 'Amiri', Tahoma;
                 font-size: 150%;
@@ -30,13 +25,13 @@
                 border: 1px solid #ccc;
                 clear: both;
                 padding: .5em 1em;
-
-                background-image: url('../ar-php_256.png');
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-position: 20px 20px;
             }
 
+            .Logo {
+                float: left; 
+                margin: 0 15px 0 0;
+            }
+            
             h2 {
                 border-bottom: 2px solid #69c;
                 color: #333;
@@ -79,11 +74,12 @@
     </head>
     <body>
         <div class="Paragraph" dir="rtl">
+            <img src="../ar-php_256.png" class ="Logo">
             <h2>تحليل المشاعر</h2>
             
             <h3>الفكرة:</h3>
             <p>
-                يقوم هذا النموذج بتحليل المشاعر باستخدام خوارزمية إحصائية تعتمد على حساب لوغاريتمات نسبة الأرجحية قائمة على نظرية 
+                يقوم هذا النموذج بتحليل المشاعر باستخدام خوارزمية إحصائية تعتمد على حساب لوغاريتمات نسبة الأرجحية القائمة على نظرية 
                 <a href="https://repositories.lib.utexas.edu/handle/2152/13246" target="_blank">الأصل الثنائي للجذور العربية</a>.
             </p>
             
@@ -97,7 +93,7 @@
             <p>
                 أدخل جملة معينة (تقييم على سبيل المثال):
                 <form onsubmit="return checkSentiment();">
-                    <input id="review" type="text" dir="rtl" placeholder="اكتب هنا جملة مثلا : ضعيف التكييف سيء جدا" />
+                    <input id="review" type="text" dir="rtl" placeholder="اكتب جملتك هنا، مثلا: ضعيف، التكييف سيء جدا!" />
                     <input type="submit" value="صنّف!" />
                     <span id="result" dir="rtl" style="padding: .1em .5em;"></span>
                 </form>
@@ -107,7 +103,7 @@
             <p>
                 بحجم لا يتجاوز 30 كيلوبايت للنموذج
                 (الشيفرة البرمجية متاحة <a href="https://github.com/khaled-alshamaa/ar-php/blob/master/examples/ar_sentiment.js" target="_blank">هنا</a>)،
-                استطعنا تحقيق نسبة إجابات صحيحة تبلغ %75 على بيانات التدريب، وكذلك %82 على 
+                استطعنا تحقيق نسبة إجابات صحيحة تبلغ %75 على بيانات التدريب، وكذلك %84 على 
                 <a href="" target="_blank">مجموعة بيانات التقييمات العربية للفنادق</a>
                 (بإجمالي 105698 تقييما لم يرها النموذج من قبل).
             </p>
@@ -118,10 +114,9 @@
             </center>
         </div>
         <footer>
-            <i>
-                <a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, 
-                an open-source library for website developers to process Arabic content
-            </i>
+            <a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, 
+            an open-source library for website developers to process Arabic content
+            <br />Copyright © 2021 Khaled Al-Sham'aa
         </footer>
     </body>
 </html>
