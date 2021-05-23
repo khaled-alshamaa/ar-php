@@ -53,7 +53,9 @@ function arSentiment(str, debug = false) {
     // split string to words
     var words = str.split(/\s+/u);
 
-    var negationWords = ['لا', 'ليس', 'غير', 'ما', 'لم', 'لن'];
+    var negationWords = ['لا', 'ليس', 'غير', 'ما', 'لم', 'لن',
+                        'لست', 'ليست', 'ليسا', 'ليستا', 'لستما',
+                        'لسنا', 'لستم', 'ليسوا', 'لسن', 'لستن'];
     var negationFlag  = false;
   
     // for each word
@@ -111,7 +113,7 @@ function arSentiment(str, debug = false) {
         probability = Math.exp(positiveScore) / (1 + Math.exp(positiveScore));
     } else {
         isPositive = false;
-        probability = Math.exp(negativeScore) / (1 + Math.exp(negativeScore));            
+        probability = Math.exp(negativeScore) / (1 + Math.exp(negativeScore));
     }
     
     return [isPositive, probability];

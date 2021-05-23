@@ -3977,7 +3977,9 @@ class Arabic
         $negativeScore = 0;
 
         # add a simple rule-based mechanism to handle the negation words
-        $negationWords = array('لا', 'ليس', 'غير', 'ما', 'لم', 'لن');
+        $negationWords = array('لا', 'ليس', 'غير', 'ما', 'لم', 'لن',
+                               'لست', 'ليست', 'ليسا', 'ليستا', 'لستما',
+                               'لسنا', 'لستم', 'ليسوا', 'لسن', 'لستن');
         $negationFlag  = false;
 
         # for each word
