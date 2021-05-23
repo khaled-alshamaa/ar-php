@@ -4053,7 +4053,7 @@ class Arabic
         $text = preg_replace('/ف/u', 'ڡ', $text);
         $text = preg_replace('/ق/u', 'ٯ', $text);
 
-        $text = preg_replace('/ك(\b)/u', 'لـﹳ$1', $text);
+        $text = preg_replace('/ك(\b)/u', 'ک$1', $text);
 
         $text = preg_replace('/ش/u', 'س', $text);
         $text = preg_replace('/غ/u', 'ع', $text);
