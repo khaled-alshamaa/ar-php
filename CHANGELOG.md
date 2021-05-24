@@ -37,6 +37,8 @@
 
 * Add noDots method to get Arabic text written using letters without dots and Hamzat including Progressive Web App (PWA) example.
 
+* Add basic support to transliterate Arabizi (Franco-Arabic) into Arabic text in the en2ar method.
+
 * Remove extra space after the WAW letter (and) when spelling numbers in the Arabic idiom.
 
 * Optimize the big SVG files of country flags using the [SVGO web app](https://jakearchibald.github.io/svgomg/) tool, which saved ~70 kb.

@@ -326,6 +326,46 @@
     {
       "search": "?",
       "replace": "؟"
+    },
+    {
+      "search": "/2/",
+      "replace": "ء"
+    },
+    {
+      "search": "7'",
+      "replace": "خ"
+    },
+    {
+      "search": "7",
+      "replace": "ح"
+    },
+    {
+      "search": "9'",
+      "replace": "ض"
+    },
+    {
+      "search": "9",
+      "replace": "ص"
+    },
+    {
+      "search": "6'",
+      "replace": "ظ"
+    },
+    {
+      "search": "6",
+      "replace": "ط"
+    },
+    {
+      "search": "3'",
+      "replace": "غ"
+    },
+    {
+      "search": "3",
+      "replace": "ع"
+    },
+    {
+      "search": "8",
+      "replace": "ق"
     }
   ],
   "preg_replace_ar2en": [

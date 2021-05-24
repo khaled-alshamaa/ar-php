@@ -307,31 +307,47 @@ class Arabic
     
     private function arTransliterateInit()
     {
-        $path = $this->rootDirectory . '/data/transliteration';
-        
-        $this->en2arStrSearch = file($path . '/en2ar_str_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->en2arStrReplace = file($path . '/en2ar_str_replace.txt', FILE_IGNORE_NEW_LINES);
+        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
 
-        $this->en2arPregSearch = file($path . '/en2ar_preg_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->en2arPregReplace = file($path . '/en2ar_preg_replace.txt', FILE_IGNORE_NEW_LINES);
+        foreach ($json['preg_replace_en2ar'] as $item) {
+            $this->en2arPregSearch[]  = $item['search'];
+            $this->en2arPregReplace[] = $item['replace'];
+        }
 
-        $this->ar2enStrSearch = file($path . '/ar2en_str_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->ar2enStrReplace = file($path . '/ar2en_str_replace.txt', FILE_IGNORE_NEW_LINES);
+        foreach ($json['str_replace_en2ar'] as $item) {
+            $this->en2arStrSearch[]  = $item['search'];
+            $this->en2arStrReplace[] = $item['replace'];
+        }
 
-        $this->sesSearch = file($path . '/ses_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->sesReplace = file($path . '/ses_replace.txt', FILE_IGNORE_NEW_LINES);
+        foreach ($json['preg_replace_ar2en'] as $item) {
+            $this->ar2enPregSearch[]  = $item['search'];
+            $this->ar2enPregReplace[] = $item['replace'];
+        }
 
-        $this->rjgcSearch = file($path . '/rjgc_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->rjgcReplace = file($path . '/rjgc_replace.txt', FILE_IGNORE_NEW_LINES);
+        foreach ($json['str_replace_ar2en'] as $item) {
+            $this->ar2enStrSearch[]  = $item['search'];
+            $this->ar2enStrReplace[] = $item['replace'];
+        }
 
-        $this->diariticalSearch = file($path . '/diaritical_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->diariticalReplace = file($path . '/diaritical_replace.txt', FILE_IGNORE_NEW_LINES);
+        foreach ($json['str_replace_diaritical'] as $item) {
+            $this->diariticalSearch[]  = $item['search'];
+            $this->diariticalReplace[] = $item['replace'];
+        }
 
-        $this->ar2enPregSearch = file($path . '/ar2en_preg_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->ar2enPregReplace = file($path . '/ar2en_preg_replace.txt', FILE_IGNORE_NEW_LINES);
+        foreach ($json['str_replace_RJGC'] as $item) {
+            $this->rjgcSearch[]  = $item['search'];
+            $this->rjgcReplace[] = $item['replace'];
+        }
 
-        $this->iso233Search = file($path . '/iso233_search.txt', FILE_IGNORE_NEW_LINES);
-        $this->iso233Replace = file($path . '/iso233_replace.txt', FILE_IGNORE_NEW_LINES);
+        foreach ($json['str_replace_SES'] as $item) {
+            $this->sesSearch[]  = $item['search'];
+            $this->sesReplace[] = $item['replace'];
+        }
+
+        foreach ($json['str_replace_ISO233'] as $item) {
+            $this->iso233Search[]  = $item['search'];
+            $this->iso233Replace[] = $item['replace'];
+        }
     }
     
     private function arNumbersInit()
@@ -799,10 +815,20 @@ class Arabic
         $string = '';
 
         foreach ($words as $word) {
-            $word = preg_replace($this->en2arPregSearch, $this->en2arPregReplace, $word);
-            $word = strtr($word, array_combine($this->en2arStrSearch, $this->en2arStrReplace));
+            // if it is el or al don't add space after
+            if ($word == 'el' || $word == 'al') {
+                $space = '';
+            } else {
+                $space = ' ';
+            }
+            
+            // skip translation if it has no a-z char (i.e., just add it to the string as is)
+            if (preg_match('/[a-z]/i', $word)) {
+                $word = preg_replace($this->en2arPregSearch, $this->en2arPregReplace, $word);
+                $word = strtr($word, array_combine($this->en2arStrSearch, $this->en2arStrReplace));
+            }
 
-            $string .= ' ' . $word;
+            $string .= $word . $space;
         }
 
         return trim($string);
