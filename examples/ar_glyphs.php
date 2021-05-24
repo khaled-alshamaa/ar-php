@@ -15,6 +15,15 @@
 hexadecimals stream that is no longer logically arranged but in a visual order which gives readable results when 
 formatted with a simple Unicode rendering just like GD and PDF libraries that does not handle basic connecting 
 glyphs of Arabic language yet but simply outputs all stand alone glyphs in left-to-right order.</p>
+
+<p align="justified"><b>What is happening?</b><br />
+Computers are designed to handle the subset of the Latin script required to manipulate American English first 
+and foremost. Every other writing system is an afterthought, and Arabic is particularly poorly served. Most of 
+the images in <a href="https://www.notarabic.com/" target="_blank">Nope, Not Arabic</a> archive are the result 
+of non-Arab graphic designers pasting Arabic text into mainstream graphic design software that cannot handle 
+anything but Latin characters and not checking with a native speaker.
+</p>
+
 </div><br />
 
 <div class="Paragraph">
