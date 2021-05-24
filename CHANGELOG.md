@@ -35,14 +35,13 @@
 
 * Improve the arSentiment method by adding a simple rule-based mechanism to handle the case of having negation words. Thanks to [Zaid Alyafeai](https://github.com/zaidalyafeai) and fruitful brainstorming with [ARBML team](https://github.com/ARBML/Research/issues/1).
 
+* Add noDots method to get Arabic text written using letters without dots and Hamzat including Progressive Web App (PWA) example.
+
+* Remove extra space after the WAW letter (and) when spelling numbers in the Arabic idiom.
+
 * Optimize the big SVG files of country flags using the [SVGO web app](https://jakearchibald.github.io/svgomg/) tool, which saved ~70 kb.
 
-* Remove extra space after waw letter (and) when spelling numbers in the Arabic idiom.
-
 * Add JavaScript version of the Arabic sentiment analysis model and query algorithm to the examples directory.
-
-* Add noDots method to get Arabic text written using letters without dots and Hamzat.
-
 -->
 
 ## What's new in ArPHP 6.1.0 _(release date: May 1, 2021)_
