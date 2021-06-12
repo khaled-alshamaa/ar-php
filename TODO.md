@@ -53,26 +53,7 @@ git pull origin master
 git push origin master
 ```
 
-Create and push a new release tag:
-
-```bash
-git tag -a v5.0 -m "Ar-PHP Version 5.0"
-git push --tags
-```
-
-Create and push a new branch:
-
-```bash
-git clone https://github.com/owner/reposatory
-git pull origin master
-
-git branch
-git checkout -b newbranch
-
-git add .
-git commit -m "modify in branch"
-git push origin newbranch
-```
+> _You can include #xxx in your commit message to reference/link it to the issue number on GitHub._
 
 ### _Composer and Packagist_
 [Composer](https://getcomposer.org/): A Dependency Manager for PHP. 
