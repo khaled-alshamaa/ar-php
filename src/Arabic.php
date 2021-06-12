@@ -4045,9 +4045,11 @@ class Arabic
                 # retrive the positive and negative log odd scores and accumulate them
                 $positiveScore += $this->logOddPositive[$sel_stem];
                 $negativeScore += $this->logOddNegative[$sel_stem];
-            }    
+            }
 
-            if (in_array($word, $negationWords)) $negationFlag = true;
+            if (in_array($word, $negationWords)) {
+                $negationFlag = true;
+            }
         }
         
         # claculate the sentiment score
@@ -4058,7 +4060,7 @@ class Arabic
             $probability = exp($positiveScore) / (1 + exp($positiveScore));
         } else {
             $isPositive = false;
-            $probability = exp($negativeScore) / (1 + exp($negativeScore));            
+            $probability = exp($negativeScore) / (1 + exp($negativeScore));
         }
         
         return array('isPositive' => $isPositive, 'probability' => $probability);
