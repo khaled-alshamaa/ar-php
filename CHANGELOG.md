@@ -44,6 +44,8 @@
 * Optimize the big SVG files of country flags using the [SVGO web app](https://jakearchibald.github.io/svgomg/) tool, which saved ~70 kb.
 
 * Add JavaScript version of the Arabic sentiment analysis model and query algorithm to the examples directory.
+
+* Test using GitHub Desktop application instead of Git command line because of the token authentication requirements!
 -->
 
 ## What's new in ArPHP 6.1.0 _(release date: May 1, 2021)_
