@@ -32,6 +32,8 @@
 ### _Git and GitHub_
 Download/install Git from [git-scm.com](https://git-scm.com/downloads), then inside your project folder, right click, Git Bash here.
 
+> We start using [GitHub Desktop](https://desktop.github.com/) to make interactions with Git and GitHub easier and more productive. We made this decision because of the token authentication requirements for Git operations announced by GitHub.com in [July 2020](https://github.blog/2020-07-30-token-authentication-requirements-for-api-and-git-operations/) (Please note that GitHub.com will no longer accept account passwords beginning of [August 13, 2021](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/)).
+
 Import a new project repository hosted on GitHub.com (e.g. owner/reposatory):
 
 ```bash
@@ -51,8 +53,6 @@ git commit -m "modification message"
 git pull origin master
 git push origin master
 ```
-
-> _Because of the GitHub.com token authentication requirements for Git operations announced in [July 2020](https://github.blog/2020-07-30-token-authentication-requirements-for-api-and-git-operations/), GitHub.com will no longer accept account passwords beginning of [August 13, 2021](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/). Therefore, we start using [GitHub Desktop](https://desktop.github.com/) to make interactions with Git and GitHub easier and more productive._
 
 > _You can include #xxx in your commit message to reference/link it to the issue number on GitHub._
 
