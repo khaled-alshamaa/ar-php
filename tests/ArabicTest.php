@@ -44,7 +44,7 @@ final class ArabicTest extends TestCase
         $text = $Arabic->int2str($integer);
         
         $this->assertEquals(
-            'مئة و واحد و أربعون مليار و خمسمئة و اثنان و تسعون مليون و ستمئة و ثلاثة و خمسون ألف و خمسمئة و تسعة و ثمانون',
+            'مئة وواحد وأربعون مليار وخمسمئة واثنان وتسعون مليون وستمئة وثلاثة وخمسون ألف وخمسمئة وتسعة وثمانون',
             $text
         );
     }
@@ -61,7 +61,7 @@ final class ArabicTest extends TestCase
         $text = $Arabic->int2str($integer);
     
         $this->assertEquals(
-            'مئة و واحدة و أربعين مليار و خمسمئة و اثنتين و تسعين مليون و ستمئة و ثلاث و خمسين ألف و خمسمئة و تسع و ثمانين',
+            'مئة وواحدة وأربعين مليار وخمسمئة واثنتين وتسعين مليون وستمئة وثلاث وخمسين ألف وخمسمئة وتسع وثمانين',
             $text
         );
     }
@@ -78,7 +78,7 @@ final class ArabicTest extends TestCase
         $text = $Arabic->int2str($integer);
     
         $this->assertEquals(
-            'سالب ألفين و سبعمئة و تسع و أربعين فاصلة ثلاثمئة و سبع عشرة',
+            'سالب ألفين وسبعمئة وتسع وأربعين فاصلة ثلاثمئة وسبع عشرة',
             $text
         );
     }
@@ -94,7 +94,7 @@ final class ArabicTest extends TestCase
         $text   = $Arabic->money2str($number, 'KWD', 'ar');
     
         $this->assertEquals(
-            'سبعة دنانير و مئتان و خمسون فلسا',
+            'سبعة دنانير ومئتان وخمسون فلسا',
             $text
         );
     }
@@ -1028,22 +1028,22 @@ END;
         $actual   = array();
         
         $expected[] = false;
-        $actual[]   = $Arabic->arSentiment('الخدمة كانت بطيئة') > 0;
+        $actual[]   = $Arabic->arSentiment('الخدمة كانت بطيئة')['isPositive'];
         
         $expected[] = true;
-        $actual[]   = $Arabic->arSentiment('الإطلالة رائعة والطعام لذيذ') > 0;
+        $actual[]   = $Arabic->arSentiment('الإطلالة رائعة والطعام لذيذ')['isPositive'];
         
         $expected[] = false;
-        $actual[]   = $Arabic->arSentiment('التبريد لا يعمل والواي فاي ضعيفة') > 0;
+        $actual[]   = $Arabic->arSentiment('التبريد لا يعمل والواي فاي ضعيفة')['isPositive'];
         
         $expected[] = true;
-        $actual[]   = $Arabic->arSentiment('النظافة مميزة وموظفي الاستقبال متعاونين') > 0;
+        $actual[]   = $Arabic->arSentiment('النظافة مميزة وموظفي الاستقبال متعاونين')['isPositive'];
         
         $expected[] = false;
-        $actual[]   = $Arabic->arSentiment('جاءت القطعة مكسورة والعلبة مفتوحة') > 0;
+        $actual[]   = $Arabic->arSentiment('جاءت القطعة مكسورة والعلبة مفتوحة')['isPositive'];
         
         $expected[] = true;
-        $actual[]   = $Arabic->arSentiment('المنتج مطابق للمواصفات والتسليم سريع') > 0;
+        $actual[]   = $Arabic->arSentiment('المنتج مطابق للمواصفات والتسليم سريع')['isPositive'];
         
         $this->assertEquals($expected, $actual);
     }
