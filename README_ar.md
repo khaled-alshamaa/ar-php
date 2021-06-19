@@ -1,9 +1,11 @@
+<div dir="rtl" align="justify">
+
 <a href="https://www.php.net/"><img src="https://img.shields.io/github/languages/top/khaled-alshamaa/ar-php"/></a> <a href="https://www.php.net/manual/en/migration54.php"><img src="https://img.shields.io/packagist/php-v/khaled.alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/releases/tag/v5.1.0"><img src="https://img.shields.io/github/v/release/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/tags"><img src="https://img.shields.io/github/release-date/khaled-alshamaa/ar-php"/></a> <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html"><img src="https://img.shields.io/packagist/l/khaled.alshamaa/ar-php"/></a> <a href="https://packagist.org/packages/khaled.alshamaa/ar-php/stats"><img src="https://img.shields.io/packagist/dt/khaled.alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/stargazers"><img src="https://img.shields.io/packagist/stars/khaled.alshamaa/ar-php"/></a> <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fkhaled-alshamaa%2Far-php&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 
 <a href="https://github.com/khaled-alshamaa/ar-php/issues"><img src="https://img.shields.io/github/issues-raw/khaled-alshamaa/ar-php"/></a> <img src="https://img.shields.io/github/languages/code-size/khaled-alshamaa/ar-php"/> <a href="https://github.com/khaled-alshamaa/ar-php/commits/master"><img src="https://img.shields.io/github/commit-activity/m/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/commits/master"><img src="https://img.shields.io/github/last-commit/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/network/members"><img src="https://img.shields.io/github/forks/khaled-alshamaa/ar-php?style=social"/></a> <a href="https://twitter.com/arphp"><img src="https://img.shields.io/twitter/follow/arphp?style=social"></a>
 <!-- https://shields.io/ -->
 
-<img align="right" width="256" height="256" src="https://raw.githubusercontent.com/khaled-alshamaa/ar-php/master/ar-php_256.png">
+<img align="left" width="256" height="256" src="https://raw.githubusercontent.com/khaled-alshamaa/ar-php/master/ar-php_256.png">
 
 # مشروع PHP واللغة العربية ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _لغة PHP تتحدث العربية - كن مستعدا!_
@@ -38,13 +40,19 @@ _حقوق النشر © 2006-2021 خالد الشمعة._
 
 إذا رغبت في الإشارة إلى مكتبة PHP واللغة العربية في عمل أكاديمي، يمكنك استخدام الاقتباس التالي:
 
+<div dir="ltr" align="left">
+  
 ```
 K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
 https://github.com/khaled-alshamaa/ar-php, 2021
 ```
 
+</div>
+
 أو باستخدام صيغة bibtex
 
+<div dir="ltr" align="left">
+  
 ```latex
 @misc{ar-php,
   title={Ar-PHP, PHP library for website developers to process Arabic content},
@@ -54,6 +62,8 @@ https://github.com/khaled-alshamaa/ar-php, 2021
   year={2021}
 }
 ```
+  
+</div>
 
 ### أين تم استخدامه؟
 
@@ -93,25 +103,37 @@ PHP هي لغة نصية واسعة الاستخدام وعامة الأغراض
 
 للتثبيت باستخدام [Composer](https://getcomposer.org/), قم ببساطة بطلب الإصدار الأحدث من هذه الحزمة.
 
+<div dir="ltr" align="left">
+  
 ```bash
 composer require khaled.alshamaa/ar-php
 ```
+  
+</div>
 
 تأكد من أن ملف التحميل الآلي الخاص بأداة Composer يتم تحميله.
 
+<div dir="ltr" align="left">
+  
 ```php
 // somewhere early in your project's loading, require the Composer autoloader
 // see: http://getcomposer.org/doc/00-intro.md
 require 'vendor/autoload.php';
 ```
+  
+</div>
 
 ### التنزيل والتثبيت اليدوي
 
 قم بتنزيل [الإصدار الأحدث](https://github.com/khaled-alshamaa/ar-php/releases/latest) من مكتبة PHP واللغة العربية وفك ضغطه ضمن المجلد الذي ستسخدمه فيه.
 
+<div dir="ltr" align="left">
+  
 ```php
 require_once 'ar-php/src/Arabic.php';
 ```
+  
+</div>
 
 ### الوظائف الرئيسية
 * تحليل مشاعر النص العربي ([مثال 1](https://ar-php.org/github/examples/ar_sentiment.php), [مثال 2](https://ar-php.org/github/examples/ar_sentiment.html))
@@ -159,3 +181,4 @@ require_once 'ar-php/src/Arabic.php';
 [Top](#ar-php-project-ar-phporg)
 
 <!-- If you find this project useful, please consider making a donation. Any funds donated will be used to help further development on this project. -->
+  </div>
