@@ -20,9 +20,9 @@ _حقوق النشر © 2006-2021 خالد الشمعة._
 
 يقدم هذا المشروع مجموعة من الأدوات التي تمكن مطوري المواقع العربية من تقديم بحث وعرض ومعالجة إحترافية للمحتوى العربي بلغة PHP.
 
-> [تنصيب سهل](#quick-start)
+> [تنصيب سهل](#مدخل-سريع)
 
-> [لائحة بأهم الوظائف](#main-functionalities) 
+> [لائحة بأهم الوظائف](#الوظائف-الرئيسية) 
 
 > [سجل التعديلات](https://github.com/khaled-alshamaa/ar-php/blob/master/CHANGELOG.md)
 
@@ -32,9 +32,9 @@ _حقوق النشر © 2006-2021 خالد الشمعة._
 
 > [الترتيبات اللوجستية للمساهمين](https://github.com/khaled-alshamaa/ar-php/blob/master/TODO.md)
 
-> [كيف تساهم؟](#how-to-contribute)
+> [كيف تساهم؟](#كيف-تساهم)
 
-> [دعم احترافي](#professional-support)
+> [دعم احترافي](#الدعم-الاحترافي)
 
 ### الاقتباس
 
@@ -67,41 +67,41 @@ https://github.com/khaled-alshamaa/ar-php, 2021
 
 ### أين تم استخدامه؟
 
-* [Bagisto](https://github.com/bagisto/bagisto/blob/master/README.md): Laravel package for e-commerce. [check it out [here](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
+* [Bagisto](https://github.com/bagisto/bagisto/blob/master/README.md): حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
 
-* [LimeSurvey](https://github.com/LimeSurvey/LimeSurvey/blob/master/README.md): Open-source survey software. 
-[[version 3.6.0](https://github.com/LimeSurvey/LimeSurvey/tree/master/application/third_party/ar-php), check it out [here](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L134) and 
-[here](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L133)]
+* [LimeSurvey](https://github.com/LimeSurvey/LimeSurvey/blob/master/README.md): برمجية استبيان مفتوحة المصدر. 
+[[version 3.6.0](https://github.com/LimeSurvey/LimeSurvey/tree/master/application/third_party/ar-php)، تحقق من ذلك [هنا](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L134) و 
+[هنا](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L133)]
 
-* [Laravel package for the Ar-PHP Project](https://github.com/atm-code/ar-php-laravel)
+* [حزمة لارافل لمشروع PHP واللغة العربية](https://github.com/atm-code/ar-php-laravel)
 
 ### اللغة العربية
 لقد نما استخدام الإنترنت على المستوى العالمي بشكل هائل خلال الأعوام القليلة الماضية، وكان هذا النمو أسرع في المناطق غير الناطقة بالإنجليزية وبالذات في العالم العربي. فعلى سبيل المثال، لقد نمى عدد مستخدمي الإنترنت في الشرق الأوسط بين عامي 2000 و 2020 بنسبة 9300%، في حين يقدر أن حجم المحتوى العربي على شبكة الويب يتضاعف في كل عام. إن مثل هكذا نمو أوجد حاجة إلى مصادر برمجية تساعد في تطوير مواقع الويب باللغة العربية. على كل حال، فإن مصادر تطوير مواقع الويب المتوفرة ربما لا تكون ملائمة لأنها طورت أساسا لخدمة المستخدمين الناطقين بالإنجليزية.
 
-[[اللغة العربية](https://en.wikipedia.org/wiki/Arabic), [تقرير](https://www.internetworldstats.com/stats7.htm)]
+[[اللغة العربية](https://en.wikipedia.org/wiki/Arabic)، [تقرير](https://www.internetworldstats.com/stats7.htm)]
 
 ### PHP
 PHP هي لغة نصية واسعة الاستخدام وعامة الأغراض، وهي ملائمة بشكل خاص لعمليات تطوير مواقع الويب حيث يمكن تضمينها داخل شيفرة HTML. تستخدم لغة PHP في تشغيل أكثر من 79% من أعلى 10 ملايين موقع على مستوى العالم منها الفيسبوك والويكيبيديا كأمثلة جيدة.
 
-[[لغة PHP](https://www.php.net/), [تقرير](https://w3techs.com/technologies/overview/programming_language)]
+[[لغة PHP](https://www.php.net/)، [تقرير](https://w3techs.com/technologies/overview/programming_language)]
 
 ### LGPL
 الفارق الأساسي فيما بين ترخيص GPL وترخيص LGPL هو أن هذا الأخير يمكن ربطه إلى (وفي حالة المكتبات "استخدامه بواسطة") برامج لا تخضع لأي من الترخيصين GPL و LGPL، والتي يمكن أن تكون برامج حرة مفتوحة المصدر أو حتى برمجيات مغلقة المصدر. ويمكن إعادة توزيع هذه البرمجيات غير الخاضعة للترخيصين GPL و LGPL تحت أي شروط مختارة طالما أنها ليست عملا مشتقا منها.
 
-[[ترخيص LGPL](http://www.gnu.org/licenses/lgpl-3.0.html), [أسئلة GPL الشائعة](http://www.gnu.org/licenses/gpl-faq.html)]
+[[ترخيص LGPL](http://www.gnu.org/licenses/lgpl-3.0.html)، [أسئلة GPL الشائعة](http://www.gnu.org/licenses/gpl-faq.html)]
 
 ### لمحة تاريخية
 * الإصدار 7 من PHP على [GitHub.com](https://github.com/khaled-alshamaa/ar-php) بداية من عام 2020.
 * الإصدار 5 من PHP على [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
 * الإصدار 4 من PHP على [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
 
-[Top](#لغة-php-تتحدث-العربية---كن-مستعدا)
+[Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
 ## _مدخل سريع_
 
 ### التثبيت باستخدام Composer
 
-للتثبيت باستخدام [Composer](https://getcomposer.org/), قم ببساطة بطلب الإصدار الأحدث من هذه الحزمة.
+للتثبيت باستخدام [Composer](https://getcomposer.org/)، قم ببساطة بطلب الإصدار الأحدث من هذه الحزمة.
 
 <div dir="ltr" align="left">
   
@@ -136,8 +136,8 @@ require_once 'ar-php/src/Arabic.php';
 </div>
 
 ### الوظائف الرئيسية
-* تحليل مشاعر النص العربي ([مثال 1](https://ar-php.org/github/examples/ar_sentiment.php), [مثال 2](https://ar-php.org/github/examples/ar_sentiment.html))
-* الترجمة اللفظية بين اللغتين العربية والإنجليزية ([مثال 1](https://ar-php.org/github/examples/ar_transliteration.php), [مثال 2](https://ar-php.org/github/examples/en_transliteration.php))
+* تحليل مشاعر النص العربي ([مثال 1](https://ar-php.org/github/examples/ar_sentiment.php)، [مثال 2](https://ar-php.org/github/examples/ar_sentiment.html))
+* الترجمة اللفظية بين اللغتين العربية والإنجليزية ([مثال 1](https://ar-php.org/github/examples/ar_transliteration.php)، [مثال 2](https://ar-php.org/github/examples/en_transliteration.php))
 * التفقيط: كتابة الأرقام بالعربية ([مثال](https://ar-php.org/github/examples/numbers.php))
 * معالجة إظهار الحروف العربية المتصلة ([مثال](https://ar-php.org/github/examples/ar_glyphs.php))
 * تغيير لغة لوحة المفاتيح برمجيا ([مثال](https://ar-php.org/github/examples/keyswap.php))
@@ -152,7 +152,7 @@ require_once 'ar-php/src/Arabic.php';
 * التلخيص الآلي للنص العربي ([مثال](https://ar-php.org/github/examples/ar_summarize.php))
 * تحديد النصوص العربية في الوثائق متعددة اللغات ([مثال](https://ar-php.org/github/examples/identifier.php))
 
-[Top](#لغة-php-تتحدث-العربية---كن-مستعدا)
+[Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
 ## _كيف تساهم؟_
 نحن نرحب دوما بالمساهمين الجدد - خصوصا المبرمجين منهم. لكن بغض النظر عن مهاراتك واهتماماتك، هنالك دوما مجال لمساهمتك في تطوير مشروع Ar-PHP:
@@ -165,7 +165,7 @@ require_once 'ar-php/src/Arabic.php';
 * __مساعدة المستخدمين:__ هنالك طريقتين باستطاعتك مساعدة غيرك من المستخدمين من خلالهما هما قوائم البريد الإلكتروني للمستخدمين والمنتديات.
 * __احتفل معنا!__ مهمتك هي أخذ صورة لك وأنت تدعم مشروع PHP واللغة العربية. يمكنك الذهاب إلى موقع شهير، أو مكانك المفضل في الجوار، أو أي مكان تعتقد أنه موقع مناسب لصورة ناجحة. قمنا بإنشاء بعض الملصقات الإعلانية من أجلك لتستخدمها في صورك. قم بطباعة إحدى هذه التصاميم أو قم باستخدام التصميم الخاص بك. نحن نرغب في رؤيتك أنت وموقعك بشكل واضح في الصورة، لذا لا تدع أي من هذين العنصرين يطغى على الصورة. كما يجب أن نرى أيضا الملصق الإعلاني للمشروع. حالما تكون صورك جاهزة، أرسلهم لنا بالبريد الإلكتروني. رجاء أرسل صورك بتنسيق jpg أو png وبحجم 1200 x 800 بيكسل على الأقل.
 
-[Top](#لغة-php-تتحدث-العربية---كن-مستعدا)
+[Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
 ## _الدعم الاحترافي_
 كوننا مطوري مشروع PHP واللغة العربية، فباستطاعتنا مساعدة شركتك على استخلاص أقصى الإمكانيات من مكتبة Ar-PHP في خدمة أهداف أعمالك. نحن نقدم خدمات إحترافية تغطي كامل مراحل استثمار مكتبة Ar-PHP.
@@ -178,7 +178,7 @@ require_once 'ar-php/src/Arabic.php';
 * __إستشارة:__ باستطاعتك الاتصال بنا طلبا للاستشارة في أي وقت من استخدامك لمكتبة Ar-PHP. لدينا الخبرة في Ar-PHP للتأكد من كون طريقة استثمارك لهذه المكتبة تطبق أفضل الممارسات العملية في هذا المجال.
 * __تدريب:__ إحصل على تدريب شامل على Ar-PHP.
 
-[Top](#لغة-php-تتحدث-العربية---كن-مستعدا)
+[Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
 <!-- If you find this project useful, please consider making a donation. Any funds donated will be used to help further development on this project. -->
   </div>
