@@ -84,9 +84,9 @@ highlight_string($code);
     $content = <<<END
 إذا رُمتَ أنْ تَحيا سَليماً مِن الأذى
 ...
-وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِنُّ
+وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِّنُ
 <br />
-لِســـــــانُكَ لا تَذكُرْ بِهِ عَورَةَ امرئٍ
+لِســـــــانَكَ لا تَذكُرْ بِهِ عَورَةَ امرئٍ
 ...
 فَكُلُّكَ عَوراتٌ وللنّاسِ ألسُنُ
 END;
@@ -106,6 +106,12 @@ END;
     echo '<hr /><b>Strip Harakat but Tatweel, Tanwen, Shadda, and Last Harakat</b>';
     echo '<p dir="rtl" align="justify">';
     echo $str2 . '</p>';
+
+    $str2 = $Arabic->stripHarakat($content, FALSE, TRUE, FALSE, TRUE, FALSE);
+    
+    echo '<hr /><b>Strip Last Harakat Only (including Tanwen)</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $str2 . '</p>';
 ?>
 
 </div><br />
@@ -119,9 +125,9 @@ $code = <<< ENDALL
     \$content = <<<END
 إذا رُمتَ أنْ تَحيا سَليماً مِن الأذى
 ...
-وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِنُّ
+وَ دينُكَ مَوفورٌ وعِرْضُكَ صَيِّنُ
 <br />
-لِســـــــانُكَ لا تَذكُرْ بِهِ عَورَةَ امرئٍ
+لِســـــــانَكَ لا تَذكُرْ بِهِ عَورَةَ امرئٍ
 ...
 فَكُلُّكَ عَوراتٌ وللنّاسِ ألسُنُ
 END;
@@ -139,6 +145,12 @@ END;
     \$str2 = \$Arabic->stripHarakat(\$content, FALSE, FALSE, FALSE, FALSE);
     
     echo '<hr /><b>Strip Harakat but Tatweel, Tanwen, Shadda, and Last Harakat</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$str2 . '</p>';
+
+    \$str2 = \$Arabic->stripHarakat(\$content, FALSE, TRUE, FALSE, TRUE, FALSE);
+    
+    echo '<hr /><b>Strip Last Harakat Only (including Tanwen)</b>';
     echo '<p dir="rtl" align="justify">';
     echo \$str2 . '</p>';
 ENDALL;

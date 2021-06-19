@@ -39,6 +39,8 @@
 
 * Add basic support to transliterate Arabizi (Franco-Arabic) into Arabic text in the en2ar method.
 
+* Improve the stripHarakat method and make it able to remove the last Harakat alone. Thanks to [Tameem Ahmad](https://github.com/tameemahmad) for his [suggestion](https://github.com/khaled-alshamaa/ar-php/issues/11).
+
 * Remove extra space after the WAW letter (and) when spelling numbers in the Arabic idiom.
 
 * Optimize the big SVG files of country flags using the [SVGO web app](https://jakearchibald.github.io/svgomg/) tool, which saved ~70 kb.

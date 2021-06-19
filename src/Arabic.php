@@ -3928,19 +3928,22 @@ class Arabic
      * @param boolean $tanwen  Strip Tanwen (default is TRUE).
      * @param boolean $shadda  Strip Shadda (default is TRUE).
      * @param boolean $last    Strip last Harakat (default is TRUE).
+     * @param boolean $harakat Strip in word Harakat (default is TRUE).
      *
      * @return string Arabic string clean from selected Harakat
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function stripHarakat($text, $tatweel = true, $tanwen = true, $shadda = true, $last = true)
+    public function stripHarakat($text, $tatweel = true, $tanwen = true, $shadda = true, $last = true, $harakat = true)
     {
-        $shortHarakat = array('َ', 'ُ', 'ِ', 'ْ');
-        $lastHarakat  = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u', '/ْ(\S)/u');
-        $allTanwen    = array('ً', 'ٍ', 'ٌ');
+        $lastHarakat = array('/َ(\s)/u', '/ُ(\s)/u', '/ِ(\s)/u', '/ْ(\s)/u', '/[َُِْ]$/u');
+        $bodyHarakat = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u', '/ْ(\S)/u');
+        $allTanwen   = array('ً', 'ٍ', 'ٌ');
+        
+        if ($harakat) {
+            $text = preg_replace($bodyHarakat, '\\1', $text);
+        }
         
         if ($last) {
-            $text = str_replace($shortHarakat, '', $text);
-        } else {
             $text = preg_replace($lastHarakat, '\\1', $text);
         }
         
