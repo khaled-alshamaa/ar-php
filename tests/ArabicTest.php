@@ -32,116 +32,73 @@ final class ArabicTest extends TestCase
         );
     }
 
-    public function testSpellNumbersInTheArabicIdiomExample1(): void
+    public function testSpellNumbersInTheArabicIdiom(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $expected = array();
+        $actual   = array();
 
         $Arabic->setNumberFeminine(1);
         $Arabic->setNumberFormat(1);
 
-        $integer = 141592653589;
+        $expected[] = 'مئة وواحد وأربعون مليار وخمسمئة واثنان وتسعون مليون وستمئة وثلاثة وخمسون ألف وخمسمئة وتسعة وثمانون';
+        $actual[]   = $Arabic->int2str(141592653589);
 
-        $text = $Arabic->int2str($integer);
-        
-        $this->assertEquals(
-            'مئة وواحد وأربعون مليار وخمسمئة واثنان وتسعون مليون وستمئة وثلاثة وخمسون ألف وخمسمئة وتسعة وثمانون',
-            $text
-        );
-    }
-
-    public function testSpellNumbersInTheArabicIdiomExample2(): void
-    {
-        $Arabic = new \ArPHP\I18N\Arabic();
+        $expected[] = 'صفر صفر تسعمئة وثلاثة وستون فاصلة صفر واحد وثلاثون';
+        $actual[]   = $Arabic->int2str('00963.031');
 
         $Arabic->setNumberFeminine(2);
         $Arabic->setNumberFormat(2);
 
-        $integer = 141592653589;
-        
-        $text = $Arabic->int2str($integer);
-    
-        $this->assertEquals(
-            'مئة وواحدة وأربعين مليار وخمسمئة واثنتين وتسعين مليون وستمئة وثلاث وخمسين ألف وخمسمئة وتسع وثمانين',
-            $text
-        );
-    }
+        $expected[] = 'مئة وواحدة وأربعين مليار وخمسمئة واثنتين وتسعين مليون وستمئة وثلاث وخمسين ألف وخمسمئة وتسع وثمانين';
+        $actual[]   = $Arabic->int2str(141592653589);
 
-    public function testSpellNumbersInTheArabicIdiomExample3(): void
-    {
-        $Arabic = new \ArPHP\I18N\Arabic();
-        
         $Arabic->setNumberFeminine(2);
         $Arabic->setNumberFormat(2);
         
-        $integer = '-2749.317';
-        
-        $text = $Arabic->int2str($integer);
-    
-        $this->assertEquals(
-            'سالب ألفين وسبعمئة وتسع وأربعين فاصلة ثلاثمئة وسبع عشرة',
-            $text
-        );
-    }
+        $expected[] = 'سالب ألفين وسبعمئة وتسع وأربعين فاصلة ثلاثمئة وسبع عشرة';
+        $actual[]   = $Arabic->int2str('-2749.317');
 
-    public function testSpellNumbersInTheArabicIdiomExample4(): void
-    {
-        $Arabic = new \ArPHP\I18N\Arabic();
-        
         $Arabic->setNumberFeminine(1);
         $Arabic->setNumberFormat(1);
         
-        $number = 7.25;
-        $text   = $Arabic->money2str($number, 'KWD', 'ar');
-    
-        $this->assertEquals(
-            'سبعة دنانير ومئتان وخمسون فلسا',
-            $text
-        );
-    }
-
-    public function testSpellNumbersInTheArabicIdiomExample5(): void
-    {
-        $Arabic = new \ArPHP\I18N\Arabic();
+        $expected[] = 'سبعة دنانير ومئتان وخمسون فلسا';
+        $actual[]   = $Arabic->money2str(7.25, 'KWD', 'ar');
         
-        $string = '1975/8/2 9:43 صباحا';
-        $text   = $Arabic->int2indic($string);
-    
-        $this->assertEquals(
-            '&#1633;&#1641;&#1639;&#1637;/&#1640;/&#1634; &#1641;:&#1636;&#1635; صباحا',
-            $text
-        );
-    }
-
-    public function testSpellNumbersInTheArabicIdiomExample6(): void
-    {
-        $Arabic = new \ArPHP\I18N\Arabic();
+        $expected[] = '7 Dinar and 250 Fils';
+        $actual[]   = $Arabic->money2str(7.25, 'KWD', 'en');
         
+        $expected[] = '&#1633;&#1641;&#1639;&#1637;/&#1640;/&#1634; &#1641;:&#1636;&#1635; صباحا';
+        $actual[]   = $Arabic->int2indic('1975/8/2 9:43 صباحا');
+
         $Arabic->setNumberFeminine(2);
         $Arabic->setNumberFormat(2);
         $Arabic->setNumberOrder(2);
         
-        $integer = '17';
+        $expected[] = 'السابعة عشرة';
+        $actual[]   = $Arabic->int2str(17);
         
-        $text = $Arabic->int2str($integer);
-    
-        $this->assertEquals(
-            'السابعة عشرة',
-            $text
-        );
-    }
-
-    public function testSpellNumbersInTheArabicIdiomExample7(): void
-    {
-        $Arabic = new \ArPHP\I18N\Arabic();
+        $expected[] = 'الثالثة والعشرين';
+        $actual[]   = $Arabic->int2str(23);
         
-        $string  = 'مليار و مئتين و خمسة و ستين مليون و ثلاثمئة و ثمانية و خمسين ألف و تسعمئة و تسعة و سبعين';
+        $expected[] = 'الأولى';
+        $actual[]   = $Arabic->int2str(1);
 
-        $integer = $Arabic->str2int($string);
-    
-        $this->assertEquals(
-            1265358979,
-            $integer
-        );
+        $Arabic->setNumberFeminine(1);
+        $Arabic->setNumberFormat(1);
+        $Arabic->setNumberOrder(2);
+        
+        $expected[] = 'السابع';
+        $actual[]   = $Arabic->int2str(7);
+
+        $expected[] = 1265358979;
+        $actual[]   = $Arabic->str2int('مليار ومئتين وخمسة وستين مليون وثلاثمئة وثمانية وخمسين ألف وتسعمئة وتسعة وسبعين');
+
+        $expected[] = -52;
+        $actual[]   = $Arabic->str2int('سالب اثنان وخمسون');
+
+        $this->assertEquals($expected, $actual);
     }
 
     public function testDateOfHijriFormatInIslamicCalendar(): void
@@ -421,12 +378,17 @@ final class ArabicTest extends TestCase
     {
         $Arabic = new \ArPHP\I18N\Arabic();
         
-        $str = 'بسم الله الرحمن الرحيم';
-    
-        $this->assertEquals(
-            $Arabic->utf8Glyphs($str),
-            'ﻢﻴﺣﺮﻟﺍ ﻦﻤﺣﺮﻟﺍ ﻪﻠﻟﺍ ﻢﺴﺑ'
-        );
+        $expected = array();
+        $actual   = array();
+        
+        $expected[] = 'ﻢﻴﺣﺮﻟﺍ ﻦﻤﺣﺮﻟﺍ ﻪﻠﻟﺍ ﻢﺴﺑ';
+        $actual[]   = $Arabic->utf8Glyphs('بسم الله الرحمن الرحيم');
+        
+        $expected[] = '٢٠٠٦ ﻡﺎﻌﻟﺍ ﺬﻨﻣ ﺃﺪﺑ ﺔّﻴﺑﺮﻌﻟﺍ ﺔﻐﻠﻟﺍﻭ  PHP  ﻉﻭﺮﺸﻣ
+ًﺍﺮﻤﺘﺴﻣ ﻝﺍﺰﻳﻻﻭ';
+        $actual[]   = $Arabic->utf8Glyphs('مشروع PHP واللغة العربيّة بدأ منذ العام 2006 ولايزال مستمراً');
+        
+        $this->assertEquals($expected, $actual);
     }
 
     public function testHijriDateMakeTime(): void
@@ -445,29 +407,36 @@ final class ArabicTest extends TestCase
     public function testDaysCountOfHijriMonth(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
+
+        $expected = array();
+        $actual   = array();
         
-        $days = $Arabic->hijriMonthDays(9, 1429);
-    
-        $this->assertEquals(
-            $days,
-            30
-        );
+        $expected[] = 30;
+        $actual[]   = $Arabic->hijriMonthDays(9, 1429);
+        
+        $expected[] = 30;
+        $actual[]   = $Arabic->hijriMonthDays(12, 1442, false);
+        
+        $this->assertEquals($expected, $actual);
     }
 
     public function testDecimalDegreeAndDegreeMinuteSecondConversion(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
 
-        $v1 = -12.5822;
-        $v2 = '12°34\'30"S';
+        $expected = array();
+        $actual   = array();
+        
+        $expected[] = '-12°34\'55.92"';
+        $actual[]   = $Arabic->dd2dms(-12.5822);
+        
+        $expected[] = '12°04\'04.8"';
+        $actual[]   = $Arabic->dd2dms('12.068');
+        
+        $expected[] = -12.575;
+        $actual[]   = $Arabic->dms2dd('12°34\'30"S');
 
-        $dms = $Arabic->dd2dms($v1);
-        $dd  = $Arabic->dms2dd($v2);
-
-        $this->assertEquals(
-            [$dms, $dd],
-            ['-12°34\'55.92"', -12.575]
-        );
+        $this->assertEquals($expected, $actual);
     }
 
     public function testGetQiblaDirection(): void
@@ -486,16 +455,27 @@ final class ArabicTest extends TestCase
     public function testMuslimPrayerTimes(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
+
+        $expected = array();
+        $actual   = array();
         
         $Arabic->setSalatLocation(33.52, 36.31, 3, 691);
         $Arabic->setSalatDate(11, 19, 2020);
         $Arabic->setSalatConf('Shafi', -0.833333, -17.5, -19.5, 'Sunni');
+
+        $expected[] = ["5:36","7:05","12:20","15:10","17:37","18:54","17:35","0:20","5:26",
+                      [1605764160.0,1605769500.0,1605788400.0,1605798600.0,1605807420.0,1605812040.0,1605807300.0,1605831600.0,1605763560.0]];
+        $actual[]   = $Arabic->getPrayTime();
+        
+        $Arabic->setSalatLocation(36.22, 37.13, 2, 380);
+        $Arabic->setSalatDate(1, 25, 2021);
+        $Arabic->setSalatConf('Hanafi', -0.833333, -17.5, -19.5, 'Shia');
+
+        $expected[] = ["5:01","6:34","11:44","15:11","17:07","18:17","16:54","22:57","4:51",
+                      [1611550860.0,1611556440.0,1611575040.0,1611587460.0,1611594420.0,1611598620.0,1611593640.0,1611615420.0,1611550260.0]];
+        $actual[]   = $Arabic->getPrayTime();
     
-        $this->assertEquals(
-            $Arabic->getPrayTime(),
-            ["5:36","7:05","12:20","15:10","17:37","18:54","17:35","0:20","5:26",
-            [1605764160.0,1605769500.0,1605788400.0,1605798600.0,1605807420.0,1605812040.0,1605807300.0,1605831600.0,1605763560.0]]
-        );
+        $this->assertEquals($expected, $actual);
     }
 
     public function testArabicTextStandardize(): void
@@ -560,9 +540,12 @@ END;
         // to improve the code coverage of this unit test
         $Arabic->setSoundexCode('phonix');
         $indices[] = $Arabic->soundex('كلينزمان');
+
+        $Arabic->setSoundexCode('soundex');
+        $indices[] = $Arabic->soundex('كلينزمان');
     
         $this->assertEquals(
-            ['K453','K453','K453','K453','K453','K453','K452','M421','M421','M421','M421','M421','M421','M455','K458'],
+            ['K453','K453','K453','K453','K453','K453','K452','M421','M421','M421','M421','M421','M421','M455','K458','K452'],
             $indices
         );
     }
@@ -614,11 +597,23 @@ END;
     public function testArabicQuearyGetAllWordForms(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
+
+        $expected = array();
+        $actual   = array();
         
-        $this->assertEquals(
-            $Arabic->arQueryAllForms('عرب فلسطينيون'),
-            'عرب فلسطينيون فلسطيني فلسطينية فلسطينيتين فلسطينيين فلسطينيان فلسطينيات فلسطينيوا'
-        );
+        $expected[] = 'عرب فلسطينيون فلسطيني فلسطينية فلسطينيتين فلسطينيين فلسطينيان فلسطينيات فلسطينيوا';
+        $actual[]   = $Arabic->arQueryAllForms('عرب فلسطينيون');
+        
+        $expected[] = 'السعودية سعودية سعودي سعود سعوديه سعوديت سعوديات';
+        $actual[]   = $Arabic->arQueryAllForms('السعودية');
+        
+        $expected[] = 'ديارنا ديار دياري ديارك دياركما ديارهما دياركم دياركن ديارها ديارهم ديارهن مستقلة مستقل مستقله مستقلت مستقلات';
+        $actual[]   = $Arabic->arQueryAllForms('ديارنا مستقلة');
+        
+        $expected[] = 'مرحى مرحا تعليقهما تعليق تعليقكما';
+        $actual[]   = $Arabic->arQueryAllForms('مرحى تعليقهما');
+        
+        $this->assertEquals($expected, $actual);
     }
 
     public function testArabicQuearyGetSqlStatementByFieldsStr(): void
@@ -953,20 +948,40 @@ END;
     {
         $Arabic = new \ArPHP\I18N\Arabic();
         
-        $test = array();
+        $expected = array();
+        $actual   = array();
+        
+        $number = 0;
+        $expected[] = 'لا تعليقات';
+        $text       = $Arabic->arPlural('تعليق', $number);
+        $actual[]   = str_replace('%d', $number, $text);
+        
+        $number = 1;
+        $expected[] = 'تعليق واحد';
+        $text       = $Arabic->arPlural('تعليق', $number);
+        $actual[]   = str_replace('%d', $number, $text);
+        
+        $number = 2;
+        $expected[] = 'تعليقان';
+        $text       = $Arabic->arPlural('تعليق', $number);
+        $actual[]   = str_replace('%d', $number, $text);
         
         $number = 9;
-        $text   = $Arabic->arPlural('تعليق', $number);
-        $test[] = str_replace('%d', $number, $text);
+        $expected[] = '9 تعليقات';
+        $text       = $Arabic->arPlural('تعليق', $number);
+        $actual[]   = str_replace('%d', $number, $text);
         
         $number = 16;
-        $text   = $Arabic->arPlural('صندوق', $number, 'صندوقان', 'صناديق', 'صندوقا');
-        $test[] = str_replace('%d', $number, $text);        
+        $expected[] = '16 صندوقا';
+        $text       = $Arabic->arPlural('صندوق', $number, 'صندوقان', 'صناديق', 'صندوقا');
+        $actual[]   = str_replace('%d', $number, $text);        
         
-        $this->assertEquals(
-            $test,
-            ['9 تعليقات', '16 صندوقا']
-        );
+        $number = 101;
+        $expected[] = '101 صندوق';
+        $text       = $Arabic->arPlural('صندوق', $number, 'صندوقان', 'صناديق', 'صندوقا');
+        $actual[]   = str_replace('%d', $number, $text);        
+        
+        $this->assertEquals($actual, $expected);
     }
     
     public function testStripArabicHarakat(): void
@@ -1006,6 +1021,9 @@ END;
         $actual[]   = $Arabic->volc('8G6RM7C7+PF');
         
         $expected[] = false;
+        $actual[]   = $Arabic->volc('8G6RM7C7-PF');
+        
+        $expected[] = false;
         $actual[]   = $Arabic->volc('8G6RM7C7+PA');
         
         $expected[] = false;
@@ -1016,6 +1034,9 @@ END;
         
         $expected[] = array(34.67175, 36.263625);
         $actual[]   = $Arabic->olc2dd('8G6RM7C7+PF');
+        
+        $expected[] = array(null, null);
+        $actual[]   = $Arabic->olc2dd('8G6RM7C7-PF');
         
         $this->assertEquals($expected, $actual);
     }
@@ -1044,6 +1065,20 @@ END;
         
         $expected[] = true;
         $actual[]   = $Arabic->arSentiment('المنتج مطابق للمواصفات والتسليم سريع')['isPositive'];
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    public function testArabicNoDots(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $expected = array();
+        $actual   = array();
+        
+        $text = 'هل تعلم أن النقاط تم إختراعها للعجم وليس للعرب، حتى أن العرب قديما كانوا لا يستخدمون النقاط وأنت كذلك يمكنك أن تقرأ مقاطع كاملة بدون نقاط كما كان يفعل الأسلاف، وكانوا يفهمون الكلمات من سياق الجملة وأبسط مثال على ذلك أنك تقرأ هذا المقطع من دون مشاكل.';
+        $expected[] = 'هل ٮعلم اں الٮٯاط ٮم احٮراعها للعحم ولىس للعرٮ، حٮى اں العرٮ ٯدىما كاٮوا لا ىسٮحدموں الٮٯاط واٮٮ كدلک ىمكٮک اں ٮٯرا مٯاطع كامله ٮدوں ٮٯاط كما كاں ىڡعل الاسلاڡ، وكاٮوا ىڡهموں الكلماٮ مں سىاٯ الحمله واٮسط مٮال على دلک اٮک ٮٯرا هدا المٯطع مں دوں مساكل.';
+        $actual[]   = $Arabic->noDots($text);
         
         $this->assertEquals($expected, $actual);
     }
