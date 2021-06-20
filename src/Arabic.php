@@ -3524,16 +3524,6 @@ class Arabic
             }
         }
 
-        foreach ($wordsRanks as $wordRank => $total) {
-            if (mb_substr($wordRank, 0, 1) == 'و') {
-                $subWordRank = mb_substr($wordRank, 1, mb_strlen($wordRank) - 1);
-                if (isset($wordsRanks[$subWordRank])) {
-                    unset($wordsRanks[$wordRank]);
-                    $wordsRanks[$subWordRank] += $total;
-                }
-            }
-        }
-
         return $wordsRanks;
     }
 
