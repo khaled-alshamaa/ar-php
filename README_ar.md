@@ -13,6 +13,8 @@ _حقوق النشر © 2006-2021 خالد الشمعة._
 
 [![DOI](https://zenodo.org/badge/231197063.svg)](https://zenodo.org/badge/latestdoi/231197063)
 
+[English](https://github.com/khaled-alshamaa/ar-php/blob/master/README.md)
+  
 ### المهمة والرؤيا
 كما حدث في الشرق الأقصى وأمريكا اللاتينية، كلما اتجهت الإنترنت إلى الجماهير، أرادها الناس بلغتهم الأصلية.
 
@@ -58,7 +60,7 @@ https://github.com/khaled-alshamaa/ar-php, 2021
   title={Ar-PHP, PHP library for website developers to process Arabic content},
   author={Al-Shamaa, Khaled},
   url={https://github.com/khaled-alshamaa/ar-php},
-  version = {6.1.0},
+  version = {6.2.0},
   year={2021}
 }
 ```
