@@ -1440,9 +1440,11 @@ class Arabic
         $ptr = array('ـ', 'َ','ً','ُ','ٌ','ِ','ٍ','ْ','ّ');
         $str = str_replace($ptr, '', $str);
         $str = str_replace('مائة', 'مئة', $str);
-        $str = str_replace(array('احدى','احد'), 'واحد', $str);
-        $ptr = array('اثنا','اثني','اثنتا', 'اثنتي');
-        $str = str_replace($ptr, 'اثنان', $str);
+        $ptr = array('/احدى\s/u','/احد\s/u');
+        $str = preg_replace($ptr, 'واحد ', $str);
+        $ptr = array('/اثنا\s/u','/اثني\s/u','/اثنتا\s/u', '/اثنتي\s/u','/اثنين\s/u','/اثنتان\s/u', '/اثنتين\s/u');
+        $str = preg_replace($ptr, 'اثنان ', $str);
+
         $str = trim($str);
 
         if (strpos($str, 'ناقص') === false && strpos($str, 'سالب') === false) {
@@ -1537,6 +1539,7 @@ class Arabic
                     $zeros = 'صفر ' . $zeros;
                     $fulnum = substr($fulnum, 1, strlen($fulnum));
                 };
+                $zeros = trim($zeros);
             };
             //---/
 
