@@ -1343,10 +1343,10 @@ class Arabic
 
             $temp = explode('.', (string)$number);
 
-            $string .= $this->arNumbersSubStr((int)$temp[0]);
+            $string .= $this->arNumbersSubStr("{$temp[0]}");
 
             if (!empty($temp[1])) {
-                $dec     = $this->arNumbersSubStr((int)$temp[1]);
+                $dec     = $this->arNumbersSubStr("{$temp[1]}");
                 $string .= ' فاصلة ' . $dec;
             }
         }
