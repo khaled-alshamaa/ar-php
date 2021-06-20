@@ -1,5 +1,6 @@
 # ArPHP Library - Change Log
 
+* Version [6.2.0](#whats-new-in-arphp-620-release-date-jun-20-2021) _(release date: Jun 20, 2021)_
 * Version [6.1.0](#whats-new-in-arphp-610-release-date-may-1-2021) _(release date: May 1, 2021)_
 * Version [6.0.0](#whats-new-in-arphp-600-release-date-feb-15-2021) _(release date: Feb 15, 2021)_
 * Version [5.5.2](#whats-new-in-arphp-552-release-date-jan-26-2021) _(release date: Jan 26, 2021)_
@@ -28,8 +29,7 @@
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
 
-<!--
-## What's new in ArPHP 6.2.0 _(release date: Jun ##, 2021)_
+## What's new in ArPHP 6.2.0 _(release date: Jun 20, 2021)_
 
 * Improve the usability of the arSentiment method by changing the returned value to be an array of two elements: isPositive (boolean, positive if true and negative if false), and probability (float, ranged from 0 to 1). Thanks to [Zaid Alyafeai](https://github.com/zaidalyafeai) and fruitful brainstorming with [ARBML team](https://github.com/ARBML/Research/issues/1).
 
@@ -39,7 +39,7 @@
 
 * Add basic support to transliterate Arabizi (Franco-Arabic) into Arabic text in the en2ar method.
 
-* Improve the stripHarakat method and make it able to remove the last Harakat alone. Thanks to [Tameem Ahmad](https://github.com/tameemahmad) for his [suggestion](https://github.com/khaled-alshamaa/ar-php/issues/11).
+* Improve the stripHarakat method by make it able to remove the last Harakat alone. Thanks to [Tameem Ahmad](https://github.com/tameemahmad) for his [suggestion](https://github.com/khaled-alshamaa/ar-php/issues/11).
 
 * Remove extra space after the WAW letter (and) when spelling numbers in the Arabic idiom.
 
@@ -47,8 +47,10 @@
 
 * Add JavaScript version of the Arabic sentiment analysis model and query algorithm to the examples directory.
 
-* A few bug fixes in handling left zeros in int2str, 1 and 2 in str2int, and midnight calculation in getPrayTime.
--->
+* A few bug fixes in handling leading zeros in int2str, 1 and 2 in str2int, and midnight calculation in getPrayTime.
+
+[Top](#arphp-library---change-log)
+
 
 ## What's new in ArPHP 6.1.0 _(release date: May 1, 2021)_
 
