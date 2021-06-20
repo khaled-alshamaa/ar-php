@@ -3152,11 +3152,13 @@ class Arabic
         } else {
             // In Shia point of view, the juridical midnight (the ending time for
             // performing Isha prayer) is the mean time from Sunset to Fajr
-            $Midnight = 0.5 * ($Fajr - $Sunset);
+            $Midnight = $Sunset + 0.5 * ($Fajr - $Sunset);
         }
 
         if ($Midnight > 12) {
             $Midnight = $Midnight - 12;
+        } else {
+            $Midnight = $Midnight + 12;
         }
 
         // Result.ThlthAkhir:= Result.Fajr - (24 - Result.Maghrib + Result.Fajr) / 3;
