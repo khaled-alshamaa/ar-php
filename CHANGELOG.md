@@ -29,7 +29,7 @@
 
 
 <!--
-## What's new in ArPHP 6.2.0 _(release date: ??? ##, 2021)_
+## What's new in ArPHP 6.2.0 _(release date: Jun ##, 2021)_
 
 * Improve the usability of the arSentiment method by changing the returned value to be an array of two elements: isPositive (boolean, positive if true and negative if false), and probability (float, ranged from 0 to 1). Thanks to [Zaid Alyafeai](https://github.com/zaidalyafeai) and fruitful brainstorming with [ARBML team](https://github.com/ARBML/Research/issues/1).
 
@@ -47,7 +47,7 @@
 
 * Add JavaScript version of the Arabic sentiment analysis model and query algorithm to the examples directory.
 
-* Test using GitHub Desktop application instead of Git command line because of the token authentication requirements!
+* A few bug fixes in handling left zeros in int2str, 1 and 2 in str2int, and midnight calculation in getPrayTime.
 -->
 
 ## What's new in ArPHP 6.1.0 _(release date: May 1, 2021)_
