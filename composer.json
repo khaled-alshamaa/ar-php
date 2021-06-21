@@ -3,12 +3,16 @@
 	"description": "Set of functionalities enable Arabic website developers to serve professional search, present and process Arabic content in PHP",
 	"type": "library",
 	"license": "LGPL-3.0",
-	"homepage": "https://github.com/khaled-alshamaa/ar-php",
-
+	"homepage": "https://www.ar-php.org/",
 	"keywords": [
-		"Arabic", "arabic-sentiment", "arabic-numbers", "arabic-glyphs", "arabic-calendar", "arabic-sql-query", "arabic-segments-identifier"
+		"Arabic",
+		"arabic-sentiment",
+		"arabic-numbers",
+		"arabic-glyphs",
+		"arabic-calendar",
+		"arabic-sql-query",
+		"arabic-segments-identifier"
 	],
-	
 	"authors": [
 		{
 			"name": "Khaled Al-Sham'aa",
@@ -16,16 +20,13 @@
 			"homepage":"http://www.ar-php.org"
 		}
 	],
-
 	"require": {
 		"php": ">=7.0",
 		"ext-mbstring": "*"
 	},
-
 	"require-dev": {
 		"phpunit/phpunit": "9.*"
 	},
-
 	"autoload": {
 		"psr-4": {
 			"ArPHP\\I18N\\": "src"
