@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace ArPHP\I18N\Test;
 
