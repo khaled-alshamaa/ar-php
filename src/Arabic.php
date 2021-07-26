@@ -3314,12 +3314,11 @@ class Arabic
      * @param integer $int      Sentences value (see $mode effect also)
      * @param integer $mode     Mode of sentences count [1|2] for "number" and "rate" modes respectively
      * @param integer $output   Output mode [1|2] for "summary" and "highlight" modes respectively
-     * @param string  $style    Name of the CSS class you would like to apply
      *
      * @return string Output summary requested
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function arSummary($str, $keywords, $int, $mode, $output, $style = null)
+    public function arSummary($str, $keywords, $int, $mode, $output)
     {
         preg_match_all("/[^\.\n\،\؛\,\;](.+?)[\.\n\،\؛\,\;]/u", $str, $sentences);
         $_sentences = $sentences[0];
@@ -3367,7 +3366,7 @@ class Arabic
                 if ($output == 1) {
                     $summary .= ' ' . $sentencesRanks[0][$i];
                 } else {
-                    $summary .= '<span class="' . $style . '">' . $sentencesRanks[0][$i] . '</span>';
+                    $summary .= '<mark>' . $sentencesRanks[0][$i] . '</mark>';
                 }
             } else {
                 if ($output == 2) {

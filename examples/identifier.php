@@ -89,7 +89,7 @@ $p = $Arabic->arIdentify($html);
 
 for ($i = count($p)-1; $i >= 0; $i-=2) {
     $arStr   = substr($html, $p[$i-1], $p[$i] - $p[$i-1]);
-    $replace = '<span style="background-color: #EEEE80">' . $arStr . '</span>';
+    $replace = '<mark>' . $arStr . '</mark>';
     $html    = substr_replace($html, $replace, $p[$i-1], $p[$i] - $p[$i-1]);
 }
 
@@ -109,7 +109,7 @@ $code = <<< END
 
     for (\$i = count(\$p)-1; \$i >= 0; \$i-=2) {
         \$arStr   = substr(\$html, \$p[\$i-1], \$p[\$i] - \$p[\$i-1]);
-        \$replace = '<span style="background-color: #EEEE80">' . \$arStr . '</span>';
+        \$replace = '<mark>' . \$arStr . '</mark>';
         \$html    = substr_replace(\$html, \$replace, \$p[\$i-1], \$p[\$i] - \$p[\$i-1]);
     }
 
