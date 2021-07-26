@@ -5,7 +5,7 @@
 
 * Insure coding standards in Documentation ([PSR-5](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md)).
 
-* Improve error handling by the switch to exceptions (set_error_handler: try/catch)!
+* Improve error handling by using [exceptions](https://www.php.net/manual/en/language.exceptions.php) as [@atmonshi](https://github.com/atmonshi) suggested in [this pull request](https://github.com/khaled-alshamaa/ar-php/pull/10), update related phpdoc by adding [@throws](https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/throws.html) tag. We may extend the general exception class like this: `class ArphpException extends Exception { }`, then we can throw an exception like this: `throw new ArphpException('Customized error message');`
 
 * Enhance example scripts by call the following methods: _arSummaryLoadExtra, setQueryArrFields, swapAf, arabizi, dms2dd, dd2dms, dd2olc, olc2dd._
 
