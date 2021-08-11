@@ -121,6 +121,7 @@ http://localhost/ar-php/examples/strtotime.php?XDEBUG_PROFILE=1
 
 After a profile information file has been generated you can open it with the [KCacheGrind](https://kcachegrind.github.io/html/Home.html) tool for Linux users or [QCacheGrind](https://sourceforge.net/projects/qcachegrindwin/) for Windows users.
 
+> __Note:__ You can find some nice video tutorials by Derick Rethans the (Xdebug author) available here ([Xdebug 3 Profiling](https://www.youtube.com/watch?v=8yUY063WgDg) and [Analysing Xdebug 3 Profiling Data](https://www.youtube.com/watch?v=iH-hDOuQfcY))
 
 ### _Extra Utilities for Code Reviews_
 * [Insphpect](https://insphpect.com/) is an automated code review tool which identifies inflexibilities in PHP code and helps you write better software.
