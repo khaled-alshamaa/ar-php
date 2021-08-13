@@ -208,9 +208,13 @@ php -S localhost:8000 -t C:\xampp\htdocs\
 
 Also you can use the [NoPaste snippet](https://nopaste.ml/?l=php#XQAAAQCzAAAAAAAAAAASEEpGEzYNlb/RRmMcH3OypbHqK68xfyVj2/6MRioTOArMdW/HwAcAdukQ77ekAcnzpI3j/UcLCqrmQyQF5CkQ7e6oHfhz7FYdWyNk1gKH9a2qc+uyWWfQTVw/uKaxxosiMuzn7TBs2LA0GOZw8+vz/wA+wQJGVmJfc3yzUvEFXs61NEmOvbQKBpFQEMPNQ+9+Rjgf4XOl/vUxygA=). It is an open-source website similar to Pastebin where you can store any piece of code, and generate links for easy sharing.
 
-### _Github1s: A Browser-Based VSCode Project Viewer_
+### _A Browser-Based VSCode Project Viewer_
 
-Explore GitHub source code right on the "web" version of VSCode simply by adding 1s after GitHub in the URL, for example: 
+There are two options:
+
+1. GitHub is making [Codespaces](https://github.com/features/codespaces) available to Team and Enterprise Cloud plans on github.com. Codespaces provides software teams a faster, more collaborative development environment in the cloud. Have you tried github.dev yet (i.e., change the GitHub URL from ".com" to ".dev")? Just press the dot key ;-)
+
+2. Github1s explore GitHub source code right on the "web" version of VSCode simply by adding 1s after GitHub in the URL, for example: 
 
 https://github1s.com/khaled-alshamaa/ar-php/blob/HEAD/src/Arabic.php
 
