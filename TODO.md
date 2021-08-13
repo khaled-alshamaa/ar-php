@@ -214,7 +214,5 @@ There are two options:
 
 1. GitHub is making [Codespaces](https://github.com/features/codespaces) available to Team and Enterprise Cloud plans on github.com. Codespaces provides software teams a faster, more collaborative development environment in the cloud. Have you tried github.dev yet (i.e., change the GitHub URL from ".com" to ".dev")? Just press the dot key ;-)
 
-2. Github1s explore GitHub source code right on the "web" version of VSCode simply by adding 1s after GitHub in the URL, for example: 
-
-https://github1s.com/khaled-alshamaa/ar-php/blob/HEAD/src/Arabic.php
+2. Github1s explore GitHub source code right on the "web" version of VSCode simply by adding 1s after GitHub in the URL, for example: https://github1s.com/khaled-alshamaa/ar-php/blob/HEAD/src/Arabic.php
 
