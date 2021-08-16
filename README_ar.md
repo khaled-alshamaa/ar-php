@@ -90,6 +90,8 @@ PHP هي لغة نصية واسعة الاستخدام وعامة الأغراض
 ### LGPL
 الفارق الأساس فيما بين ترخيص GPL وترخيص LGPL هو أن هذا الأخير يمكن ربطه (وفي حالة المكتبات "استخدامه بواسطة") ببرامج لا تخضع لأي من الترخيصين GPL و LGPL، والتي يمكن أن تكون برامج حرة مفتوحة المصدر أو حتى برمجيات مغلقة المصدر. ويمكن إعادة توزيع هذه البرمجيات غير الخاضعة للترخيصين GPL و LGPL تحت أي شروط مختارة طالما أنها ليست عملا مشتقا منها.
 
+<a href="https://darshoaa.com/pHP-and-Arabic-language/"><img align="left" width="171" height="256" src="https://user-images.githubusercontent.com/11270404/129626204-d354e794-bfbf-4f3c-bc22-27e7fc252701.png" border="0"></a>
+
 [[ترخيص LGPL](http://www.gnu.org/licenses/lgpl-3.0.html)، [أسئلة GPL الشائعة](http://www.gnu.org/licenses/gpl-faq.html)]
 
 ### لمحة تاريخية
