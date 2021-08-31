@@ -90,9 +90,9 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 * PHP 5 at [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
 * PHP 4 at [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
 
-[Top](#ar-php-project-ar-phporg)
-
 [![محاضرة افتتاحية عن تجربة بناء ادوات لدعم اللغة العربية و المشاريع مفتوحة المصدر - خالد الشمعة](https://img.youtube.com/vi/P4zV1Iu5QcE/0.jpg)](https://www.youtube.com/watch?v=P4zV1Iu5QcE)
+
+[Top](#ar-php-project-ar-phporg)
 
 ## _Quick Start_
 
