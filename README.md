@@ -80,16 +80,19 @@ PHP is a widely-used general-purpose scripting language that is especially suite
 ### LGPL
 The main difference between the GPL and the LGPL is that the latter can be linked to (in the case of a library, 'used by') a non-(L)GPLed program, which may be free software or proprietary software. This non-(L)GPLed program can then be distributed under any chosen terms if it is not a derivative work.
 
-<a href="https://darshoaa.com/pHP-and-Arabic-language/" target="_blank"><img align="right" width="171" height="256" src="https://user-images.githubusercontent.com/11270404/129626204-d354e794-bfbf-4f3c-bc22-27e7fc252701.png" border="0"></a>
-
 [[LGPL](http://www.gnu.org/licenses/lgpl-3.0.html), [GNU FAQ](http://www.gnu.org/licenses/gpl-faq.html)]
 
 ### History
+
+<a href="https://darshoaa.com/pHP-and-Arabic-language/" target="_blank"><img align="right" width="171" height="256" src="https://user-images.githubusercontent.com/11270404/129626204-d354e794-bfbf-4f3c-bc22-27e7fc252701.png" border="0"></a>
+
 * PHP 7 at [GitHub.com](https://github.com/khaled-alshamaa/ar-php) starting in 2020.
 * PHP 5 at [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
 * PHP 4 at [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
 
 [Top](#ar-php-project-ar-phporg)
+
+[![محاضرة افتتاحية عن تجربة بناء ادوات لدعم اللغة العربية و المشاريع مفتوحة المصدر - خالد الشمعة](https://img.youtube.com/vi/P4zV1Iu5QcE/0.jpg)](https://www.youtube.com/watch?v=P4zV1Iu5QcE)
 
 ## _Quick Start_
 
