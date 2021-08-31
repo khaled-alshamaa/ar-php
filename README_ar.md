@@ -90,15 +90,18 @@ PHP هي لغة نصية واسعة الاستخدام وعامة الأغراض
 ### LGPL
 الفارق الأساس فيما بين ترخيص GPL وترخيص LGPL هو أن هذا الأخير يمكن ربطه (وفي حالة المكتبات "استخدامه بواسطة") ببرامج لا تخضع لأي من الترخيصين GPL و LGPL، والتي يمكن أن تكون برامج حرة مفتوحة المصدر أو حتى برمجيات مغلقة المصدر. ويمكن إعادة توزيع هذه البرمجيات غير الخاضعة للترخيصين GPL و LGPL تحت أي شروط مختارة طالما أنها ليست عملا مشتقا منها.
 
-<a href="https://darshoaa.com/pHP-and-Arabic-language/"><img align="left" width="171" height="256" src="https://user-images.githubusercontent.com/11270404/129626204-d354e794-bfbf-4f3c-bc22-27e7fc252701.png" border="0"></a>
-
 [[ترخيص LGPL](http://www.gnu.org/licenses/lgpl-3.0.html)، [أسئلة GPL الشائعة](http://www.gnu.org/licenses/gpl-faq.html)]
 
 ### لمحة تاريخية
+
+<a href="https://darshoaa.com/pHP-and-Arabic-language/"><img align="left" width="171" height="256" src="https://user-images.githubusercontent.com/11270404/129626204-d354e794-bfbf-4f3c-bc22-27e7fc252701.png" border="0"></a>
+
 * الإصدار 7 من PHP على [GitHub.com](https://github.com/khaled-alshamaa/ar-php) بداية من عام 2020.
 * الإصدار 5 من PHP على [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
 * الإصدار 4 من PHP على [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
 
+[![محاضرة افتتاحية عن تجربة بناء ادوات لدعم اللغة العربية و المشاريع مفتوحة المصدر - خالد الشمعة](https://img.youtube.com/vi/P4zV1Iu5QcE/0.jpg)](https://www.youtube.com/watch?v=P4zV1Iu5QcE)
+  
 [Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
 ## _مدخل سريع_
