@@ -718,6 +718,22 @@
     {
       "search": "؟",
       "replace": "?"
+    },
+    {
+        "search": "پ",
+        "replace": "p"
+    },
+    {
+        "search": "گ",
+        "replace": "g"
+    },
+    {
+        "search": "ژ",
+        "replace": "zh"
+    },
+    {
+        "search": "چ",
+        "replace": "ch"
     }
   ],
   "str_replace_diaritical": [
