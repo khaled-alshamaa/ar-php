@@ -1,9 +1,9 @@
 {
-	"name": "khaled.alshamaa/ar-php",
+	"name": "saber13812002/persian-php",
 	"description": "Set of functionalities enable Arabic website developers to serve professional search, present and process Arabic content in PHP",
 	"type": "library",
 	"license": "LGPL-3.0",
-	"homepage": "https://github.com/khaled-alshamaa/ar-php",
+	"homepage": "https://github.com/saber13812002/persian-php",
 
 	"keywords": [
 		"Arabic", "arabic-sentiment", "arabic-numbers", "arabic-glyphs", "arabic-calendar", "arabic-sql-query", "arabic-segments-identifier"
@@ -11,7 +11,7 @@
 	
 	"authors": [
 		{
-			"name": "Khaled Al-Sham'aa",
+			"name": "saber tabatabaee",
 			"email": "khaled@ar-php.org",
 			"homepage":"http://www.ar-php.org"
 		}
