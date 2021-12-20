@@ -1343,10 +1343,10 @@ class Arabic
 
             $temp = explode('.', (string)$number);
 
-            $string .= $this->arNumbersSubStr("{$temp[0]}");
+            $string .= $this->arNumbersSubStr($temp[0]);
 
             if (!empty($temp[1])) {
-                $dec     = $this->arNumbersSubStr("{$temp[1]}");
+                $dec     = $this->arNumbersSubStr($temp[1]);
                 $string .= ' فاصلة ' . $dec;
             }
         }
@@ -3961,7 +3961,7 @@ class Arabic
      *
      * @param string $text Arabic review string
      *
-     * @return hash of 2 elements: boolean isPositive (negative if false), and float probability (range from 0 to 1)
+     * @return array of 2 elements: boolean isPositive (negative if false), and float probability (range from 0 to 1)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function arSentiment($text)

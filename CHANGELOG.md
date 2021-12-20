@@ -1,5 +1,6 @@
 # ArPHP Library - Change Log
 
+<!-- * Version [6.5.0](#whats-new-in-arphp-650-release-date-dec-18-2021) _(release date: Dec 18, 2021)_ -->
 * Version [6.2.0](#whats-new-in-arphp-620-release-date-jun-20-2021) _(release date: Jun 20, 2021)_
 * Version [6.1.0](#whats-new-in-arphp-610-release-date-may-1-2021) _(release date: May 1, 2021)_
 * Version [6.0.0](#whats-new-in-arphp-600-release-date-feb-15-2021) _(release date: Feb 15, 2021)_
@@ -28,6 +29,13 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
+
+<!--
+## What's new in ArPHP 6.5.0 _(release date: Dec 18, 2021)_
+
+* Improve the code quality by fix all issues reported by the [PHPStan.org](https://phpstan.org) (PHP Static Analysis Tool) up to the [rule level 6](https://phpstan.org/user-guide/rule-levels).
+
+-->
 
 ## What's new in ArPHP 6.2.0 _(release date: Jun 20, 2021)_
 
