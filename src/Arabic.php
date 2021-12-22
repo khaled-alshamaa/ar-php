@@ -166,10 +166,9 @@ class Arabic
     
     private $arPluralsForms = array();
     
-    private $logOddPositive = array();
-    private $logOddNegative = array();
-    private $logOddStem     = array();
-    private $allStems       = array();
+    private $logOdd     = array();
+    private $logOddStem = array();
+    private $allStems   = array();
     
     private $rootDirectory;
 
@@ -558,9 +557,7 @@ class Arabic
     {
         $this->allStems   = file($this->rootDirectory . '/data/stems.txt', FILE_IGNORE_NEW_LINES);
         $this->logOddStem = file($this->rootDirectory . '/data/logodd_stem.txt', FILE_IGNORE_NEW_LINES);
-
-        $this->logOddPositive = file($this->rootDirectory . '/data/logodd_positive.txt', FILE_IGNORE_NEW_LINES);
-        $this->logOddNegative = file($this->rootDirectory . '/data/logodd_negative.txt', FILE_IGNORE_NEW_LINES);
+        $this->logOdd     = file($this->rootDirectory . '/data/logodd.txt', FILE_IGNORE_NEW_LINES);
     }
     
     /////////////////////////////////////// Standard //////////////////////////////////////////////
@@ -3996,8 +3993,7 @@ class Arabic
         $words = preg_split('/\s+/u', $text, -1, PREG_SPLIT_NO_EMPTY);
 
         # set initial scores
-        $positiveScore = 0;
-        $negativeScore = 0;
+        $score = 0;
 
         # add a simple rule-based mechanism to handle the negation words
         $negationWords = array('لا', 'ليس', 'غير', 'ما', 'لم', 'لن',
@@ -4034,14 +4030,12 @@ class Arabic
 
             if ($negationFlag) {
                 // switch positive/negative sentiment because of negation word effect
-                $positiveScore += -1 * $this->logOddPositive[$sel_stem];
-                $negativeScore += -1 * $this->logOddNegative[$sel_stem];
+                $score += -1 * $this->logOdd[$sel_stem];
                 
                 $negationFlag = false;
             } else {
                 # retrive the positive and negative log odd scores and accumulate them
-                $positiveScore += $this->logOddPositive[$sel_stem];
-                $negativeScore += $this->logOddNegative[$sel_stem];
+                $score += $this->logOdd[$sel_stem];
             }
 
             if (in_array($word, $negationWords)) {
@@ -4049,17 +4043,14 @@ class Arabic
             }
         }
         
-        # claculate the sentiment score
-        $sentiment = $positiveScore - $negativeScore;
-        
-        if ($positiveScore > $negativeScore) {
+        if ($score > 0) {
             $isPositive  = true;
-            $probability = exp($positiveScore) / (1 + exp($positiveScore));
         } else {
             $isPositive = false;
-            $probability = exp($negativeScore) / (1 + exp($negativeScore));
         }
         
+        $probability = exp(abs($score)) / (1 + exp(abs($score)));
+
         return array('isPositive' => $isPositive, 'probability' => $probability);
     }
     

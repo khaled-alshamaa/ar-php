@@ -35,6 +35,8 @@
 
 * Improve the code quality by fix all issues reported by the [PHPStan.org](https://phpstan.org) (PHP Static Analysis Tool) up to the [rule level 6](https://phpstan.org/user-guide/rule-levels).
 
+* Improve sentiment analysis model by optimise system parameters and calculate probability.
+
 -->
 
 ## What's new in ArPHP 6.2.0 _(release date: Jun 20, 2021)_
