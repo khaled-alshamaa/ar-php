@@ -401,20 +401,20 @@ class Arabic
 
         foreach ($json['individual']['male'] as $num) {
             if ($num['value'] < 11) {
-                $str = str_replace(array('أ','إ','آ'), 'ا', (string)$num['text']);
+                $str = strtr((string)$num['text'], array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا'));
                 $this->arNumberSpell[$str] = (int)$num['value'];
             }
         }
         
         foreach ($json['individual']['female'] as $num) {
             if ($num['value'] < 11) {
-                $str = str_replace(array('أ','إ','آ'), 'ا', (string)$num['text']);
+                $str = strtr((string)$num['text'], array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا'));
                 $this->arNumberSpell[$str] = (int)$num['value'];
             }
         }
         
         foreach ($json['individual']['gt19'] as $num) {
-            $str = str_replace(array('أ','إ','آ'), 'ا', (string)$num['text']);
+            $str = strtr((string)$num['text'], array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا'));
             $this->arNumberSpell[$str] = (int)$num['value'];
         }
         
@@ -605,7 +605,7 @@ class Arabic
         $words  = explode(' ', $str);
         $str    = $words[0];
 
-        $str = str_replace(array('أ','إ','آ'), 'ا', $str);
+        $str = strtr($str, array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا'));
 
         $last       = mb_substr($str, -1, 1);
         $beforeLast = mb_substr($str, -2, 1);
@@ -844,7 +844,7 @@ class Arabic
      */
     public function ar2en($string, $standard = 'UNGEGN')
     {
-        //$string = str_replace('ة ال', 'tul', $string);
+        //$string = strtr($string, array('ة ال' => 'tul'));
         $words  = explode(' ', $string);
         $string = '';
 
@@ -1051,8 +1051,8 @@ class Arabic
             $year -= 632;
             $yr    = substr("$year", -2);
 
-            $format = str_replace('Y', (string)$year, $format);
-            $format = str_replace('y', $yr, $format);
+            $format = strtr($format, array('Y' => (string)$year));
+            $format = strtr($format, array('y' => $yr));
 
             $str = date($format, $timestamp);
             $str = $this->arDateEn2ar($str);
@@ -1369,7 +1369,7 @@ class Arabic
         $str1 = $this->int2str($count);
         $str2 = $this->arPlural($word, $count);
         
-        $string = str_replace('%d', $str1, $str2);
+        $string = strtr($str2, array('%d' => $str1));
 
         return $string;
     }
@@ -1431,12 +1431,12 @@ class Arabic
     public function str2int($str)
     {
         // Normalization phase
-        $str = str_replace(array('أ','إ','آ'), 'ا', $str);
-        $str = str_replace('ه', 'ة', $str);
+        $str = strtr($str, array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا'));
+        $str = strtr($str, array('ه' => 'ة'));
         $str = preg_replace('/\s+/', ' ', $str);
-        $ptr = array('ـ', 'َ','ً','ُ','ٌ','ِ','ٍ','ْ','ّ');
-        $str = str_replace($ptr, '', $str);
-        $str = str_replace('مائة', 'مئة', $str);
+        $ptr = array('ـ' => '', 'َ' => '', 'ً' => '', 'ُ' => '', 'ٌ' => '', 'ِ' => '', 'ٍ' => '', 'ْ' => '', 'ّ' => '');
+        $str = strtr($str, $ptr);
+        $str = strtr($str, array('مائة' => 'مئة'));
         $ptr = array('/احدى\s/u','/احد\s/u');
         $str = preg_replace($ptr, 'واحد ', $str);
         $ptr = array('/اثنا\s/u','/اثني\s/u','/اثنتا\s/u', '/اثنتي\s/u','/اثنين\s/u','/اثنتان\s/u', '/اثنتين\s/u');
@@ -1457,11 +1457,11 @@ class Arabic
         for ($scale = $max; $scale > 0; $scale--) {
             $key = pow(1000, $scale);
 
-            $pattern = array('أ','إ','آ');
-            $format1 = str_replace($pattern, 'ا', $this->arNumberComplications[$scale][1]);
-            $format2 = str_replace($pattern, 'ا', $this->arNumberComplications[$scale][2]);
-            $format3 = str_replace($pattern, 'ا', $this->arNumberComplications[$scale][3]);
-            $format4 = str_replace($pattern, 'ا', $this->arNumberComplications[$scale][4]);
+            $pattern = array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا');
+            $format1 = strtr($this->arNumberComplications[$scale][1], $pattern);
+            $format2 = strtr($this->arNumberComplications[$scale][2], $pattern);
+            $format3 = strtr($this->arNumberComplications[$scale][3], $pattern);
+            $format4 = strtr($this->arNumberComplications[$scale][4], $pattern);
 
             if (strpos($str, $format1) !== false) {
                 list($temp, $str) = explode($format1, $str);
@@ -1493,7 +1493,7 @@ class Arabic
             $str = " $str ";
             foreach ($this->arNumberSpell as $word => $value) {
                 if (strpos($str, "$word ") !== false) {
-                    $str = str_replace("$word ", ' ', $str);
+                    $str = strtr($str, array("$word " => ' '));
                     $subTotal += $value;
                 }
             }
@@ -1878,7 +1878,7 @@ class Arabic
         preg_match_all("/([\x{0600}-\x{06FF}])/u", $str, $matches);
 
         $arNum    = count($matches[0]);
-        $nonArNum = mb_strlen(str_replace(' ', '', $str)) - $arNum;
+        $nonArNum = mb_strlen(strtr($str, array(' ' => ''))) - $arNum;
 
         $capital = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $small   = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -2110,7 +2110,7 @@ class Arabic
         $cleanEncodedRest = $this->arSoundexTrimRep($encodedRest);
 
         $soundex .= $cleanEncodedRest;
-        $soundex  = str_replace('0', '', $soundex);
+        $soundex  = strtr($soundex, array('0' => ''));
         $totalLen = mb_strlen($soundex);
 
         if ($totalLen > $this->soundexLen) {
@@ -2306,7 +2306,7 @@ class Arabic
         // from Arabic Presentation Forms-B, Range: FE70-FEFF,
         // file "UFE70.pdf" (in reversed order)
         // into Arabic Presentation Forms-A, Range: FB50-FDFF, file "UFB50.pdf"
-        // Example: $output = str_replace('&#xFEA0;&#xFEDF;', '&#xFCC9;', $output);
+        // Example: $output = strtr($output, array('&#xFEA0;&#xFEDF;' => '&#xFCC9;'));
         // Lam Jeem
         $output = $this->arGlyphsDecodeEntities($output, $exclude = array('&'));
 
@@ -2424,7 +2424,7 @@ class Arabic
         
         // convert to hindo numbers if requested
         if ($hindo == true) {
-            $output = str_replace($num, $arNum, $output);
+            $output = strtr($output, array_combine($num, $arNum));
         }
 
         return $output;
@@ -2626,7 +2626,7 @@ class Arabic
         //$arg   = mysql_real_escape_string($arg);
         $search  = array("\\",  "\x00", "\n",  "\r",  "'",  '"', "\x1a");
         $replace = array("\\\\","\\0","\\n", "\\r", "\'", '\"', "\\Z");
-        $arg     = str_replace($search, $replace, $arg);
+        $arg     = strtr($arg, array_combine($search, $replace));
 
         // Check if there are phrases in $arg should handle as it is
         $phrase = explode("\"", $arg);
@@ -2656,7 +2656,7 @@ class Arabic
                 // Take off all the punctuation
                 //$word = preg_replace("/\p{P}/", '', $word);
                 $exclude = array('(', ')', '[', ']', '{', '}', ',', ';', ':', '?', '!', '،', '؛', '؟');
-                $word    = str_replace($exclude, '', $word);
+                $word    = strtr($word, array_fill_keys($exclude, ''));
 
                 $wordCondition[] = $this->getWordRegExp($word);
             //}
@@ -3373,7 +3373,7 @@ class Arabic
         }
 
         if ($output == 2) {
-            $summary = str_replace("\n", '<br />', $summary);
+            $summary = strtr($summary, array("\n" => '<br />'));
         }
 
         return $summary;
@@ -3456,8 +3456,8 @@ class Arabic
      */
     private function arNormalize($str)
     {
-        $str = str_replace($this->arNormalizeAlef, 'ا', $str);
-        $str = str_replace($this->arNormalizeDiacritics, '', $str);
+        $str = strtr($str, array_fill_keys($this->arNormalizeAlef, 'ا'));
+        $str = strtr($str, array_fill_keys($this->arNormalizeDiacritics, ''));
         $str = strtr($str, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
 
         return $str;
@@ -3474,7 +3474,7 @@ class Arabic
      */
     private function arCleanCommon($str)
     {
-        $str = str_replace($this->arSummaryCommonWords, ' ', $str);
+        $str = strtr($str, array_fill_keys($this->arSummaryCommonWords, ' '));
 
         return $str;
     }
@@ -3490,7 +3490,7 @@ class Arabic
      */
     private function arDraftStem($str)
     {
-        $str = str_replace($this->arCommonChars, '', $str);
+        $str = strtr($str, array_fill_keys($this->arCommonChars, ''));
 
         return $str;
     }
@@ -3509,7 +3509,7 @@ class Arabic
     {
         $wordsRanks = array();
 
-        $str   = str_replace($this->arSeparators, ' ', $str);
+        $str   = strtr($str, array_fill_keys($this->arSeparators, ' '));
         $words = preg_split("/[\s,]+/u", $str);
 
         foreach ($words as $word) {
@@ -3829,7 +3829,7 @@ class Arabic
             $codeLength = $codeLength / 2;
             $validChars = '23456789CFGHJMPQRVWX';
             
-            $olc = strtoupper(str_replace('+', '', $olc));
+            $olc = strtoupper(strtr($olc, array('+' => '')));
 
             $latitude  = 0;
             $longitude = 0;
@@ -3928,7 +3928,7 @@ class Arabic
     {
         $lastHarakat = array('/َ(\s)/u', '/ُ(\s)/u', '/ِ(\s)/u', '/ْ(\s)/u', '/[َُِْ]$/u');
         $bodyHarakat = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u', '/ْ(\S)/u');
-        $allTanwen   = array('ً', 'ٍ', 'ٌ');
+        $allTanwen   = array('ً' => '', 'ٍ' => '', 'ٌ' => '');
         
         if ($harakat) {
             $text = preg_replace($bodyHarakat, '\\1', $text);
@@ -3939,15 +3939,15 @@ class Arabic
         }
         
         if ($tatweel) {
-            $text = str_replace('ـ', '', $text);
+            $text = strtr($text, array('ـ' => ''));
         }
         
         if ($tanwen) {
-            $text = str_replace($allTanwen, '', $text);
+            $text = strtr($text, $allTanwen);
         }
         
         if ($shadda) {
-            $text = str_replace('ّ', '', $text);
+            $text = strtr($text, array('ّ' => ''));
         }
         
         return $text;
