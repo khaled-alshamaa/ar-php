@@ -1512,7 +1512,7 @@ class Arabic
     /**
      * Spell integer number in Arabic idiom
      *
-     * @param integer $number The number you want to spell in Arabic idiom
+     * @param string  $number The number you want to spell in Arabic idiom
      * @param boolean $zero   Present leading zero if true [default is true]
      *
      * @return string The Arabic idiom that spells inserted number
