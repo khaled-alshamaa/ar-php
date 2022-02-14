@@ -108,10 +108,10 @@ $contents = <<<END
 المعتمد على نظريات العالم البرت اينشتاين في اوائل القرن العشرين.
 END;
 
-    $contents = str_replace("\n", '', $contents);
+    $contents = str_replace("\n", ' ', $contents);
 
     $summary     = $Arabic->arSummary($contents, $_GET['q'], $rate, 1, 1);
-    $highlighted = $Arabic->arSummary($contents, $_GET['q'], $rate, 1, 2, 'summary');
+    $highlighted = $Arabic->arSummary($contents, $_GET['q'], $rate, 1, 2);
     //$keywords    = $Arabic->arSummaryKeywords($contents, 10);
 
     echo "<h3>$title:</h3>";
@@ -174,10 +174,10 @@ $code = <<< ENDALL
 المعتمد على نظريات العالم البرت اينشتاين في اوائل القرن العشرين.
 END;
 
-    \$contents = str_replace("\\n", '', \$contents);
+    \$contents = str_replace("\\n", ' ', \$contents);
 
     \$summary     = \$Arabic->arSummary(\$contents, \$_GET['q'], \$rate, 1, 1);
-    \$highlighted = \$Arabic->arSummary(\$contents, \$_GET['q'], \$rate, 1, 2, 'summary');
+    \$highlighted = \$Arabic->arSummary(\$contents, \$_GET['q'], \$rate, 1, 2);
 
     echo "<h3>\$title:</h3>";
     echo '<a href="AutoSummarize.php">ملخص عادي</a> | ';
