@@ -37,6 +37,10 @@
 
 * Improve sentiment analysis model by optimise system parameters and calculate probability.
 
+* Improve the code performance by replacing str_replace function with strtr function.
+
+* Fix the internal method to clean common words by making sure to remove the whole words only.
+
 -->
 
 ## What's new in ArPHP 6.2.0 _(release date: Jun 20, 2021)_
