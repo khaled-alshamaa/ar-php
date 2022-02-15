@@ -3970,13 +3970,13 @@ class Arabic
         $text = preg_replace('/#\\S+/u', '', $text);
 
         # normalise Alef
-        $text = preg_replace('/[أإآى]/u', 'ا', $text);
+        $text = strtr($text, array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا', 'ى' => 'ا'));
 
         # normalise Hamza
-        $text = preg_replace('/[ؤئء]/u', 'ء', $text);
+        $text = strtr($text, array('ؤ' => 'ء', 'ئ' => 'ء'));
 
         # replace taa marbouta by taa maftouha
-        $text = preg_replace('/ة/u', 'ه', $text);
+        $text = strtr($text, array('ة' => 'ه'));
 
         # filter only Arabic text (white list)
         $text = preg_replace('/[^ ءابتثجحخدذرزسشصضطظعغفقكلمنهوي]+/u', ' ', $text);
@@ -4065,26 +4065,14 @@ class Arabic
     public function noDots($text)
     {
         $text = preg_replace('/ن(\b)/u', 'ں$1', $text);
-        $text = preg_replace('/[بتثن]/u', 'ٮ', $text);
-        $text = preg_replace('/ي/u', 'ى', $text);
-        
-        $text = preg_replace('/ف/u', 'ڡ', $text);
-        $text = preg_replace('/ق/u', 'ٯ', $text);
-
         $text = preg_replace('/ك(\b)/u', 'ک$1', $text);
-
-        $text = preg_replace('/ش/u', 'س', $text);
-        $text = preg_replace('/غ/u', 'ع', $text);
-        $text = preg_replace('/ذ/u', 'د', $text);
-        $text = preg_replace('/ز/u', 'ر', $text);
-        $text = preg_replace('/ض/u', 'ص', $text);
-        $text = preg_replace('/ظ/u', 'ط', $text);
-        $text = preg_replace('/ة/u', 'ه', $text);
-        $text = preg_replace('/[جخ]/u', 'ح', $text);
-
-        $text = preg_replace('/[أإآ]/u', 'ا', $text);
-        $text = preg_replace('/ؤ/u', 'و', $text);
-        $text = preg_replace('/ئ/u', 'ى', $text);
+        
+        $text = strtr($text, array('ب' => 'ٮ', 'ت' => 'ٮ', 'ث' => 'ٮ', 'ن' => 'ٮ',
+                                   'ي' => 'ى', 'ف' => 'ڡ', 'ق' => 'ٯ', 'ش' => 'س',
+                                   'غ' => 'ع', 'ذ' => 'د', 'ز' => 'ر', 'ض' => 'ص',
+                                   'ظ' => 'ط', 'ة' => 'ه', 'ج' => 'ح', 'خ' => 'ح',
+                                   'أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا', 'ؤ' => 'و',
+                                   'ئ' => 'ى'));
         
         return $text;
     }
