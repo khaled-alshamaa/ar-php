@@ -37,7 +37,7 @@
 
 * Improve sentiment analysis model by optimise system parameters and calculate probability.
 
-* Improve the code performance by replacing str_replace function with strtr function.
+* Improve the code performance by replacing str_replace function with strtr function (arSummary can handle 145% of requests per second compared to the previous version).
 
 * Fix the internal method to clean common words by making sure to remove the whole words only.
 
