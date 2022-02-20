@@ -123,9 +123,19 @@ After a profile information file has been generated you can open it with the [KC
 
 > __Note:__ You can find some nice video tutorials by Derick Rethans the (Xdebug author) available here ([Xdebug 3 Profiling](https://www.youtube.com/watch?v=8yUY063WgDg) and [Analysing Xdebug 3 Profiling Data](https://www.youtube.com/watch?v=iH-hDOuQfcY))
 
+### _PHPStan Static Analysis Tool_
+
+[PHPStan](https://phpstan.org/) is a PHP static analysis tool that finds bugs in your code without writing tests. It catches whole classes of bugs even before you write tests for the code. You can download the latest PHAR distribution of PHPStan from [here](https://github.com/phpstan/phpstan/releases), then copy it inside the root directory of the library.
+
+To let PHPStan analyse your codebase, you have to use the `analyse` command and point it to the right directories. For example, you can run the following command line that checks scripts inside the `src` directory up to rule **level 6** (more about [rule levels](https://phpstan.org/user-guide/rule-levels)):
+
+```bash
+php phpstan.phar analyse -l 6 src
+```
+
 ### _Extra Utilities for Code Reviews_
 * [Insphpect](https://insphpect.com/) is an automated code review tool which identifies inflexibilities in PHP code and helps you write better software.
-* [PHPStan](https://phpstan.org/) is a PHP static analysis tool finds bugs In your code without writing tests! 
+
 
 ### _PHP Archive (phar)_
 
