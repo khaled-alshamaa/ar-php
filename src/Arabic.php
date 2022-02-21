@@ -84,7 +84,7 @@ class Arabic
     /** @var array<string> */
     private $strToTimeReplacements = array();
     
-    /** @var array<string> */
+    /** @var array<string|false> */
     private $umAlqoura;
     
     /** @var array<string> */
@@ -162,7 +162,7 @@ class Arabic
     /** @var array<string> */
     private $arNumberCurrency = array();
 
-    /** @var array<string> */
+    /** @var array<int> */
     private $arNumberSpell = array();
 
     /** @var int */
@@ -176,7 +176,11 @@ class Arabic
     
     /** @var array<string> */
     private $arabizi = array();
+
+    /** @var array<float> */
     private $arLogodd;
+
+    /** @var array<float> */
     private $enLogodd;
 
     /** @var array<string> */
@@ -188,31 +192,53 @@ class Arabic
     /** @var array<string> */
     private $frKeyboard = array();
     
+    /** @var array<string> */
     private $soundexTransliteration = array();
-    private $soundexMap             = array();
+
+    /** @var array<string> */
+    private $soundexMap = array();
     
+    /** @var array<string> */
     private $arSoundexCode = array();
-    private $arPhonixCode  = array();
+
+    /** @var array<string> */
+    private $arPhonixCode = array();
 
     /** @var int */
-    private $soundexLen    = 4;
+    private $soundexLen = 4;
 
     /** @var string */
-    private $soundexLang   = 'en';
+    private $soundexLang = 'en';
 
     /** @var string */
-    private $soundexCode   = 'soundex';
-    
-    private $arGlyphs         = null;
-    private $arGlyphsHex      = null;
+    private $soundexCode = 'soundex';
+
+    /** @var null|string */
+    private $arGlyphs = null;
+
+    /** @var null|string */
+    private $arGlyphsHex = null;
+
+    /** @var null|string */
     private $arGlyphsPrevLink = null;
-    private $arGlyphsNextLink = null;
-    private $arGlyphsVowel    = null;
 
-    private $arQueryFields          = array();
-    private $arQueryLexPatterns     = array();
+    /** @var null|string */
+    private $arGlyphsNextLink = null;
+
+    /** @var null|string */
+    private $arGlyphsVowel = null;
+
+    /** @var array<string> */
+    private $arQueryFields = array();
+
+    /** @var array<string> */
+    private $arQueryLexPatterns = array();
+
+    /** @var array<string> */
     private $arQueryLexReplacements = array();
-    private $arQueryMode            = 0;
+
+    /** @var int */
+    private $arQueryMode = 0;
 
     /** @var int */
     private $salatYear = 1975;
@@ -238,7 +264,10 @@ class Arabic
     /** @var float */
     private $salatAB2 = -0.833333;
 
+    /** @var float */
     private $salatAG2 = -18;
+
+    /** @var float */
     private $salatAJ2 = -18;
 
     /** @var string */
@@ -266,10 +295,16 @@ class Arabic
     /** @var array<string> */
     private $arSummaryImportantWords = array();
     
+    /** @var array<string> */
     private $arPluralsForms = array();
     
+    /** @var array<string> */
     private $logOdd     = array();
+
+    /** @var array<string> */
     private $logOddStem = array();
+
+    /** @var array<string> */
     private $allStems   = array();
     
     /** @var string */
@@ -300,6 +335,7 @@ class Arabic
         $this->arSentimentInit();
     }
     
+    /** @return void */
     private function arStandardInit()
     {
         $this->arStandardPatterns[] = '/\r\n/u';
@@ -389,6 +425,7 @@ class Arabic
         $this->arStandardReplacements[] = "\r";
     }
     
+    /** @return void */
     private function arStrToTimeInit()
     {
         $this->strToTimeSearch = file($this->rootDirectory . '/data/strtotime_search.txt', FILE_IGNORE_NEW_LINES);
@@ -407,6 +444,7 @@ class Arabic
         $this->strToTimeReplacements[] = ' \\1';
     }
     
+    /** @return void */
     private function arTransliterateInit()
     {
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
@@ -452,6 +490,7 @@ class Arabic
         }
     }
     
+    /** @return void */
     private function arNumbersInit()
     {
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_numbers.json'), true);
@@ -531,6 +570,7 @@ class Arabic
         }
     }
     
+    /** @return void */
     private function arKeySwapInit()
     {
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/arabizi.json'), true);
@@ -561,6 +601,7 @@ class Arabic
         $this->enLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_en.txt'));
     }
     
+    /** @return void */
     private function arSoundexInit()
     {
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_soundex.json'), true);
@@ -583,6 +624,7 @@ class Arabic
         $this->soundexMap = $this->arSoundexCode;
     }
     
+    /** @return void */
     private function arGlyphsInit()
     {
         $this->arGlyphsPrevLink  = '،؟؛ـئبتثجحخسشصضطظعغفقكلمنهي';
@@ -629,6 +671,7 @@ class Arabic
         $this->arGlyphsHex .= 'FEF5FEF6FEF5FEF6FEF7FEF8FEF7FEF8FEF9FEFAFEF9FEFAFEFBFEFCFEFBFEFC';
     }
 
+    /** @return void */
     private function arQueryInit()
     {
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_query.json'), true);
@@ -639,6 +682,7 @@ class Arabic
         }
     }
 
+    /** @return void */
     private function arSummaryInit()
     {
         // This common words used in cleanCommon method
@@ -656,6 +700,7 @@ class Arabic
     }
 
     
+    /** @return void */
     private function arSentimentInit()
     {
         $this->allStems   = file($this->rootDirectory . '/data/stems.txt', FILE_IGNORE_NEW_LINES);
@@ -808,7 +853,7 @@ class Arabic
      * @param integer $m Hijri month (Islamic calendar)
      * @param integer $d Hijri day (Islamic calendar)
      *
-     * @return array Gregorian date [int Year, int Month, int Day]
+     * @return array<int> Gregorian date [int Year, int Month, int Day]
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arDateIslamicToGreg($y, $m, $d)
@@ -817,7 +862,7 @@ class Arabic
 
         list($month, $day, $year) = explode('/', $str);
 
-        return array($year, $month, $day);
+        return array((int)$year, (int)$month, (int)$day);
     }
 
     /**
@@ -2538,10 +2583,10 @@ class Arabic
      * Double-escaped entities will only be decoded once
      * ("&amp;lt;" becomes "&lt;", not "<").
      *
-     * @param string $text    The text to decode entities in.
-     * @param array  $exclude An array of characters which should not be decoded.
-     *                        For example, array('<', '&', '"'). This affects
-     *                        both named and numerical entities.
+     * @param string        $text    The text to decode entities in.
+     * @param array<string> $exclude An array of characters which should not be decoded.
+     *                               For example, array('<', '&', '"'). This affects
+     *                               both named and numerical entities.
      *
      * @return string
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
@@ -3006,15 +3051,15 @@ class Arabic
     public function setSalatDate($m = 8, $d = 2, $y = 1975)
     {
         if (is_numeric($y) && $y > 0 && $y < 3000) {
-            $this->salatYear = floor($y);
+            $this->salatYear = (int)floor($y);
         }
 
         if (is_numeric($m) && $m >= 1 && $m <= 12) {
-            $this->salatMonth = floor($m);
+            $this->salatMonth = (int)floor($m);
         }
 
         if (is_numeric($d) && $d >= 1 && $d <= 31) {
-            $this->salatDay = floor($d);
+            $this->salatDay = (int)floor($d);
         }
 
         return $this;
@@ -3042,7 +3087,7 @@ class Arabic
         }
 
         if (is_numeric($z) && $z >= -12 && $z <= 12) {
-            $this->salatZone = floor($z);
+            $this->salatZone = (int)floor($z);
         }
 
         if (is_numeric($e)) {
@@ -3113,11 +3158,11 @@ class Arabic
      * Calculate Salat times for the date set in setSalatDate methode, and
      * location set in setSalatLocation.
      *
-     * @return array of Salat times + sun rise in the following format
-     *               hh:mm where hh is the hour in local format and 24 mode
-     *               mm is minutes with leading zero to be 2 digits always
-     *               array items is [$Fajr, $Sunrise, $Dhuhr, $Asr, $Maghrib,
-     *               $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]
+     * @return array<string> of Salat times + sun rise in the following format
+     *                       hh:mm where hh is the hour in local format and 24 mode
+     *                       mm is minutes with leading zero to be 2 digits always
+     *                       array items is [$Fajr, $Sunrise, $Dhuhr, $Asr, $Maghrib,
+     *                       $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      * @author Hamid Zarrabi-Zadeh <zarrabi@scs.carleton.ca>
      * @source http://praytimes.org/calculation
@@ -3604,8 +3649,8 @@ class Arabic
      *
      * @param string $str Input Arabic document as a string
      *
-     * @return array Associated array where document words referred by index and
-     *               those words ranks referred by values of those array items.
+     * @return array<int> Associated array where document words referred by index and
+     *                    those words ranks referred by values of those array items.
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arSummaryRankWords($str)
@@ -3631,10 +3676,10 @@ class Arabic
      *
      * @param array<string> $sentences        Sentences of the input Arabic document as an array
      * @param array<string> $stemmedSentences Stemmed sentences of the input Arabic document as an array
-     * @param array<string> $arr              Words ranks array (word as an index and value refer to the word frequency)
+     * @param array<int>    $arr              Words ranks array (word as an index and value refer to the word frequency)
      *
-     * @return array Two dimension array, first item is an array of document sentences, second item is an array
-     *               of ranks of document sentences.
+     * @return array<int, array<int, float|int|string>> Two dimension array, first item is an array of document
+     *                                        sentences, second item is an array of ranks of document sentences.
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arSummaryRankSentences($sentences, $stemmedSentences, $arr)
@@ -3776,8 +3821,8 @@ class Arabic
      *
      * @param string $str UTF-8 multi language string
      *
-     * @return array Offset of the beginning and end of each Arabic segment in
-     *               sequence in the given UTF-8 multi language string
+     * @return array<int> Offset of the beginning and end of each Arabic segment in
+     *                    sequence in the given UTF-8 multi language string
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function arIdentify($str)
@@ -3921,7 +3966,7 @@ class Arabic
      * @param integer $codeLength Code length, default value is 10 (this provides an area that is
      *                            1/8000 x 1/8000 degree in size, roughly 14x14 meters)
      *
-     * @return array Location coordinates in decimal degrees [latitude, longitude] in WGS84
+     * @return array<null|float>  Location coordinates in decimal degrees [latitude, longitude] in WGS84
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function olc2dd($olc, $codeLength = 10)
@@ -4061,7 +4106,8 @@ class Arabic
      *
      * @param string $text Arabic review string
      *
-     * @return array of 2 elements: boolean isPositive (negative if false), and float probability (range from 0 to 1)
+     * @return array<boolean|float> of 2 elements: boolean isPositive (negative if false),
+     *                              and float probability (range from 0 to 1)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function arSentiment($text)
@@ -4133,7 +4179,7 @@ class Arabic
 
             if ($negationFlag) {
                 // switch positive/negative sentiment because of negation word effect
-                $score += -1 * $this->logOdd[$sel_stem];
+                $score += -1 * (float)$this->logOdd[$sel_stem];
                 
                 $negationFlag = false;
             } else {
