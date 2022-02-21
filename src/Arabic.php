@@ -57,74 +57,150 @@ namespace ArPHP\I18N;
  
 class Arabic
 {
+    /** @var string */
     public $version = '6.2.0';
     
-    private $arStandardPatterns     = array();
+    /** @var array<string> */
+    private $arStandardPatterns = array();
+
+    /** @var array<string> */
     private $arStandardReplacements = array();
     
-    private $arFemaleNames;
+    /** @var array<string> */
+    private $arFemaleNames = array();
     
-    private $strToTimeSearch  = array();
+    /** @var array<string> */
+    private $strToTimeSearch = array();
+
+    /** @var array<string> */
     private $strToTimeReplace = array();
+
+    /** @var array<string> */
     private $hj = array();
     
-    private $strToTimePatterns     = array();
+    /** @var array<string> */
+    private $strToTimePatterns = array();
+
+    /** @var array<string> */
     private $strToTimeReplacements = array();
     
+    /** @var array<string> */
     private $umAlqoura;
     
-    private $arFinePatterns     = array("/'+/u", "/([\- ])'/u", '/(.)#/u');
+    /** @var array<string> */
+    private $arFinePatterns = array("/'+/u", "/([\- ])'/u", '/(.)#/u');
+
+    /** @var array<string> */
     private $arFineReplacements = array("'", '\\1', "\\1'\\1");
     
-    private $diariticalSearch  = array();
+    /** @var array<string> */
+    private $diariticalSearch = array();
+
+    /** @var array<string> */
     private $diariticalReplace = array();
     
-    private $en2arPregSearch  = array();
+    /** @var array<string> */
+    private $en2arPregSearch = array();
+
+    /** @var array<string> */
     private $en2arPregReplace = array();
-    private $en2arStrSearch   = array();
-    private $en2arStrReplace  = array();
+
+    /** @var array<string> */
+    private $en2arStrSearch = array();
+
+    /** @var array<string> */
+    private $en2arStrReplace = array();
     
-    private $ar2enPregSearch  = array();
+    /** @var array<string> */
+    private $ar2enPregSearch = array();
+
+    /** @var array<string> */
     private $ar2enPregReplace = array();
-    private $ar2enStrSearch   = array();
-    private $ar2enStrReplace  = array();
+
+    /** @var array<string> */
+    private $ar2enStrSearch = array();
+
+    /** @var array<string> */
+    private $ar2enStrReplace = array();
     
-    private $iso233Search  = array();
+    /** @var array<string> */
+    private $iso233Search = array();
+
+    /** @var array<string> */
     private $iso233Replace = array();
     
-    private $rjgcSearch  = array();
+    /** @var array<string> */
+    private $rjgcSearch = array();
+
+    /** @var array<string> */
     private $rjgcReplace = array();
     
-    private $sesSearch  = array();
+    /** @var array<string> */
+    private $sesSearch = array();
+
+    /** @var array<string> */
     private $sesReplace = array();
     
+    /** @var int */
     private $arDateMode = 1;
-    private $arDateJSON;
+
+    /** @var array<string> */
+    private $arDateJSON = array();
     
-    private $arNumberIndividual    = array();
+    /** @var array<string> */
+    private $arNumberIndividual = array();
+
+    /** @var array<string> */
     private $arNumberComplications = array();
-    private $arNumberArabicIndic   = array();
-    private $arNumberOrdering      = array();
-    private $arNumberCurrency      = array();
-    private $arNumberSpell         = array();
-    private $arNumberFeminine      = 1;
-    private $arNumberFormat        = 1;
-    private $arNumberOrder         = 1;
+
+    /** @var array<string> */
+    private $arNumberArabicIndic = array();
+
+    /** @var array<string> */
+    private $arNumberOrdering = array();
+
+    /** @var array<string> */
+    private $arNumberCurrency = array();
+
+    /** @var array<string> */
+    private $arNumberSpell = array();
+
+    /** @var int */
+    private $arNumberFeminine = 1;
+
+    /** @var int */
+    private $arNumberFormat = 1;
+
+    /** @var int */
+    private $arNumberOrder = 1;
     
+    /** @var array<string> */
     private $arabizi = array();
     private $arLogodd;
     private $enLogodd;
-    private $arKeyboard;
-    private $enKeyboard;
-    private $frKeyboard;
+
+    /** @var array<string> */
+    private $arKeyboard = array();
+
+    /** @var array<string> */
+    private $enKeyboard = array();
+
+    /** @var array<string> */
+    private $frKeyboard = array();
     
     private $soundexTransliteration = array();
     private $soundexMap             = array();
     
     private $arSoundexCode = array();
     private $arPhonixCode  = array();
+
+    /** @var int */
     private $soundexLen    = 4;
+
+    /** @var string */
     private $soundexLang   = 'en';
+
+    /** @var string */
     private $soundexCode   = 'soundex';
     
     private $arGlyphs         = null;
@@ -138,30 +214,56 @@ class Arabic
     private $arQueryLexReplacements = array();
     private $arQueryMode            = 0;
 
-    private $salatYear  = 1975;
-    private $salatMonth = 8;
-    private $salatDay   = 2;
-    private $salatZone  = 2;
+    /** @var int */
+    private $salatYear = 1975;
 
+    /** @var int */
+    private $salatMonth = 8;
+
+    /** @var int */
+    private $salatDay = 2;
+
+    /** @var int */
+    private $salatZone = 2;
+
+    /** @var float */
     private $salatLong = 37.15861;
-    private $salatLat  = 36.20278;
+
+    /** @var float */
+    private $salatLat = 36.20278;
+
+    /** @var int */
     private $salatElevation = 0;
 
+    /** @var float */
     private $salatAB2 = -0.833333;
+
     private $salatAG2 = -18;
     private $salatAJ2 = -18;
 
+    /** @var string */
     private $salatSchool = 'Shafi';
+
+    /** @var string */
     private $salatView   = 'Sunni';
 
-    private $arNormalizeAlef       = array('أ','إ','آ');
+    /** @var array<string> */
+    private $arNormalizeAlef = array('أ','إ','آ');
+
+    /** @var array<string> */
     private $arNormalizeDiacritics = array('َ','ً','ُ','ٌ','ِ','ٍ','ْ','ّ');
 
-    private $arSeparators  = array('.',"\n",'،','؛','(','[','{',')',']','}',',',';');
+    /** @var array<string> */
+    private $arSeparators = array('.',"\n",'،','؛','(','[','{',')',']','}',',',';');
+
+    /** @var array<string> */
     private $arCommonChars = array('ة','ه','ي','ن','و','ت','ل','ا','س','م',
                                    'e', 't', 'a', 'o', 'i', 'n', 's');
 
-    private $arSummaryCommonWords    = array();
+    /** @var array<string> */
+    private $arSummaryCommonWords = array();
+
+    /** @var array<string> */
     private $arSummaryImportantWords = array();
     
     private $arPluralsForms = array();
@@ -170,6 +272,7 @@ class Arabic
     private $logOddStem = array();
     private $allStems   = array();
     
+    /** @var string */
     private $rootDirectory;
 
 
@@ -1127,7 +1230,7 @@ class Arabic
      *                       6) Algeria and Tunis style
      *                       7) Morocco style
      *
-     * @return array Arabic month names in selected style
+     * @return array<string> Arabic month names in selected style
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arDateArabicMonths($mode)
@@ -1148,7 +1251,7 @@ class Arabic
      * @param integer $m Month Gregorian month
      * @param integer $d Day Gregorian day
      *
-     * @return array Hijri date [int Year, int Month, int Day](Islamic calendar)
+     * @return array<int> Hijri date [int Year, int Month, int Day](Islamic calendar)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arDateGregToIslamic($y, $m, $d)
@@ -1165,7 +1268,7 @@ class Arabic
      *
      * @param integer $jd Julian day
      *
-     * @return array Hijri date [int Year, int Month, int Day](Islamic calendar)
+     * @return array<int> Hijri date [int Year, int Month, int Day](Islamic calendar)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arDateJdToIslamic($jd)
@@ -2464,11 +2567,11 @@ class Arabic
     /**
      * Helper function for decodeEntities
      *
-     * @param string $prefix    Prefix
-     * @param string $codepoint Codepoint
-     * @param string $original  Original
-     * @param array  $table     Store named entities in a table
-     * @param array  $exclude   An array of characters which should not be decoded
+     * @param string        $prefix    Prefix
+     * @param string        $codepoint Codepoint
+     * @param string        $original  Original
+     * @param array<string> $table     Store named entities in a table
+     * @param array<string> $exclude   An array of characters which should not be decoded
      *
      * @return string
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
@@ -2518,8 +2621,8 @@ class Arabic
     /**
      * Setting value for $_fields array
      *
-     * @param array $arrConfig Name of the fields that SQL statement will search
-     *                         them (in array format where items are those fields names)
+     * @param array<string> $arrConfig Name of the fields that SQL statement will search
+     *                                 them (in array format where items are those fields names)
      *
      * @return object $this to build a fluent interface
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
@@ -2586,7 +2689,7 @@ class Arabic
     /**
      * Getting values of $_fields Array in array format
      *
-     * @return array Value of $_fields array in Array format
+     * @return array<string> Value of $_fields array in Array format
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function getQueryArrFields()
@@ -2772,7 +2875,7 @@ class Arabic
      *
      * @param string $word String that user search for
      *
-     * @return array list of most possible Arabic lexical forms for a given word
+     * @return array<string> list of most possible Arabic lexical forms for a given word
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     private function arQueryAllWordForms($word)
@@ -3093,7 +3196,7 @@ class Arabic
         // can consider this elevation into consideration by increasing the above
         // constant 0.833 by 0.0347 × sqrt(elevation), where elevation is the
         // observer's height in meters.
-        $alpha = 0.833 + 0.0347 * sqrt($this->salatElevation);
+        $alpha = -1 * $this->salatAB2 + 0.0347 * sqrt($this->salatElevation);
         $n     = -1 * sin(deg2rad($alpha)) - sin(deg2rad($this->salatLat)) * sin(deg2rad($D));
         $d     = cos(deg2rad($this->salatLat)) * cos(deg2rad($D));
 
@@ -3526,9 +3629,9 @@ class Arabic
     /**
      * Ranks sentences in a given Arabic string (document content).
      *
-     * @param array $sentences        Sentences of the input Arabic document as an array
-     * @param array $stemmedSentences Stemmed sentences of the input Arabic document as an array
-     * @param array $arr              Words ranks array (word as an index and value refer to the word frequency)
+     * @param array<string> $sentences        Sentences of the input Arabic document as an array
+     * @param array<string> $stemmedSentences Stemmed sentences of the input Arabic document as an array
+     * @param array<string> $arr              Words ranks array (word as an index and value refer to the word frequency)
      *
      * @return array Two dimension array, first item is an array of document sentences, second item is an array
      *               of ranks of document sentences.
@@ -3606,10 +3709,10 @@ class Arabic
     /**
      * Calculate minimum rank for sentences which will be including in the summary
      *
-     * @param array   $str Document sentences
-     * @param array   $arr Sentences ranks
-     * @param integer $int Number of sentences you need to include in your summary
-     * @param integer $max Maximum number of characters accepted in your summary
+     * @param array<string> $str Document sentences
+     * @param array<int>    $arr Sentences ranks
+     * @param integer $int  Number of sentences you need to include in your summary
+     * @param integer $max  Maximum number of characters accepted in your summary
      *
      * @return integer Minimum accepted sentence rank (sentences with rank more
      *                 than this will be listed in the document summary)
