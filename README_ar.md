@@ -67,13 +67,14 @@ https://github.com/khaled-alshamaa/ar-php, 2022
 
 ### أين تم استخدامه؟
 
-* [Bagisto](https://github.com/bagisto/bagisto/blob/master/README.md): حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
+برنامج [Akeneo](https://www.akeneo.com/): برمجية حرّة مفتوحة المصدر سهلة ومرنة لتنظيم وإثراء كتالوج منتجاتك. حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/akeneo/pim-community-dev/blob/master/src/Akeneo/Pim/Enrichment/Bundle/PdfGeneration/HtmlFormatter/ArabicHtmlFormatter.php)] 
 
-* [LimeSurvey](https://github.com/LimeSurvey/LimeSurvey/blob/master/README.md): برمجية استبيان مفتوحة المصدر. 
+برنامج [Bagisto](https://www.bagisto.com/): حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
+
+برنامج [LimeSurvey](https://www.limesurvey.org/): برمجية استبيان مفتوحة المصدر. 
 [[version 3.6.0](https://github.com/LimeSurvey/LimeSurvey/tree/master/application/third_party/ar-php)، تحقق من ذلك [هنا](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L134) و 
 [هنا](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L133)]
 
-* [حزمة لارافل لمشروع PHP واللغة العربية](https://github.com/atm-code/ar-php-laravel)
 
 ### اللغة العربية
 لقد نما استخدام الإنترنت على المستوى العالمي بشكل هائل خلال الأعوام القليلة الماضية، وكان هذا النمو أسرع في المناطق غير الناطقة باللغة الإنجليزية وبالذات في العالم العربي. فعلى سبيل المثال، لقد نمى عدد مستخدمي الإنترنت في الشرق الأوسط بين عامي 2000 و 2020 بنسبة 9300%، في حين يقدر أن حجم المحتوى العربي على شبكة الويب يتضاعف في كل عام. إن مثل هكذا نمو أوجد حاجة إلى مصادر برمجية تساعد في تطوير مواقع الويب باللغة العربية. على كل حال، فإن مصادر تطوير مواقع الويب المتوفرة ربما لا تكون ملائمة لأنها طورت أساسا لخدمة المستخدمين الناطقين باللغة الإنجليزية.
