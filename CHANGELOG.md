@@ -41,6 +41,8 @@
 
 * Fix the internal method to clean common words by making sure to remove the whole words only.
 
+* Fix PHP notices in handling some extreme cases in glyphs algorithm. Thanks to [Denis Chenu](https://github.com/Shnoulle) from [LimeSurvey](https://github.com/LimeSurvey/LimeSurvey) team.
+
 -->
 
 ## What's new in ArPHP 6.2.0 _(release date: Jun 20, 2021)_

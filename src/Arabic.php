@@ -2365,10 +2365,10 @@ class Arabic
                 $number  = '';
             }
 
-            if ($prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false) {
+            if ($i > 1 && $prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false) {
                 $prevChar = $chars[$i - 2];
 
-                if ($prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false) {
+                if ($i > 2 && $prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false) {
                     $prevChar = $chars[$i - 3];
                 }
             }
@@ -2427,7 +2427,7 @@ class Arabic
                     }
                 }
 
-                if (mb_strpos($this->arGlyphsVowel, $chars[$i - 1], 0)) {
+                if (isset($chars[$i - 1]) && mb_strpos($this->arGlyphsVowel, $chars[$i - 1], 0)) {
                     $output .= '&#x';
                     $output .= $this->getArGlyphs($crntChar, $form) . ';';
                 } else {
