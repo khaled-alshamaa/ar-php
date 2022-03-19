@@ -1,6 +1,6 @@
 # ArPHP Library - Change Log
 
-<!-- * Version [6.5.0](#whats-new-in-arphp-650-release-date-dec-18-2021) _(release date: Dec 18, 2021)_ -->
+<!-- * Version [6.3.0](#whats-new-in-arphp-630-release-date-apr-18-2022) _(release date: Apr 18, 2022)_ -->
 * Version [6.2.0](#whats-new-in-arphp-620-release-date-jun-20-2021) _(release date: Jun 20, 2021)_
 * Version [6.1.0](#whats-new-in-arphp-610-release-date-may-1-2021) _(release date: May 1, 2021)_
 * Version [6.0.0](#whats-new-in-arphp-600-release-date-feb-15-2021) _(release date: Feb 15, 2021)_
@@ -31,19 +31,21 @@
 
 
 <!--
-## What's new in ArPHP 6.5.0 _(release date: Dec 18, 2021)_
+## What's new in ArPHP 6.3.0 _(release date: Apr 18, 2022)_
 
-* Improve the code quality by fix all issues reported by the [PHPStan.org](https://phpstan.org) (PHP Static Analysis Tool) up to the [rule level 6](https://phpstan.org/user-guide/rule-levels).
-
-* Improve sentiment analysis model by optimise system parameters and calculate probability.
+* Improve the arIdentify method by adding an option to ignore the HTML tags (active by default).
 
 * Improve the way that the keyboard swap function handles لا case (i.e., b vs. gh option) using a probability model.
+
+* Improve sentiment analysis model by optimise system parameters and calculate probability.
 
 * Improve the code performance by replacing str_replace function with strtr function (arSummary can handle 145% of requests per second compared to the previous version).
 
 * Fix the internal method to clean common words by making sure to remove the whole words only.
 
 * Fix PHP notices in handling some extreme cases in glyphs algorithm. Thanks to [Denis Chenu](https://github.com/Shnoulle) from [LimeSurvey](https://github.com/LimeSurvey/LimeSurvey) team.
+
+* Improve the code quality by fix all issues reported by the [PHPStan.org](https://phpstan.org) (PHP Static Analysis Tool) up to the [rule level 6](https://phpstan.org/user-guide/rule-levels).
 
 -->
 

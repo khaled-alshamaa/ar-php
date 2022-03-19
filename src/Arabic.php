@@ -3843,25 +3843,37 @@ class Arabic
     /**
      * Identify Arabic text in a given UTF-8 multi language string
      *
-     * @param string $str UTF-8 multi language string
+     * @param string  $str  UTF-8 multi language string
+     * @param boolean $html If True, then ignore the HTML tags (default is TRUE)
      *
      * @return array<int> Offset of the beginning and end of each Arabic segment in
      *                    sequence in the given UTF-8 multi language string
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function arIdentify($str)
+    public function arIdentify($str, $html = true)
     {
-        $minAr  = 55436;
-        $maxAr  = 55698;
-        $probAr = false;
-        $arFlag = false;
-        $arRef  = array();
-        $max    = strlen($str);
-        $ascii  = unpack('C*', $str);
+        $minAr    = 55436;
+        $maxAr    = 55698;
+        $probAr   = false;
+        $arFlag   = false;
+        $htmlFlag = false;
+        $arRef    = array();
+        $max      = strlen($str);
+        $ascii    = unpack('C*', $str);
 
         $i = -1;
         while (++$i < $max) {
             $cDec = $ascii[$i + 1];
+            
+            if ($html == true) {
+                if ($cDec == 60 && $ascii[$i + 2] != 32) {
+                    $htmlFlag = true;
+                } else if ($htmlFlag == true && $cDec == 62) {
+                    $htmlFlag = false;
+                } else if ($htmlFlag == true) {
+                    continue;
+                }
+            }
 
             // ignore ! " # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 :
             // If it come in the Arabic context
