@@ -1843,7 +1843,31 @@ class Arabic
      */
     public function swapAe($text)
     {
-        $output = $this->swapCore($text, 'ar', 'en');
+        $pieces = explode('لا', $text);
+        
+        $max = count($pieces);
+
+        for ($i = 0; $i < $max; $i++) {
+            $pieces[$i] = $this->swapCore($pieces[$i], 'ar', 'en');
+        }
+        
+        if ($max > 1) {
+            for ($i = 1; $i < $max; $i++) {
+                $first_next = mb_substr($pieces[$i], 0, 1);
+                $last_prev  = mb_substr($pieces[$i - 1], -1);
+                
+                $rank_b  = $this->enLogodd[$last_prev]['b'] + $this->enLogodd['b'][$first_next];
+                $rank_gh = $this->enLogodd[$last_prev]['g'] + $this->enLogodd['h'][$first_next];
+                
+                if ($rank_b > $rank_gh) {
+                    $pieces[$i] = 'b' . $pieces[$i];
+                } else {
+                    $pieces[$i] = 'gh' . $pieces[$i];
+                }
+            }
+        }
+        
+        $output = implode('', $pieces);
 
         return $output;
     }

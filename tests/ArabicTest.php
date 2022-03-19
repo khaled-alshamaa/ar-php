@@ -370,7 +370,7 @@ final class ArabicTest extends TestCase
     
         $this->assertEquals(
             $fixed,
-            ['ببطئ لكن بثبات', 'ببطئ لكن بثبات', 'Slowly ghut surely', 'Slowly but surely']
+            ['ببطئ لكن بثبات', 'ببطئ لكن بثبات', 'Slowly but surely', 'Slowly but surely']
         );
     }
 
