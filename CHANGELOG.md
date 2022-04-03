@@ -37,9 +37,11 @@
 
 * Improve the way that the keyboard swap function handles لا case (i.e., b vs. gh option) using a probability model.
 
-* Improve sentiment analysis model by optimise system parameters and calculate probability.
+* Improve sentiment analysis model by optimise system parameters and calculate probability method.
 
 * Improve the code performance by replacing str_replace function with strtr function (arSummary can handle 145% of requests per second compared to the previous version).
+
+* Fix the issue of Hijri date correction not behaving consistently when the Hijri month end on 29th. Thanks to [Socotoly](https://github.com/Socotoly) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/22).
 
 * Fix the internal method to clean common words by making sure to remove the whole words only.
 
