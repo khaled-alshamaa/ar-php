@@ -1164,14 +1164,15 @@ class Arabic
             
             list($y, $m, $d) = explode(' ', date('Y m d', $timestamp));
             list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d);
-            
+
             $hj_d += $correction;
-            
+
             if ($hj_d <= 0) {
-                $hj_d = 30;
+                $hj_d = $hj_d == 0 ? 30 : 29;
                 list($hj_y, $hj_m, $temp) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d + $correction);
             } elseif ($hj_d > 30) {
-                list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d + $correction);
+                $hj_d = $hj_d == 31 ? 1 : 2;
+                list($hj_y, $hj_m, $temp) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d + $correction);
             }
 
             $patterns     = array();
