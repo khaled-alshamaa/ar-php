@@ -1163,34 +1163,16 @@ class Arabic
             */
             
             list($y, $m, $d) = explode(' ', date('Y m d', $timestamp));
-            list($y_plus, $m_plus, $d_plus) = explode(' ', date('Y m d', strtotime($y . "-" . $m . "-" . $d . "+1 days")));
-            list($y_minus, $m_minus, $d_minus) = explode(' ', date('Y m d', strtotime($y . "-" . $m . "-" . $d . "-1 days")));
-
             list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d);
 
-            $hj_d_no_correction = $hj_d;
             $hj_d += $correction;
 
             if ($hj_d <= 0) {
-                $hj_d = 30;
-                if ($hj_d_no_correction == 1) {
-                    list($temp_hj_y, $temp_hj_m, $temp_hj_d) = $this->arDateGregToIslamic((int)$y_minus, (int)$m_minus, (int)$d_minus);
-
-                    if ($temp_hj_d == 29) {
-                        $hj_d = 29;
-                    }
-                }
+                $hj_d = $hj_d == 0 ? 30 : 29;
                 list($hj_y, $hj_m, $temp) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d + $correction);
             } elseif ($hj_d > 30) {
-                list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d + $correction);
-
-                if ($hj_d_no_correction == 29) {
-                    list($temp_hj_y, $temp_hj_m, $temp_hj_d) = $this->arDateGregToIslamic((int)$y_plus, (int)$m_plus, (int)$d_plus);
-
-                    if ($temp_hj_d == 1) {
-                        list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d + $correction - 1);
-                    }
-                }
+                $hj_d = $hj_d == 31 ? 1 : 2;
+                list($hj_y, $hj_m, $temp) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d + $correction);
             }
 
             $patterns     = array();
