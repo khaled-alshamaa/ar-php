@@ -4143,6 +4143,7 @@ class Arabic
                      ->setNorm('stripShadda', $shadda)
                      ->setNorm('stripLastHarakat', $last)
                      ->setNorm('stripWordHarakat', $harakat)
+                     ->setNorm('normaliseLamAlef', true)
                      ->setNorm('normaliseAlef', false)
                      ->setNorm('normaliseHamza', false)
                      ->setNorm('normaliseTaa', false)
@@ -4406,7 +4407,9 @@ class Arabic
         }
 
         if ($this->normaliseLamAlef) {
-            $text = strtr($text, array('لا' => 'لا', 'لإ' => 'لإ', 'لآ' => 'لآ', 'لأ' => 'لأ'));
+            $search  = array('لا', 'لآ', 'لأ', 'لإ');
+            $replace = array('لا', 'لآ', 'لأ', 'لإ');
+            $text    = str_replace($search, $replace, $text);
         }
 
         if ($this->normaliseAlef) {

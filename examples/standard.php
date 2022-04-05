@@ -205,6 +205,62 @@ ENDALL;
 
 highlight_string($code);
 ?>
+</div><br />
+
+<div class="Paragraph" dir="rtl">
+<h2 dir="ltr">Example Output:</h2>
+<?php
+    $text = 'آسِفـــةٌ لا تَنَبُّؤْ';
+
+    $Arabic->setNorm('stripTatweel', true)
+           ->setNorm('stripTanween', true)
+           ->setNorm('stripShadda', true)
+           ->setNorm('stripLastHarakat', true)
+           ->setNorm('stripWordHarakat', true)
+           ->setNorm('normaliseLamAlef', true)
+           ->setNorm('normaliseAlef', true)
+           ->setNorm('normaliseHamza', true)
+           ->setNorm('normaliseTaa', true);
+
+    echo '<b>Origenal Text</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $text . '</p>';
+
+    echo '<hr /><b>Normalized Text</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $Arabic->arNormalizeText($text) . '</p>';
+?>
+</div><br />
+<div class="Paragraph">
+<h2>Example Code:</h2>
+<?php
+$code = <<< ENDALL
+<?php
+	\$Arabic = new \\ArPHP\\I18N\\Arabic();
+    
+    \$text = 'آسِفـــةٌ لا تَنَبُّؤْ';
+
+    \$Arabic->setNorm('stripTatweel', true)
+           ->setNorm('stripTanween', true)
+           ->setNorm('stripShadda', true)
+           ->setNorm('stripLastHarakat', true)
+           ->setNorm('stripWordHarakat', true)
+           ->setNorm('normaliseLamAlef', true)
+           ->setNorm('normaliseAlef', true)
+           ->setNorm('normaliseHamza', true)
+           ->setNorm('normaliseTaa', true);
+
+    echo '<b>Origenal Text</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$text . '</p>';
+
+    echo '<hr /><b>Normalized Text</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$Arabic->arNormalizeText(\$text) . '</p>';    
+ENDALL;
+
+highlight_string($code);
+?>
 </div>
 
 <footer><i><a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, an open-source library for website developers to process Arabic content</i></footer>
