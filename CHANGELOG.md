@@ -33,6 +33,8 @@
 <!--
 ## What's new in ArPHP 6.3.0 _(release date: Apr 18, 2022)_
 
+* Add Arabic text normalization method (e.g., Alef, Hamza, Taa, Alef Lam, etc.). Thanks to [Watheq Alshowaiter](https://github.com/WatheqAlshowaiter) for the [request](https://github.com/khaled-alshamaa/ar-php/issues/18).
+
 * Improve the arIdentify method by adding an option to ignore the HTML tags (active by default).
 
 * Improve the way that the keyboard swap function handles لا case (i.e., b vs. gh option) using a probability model.

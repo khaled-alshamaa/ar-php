@@ -299,16 +299,43 @@ class Arabic
     private $arPluralsForms = array();
     
     /** @var array<string> */
-    private $logOdd     = array();
+    private $logOdd = array();
 
     /** @var array<string> */
     private $logOddStem = array();
 
     /** @var array<string> */
-    private $allStems   = array();
+    private $allStems = array();
     
     /** @var string */
     private $rootDirectory;
+
+    /** @var boolean */
+    private $stripTatweel = true;
+    
+    /** @var boolean */
+    private $stripTanween = true;
+    
+    /** @var boolean */
+    private $stripShadda = true;
+    
+    /** @var boolean */
+    private $stripLastHarakat = true;
+    
+    /** @var boolean */
+    private $stripWordHarakat = true;
+    
+    /** @var boolean */
+    private $normaliseLamAlef = true;
+
+    /** @var boolean */
+    private $normaliseAlef = true;
+
+    /** @var boolean */
+    private $normaliseHamza = true;
+
+    /** @var boolean */
+    private $normaliseTaa = true;
 
 
     public function __construct()
@@ -4111,30 +4138,16 @@ class Arabic
      */
     public function stripHarakat($text, $tatweel = true, $tanwen = true, $shadda = true, $last = true, $harakat = true)
     {
-        $lastHarakat = array('/َ(\s)/u', '/ُ(\s)/u', '/ِ(\s)/u', '/ْ(\s)/u', '/[َُِْ]$/u');
-        $bodyHarakat = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u', '/ْ(\S)/u');
-        $allTanwen   = array('ً' => '', 'ٍ' => '', 'ٌ' => '');
-        
-        if ($harakat) {
-            $text = preg_replace($bodyHarakat, '\\1', $text);
-        }
-        
-        if ($last) {
-            $text = preg_replace($lastHarakat, '\\1', $text);
-        }
-        
-        if ($tatweel) {
-            $text = strtr($text, array('ـ' => ''));
-        }
-        
-        if ($tanwen) {
-            $text = strtr($text, $allTanwen);
-        }
-        
-        if ($shadda) {
-            $text = strtr($text, array('ّ' => ''));
-        }
-        
+        $text = $this->setNorm('stripTatweel', $tatweel)
+                     ->setNorm('stripTanween', $tanwen)
+                     ->setNorm('stripShadda', $shadda)
+                     ->setNorm('stripLastHarakat', $last)
+                     ->setNorm('stripWordHarakat', $harakat)
+                     ->setNorm('normaliseAlef', false)
+                     ->setNorm('normaliseHamza', false)
+                     ->setNorm('normaliseTaa', false)
+                     ->arNormalizeText($text);
+
         return $text;
     }
     
@@ -4155,14 +4168,11 @@ class Arabic
         # remove hashtags
         $text = preg_replace('/#\\S+/u', '', $text);
 
-        # normalise Alef
-        $text = strtr($text, array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا', 'ى' => 'ا'));
-
-        # normalise Hamza
-        $text = strtr($text, array('ؤ' => 'ء', 'ئ' => 'ء'));
-
-        # replace taa marbouta by taa maftouha
-        $text = strtr($text, array('ة' => 'ه'));
+        # normalise Alef, Hamza, and Taa
+        $text = $this->setNorm('normaliseAlef', true)
+                     ->setNorm('normaliseHamza', true)
+                     ->setNorm('normaliseTaa', true)
+                     ->arNormalizeText($text);
 
         # filter only Arabic text (white list)
         $text = preg_replace('/[^ ءابتثجحخدذرزسشصضطظعغفقكلمنهوي]+/u', ' ', $text);
@@ -4261,5 +4271,156 @@ class Arabic
                                    'ئ' => 'ى'));
         
         return $text;
+    }
+
+    /////////////////////////////////////// Normalize ///////////////////////////////////////////////
+
+    /**
+     * Set given normalization form status.
+     *
+     * @param string  $form   One of the normalization forms ['stripTatweel', 'stripTanween', 'stripShadda',
+     *                        'stripLastHarakat', 'stripWordHarakat', 'normaliseLamAlef',
+     *                        'normaliseAlef', 'normaliseHamza', 'normaliseTaa']
+     * @param boolean $status Normalization form status [true|false]
+     *
+     * @return object $this to build a fluent interface.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function setNorm($form, $status)
+    {
+        if ($status == true) {
+            $status = true;
+        } else {
+            $status = false;
+        }
+        
+        switch ($form) {
+            case 'stripTatweel':
+                $this->stripTatweel = $status;
+                break;
+            case 'stripTanween':
+                $this->stripTanween = $status;
+                break;
+            case 'stripShadda':
+                $this->stripShadda = $status;
+                break;
+            case 'stripLastHarakat':
+                $this->stripLastHarakat = $status;
+                break;
+            case 'stripWordHarakat':
+                $this->stripWordHarakat = $status;
+                break;
+            case 'normaliseLamAlef':
+                $this->normaliseLamAlef = $status;
+                break;
+            case 'normaliseAlef':
+                $this->normaliseAlef = $status;
+                break;
+            case 'normaliseHamza':
+                $this->normaliseHamza = $status;
+                break;
+            case 'normaliseTaa':
+                $this->normaliseTaa = $status;
+                break;
+        }
+
+        return $this;
+    }
+    
+    /**
+     * Get given normalization form status.
+     *
+     * @param string  $form One of the normalization forms ['stripTatweel', 'stripTanween', 'stripShadda',
+     *                      'stripLastHarakat', 'stripWordHarakat', 'normaliseLamAlef',
+     *                      'normaliseAlef', 'normaliseHamza', 'normaliseTaa']
+     *
+     * @return boolean Selected normalization form status.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function getNorm($form)
+    {
+        switch ($form) {
+            case 'stripTatweel':
+                $value = $this->stripTatweel;
+                break;
+            case 'stripTanween':
+                $value = $this->stripTanween;
+                break;
+            case 'stripShadda':
+                $value = $this->stripShadda;
+                break;
+            case 'stripLastHarakat':
+                $value = $this->stripLastHarakat;
+                break;
+            case 'stripWordHarakat':
+                $value = $this->stripWordHarakat;
+                break;
+            case 'normaliseLamAlef':
+                $value = $this->normaliseLamAlef;
+                break;
+            case 'normaliseAlef':
+                $value = $this->normaliseAlef;
+                break;
+            case 'normaliseHamza':
+                $value = $this->normaliseHamza;
+                break;
+            case 'normaliseTaa':
+                $value = $this->normaliseTaa;
+                break;
+        }
+        
+        return $value;
+    }
+    
+    /**
+     * Normalizes the input provided and returns the normalized string.
+     *
+     * @param string  $text The input string to normalize.
+     *
+     * @return string The normalized string.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function arNormalizeText($text)
+    {
+        if ($this->stripWordHarakat) {
+            $bodyHarakat = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u', '/ْ(\S)/u');
+            $text = preg_replace($bodyHarakat, '\\1', $text);
+        }
+
+        if ($this->stripLastHarakat) {
+            $lastHarakat = array('/َ(\s)/u', '/ُ(\s)/u', '/ِ(\s)/u', '/ْ(\s)/u', '/[َُِْ]$/u');
+            $text = preg_replace($lastHarakat, '\\1', $text);
+        }
+
+        if ($this->stripTatweel) {
+            $text = strtr($text, array('ـ' => ''));
+        }
+
+        if ($this->stripTanween) {
+            $allTanwen = array('ً' => '', 'ٍ' => '', 'ٌ' => '');
+            $text = strtr($text, $allTanwen);
+        }
+
+        if ($this->stripShadda) {
+            $text = strtr($text, array('ّ' => ''));
+        }
+
+        if ($this->normaliseLamAlef) {
+            $text = strtr($text, array('لا' => 'لا', 'لإ' => 'لإ', 'لآ' => 'لآ', 'لأ' => 'لأ'));
+        }
+
+        if ($this->normaliseAlef) {
+            $text = strtr($text, array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا', 'ى' => 'ا'));
+        }
+
+        if ($this->normaliseHamza) {
+            $text = strtr($text, array('ؤ' => 'ء', 'ئ' => 'ء'));
+        }
+
+        if ($this->normaliseTaa) {
+            $text = strtr($text, array('ة' => 'ه'));
+        }
+
+        return($text);
     }
 }
