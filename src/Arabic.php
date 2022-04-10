@@ -4281,7 +4281,7 @@ class Arabic
      *
      * @param string  $form   One of the normalization forms ['stripTatweel', 'stripTanween', 'stripShadda',
      *                        'stripLastHarakat', 'stripWordHarakat', 'normaliseLamAlef',
-     *                        'normaliseAlef', 'normaliseHamza', 'normaliseTaa']
+     *                        'normaliseAlef', 'normaliseHamza', 'normaliseTaa', 'all']
      * @param boolean $status Normalization form status [true|false]
      *
      * @return object $this to build a fluent interface.
@@ -4322,6 +4322,17 @@ class Arabic
                 break;
             case 'normaliseTaa':
                 $this->normaliseTaa = $status;
+                break;
+            case 'all':
+                $this->stripTatweel     = $status;
+                $this->stripTanween     = $status;
+                $this->stripShadda      = $status;
+                $this->stripLastHarakat = $status;
+                $this->stripWordHarakat = $status;
+                $this->normaliseLamAlef = $status;
+                $this->normaliseAlef    = $status;
+                $this->normaliseHamza   = $status;
+                $this->normaliseTaa     = $status;
                 break;
         }
 

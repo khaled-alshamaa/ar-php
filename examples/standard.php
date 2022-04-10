@@ -221,6 +221,9 @@ highlight_string($code);
            ->setNorm('normaliseAlef', true)
            ->setNorm('normaliseHamza', true)
            ->setNorm('normaliseTaa', true);
+    
+    # you can also use all form like the following example
+    # $Arabic->setNorm('all', true)->setNorm('normaliseHamza', false)->setNorm('normaliseTaa', false);
 
     echo '<b>Origenal Text</b>';
     echo '<p dir="rtl" align="justify">';
@@ -249,6 +252,9 @@ $code = <<< ENDALL
            ->setNorm('normaliseAlef', true)
            ->setNorm('normaliseHamza', true)
            ->setNorm('normaliseTaa', true);
+
+    # you can also use all form like the following example
+    # \$Arabic->setNorm('all', true)->setNorm('normaliseHamza', false)->setNorm('normaliseTaa', false);
 
     echo '<b>Origenal Text</b>';
     echo '<p dir="rtl" align="justify">';
