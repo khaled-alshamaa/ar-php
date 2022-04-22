@@ -51,6 +51,8 @@
 
 * Improve the code quality by fix all issues reported by the [PHPStan.org](https://phpstan.org) (PHP Static Analysis Tool) up to the [rule level 6](https://phpstan.org/user-guide/rule-levels).
 
+* Use version 0.114 of the Amiri font ([changes in this release](https://github.com/aliftype/amiri/releases/tag/0.114)).
+
 -->
 
 ## What's new in ArPHP 6.2.0 _(release date: Jun 20, 2021)_
