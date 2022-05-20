@@ -3051,11 +3051,17 @@ class Arabic
         if ($len >= 4 && $last1 == 'ى') {
             $wordForms[] = $str1 . 'ا';
         }
+        
+        if (preg_match("/(\\S{1,})ئ(\\S{1,})/", $word) != false) {
+            foreach ($wordForms as $form) {
+                $wordForms[] = preg_replace("/(\\S{1,})ئ(\\S{1,})/", "\\1ي\\2", $form);
+            }
+        }
 
         $trans = array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا');
-        foreach ($wordForms as $word) {
-            $normWord = strtr($word, $trans);
-            if ($normWord != $word) {
+        foreach ($wordForms as $form) {
+            $normWord = strtr($form, $trans);
+            if ($normWord != $form) {
                 $wordForms[] = $normWord;
             }
         }

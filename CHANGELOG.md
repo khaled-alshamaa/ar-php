@@ -1,6 +1,6 @@
 # ArPHP Library - Change Log
 
-<!-- * Version [6.3.0](#whats-new-in-arphp-630-release-date-apr-18-2022) _(release date: Apr 18, 2022)_ -->
+<!-- * Version [6.3.0](#whats-new-in-arphp-630-release-date-jun-12-2022) _(release date: Jun 12, 2022)_ -->
 * Version [6.2.0](#whats-new-in-arphp-620-release-date-jun-20-2021) _(release date: Jun 20, 2021)_
 * Version [6.1.0](#whats-new-in-arphp-610-release-date-may-1-2021) _(release date: May 1, 2021)_
 * Version [6.0.0](#whats-new-in-arphp-600-release-date-feb-15-2021) _(release date: Feb 15, 2021)_
@@ -31,7 +31,7 @@
 
 
 <!--
-## What's new in ArPHP 6.3.0 _(release date: Apr 18, 2022)_
+## What's new in ArPHP 6.3.0 _(release date: Jun 12, 2022)_
 
 * Add Arabic text normalization method (e.g., Alef, Hamza, Taa, Alef Lam, etc.). Thanks to [Watheq Alshowaiter](https://github.com/WatheqAlshowaiter) for the [request](https://github.com/khaled-alshamaa/ar-php/issues/18).
 
@@ -42,6 +42,8 @@
 * Improve sentiment analysis model by optimise system parameters and calculate probability method.
 
 * Improve the code performance by replacing str_replace function with strtr function (arSummary can handle 145% of requests per second compared to the previous version).
+
+* Account for the spelling difference of using Yaa' instead of Hamza Ala Nabrah in the arQueryAllForms() and arQueryWhereCondition() methods. Thanks to [Hamad Adhbiyah](https://github.com/Q8hma) for mentioning it in [this issue](https://github.com/khaled-alshamaa/ar-php/issues/26).
 
 * Fix the issue of Hijri date correction not behaving consistently when the Hijri month end on 29th. Thanks to [Socotoly](https://github.com/Socotoly) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/22).
 

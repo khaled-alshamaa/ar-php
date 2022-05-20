@@ -15,7 +15,7 @@
 <body>
 
 <div class="Paragraph">
-<h2>Arabic SQL Queary:</h2>
+<h2>Arabic SQL Query:</h2>
 <p align="justified">Build WHERE condition for SQL statement using MySQL REGEXP and Arabic lexical rules.</p>
 
 <p align="justified">With the exception of the Qur'an and pedagogical texts, Arabic is generally written without vowels or 
