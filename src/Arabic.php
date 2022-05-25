@@ -213,17 +213,8 @@ class Arabic
     /** @var string */
     private $soundexCode = 'soundex';
 
-    /** @var null|string */
+    /** @var array<string> */
     private $arGlyphs = null;
-
-    /** @var null|string */
-    private $arGlyphsHex = null;
-
-    /** @var null|string */
-    private $arGlyphsPrevLink = null;
-
-    /** @var null|string */
-    private $arGlyphsNextLink = null;
 
     /** @var null|string */
     private $arGlyphsVowel = null;
@@ -654,48 +645,12 @@ class Arabic
     /** @return void */
     private function arGlyphsInit()
     {
-        $this->arGlyphsPrevLink  = '،؟؛ـئبتثجحخسشصضطظعغفقكلمنهي';
-        $this->arGlyphsNextLink  = 'ـآأؤإائبةتثجحخدذرز';
-        $this->arGlyphsNextLink .= 'سشصضطظعغفقكلمنهوىي';
         $this->arGlyphsVowel     = 'ًٌٍَُِّْ';
         
-        $this->arGlyphs     = 'ًٌٍَُِّْٰ';
-        $this->arGlyphsHex  = '064B064B064B064B064C064C064C064C064D064D064D064D064E064E064E064E';
-        $this->arGlyphsHex .= '064F064F064F064F065006500650065006510651065106510652065206520652';
-        $this->arGlyphsHex .= '0670067006700670';
-        
-        $this->arGlyphs    .= 'ءآأؤإئاب';
-        $this->arGlyphsHex .= 'FE80FE80FE80FE80FE81FE82FE81FE82FE83FE84FE83FE84FE85FE86FE85FE86';
-        $this->arGlyphsHex .= 'FE87FE88FE87FE88FE89FE8AFE8BFE8CFE8DFE8EFE8DFE8EFE8FFE90FE91FE92';
-        
-        $this->arGlyphs    .= 'ةتثجحخدذ';
-        $this->arGlyphsHex .= 'FE93FE94FE93FE94FE95FE96FE97FE98FE99FE9AFE9BFE9CFE9DFE9EFE9FFEA0';
-        $this->arGlyphsHex .= 'FEA1FEA2FEA3FEA4FEA5FEA6FEA7FEA8FEA9FEAAFEA9FEAAFEABFEACFEABFEAC';
-        
-        $this->arGlyphs    .= 'رزسشصضطظ';
-        $this->arGlyphsHex .= 'FEADFEAEFEADFEAEFEAFFEB0FEAFFEB0FEB1FEB2FEB3FEB4FEB5FEB6FEB7FEB8';
-        $this->arGlyphsHex .= 'FEB9FEBAFEBBFEBCFEBDFEBEFEBFFEC0FEC1FEC2FEC3FEC4FEC5FEC6FEC7FEC8';
-        
-        $this->arGlyphs    .= 'عغفقكلمن';
-        $this->arGlyphsHex .= 'FEC9FECAFECBFECCFECDFECEFECFFED0FED1FED2FED3FED4FED5FED6FED7FED8';
-        $this->arGlyphsHex .= 'FED9FEDAFEDBFEDCFEDDFEDEFEDFFEE0FEE1FEE2FEE3FEE4FEE5FEE6FEE7FEE8';
-
-        $this->arGlyphs    .= 'هوىيـ،؟؛';
-        $this->arGlyphsHex .= 'FEE9FEEAFEEBFEECFEEDFEEEFEEDFEEEFEEFFEF0FEEFFEF0FEF1FEF2FEF3FEF4';
-        $this->arGlyphsHex .= '0640064006400640060C060C060C060C061F061F061F061F061B061B061B061B';
-        
-        // Support 5 Persian letters (Peh), (Tcheh), (Jeh), (Gaf), and (Yeh)
-        // DejaVuSans.ttf font
-        // $text = 'نمونة قلم: لاگچ ژافپ';
-        $this->arGlyphs    .= 'پچژگی';
-        $this->arGlyphsHex .= 'FB56FB57FB58FB59FB7AFB7BFB7CFB7DFB8AFB8BFB8AFB8B';
-        $this->arGlyphsHex .= 'FB92FB93FB94FB95FBFCFBFDFBFEFBFF';
-        
-        $this->arGlyphsPrevLink .= 'پچگی';
-        $this->arGlyphsNextLink .= 'پچژگی';
-
-        $this->arGlyphs    .= 'لآلألإلا';
-        $this->arGlyphsHex .= 'FEF5FEF6FEF5FEF6FEF7FEF8FEF7FEF8FEF9FEFAFEF9FEFAFEFBFEFCFEFBFEFC';
+        // Arabic Presentation Forms-B (https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-B)
+        // Contextual forms (https://en.wikipedia.org/wiki/Arabic_script_in_Unicode#Contextual_forms)
+        // 0- ISOLATED FORM, 1- FINAL FORM, 2- INITIAL FORM, 3- MEDIAL FORM
+        $this->arGlyphs = json_decode(file_get_contents($this->rootDirectory . '/data/ar_glyphs.json'), true);
     }
 
     /** @return void */
@@ -2341,45 +2296,19 @@ class Arabic
      */
     public function addGlyphs($char, $hex, $prevLink = true, $nextLink = true)
     {
-        if ($prevLink) {
-            $this->arGlyphsPrevLink  = $char . $this->arGlyphsPrevLink;
-        }
-        if ($nextLink) {
-            $this->arGlyphsNextLink  = $char . $this->arGlyphsNextLink;
-        }
+        $this->arGlyphs[$char][0] = substr($hex, 0, 4);
+        $this->arGlyphs[$char][1] = substr($hex, 4, 4);
+        $this->arGlyphs[$char][2] = substr($hex, 8, 4);
+        $this->arGlyphs[$char][3] = substr($hex, 12, 4);
         
-        $this->arGlyphs    = $char . $this->arGlyphs;
-        $this->arGlyphsHex = $hex . $this->arGlyphsHex;
+        $this->arGlyphs[$char]["prevLink"] = $prevLink;
+        $this->arGlyphs[$char]["nextLink"] = $nextLink;
     }
     
     /**
-     * Get glyphs
-     *
-     * @param string  $char Char
-     * @param integer $type Type
-     *
-     * @return string
-     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
-     */
-    private function getArGlyphs($char, $type)
-    {
-        $pos = mb_strpos($this->arGlyphs, $char, 0);
-        
-        $lastSimpleCharOffset = mb_strlen($this->arGlyphs) - 8;
-
-        if ($pos > $lastSimpleCharOffset) {
-            $pos = ($pos - $lastSimpleCharOffset) / 2 + $lastSimpleCharOffset;
-        }
-
-        $pos = $pos * 16 + $type * 4;
-
-        return substr($this->arGlyphsHex, $pos, 4);
-    }
-
-    /**
      * Convert Arabic string into glyph joining in UTF-8 hexadecimals stream
      *
-     * @param string $str Arabic string in Windows-1256 charset
+     * @param string $str Arabic string in UTF-8 charset
      *
      * @return string Arabic glyph joining in UTF-8 hexadecimals stream
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
@@ -2456,12 +2385,12 @@ class Arabic
             if ($crntChar && mb_strpos($this->arGlyphsVowel, $crntChar, 0) !== false) {
                 if (
                     isset($chars[$i + 1])
-                    && (mb_strpos($this->arGlyphsNextLink, $chars[$i + 1], 0) !== false)
-                    && (mb_strpos($this->arGlyphsPrevLink, $prevChar, 0) !== false)
+                    && ($this->arGlyphs[$chars[$i + 1]]['nextLink'] == true)
+                    && ($this->arGlyphs[$prevChar]['prevLink'] == true)
                 ) {
-                    $output .= '&#x' . $this->getArGlyphs($crntChar, 1) . ';';
+                    $output .= '&#x' . $this->arGlyphs[$crntChar][1] . ';';
                 } else {
-                    $output .= '&#x' . $this->getArGlyphs($crntChar, 0) . ';';
+                    $output .= '&#x' . $this->arGlyphs[$crntChar][0] . ';';
                 }
                 continue;
             }
@@ -2474,32 +2403,32 @@ class Arabic
                 && (mb_strpos('آأإا', $crntChar, 0) !== false)
             ) {
                 if ($i > 1) {
-                    if (mb_strpos($this->arGlyphsPrevLink, $chars[$i - 2], 0) !== false) {
+                    if ($this->arGlyphs[$chars[$i - 2]]['prevLink'] == true) {
                         $form++;
                     }
                 }
 
                 if (isset($chars[$i - 1]) && mb_strpos($this->arGlyphsVowel, $chars[$i - 1], 0)) {
                     $output .= '&#x';
-                    $output .= $this->getArGlyphs($crntChar, $form) . ';';
+                    $output .= $this->arGlyphs[$crntChar][$form] . ';';
                 } else {
                     $output .= '&#x';
-                    $output .= $this->getArGlyphs($prevChar . $crntChar, $form) . ';';
+                    $output .= $this->arGlyphs[$prevChar . $crntChar][$form] . ';'; // check this case!
                 }
 
                 $nextChar = $prevChar;
                 continue;
             }
 
-            if ($prevChar && mb_strpos($this->arGlyphsPrevLink, $prevChar, 0) !== false) {
+            if ($prevChar && $this->arGlyphs[$prevChar]['prevLink'] == true) {
                 $form++;
             }
 
-            if ($nextChar && mb_strpos($this->arGlyphsNextLink, $nextChar, 0) !== false) {
+            if ($nextChar && $this->arGlyphs[$nextChar]['nextLink'] == true) {
                 $form += 2;
             }
 
-            $output  .= '&#x' . $this->getArGlyphs($crntChar, $form) . ';';
+            $output  .= '&#x' . $this->arGlyphs[$crntChar][$form] . ';';
             $nextChar = $crntChar;
         }
 

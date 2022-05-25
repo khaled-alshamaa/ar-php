@@ -35,6 +35,8 @@
 
 * Add Arabic text normalization method (e.g., Alef, Hamza, Taa, Alef Lam, etc.). Thanks to [Watheq Alshowaiter](https://github.com/WatheqAlshowaiter) for the [request](https://github.com/khaled-alshamaa/ar-php/issues/18).
 
+* Rewrite the Arabic glyphs mechanism for more flexibility and performance, and resolve reported issue #25 with some fonts like Cairo and Tajawal by using standard UTF-8 code for isolated letters instead of the Arabic Presentation Forms-B. Thanks to [Firas Darwish](https://github.com/firasdarwish) for reporting this issue and [Khaled Hosny](https://github.com/khaledhosny) for help in fixing it.
+
 * Improve the arIdentify method by adding an option to ignore the HTML tags (active by default).
 
 * Improve the way that the keyboard swap function handles لا case (i.e., b vs. gh option) using a probability model.
