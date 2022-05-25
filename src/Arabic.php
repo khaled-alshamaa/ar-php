@@ -2322,103 +2322,129 @@ class Arabic
         $number   = '';
         $chars    = array();
 
+        $open_range  = ')]>}';
+        $close_range = '([<{';
+
         $_temp = mb_strlen($str);
 
+        // split the given string to an array of chars
         for ($i = 0; $i < $_temp; $i++) {
             $chars[] = mb_substr($str, $i, 1);
         }
 
         $max = count($chars);
 
+        // scan the array of chars backward to flip the sequence of Arabic chars in the string
         for ($i = $max - 1; $i >= 0; $i--) {
             $crntChar = $chars[$i];
-            $prevChar = ' ';
 
+            // set the prevChar by ignore tashkeel (max of two harakat), let it be space if we process the last char 
             if ($i > 0) {
                 $prevChar = $chars[$i - 1];
+                if (mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false && $i > 1) {
+                    $prevChar = $chars[$i - 2];
+
+                    if (mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false && $i > 2) {
+                        $prevChar = $chars[$i - 3];
+                    }
+                }
+            } else {
+                $prevChar = ' ';
             }
 
+            // if it is a digit, then keep adding it to the number in the correct order from left to right
+            // once finish, push it to the output array as a whole number then reset the number value to empty
             if (is_numeric($crntChar)) {
                 $number = $crntChar . $number;
                 continue;
             } elseif (strlen($number) > 0) {
                 $output .= $number;
                 $number  = '';
+                continue;
             }
 
-            if ($i > 1 && $prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false) {
-                $prevChar = $chars[$i - 2];
-
-                if ($i > 2 && $prevChar && mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false) {
-                    $prevChar = $chars[$i - 3];
-                }
+            // handle the case of open and close brackets (flip them)
+            if (mb_strpos($open_range . $close_range, $crntChar, 0) !== false) {
+                $output .= ($close_range . $open_range)[mb_strpos($open_range . $close_range, $crntChar, 0)];
+                continue;
             }
 
-            $Reversed    = false;
-            $flip_arr    = ')]>}';
-            $ReversedChr = '([<{';
-
-            if ($crntChar && mb_strpos($flip_arr, $crntChar, 0) !== false) {
-                $crntChar = $ReversedChr[mb_strpos($flip_arr, $crntChar, 0)];
-                $Reversed = true;
-            } else {
-                $Reversed = false;
-            }
-
-            if ($crntChar && !$Reversed && (mb_strpos($ReversedChr, $crntChar, 0) !== false)) {
-                $crntChar = $flip_arr[mb_strpos($ReversedChr, $crntChar, 0)];
-            }
-
+            // if it is an English char, then show it as it is
             if (ord($crntChar) < 128) {
                 $output  .= $crntChar;
                 $nextChar = $crntChar;
                 continue;
             }
 
+            // if the current char is LAM followed by ALEF, step to the next char
             if (
                 $crntChar == 'ل' && isset($chars[$i + 1])
                 && (mb_strpos('آأإا', $chars[$i + 1], 0) !== false)
             ) {
+                $output = substr($output, 0, -8);
+                if ($this->arGlyphs[$prevChar]['prevLink'] == true) {
+                    $output .= '&#x' . $this->arGlyphs[$crntChar . $chars[$i + 1]][1] . ';';
+                } else {
+                    $output .= '&#x' . $this->arGlyphs[$crntChar . $chars[$i + 1]][0] . ';';
+                }
                 continue;
             }
 
-            if ($crntChar && mb_strpos($this->arGlyphsVowel, $crntChar, 0) !== false) {
-                if (
-                    isset($chars[$i + 1])
-                    && ($this->arGlyphs[$chars[$i + 1]]['nextLink'] == true)
-                    && ($this->arGlyphs[$prevChar]['prevLink'] == true)
-                ) {
-                    $output .= '&#x' . $this->arGlyphs[$crntChar][1] . ';';
+            // handle the case of HARAKAT
+            if (mb_strpos($this->arGlyphsVowel, $crntChar, 0) !== false) {
+                if ($crntChar == 'ّ') {
+                    /*
+                    // handle the case of HARAKAT after SHADDA
+                    switch ($chars[$i + 1]) {
+                        case 'ٌ':
+                            $output .= '&#xFC5E;';
+                            break;
+                        case 'ٍ':
+                            $output .= '&#xFC5F;';
+                            break;
+                        case 'َ':
+                            $output .= '&#xFCF2;';
+                            break;
+                        case 'ُ':
+                            $output .= '&#xFC61;';
+                            break;
+                        case 'ِ':
+                            $output .= '&#xFC62;';
+                            break;
+                        default:
+                            $output .= '&#x0651;';
+                    }
+                    */
+                    $output .= '&#x0651;';
                 } else {
-                    $output .= '&#x' . $this->arGlyphs[$crntChar][0] . ';';
+                    switch ($crntChar) {
+                        case 'ً':
+                            $output .= '&#x064B;';
+                            break;
+                        case 'ٌ':
+                            $output .= '&#x064C;';
+                            break;
+                        case 'ٍ':
+                            $output .= '&#x064D;';
+                            break;
+                        case 'َ':
+                            $output .= '&#x064E;';
+                            break;
+                        case 'ُ':
+                            $output .= '&#x064F;';
+                            break;
+                        case 'ِ':
+                            $output .= '&#x0650;';
+                            break;
+                        case 'ْ':
+                            $output .= '&#x0652;';
+                            break;
+                    }
                 }
                 continue;
             }
 
             $form = 0;
-
-            if (
-                ($prevChar == 'لا' || $prevChar == 'لآ' || $prevChar == 'لأ'
-                || $prevChar == 'لإ' || $prevChar == 'ل')
-                && (mb_strpos('آأإا', $crntChar, 0) !== false)
-            ) {
-                if ($i > 1) {
-                    if ($this->arGlyphs[$chars[$i - 2]]['prevLink'] == true) {
-                        $form++;
-                    }
-                }
-
-                if (isset($chars[$i - 1]) && mb_strpos($this->arGlyphsVowel, $chars[$i - 1], 0)) {
-                    $output .= '&#x';
-                    $output .= $this->arGlyphs[$crntChar][$form] . ';';
-                } else {
-                    $output .= '&#x';
-                    $output .= $this->arGlyphs[$prevChar . $crntChar][$form] . ';'; // check this case!
-                }
-
-                $nextChar = $prevChar;
-                continue;
-            }
 
             if ($prevChar && $this->arGlyphs[$prevChar]['prevLink'] == true) {
                 $form++;
