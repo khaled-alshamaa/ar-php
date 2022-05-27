@@ -2378,14 +2378,14 @@ class Arabic
 
             // if the current char is LAM followed by ALEF, step to the next char
             if (
-                $crntChar == 'ل' && isset($chars[$i + 1])
-                && (mb_strpos('آأإا', $chars[$i + 1], 0) !== false)
+                $crntChar == 'ل' && isset($nextChar)
+                && (mb_strpos('آأإا', $nextChar, 0) !== false)
             ) {
-                $output = substr($output, 0, -8);
+                $output = substr_replace($output, '', strrpos($output, $this->arGlyphs[$nextChar][1])-3, 8);
                 if ($this->arGlyphs[$prevChar]['prevLink'] == true) {
-                    $output .= '&#x' . $this->arGlyphs[$crntChar . $chars[$i + 1]][1] . ';';
+                    $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][1] . ';';
                 } else {
-                    $output .= '&#x' . $this->arGlyphs[$crntChar . $chars[$i + 1]][0] . ';';
+                    $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][0] . ';';
                 }
                 continue;
             }
