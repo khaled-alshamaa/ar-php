@@ -144,13 +144,13 @@ class Arabic
     /** @var int */
     private $arDateMode = 1;
 
-    /** @var array<string> */
+    /** @var array<array<string|array<string>>> */
     private $arDateJSON = array();
     
-    /** @var array<string> */
+    /** @var array<string|array<string|array<string>>> */
     private $arNumberIndividual = array();
 
-    /** @var array<string> */
+    /** @var array<array<string>> */
     private $arNumberComplications = array();
 
     /** @var array<string> */
@@ -159,7 +159,7 @@ class Arabic
     /** @var array<string> */
     private $arNumberOrdering = array();
 
-    /** @var array<string> */
+    /** @var array<array<string|array<string>>> */
     private $arNumberCurrency = array();
 
     /** @var array<int> */
@@ -177,10 +177,10 @@ class Arabic
     /** @var array<string> */
     private $arabizi = array();
 
-    /** @var array<float> */
+    /** @var array<array<string>> */
     private $arLogodd;
 
-    /** @var array<float> */
+    /** @var array<array<string>> */
     private $enLogodd;
 
     /** @var array<string> */
@@ -213,7 +213,7 @@ class Arabic
     /** @var string */
     private $soundexCode = 'soundex';
 
-    /** @var array<string> */
+    /** @var array<array<string>> */
     private $arGlyphs = null;
 
     /** @var null|string */
@@ -1839,8 +1839,8 @@ class Arabic
                 $first_next = mb_substr($pieces[$i], 0, 1);
                 $last_prev  = mb_substr($pieces[$i - 1], -1);
                 
-                $rank_b  = $this->enLogodd[$last_prev]['b'] + $this->enLogodd['b'][$first_next];
-                $rank_gh = $this->enLogodd[$last_prev]['g'] + $this->enLogodd['h'][$first_next];
+                $rank_b  = (float)$this->enLogodd[$last_prev]['b'] + (float)$this->enLogodd['b'][$first_next];
+                $rank_gh = (float)$this->enLogodd[$last_prev]['g'] + (float)$this->enLogodd['h'][$first_next];
                 
                 if ($rank_b > $rank_gh) {
                     $pieces[$i] = 'b' . $pieces[$i];
@@ -2338,6 +2338,9 @@ class Arabic
         for ($i = $max - 1; $i >= 0; $i--) {
             $crntChar = $chars[$i];
 
+            // by default assume the letter form is isolated
+            $form = 0;
+
             // set the prevChar by ignore tashkeel (max of two harakat), let it be space if we process the last char 
             if ($i > 0) {
                 $prevChar = $chars[$i - 1];
@@ -2451,9 +2454,6 @@ class Arabic
                 }
                 continue;
             }
-
-            // by default assume the letter form is isolated
-            $form = 0;
 
             // check if it should connect to the prev char, then adjust the form value accordingly
             if ($prevChar && $this->arGlyphs[$prevChar]['prevLink'] == true) {
@@ -3343,7 +3343,7 @@ class Arabic
 
         // Convert number after the decimal point into minutes
         foreach ($times as $index => $time) {
-            $hours   = floor($time);
+            $hours   = (int)floor($time);
             $minutes = round(($time - $hours) * 60);
 
             if ($minutes < 10) {
@@ -4354,6 +4354,8 @@ class Arabic
             case 'normaliseTaa':
                 $value = $this->normaliseTaa;
                 break;
+            default:
+                $value = false;
         }
         
         return $value;
