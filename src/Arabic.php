@@ -2341,10 +2341,10 @@ class Arabic
             // set the prevChar by ignore tashkeel (max of two harakat), let it be space if we process the last char 
             if ($i > 0) {
                 $prevChar = $chars[$i - 1];
-                if (mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false && $i > 1) {
+                if (mb_strpos($this->arGlyphsVowel, $prevChar) !== false && $i > 1) {
                     $prevChar = $chars[$i - 2];
 
-                    if (mb_strpos($this->arGlyphsVowel, $prevChar, 0) !== false && $i > 2) {
+                    if (mb_strpos($this->arGlyphsVowel, $prevChar) !== false && $i > 2) {
                         $prevChar = $chars[$i - 3];
                     }
                 }
@@ -2364,8 +2364,8 @@ class Arabic
             }
 
             // handle the case of open and close brackets (flip them)
-            if (mb_strpos($open_range . $close_range, $crntChar, 0) !== false) {
-                $output .= ($close_range . $open_range)[mb_strpos($open_range . $close_range, $crntChar, 0)];
+            if (mb_strpos($open_range . $close_range, $crntChar) !== false) {
+                $output .= ($close_range . $open_range)[mb_strpos($open_range . $close_range, $crntChar)];
                 continue;
             }
 
@@ -2376,10 +2376,10 @@ class Arabic
                 continue;
             }
 
-            // if the current char is LAM followed by ALEF, step to the next char
+            // if the current char is LAM followed by ALEF, use ALEF-LAM character, then step to the next char
             if (
                 $crntChar == 'ل' && isset($nextChar)
-                && (mb_strpos('آأإا', $nextChar, 0) !== false)
+                && (mb_strpos('آأإا', $nextChar) !== false)
             ) {
                 $output = substr_replace($output, '', strrpos($output, $this->arGlyphs[$nextChar][1])-3, 8);
                 if ($this->arGlyphs[$prevChar]['prevLink'] == true) {
@@ -2391,31 +2391,39 @@ class Arabic
             }
 
             // handle the case of HARAKAT
-            if (mb_strpos($this->arGlyphsVowel, $crntChar, 0) !== false) {
+            if (mb_strpos($this->arGlyphsVowel, $crntChar) !== false) {
                 if ($crntChar == 'ّ') {
-                    /*
-                    // handle the case of HARAKAT after SHADDA
-                    switch ($chars[$i + 1]) {
-                        case 'ٌ':
-                            $output .= '&#xFC5E;';
-                            break;
-                        case 'ٍ':
-                            $output .= '&#xFC5F;';
-                            break;
-                        case 'َ':
-                            $output .= '&#xFCF2;';
-                            break;
-                        case 'ُ':
-                            $output .= '&#xFC61;';
-                            break;
-                        case 'ِ':
-                            $output .= '&#xFC62;';
-                            break;
-                        default:
-                            $output .= '&#x0651;';
+                    if (mb_strpos($this->arGlyphsVowel, $chars[$i + 1]) !== false) {
+                        // remove the HARAKA from output to merge it with SHADDA
+                        $output = substr($output, 0, -8);
+                        
+                        // check if the SHADDA & HARAKA in the middle of connected letters (form 3)
+                        if (($prevChar && $this->arGlyphs[$prevChar]['prevLink'] == true) &&
+                            ($nextChar && $this->arGlyphs[$nextChar]['nextLink'] == true)) {
+                            $form = 3;
+                        }
+
+                        // handle the case of HARAKAT after SHADDA
+                        switch ($chars[$i + 1]) {
+                            case 'ٌ':
+                                $output .= '&#xFC5E;';
+                                break;
+                            case 'ٍ':
+                                $output .= '&#xFC5F;';
+                                break;
+                            case 'َ':
+                                $output .= ($form == 3) ? '&#xFCF2;' : '&#xFC60;';
+                                break;
+                            case 'ُ':
+                                $output .= ($form == 3) ? '&#xFCF3;' : '&#xFC61;';
+                                break;
+                            case 'ِ':
+                                $output .= ($form == 3) ? '&#xFCF4;' : '&#xFC62;';
+                                break;
+                        }
+                    } else {
+                        $output .= '&#x0651;';
                     }
-                    */
-                    $output .= '&#x0651;';
                 } else {
                     switch ($crntChar) {
                         case 'ً':
@@ -2444,17 +2452,23 @@ class Arabic
                 continue;
             }
 
+            // by default assume the letter form is isolated
             $form = 0;
 
+            // check if it should connect to the prev char, then adjust the form value accordingly
             if ($prevChar && $this->arGlyphs[$prevChar]['prevLink'] == true) {
                 $form++;
             }
 
+            // check if it should connect to the next char, the adjust the form value accordingly
             if ($nextChar && $this->arGlyphs[$nextChar]['nextLink'] == true) {
                 $form += 2;
             }
 
+            // add the current char UTF-8 code to the output string
             $output  .= '&#x' . $this->arGlyphs[$crntChar][$form] . ';';
+            
+            // next char will be the current one before loop (we are going backword to manage right-to-left presenting)
             $nextChar = $crntChar;
         }
 
