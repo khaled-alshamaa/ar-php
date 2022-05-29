@@ -84,7 +84,7 @@ class Arabic
     /** @var array<string> */
     private $strToTimeReplacements = array();
     
-    /** @var array<string|false> */
+    /** @var string|false */
     private $umAlqoura;
     
     /** @var array<string> */
@@ -173,9 +173,6 @@ class Arabic
 
     /** @var int */
     private $arNumberOrder = 1;
-    
-    /** @var array<string> */
-    private $arabizi = array();
 
     /** @var array<array<string>> */
     private $arLogodd;
@@ -591,13 +588,6 @@ class Arabic
     /** @return void */
     private function arKeySwapInit()
     {
-        $json = json_decode(file_get_contents($this->rootDirectory . '/data/arabizi.json'), true);
-
-        foreach ($json['transliteration'] as $item) {
-            $index = $item['id'];
-            $this->arabizi["$index"] = (string)$item['text'];
-        }
-
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_keyswap.json'), true);
         
         foreach ($json['arabic'] as $key) {
@@ -1088,6 +1078,7 @@ class Arabic
     public function date($format, $timestamp, $correction = 0)
     {
         if ($this->arDateMode == 1 || $this->arDateMode == 8) {
+            /** @var array<string> */
             $hj_txt_month = array();
             
             if ($this->arDateMode == 1) {
@@ -1169,7 +1160,7 @@ class Arabic
             $patterns[] = 'x7';
             
             $replacements[] = $hj_y;
-            $replacements[] = substr($hj_y, -2);
+            $replacements[] = substr((string)$hj_y, -2);
             $replacements[] = $hj_txt_month[$hj_m];
             $replacements[] = $hj_m;
             $replacements[] = sprintf('%02d', $hj_m);

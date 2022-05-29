@@ -336,6 +336,10 @@
       "replace": "خ"
     },
     {
+      "search": "5",
+      "replace": "خ"
+    },
+    {
       "search": "7",
       "replace": "ح"
     },
