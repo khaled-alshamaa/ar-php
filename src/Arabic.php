@@ -333,7 +333,7 @@ class Arabic
         $this->rootDirectory = dirname(__FILE__);
         $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
         $this->umAlqoura     = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
-        $this->arDateJSON    = json_decode(file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
+        $this->arDateJSON    = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
 
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_plurals.json'), true);
         $this->arPluralsForms = $json['arPluralsForms'];
@@ -462,7 +462,7 @@ class Arabic
     /** @return void */
     private function arTransliterateInit()
     {
-        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
+        $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
 
         foreach ($json['preg_replace_en2ar'] as $item) {
             $this->en2arPregSearch[]  = $item['search'];
@@ -508,7 +508,7 @@ class Arabic
     /** @return void */
     private function arNumbersInit()
     {
-        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_numbers.json'), true);
+        $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_numbers.json'), true);
         
         foreach ($json['individual']['male'] as $num) {
             if (isset($num['grammar'])) {
@@ -588,7 +588,7 @@ class Arabic
     /** @return void */
     private function arKeySwapInit()
     {
-        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_keyswap.json'), true);
+        $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_keyswap.json'), true);
         
         foreach ($json['arabic'] as $key) {
             $index = (int)$key['id'];
@@ -612,7 +612,7 @@ class Arabic
     /** @return void */
     private function arSoundexInit()
     {
-        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_soundex.json'), true);
+        $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_soundex.json'), true);
         
         foreach ($json['arSoundexCode'] as $item) {
             $index = $item['search'];
@@ -640,13 +640,13 @@ class Arabic
         // Arabic Presentation Forms-B (https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-B)
         // Contextual forms (https://en.wikipedia.org/wiki/Arabic_script_in_Unicode#Contextual_forms)
         // 0- ISOLATED FORM, 1- FINAL FORM, 2- INITIAL FORM, 3- MEDIAL FORM
-        $this->arGlyphs = json_decode(file_get_contents($this->rootDirectory . '/data/ar_glyphs.json'), true);
+        $this->arGlyphs = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_glyphs.json'), true);
     }
 
     /** @return void */
     private function arQueryInit()
     {
-        $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_query.json'), true);
+        $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_query.json'), true);
 
         foreach ($json['preg_replace'] as $pair) {
             $this->arQueryLexPatterns[] = (string)$pair['search'];
