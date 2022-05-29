@@ -332,8 +332,8 @@ class Arabic
         
         $this->rootDirectory = dirname(__FILE__);
         $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
-        $this->umAlqoura     = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
-        $this->arDateJSON    = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
+        $this->umAlqoura  = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
+        $this->arDateJSON = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
 
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_plurals.json'), true);
         $this->arPluralsForms = $json['arPluralsForms'];
@@ -2332,7 +2332,7 @@ class Arabic
             // by default assume the letter form is isolated
             $form = 0;
 
-            // set the prevChar by ignore tashkeel (max of two harakat), let it be space if we process the last char 
+            // set the prevChar by ignore tashkeel (max of two harakat), let it be space if we process the last char
             if ($i > 0) {
                 $prevChar = $chars[$i - 1];
                 if (mb_strpos($this->arGlyphsVowel, $prevChar) !== false && $i > 1) {
@@ -2374,7 +2374,7 @@ class Arabic
                 $crntChar == 'ل' && isset($nextChar)
                 && (mb_strpos('آأإا', $nextChar) !== false)
             ) {
-                $output = substr_replace($output, '', strrpos($output, $this->arGlyphs[$nextChar][1])-3, 8);
+                $output = substr_replace($output, '', strrpos($output, $this->arGlyphs[$nextChar][1]) - 3, 8);
                 if ($this->arGlyphs[$prevChar]['prevLink'] == true) {
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][1] . ';';
                 } else {
@@ -2391,8 +2391,10 @@ class Arabic
                         $output = substr($output, 0, -8);
                         
                         // check if the SHADDA & HARAKA in the middle of connected letters (form 3)
-                        if (($prevChar && $this->arGlyphs[$prevChar]['prevLink'] == true) &&
-                            ($nextChar && $this->arGlyphs[$nextChar]['nextLink'] == true)) {
+                        if (
+                            ($prevChar && $this->arGlyphs[$prevChar]['prevLink'] == true) &&
+                            ($nextChar && $this->arGlyphs[$nextChar]['nextLink'] == true)
+                        ) {
                             $form = 3;
                         }
 
@@ -3861,9 +3863,9 @@ class Arabic
             if ($html == true) {
                 if ($cDec == 60 && $ascii[$i + 2] != 32) {
                     $htmlFlag = true;
-                } else if ($htmlFlag == true && $cDec == 62) {
+                } elseif ($htmlFlag == true && $cDec == 62) {
                     $htmlFlag = false;
-                } else if ($htmlFlag == true) {
+                } elseif ($htmlFlag == true) {
                     continue;
                 }
             }
