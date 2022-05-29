@@ -381,13 +381,13 @@ final class ArabicTest extends TestCase
         $expected = array();
         $actual   = array();
         
-        $expected[] = 'ﻢﻴﺣﺮﻟﺍ ﻦﻤﺣﺮﻟﺍ ﻪﻠﻟﺍ ﻢﺴﺑ';
+        $expected[] = 'ﻢﻴﺣﺮﻟا ﻦﻤﺣﺮﻟا ﻪﻠﻟا ﻢﺴﺑ';
         $actual[]   = $Arabic->utf8Glyphs('بسم الله الرحمن الرحيم');
-        
-        $expected[] = '٢٠٠٦ ﻡﺎﻌﻟﺍ ﺬﻨﻣ ﺃﺪﺑ ﺔّﻴﺑﺮﻌﻟﺍ ﺔﻐﻠﻟﺍﻭ  PHP  ﻉﻭﺮﺸﻣ
-ًﺍﺮﻤﺘﺴﻣ ﻝﺍﺰﻳﻻﻭ';
+
+        $expected[] = '٢٠٠٦ مﺎﻌﻟا ﺬﻨﻣ أﺪﺑ ﺔّﻴﺑﺮﻌﻟا ﺔﻐﻠﻟاو  PHP  عوﺮﺸﻣ
+ًاﺮﻤﺘﺴﻣ لاﺰﻳﻻو';
         $actual[]   = $Arabic->utf8Glyphs('مشروع PHP واللغة العربيّة بدأ منذ العام 2006 ولايزال مستمراً');
-        
+
         $this->assertEquals($expected, $actual);
     }
 

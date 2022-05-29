@@ -2354,7 +2354,6 @@ class Arabic
             } elseif (strlen($number) > 0) {
                 $output .= $number;
                 $number  = '';
-                continue;
             }
 
             // handle the case of open and close brackets (flip them)
@@ -2447,12 +2446,12 @@ class Arabic
             }
 
             // check if it should connect to the prev char, then adjust the form value accordingly
-            if ($prevChar && $this->arGlyphs[$prevChar]['prevLink'] == true) {
+            if ($prevChar && isset($this->arGlyphs[$prevChar]) && $this->arGlyphs[$prevChar]['prevLink'] == true) {
                 $form++;
             }
 
             // check if it should connect to the next char, the adjust the form value accordingly
-            if ($nextChar && $this->arGlyphs[$nextChar]['nextLink'] == true) {
+            if ($nextChar && isset($this->arGlyphs[$nextChar]) && $this->arGlyphs[$nextChar]['nextLink'] == true) {
                 $form += 2;
             }
 
