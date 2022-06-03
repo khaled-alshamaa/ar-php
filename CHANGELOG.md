@@ -29,7 +29,6 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
-
 <!--
 ## What's new in ArPHP 6.3.0 _(release date: Jun 12, 2022)_
 
@@ -59,6 +58,7 @@
 
 * Use version 0.114 of the Amiri font ([changes in this release](https://github.com/aliftype/amiri/releases/tag/0.114)).
 
+[Top](#arphp-library---change-log)
 -->
 
 ## What's new in ArPHP 6.2.0 _(release date: Jun 20, 2021)_
