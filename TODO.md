@@ -1,5 +1,18 @@
+## NLP Toolkit for Arabic Language
+* Detect Dialect (e.g., 'انا هاخد ده لو سمحت' -> ['Egypt', 0.984]).
+
+* Detect Emotion (e.g., 'الله عليكي و انتي دائما مفرحانا' -> ['happy', 0.879]).
+
+* Detect Gender  (e.g., 'الله عليكي و انتي دائما مفرحانا' -> ['female', 0.926]).
+
+* Name-Entity Recognition: Recognise whether a word represents a person, location or names in the text.
+
+* Text Classification / Topic Categories: Classifying text based on the criteria (e.g., Toxic-words and Hate-speech filtering).
+
 ## To-Do List
 * Develop an Arabic version of the PHP [similar_text](https://www.php.net/manual/en/function.similar-text.php) function to handle Harakat issue properly.
+
+* [ALA-LC Arabic Romanization](https://www.loc.gov/catdir/cpso/romanization/arabic.pdf) and test it via http://romanize-arabic.camel-lab.com/.
 
 * [Setup PHP in GitHub Actions](https://github.com/marketplace/actions/setup-php-action) for CI/CD (e.g. [php-actions/phpunit](https://github.com/php-actions/example-phpunit)).
 
@@ -8,6 +21,8 @@
 * Improve error handling by using [exceptions](https://www.php.net/manual/en/language.exceptions.php) as [@atmonshi](https://github.com/atmonshi) suggested in [this pull request](https://github.com/khaled-alshamaa/ar-php/pull/10), update related phpdoc by adding [@throws](https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/throws.html) tag. We may extend the general exception class like this: `class ArphpException extends Exception { }`, then we can throw an exception like this: `throw new ArphpException('Customized error message');`
 
 * Enhance example scripts by call the following methods: _arSummaryLoadExtra, setQueryArrFields, swapAf, arabizi, dms2dd, dd2dms, dd2olc, olc2dd._
+
+* Use degree modifiers to alter sentiment intensity (e.g., intensity boosters such as "very" and intensity dampeners such as "kind of").
 
 ### _Performance Improvement Tips (lessons learned)_
 * json_decode parser is faster than SimpleXML since JSON is only a description of nested string sequences, without the need to offer a DOM interface and attributes parsing.
