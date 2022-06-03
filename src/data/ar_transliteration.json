@@ -952,6 +952,10 @@
   ],
   "str_replace_ALA_LC": [
     {
+      "search": "ا",
+      "replace": "ā"
+    },
+    {
       "search": "ب",
       "replace": "b"
     },
@@ -1064,11 +1068,11 @@
       "replace": "ī"
     },
     {
-      "search": "َو",
+      "search": "َوْ",
       "replace": "aw"
     },
     {
-      "search": "َى",
+      "search": "َىْ",
       "replace": "ay"
     },
     {
@@ -1118,6 +1122,31 @@
     {
       "search": "ڥ",
       "replace": "v"
+    },
+    {
+      "search": "ً",
+      "replace": "an",
+      "rule": "12"
+    },
+    {
+      "search": "ٍ",
+      "replace": "in",
+      "rule": "12"
+    },
+    {
+      "search": "ٌ",
+      "replace": "un",
+      "rule": "12"
+    },
+    {
+      "search": "َى",
+      "replace": "ā",
+      "rule": "6(a)"
+    },
+    {
+        "search": "ة",
+        "replace": "h",
+        "rule": "7(a)"
     }
   ]
 }
