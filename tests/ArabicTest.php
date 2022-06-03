@@ -360,7 +360,7 @@ final class ArabicTest extends TestCase
     {
         $Arabic = new \ArPHP\I18N\Arabic();
         
-        $examples = array("ff'z g;k fefhj", "FF'Z G;K FEFHJ", 'ٍمخصمغ لاعف سعقثمغ', 'sLOWLY BUT SURELY');
+        $examples = array("ff'z g;k fefhj", "FF'Z G;K FEFHJ", 'ٍمخصمغ لاعف سعقثمغ', 'sLOWLY BUT SURELY', 'أثهلاف');
 
         $fixed = array();
         
@@ -370,7 +370,7 @@ final class ArabicTest extends TestCase
     
         $this->assertEquals(
             $fixed,
-            ['ببطئ لكن بثبات', 'ببطئ لكن بثبات', 'Slowly but surely', 'Slowly but surely']
+            ['ببطئ لكن بثبات', 'ببطئ لكن بثبات', 'Slowly but surely', 'Slowly but surely', 'Height']
         );
     }
 
@@ -529,7 +529,7 @@ END;
         $Arabic = new \ArPHP\I18N\Arabic();
         
         $words = array('كلينتون', 'كلينتن', 'كلينطون', 'كلنتن', 'كلنتون', 'كلاينتون', 'كلينزمان',
-                       'ميلوسيفيتش', 'ميلوسفيتش', 'ميلوزفيتش', 'ميلوزيفيتش', 'ميلسيفيتش', 'ميلوسيفتش', 'ميلينيوم');
+                       'ميلوسيفيتش', 'ميلوسفيتش', 'ميلوزفيتش', 'ميلوزيفيتش', 'ميلسيفيتش', 'ميلوسيفتش', 'ميلينيوم', 'مريب');
         
         $indices = array();
         
@@ -545,7 +545,7 @@ END;
         $indices[] = $Arabic->soundex('كلينزمان');
     
         $this->assertEquals(
-            ['K453','K453','K453','K453','K453','K453','K452','M421','M421','M421','M421','M421','M421','M455','K458','K452'],
+            ['K453','K453','K453','K453','K453','K453','K452','M421','M421','M421','M421','M421','M421','M455', 'M610', 'K458','K452'],
             $indices
         );
     }
