@@ -1128,13 +1128,6 @@ class Arabic
                 $str = $this->arDateEn2ar($str);
             }
 
-            /*
-            $timestamp = $timestamp + 3600 * 24 * $correction;
-
-            list($y, $m, $d) = explode(' ', date('Y m d', $timestamp));
-            list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic($y, $m, $d);
-            */
-            
             list($y, $m, $d) = explode(' ', date('Y m d', $timestamp));
             list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d);
 
