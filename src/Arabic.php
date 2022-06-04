@@ -1138,20 +1138,18 @@ class Arabic
             list($y, $m, $d) = explode(' ', date('Y m d', $timestamp));
             list($hj_y, $hj_m, $hj_d) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d);
 
-            // Get the Gregorian Date with respect to the correction offset.
-            // date_create accepts a timestamp when prefixed with "@", see https://bugs.php.net/bug.php?id=40171
-            list($y, $m, $d) = explode(' ', date_create("@$timestamp")
-                ->modify("{$correction} Days")
-                ->format("Y m d"));
-
             $hj_d += $correction;
 
             if ($hj_d <= 0) {
                 $hj_d = $hj_d == 0 ? 30 : 29;
-                list($hj_y, $hj_m, $temp) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d);
+                // alter the $hj_m and $hj_y to refer to the previous month
+                $hj_m = $hj_m == 1 ? 12 : $hj_m - 1;
+                $hj_y = $hj_m == 12 ? $hj_y - 1 : $hj_y;
             } elseif ($hj_d > 30) {
                 $hj_d = $hj_d == 31 ? 1 : 2;
-                list($hj_y, $hj_m, $temp) = $this->arDateGregToIslamic((int)$y, (int)$m, (int)$d);
+                // alter the $hj_m and $hj_y to refer to the next month
+                $hj_m = $hj_m == 12 ? 1 : $hj_m + 1;
+                $hj_y = $hj_m == 1 ? $hj_y + 1 : $hj_y;
             }
 
             $patterns     = array();
