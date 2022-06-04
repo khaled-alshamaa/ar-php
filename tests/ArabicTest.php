@@ -48,6 +48,12 @@ final class ArabicTest extends TestCase
         $expected[] = 'صفر صفر تسعمئة وثلاثة وستون فاصلة صفر واحد وثلاثون';
         $actual[]   = $Arabic->int2str('00963.031');
 
+        $expected[] = 'صفر';
+        $actual[]   = $Arabic->int2str(0);
+
+        $expected[] = 'مليون وأربعة آلاف وثلاثمئة وواحد وعشرون';
+        $actual[]   = $Arabic->int2str(1004321);
+
         $Arabic->setNumberFeminine(2);
         $Arabic->setNumberFormat(2);
 
@@ -88,9 +94,15 @@ final class ArabicTest extends TestCase
         $Arabic->setNumberFeminine(1);
         $Arabic->setNumberFormat(1);
         $Arabic->setNumberOrder(2);
+
+        $expected[] = 'الأول';
+        $actual[]   = $Arabic->int2str(1);
         
         $expected[] = 'السابع';
         $actual[]   = $Arabic->int2str(7);
+        
+        $expected[] = 'المئة والسابع عشر';
+        $actual[]   = $Arabic->int2str(117);
 
         $expected[] = 1265358979;
         $actual[]   = $Arabic->str2int('مليار ومئتين وخمسة وستين مليون وثلاثمئة وثمانية وخمسين ألف وتسعمئة وتسعة وسبعين');
@@ -98,23 +110,42 @@ final class ArabicTest extends TestCase
         $expected[] = -52;
         $actual[]   = $Arabic->str2int('سالب اثنان وخمسون');
 
+        $expected[] = 6000;
+        $actual[]   = $Arabic->str2int('ستة آلاف');
+
+        $expected[] = 2000;
+        $actual[]   = $Arabic->str2int('ألفان');
+
+        $expected[] = 2000;
+        $actual[]   = $Arabic->str2int('ألفين');
+
         $this->assertEquals($expected, $actual);
     }
 
     public function testDateOfHijriFormatInIslamicCalendar(): void
     {
         date_default_timezone_set('GMT');
-        $time = 1502656150;
         
         $Arabic = new \ArPHP\I18N\Arabic();
         
+        $expected = array();
+        $actual   = array();
+
+        $time = 1502656150;
+        
         $correction = $Arabic->dateCorrection ($time);
         $date = $Arabic->date('l j F Y h:i:s A', $time, $correction);
+        
+        $expected[] = 'الأحد 20 ذو القعدة 1438 08:29:10 مساءً';
+        $actual[]   = $date;
+        
+        $expected[] = 'الأربعاء 29 شوال 1443';
+        $actual[]   = $Arabic->date('l j F Y', strtotime('2022-06-01'), -2);
+        
+        $expected[] = 'الثلاثاء 1 ذو القعدة 1443';
+        $actual[]   = $Arabic->date('l j F Y', strtotime('2022-05-31'), 2);
     
-        $this->assertEquals(
-            'الأحد 20 ذو القعدة 1438 08:29:10 مساءً',
-            $date
-        );
+        $this->assertEquals($expected, $actual);
     }
 
     public function testDateOfHijriFormatInIslamicCalendarInEnglish(): void
@@ -242,7 +273,8 @@ final class ArabicTest extends TestCase
         
         $en_terms = array('George Bush', 'Paul Wolfowitz', 'Silvio Berlusconi?', 'Guantanamo', 
                           'Arizona', 'Maryland', 'Oracle', 'Yahoo', 'Google', 'Formula1', 
-                          'Boeing', 'Caviar', 'Telephone', 'Internet', "Côte d'Ivoire");
+                          'Boeing', 'Caviar', 'Telephone', 'Internet', "Côte d'Ivoire", 
+                          'ana raye7 el jam3a el sa3a 3 el 39r', 'Al-Ahli');
         
         $ar_terms = array();
         
@@ -251,7 +283,8 @@ final class ArabicTest extends TestCase
         }
     
         $this->assertEquals(
-            ['جورج بوش','باول وولفوويتز','سيلفيو برلوسكوني','غوانتانامو','اريزونه','ماريلاند','اوراكل','ياهو','غوغل','فورمولا1','بوينغ','كافيار','تلفون','انترنت','كوت ديفوير'],
+            ['جورج بوش','باول وولفوويتز','سيلفيو برلوسكوني','غوانتانامو','اريزونه','ماريلاند','اوراكل','ياهو','غوغل','فورمولا1','بوينغ','كافيار','تلفون','انترنت','كوت ديفوير',
+            'انه رايح الجامعه الساعه 3 العصر', 'الاهلي'],
             $ar_terms
         );
     }
@@ -275,6 +308,30 @@ final class ArabicTest extends TestCase
             ["Khalid Ash-Sham'ah","Jubran Khalyl Jubran","Kazim As-Sahir","Majidat Ar-Roumi","Nizar Qab'bani","Souq Al-Hameidei'iah?","Magharat Ja'eita","Ghoutat Dimashq","Halab Ash-Shahba'a","Jazyrat Aarwad","Bilad Ar-Rafidan","Ahramat Al-Jeizah","Dira","Eid","Oud","Rid'a","Eida'a","Hibat Al-Lh","Qadin"],
             $en_terms
         );
+    }
+
+    public function testArabicToEnglishTransliterationDifferentStandards(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $expected = array();
+        $actual   = array();
+        
+        $text = 'لغة الضاد';
+
+        $expected[] = 'Lght Al-ḑad';
+        $actual[]   = $Arabic->ar2en($text, 'UNGEGN+');
+        
+        $expected[] = 'Lght Al-ḏad';
+        $actual[]   = $Arabic->ar2en($text, 'RJGC');
+        
+        $expected[] = 'Lght Al-ḍad';
+        $actual[]   = $Arabic->ar2en($text, 'SES');
+        
+        $expected[] = 'Lġt Al-ḍad';
+        $actual[]   = $Arabic->ar2en($text, 'ISO233');
+
+        $this->assertEquals($expected, $actual);
     }
 
     public function testGenderGuessForArabicNames36Cases(): void
@@ -388,20 +445,28 @@ final class ArabicTest extends TestCase
 ًاﺮﻤﺘﺴﻣ لاﺰﻳﻻو';
         $actual[]   = $Arabic->utf8Glyphs('مشروع PHP واللغة العربيّة بدأ منذ العام 2006 ولايزال مستمراً');
 
+        $expected[] = 'ﱞﻦﺴﻣ ٌﻞﺟر اﺪﺟ ًﺎﻌَﻣ ِﺔﳲﻗﱢﺮﻟا ﻰَﻬَﺘْﻨُﻣ';
+        $actual[]   = $Arabic->utf8Glyphs('مُنْتَهَى الرِّقَّةِ مَعاً جدًّا رجلٌ مسنٌّ');
+
         $this->assertEquals($expected, $actual);
     }
 
     public function testHijriDateMakeTime(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
+
+        $expected = array();
+        $actual   = array();
         
         $correction = $Arabic->mktimeCorrection(9, 1429);
-        $time = $Arabic->mktime(0, 0, 0, 9, 1, 1429, $correction);
+        
+        $actual[]   = $Arabic->mktime(0, 0, 0, 9, 1, 1429, $correction);
+        $expected[] = 1220227200;
+
+        $actual[]   = $Arabic->mktimeCorrection(9, 1400);
+        $expected[] = 0;
     
-        $this->assertEquals(
-            $time,
-            1220227200
-        );
+        $this->assertEquals($expected, $actual);
     }
 
     public function testDaysCountOfHijriMonth(): void
@@ -416,6 +481,9 @@ final class ArabicTest extends TestCase
         
         $expected[] = 30;
         $actual[]   = $Arabic->hijriMonthDays(12, 1442, false);
+        
+        $expected[] = false;
+        $actual[]   = $Arabic->hijriMonthDays(1, 1500, false);
         
         $this->assertEquals($expected, $actual);
     }
@@ -529,7 +597,7 @@ END;
         $Arabic = new \ArPHP\I18N\Arabic();
         
         $words = array('كلينتون', 'كلينتن', 'كلينطون', 'كلنتن', 'كلنتون', 'كلاينتون', 'كلينزمان',
-                       'ميلوسيفيتش', 'ميلوسفيتش', 'ميلوزفيتش', 'ميلوزيفيتش', 'ميلسيفيتش', 'ميلوسيفتش', 'ميلينيوم', 'مريب');
+                       'ميلوسيفيتش', 'ميلوسفيتش', 'ميلوزفيتش', 'ميلوزيفيتش', 'ميلسيفيتش', 'ميلوسيفتش', 'ميلينيوم', 'مؤرخ');
         
         $indices = array();
         
@@ -545,7 +613,7 @@ END;
         $indices[] = $Arabic->soundex('كلينزمان');
     
         $this->assertEquals(
-            ['K453','K453','K453','K453','K453','K453','K452','M421','M421','M421','M421','M421','M421','M455', 'M610', 'K458','K452'],
+            ['K453','K453','K453','K453','K453','K453','K452','M421','M421','M421','M421','M421','M421','M455', 'M620', 'K458','K452'],
             $indices
         );
     }
@@ -594,6 +662,21 @@ END;
         );
     }
 
+    public function testArabicSegmentsIdentifierHTML(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $text = '<abbr title="رسالة ترحيب">مرحبا بالعالم</abbr>';
+        $mark = $Arabic->arIdentify($text);
+        
+        $word = substr($text, $mark[0], $mark[1]-$mark[0]);
+
+        $this->assertEquals(
+            $mark,
+            [36, 61]
+        );
+    }
+
     public function testArabicQuearyGetAllWordForms(): void
     {
         $Arabic = new \ArPHP\I18N\Arabic();
@@ -612,6 +695,12 @@ END;
         
         $expected[] = 'مرحى مرحا تعليقهما تعليق تعليقكما';
         $actual[]   = $Arabic->arQueryAllForms('مرحى تعليقهما');
+
+        $expected[] = 'عائشة عائش عائشه عائشت عائشات عايشة عايش عايشه عايشت عايشات';
+        $actual[]   = $Arabic->arQueryAllForms('عائشة');
+
+        $expected[] = 'عصاتين عصا عصاة عصاتينة عصات عصاتة عصاتتين عصاتون عصاتان عصاتات عصاتوا';
+        $actual[]   = $Arabic->arQueryAllForms('عصاتين');
         
         $this->assertEquals($expected, $actual);
     }
@@ -633,6 +722,26 @@ END;
         $this->assertEquals(
             $StrSQL,
             "SELECT `field` FROM `table` WHERE (field LIKE 'أصيلون\') OR ( REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?') OR ( REPLACE(field, 'ـ', '') REGEXP '\') ORDER BY ((field LIKE 'أصيلون') + (CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?' THEN 1 ELSE 0 END)) DESC"
+        );
+    }
+
+    public function testArabicQuearyGetSqlStatementByFieldsStrAndLogic(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $keyword = 'ثقب أسود';
+
+        $Arabic->setQueryStrFields('field');
+        $Arabic->setQueryMode(1);
+
+        $strCondition = $Arabic->arQueryWhereCondition($keyword);
+        $strOrderBy   = $Arabic->arQueryOrderBy($keyword);
+
+        $StrSQL = "SELECT `field` FROM `table` WHERE $strCondition ORDER BY $strOrderBy";
+        
+        $this->assertEquals(
+            $StrSQL,
+            "SELECT `field` FROM `table` WHERE ( REPLACE(field, 'ـ', '') REGEXP 'ثقب') AND ( REPLACE(field, 'ـ', '') REGEXP '(ا|أ|إ|آ)سود') ORDER BY ((CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'ثقب' THEN 1 ELSE 0 END) + (CASE WHEN  REPLACE(field, 'ـ', '') REGEXP '(ا|أ|إ|آ)سود' THEN 1 ELSE 0 END)) DESC"
         );
     }
 
@@ -1007,6 +1116,30 @@ END;
         $expected[] = 'لســـــــانكَ لا تذكرْ بهِ عورةَ امرئٍ ... فكلّكَ عوراتٌ وللنّاسِ ألسنُ';
         $actual[]   = $Arabic->stripHarakat($text, false, false, false, false);
         
+        $Arabic->setNorm('all', true);
+
+        $actual[] = $Arabic->getNorm('stripTatweel');
+        $actual[] = $Arabic->getNorm('stripTanween');
+        $actual[] = $Arabic->getNorm('stripShadda');
+        $actual[] = $Arabic->getNorm('stripLastHarakat');
+        $actual[] = $Arabic->getNorm('stripWordHarakat');
+        $actual[] = $Arabic->getNorm('normaliseLamAlef');
+        $actual[] = $Arabic->getNorm('normaliseAlef');
+        $actual[] = $Arabic->getNorm('normaliseHamza');
+        $actual[] = $Arabic->getNorm('normaliseTaa');
+        $actual[] = $Arabic->getNorm('notExist');
+        
+        $expected[] = true;
+        $expected[] = true;
+        $expected[] = true;
+        $expected[] = true;
+        $expected[] = true;
+        $expected[] = true;
+        $expected[] = true;
+        $expected[] = true;
+        $expected[] = true;
+        $expected[] = false;
+
         $this->assertEquals($expected, $actual);
     }
     

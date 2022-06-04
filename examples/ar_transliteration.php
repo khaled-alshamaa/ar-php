@@ -43,7 +43,7 @@ $Arabic = new \ArPHP\I18N\Arabic();
 $en_terms = array('George Bush', 'Paul Wolfowitz', 'Silvio Berlusconi?',
     'Guantanamo', 'Arizona', 'Maryland', 'Oracle', 'Yahoo', 'Google',
     'Formula1', 'Boeing', 'Caviar', 'Telephone', 'Internet', "Côte d'Ivoire",
-    'ana raye7 el jam3a el sa3a 3 el 39r');
+    'ana raye7 el jam3a el sa3a 3 el 39r', 'Al-Ahli');
 
 echo <<< END
 <center>
