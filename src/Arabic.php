@@ -3844,8 +3844,10 @@ class Arabic
      */
     public function arIdentify($str, $html = true)
     {
-        $minAr    = 55436;
-        $maxAr    = 55698;
+        // https://utf8-chartable.de/unicode-utf8-table.pl?start=1536&number=128&utf8=dec
+        $minAr    = 55424;
+        $maxAr    = 55743;
+        
         $probAr   = false;
         $arFlag   = false;
         $htmlFlag = false;
@@ -3856,7 +3858,7 @@ class Arabic
         $i = -1;
         while (++$i < $max) {
             $cDec = $ascii[$i + 1];
-            
+
             if ($html == true) {
                 if ($cDec == 60 && $ascii[$i + 2] != 32) {
                     $htmlFlag = true;
@@ -3883,10 +3885,9 @@ class Arabic
             } else {
                 $pDec = null;
             }
-            
+
             if ($probAr) {
                 $utfDecCode = ($pDec << 8) + $cDec;
-
                 if ($utfDecCode >= $minAr && $utfDecCode <= $maxAr) {
                     if (!$arFlag) {
                         $arFlag  = true;
