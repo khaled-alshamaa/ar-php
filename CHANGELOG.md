@@ -54,6 +54,10 @@
 
 * Fix PHP notices in handling some extreme cases in glyphs algorithm. Thanks to [Denis Chenu](https://github.com/Shnoulle) from [LimeSurvey](https://github.com/LimeSurvey/LimeSurvey) team.
 
+* Fix the range of Arabic chars in the UTF-8 table and define it properly to include all extended Arabic chars. Thanks to [sakai ryota](https://github.com/sakairyota) for mentioning it in [this issue](https://github.com/khaled-alshamaa/ar-php/issues/29).
+
+* Fix minor issues in the utf8Glyphs method when handling Arabic and non Arabic chars in the same line which [reported](https://github.com/khaled-alshamaa/ar-php/issues/29) by [sakai ryota](https://github.com/sakairyota).
+
 * Improve the code quality by fix all issues reported by the [PHPStan.org](https://phpstan.org) (PHP Static Analysis Tool) up to the [rule level 6](https://phpstan.org/user-guide/rule-levels).
 
 * Use version 0.114 of the Amiri font ([changes in this release](https://github.com/aliftype/amiri/releases/tag/0.114)).

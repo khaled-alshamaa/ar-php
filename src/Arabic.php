@@ -2529,7 +2529,7 @@ class Arabic
                 
                 // if line does not start by Arabic, then save first non-Arabic fragment in block structure
                 if ($p[0] != 0) {
-                    $block[] = substr($str, 0, $p[0] - 1);
+                    $block[] = substr($str, 0, $p[0]);
                 }
                 
                 // get the last Arabic fragment identifier
@@ -2564,9 +2564,9 @@ class Arabic
                 if ($rtl == true) {
                     $block = array_reverse($block);
                 }
-                
+
                 // concatenate the whole string blocks
-                $str = implode(' ', $block);
+                $str = implode('', $block);
             }
             
             // add the processed string to the output lines array
