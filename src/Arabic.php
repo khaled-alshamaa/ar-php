@@ -641,6 +641,23 @@ class Arabic
         // Contextual forms (https://en.wikipedia.org/wiki/Arabic_script_in_Unicode#Contextual_forms)
         // 0- ISOLATED FORM, 1- FINAL FORM, 2- INITIAL FORM, 3- MEDIAL FORM
         $this->arGlyphs = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_glyphs.json'), true);
+
+        // Add default values for letters not defined in ar_glyphs.json.
+        // Loop from 0x0608 to 0x067f
+        for ($codePoint = 1541; $codePoint <= 1663; $codePoint++) {
+            $letter = chr(192 | ($codePoint >> 6)) . chr(128 | (63 & $codePoint));
+            if (!isset($this->arGlyphs[$letter])) {
+                $hexCodePoint = dechex($codePoint);
+                $this->arGlyphs[$letter] = [
+                    '0' => $hexCodePoint,
+                    '1' => $hexCodePoint,
+                    '2' => $hexCodePoint,
+                    '3' => $hexCodePoint,
+                    'prevLink' => false,
+                    'nextLink' => false,
+                ];
+            }
+        }
     }
 
     /** @return void */
