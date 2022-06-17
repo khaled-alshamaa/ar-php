@@ -456,8 +456,10 @@ final class ArabicTest extends TestCase
         $expected[] = 'あب'; //
         $actual[]   = $Arabic->utf8Glyphs('あب');
 
+        $Arabic->addGlyphs('ٱ', 'FB50FB51FB50FB51', false, true);
+
         // #29 test case 3
-        $expected[] = 'بٱ'; // \u0628 \u0671
+        $expected[] = 'بﭐ'; // \u0628 \u0671
         $actual[]   = $Arabic->utf8Glyphs('ٱب'); // \u0671 \u0628
 
         $this->assertEquals($expected, $actual);
