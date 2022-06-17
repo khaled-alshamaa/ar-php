@@ -37,7 +37,8 @@
 </label>
 
             <div class="phpdocumentor-column -eight phpdocumentor-content">
-<h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Ar-PHP</a></h1>
+                    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Ar-PHP</a></h1>
+
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
     Arabic
@@ -49,7 +50,7 @@
 
             <p class="phpdocumentor-summary">----------------------------------------------------------------------</p>
 
-    <section class="phpdocumentor-description"><p>Copyright (c) 2006-2021 Khaled Al-Sham'aa.</p>
+    <section class="phpdocumentor-description"><p>Copyright (c) 2006-2022 Khaled Al-Sham'aa.</p>
 <p>http://www.ar-php.org</p>
 <p>PHP Version &gt;= 5.6</p>
 <hr />
@@ -107,7 +108,7 @@ soundex, Hijri calendar, spell numbers, keyboard language, and more...</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>2006-2021 Khaled Al-Shamaa</p>
+                                                 <section class="phpdocumentor-description"><p>2006-2022 Khaled Al-Shamaa</p>
 </section>
 
                                     </dd>
@@ -124,9 +125,9 @@ soundex, Hijri calendar, spell numbers, keyboard language, and more...</p>
                     <span class="phpdocumentor-tag__name">version</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">6.2.0</span>
+                                            <span class="phpdocumentor-tag-link">6.3.0</span>
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>released in Jun 20, 2021</p>
+                                                 <section class="phpdocumentor-description"><p>released in Jun 18, 2022</p>
 </section>
 
                                     </dd>
@@ -153,7 +154,7 @@ soundex, Hijri calendar, spell numbers, keyboard language, and more...</p>
                 <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/ArPHP-I18N-Arabic.html#property_version">$version</a>
     <span>
-                &nbsp;: mixed            </span>
+                &nbsp;: string            </span>
 </dt>
 <dd></dd>
 
@@ -182,9 +183,16 @@ orthography of the English language</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/ArPHP-I18N-Arabic.html#method_arIdentify">arIdentify()</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                        &nbsp;: array&lt;string|int, int&gt;    </span>
 </dt>
 <dd>Identify Arabic text in a given UTF-8 multi language string</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/ArPHP-I18N-Arabic.html#method_arNormalizeText">arNormalizeText()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Normalizes the input provided and returns the normalized string.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/ArPHP-I18N-Arabic.html#method_arPlural">arPlural()</a>
@@ -224,7 +232,7 @@ LIKE condition to match it as it is.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/ArPHP-I18N-Arabic.html#method_arSentiment">arSentiment()</a>
     <span>
-                        &nbsp;: <abbr title="\ArPHP\I18N\hash">hash</abbr>    </span>
+                        &nbsp;: array&lt;string|int, bool|float&gt;    </span>
 </dt>
 <dd>Arabic Sentiment Analysis</dd>
 
@@ -320,6 +328,13 @@ in the input string. It will return the suggestion of correct inserted text.</dd
               8) Hijri format (Islamic calendar) in English</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/ArPHP-I18N-Arabic.html#method_getNorm">getNorm()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Get given normalization form status.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/ArPHP-I18N-Arabic.html#method_getNumberFeminine">getNumberFeminine()</a>
     <span>
                         &nbsp;: int    </span>
@@ -343,7 +358,7 @@ in the input string. It will return the suggestion of correct inserted text.</dd
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/ArPHP-I18N-Arabic.html#method_getPrayTime">getPrayTime()</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                        &nbsp;: array&lt;string|int, string&gt;    </span>
 </dt>
 <dd>Calculate Salat times for the date set in setSalatDate methode, and
 location set in setSalatLocation.</dd>
@@ -358,7 +373,7 @@ location set in setSalatLocation.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/ArPHP-I18N-Arabic.html#method_getQueryArrFields">getQueryArrFields()</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                        &nbsp;: array&lt;string|int, string&gt;    </span>
 </dt>
 <dd>Getting values of $_fields Array in array format</dd>
 
@@ -471,7 +486,7 @@ for given Hijri date (Islamic calendar)</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/ArPHP-I18N-Arabic.html#method_olc2dd">olc2dd()</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                        &nbsp;: array&lt;string|int, null|float&gt;    </span>
 </dt>
 <dd>Decode an Open Location Code string into its location coordinates in decimal degrees.</dd>
 
@@ -481,6 +496,13 @@ for given Hijri date (Islamic calendar)</dd>
                         &nbsp;: object    </span>
 </dt>
 <dd>Setting value for $_arDateMode scalar</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/ArPHP-I18N-Arabic.html#method_setNorm">setNorm()</a>
+    <span>
+                        &nbsp;: object    </span>
+</dt>
+<dd>Set given normalization form status.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/ArPHP-I18N-Arabic.html#method_setNumberFeminine">setNumberFeminine()</a>
@@ -678,14 +700,16 @@ sections as well as numbers and arcs etc...)</dd>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$version</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;6.2.0&#039;</span></code>
+     = <span class="phpdocumentor-signature__default-value">&#039;6.3.0&#039;</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -706,6 +730,7 @@ sections as well as numbers and arcs etc...)</dd>
         __construct()
         <a href="classes/ArPHP-I18N-Arabic.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -891,7 +916,7 @@ orthography of the English language</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">arIdentify</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$str</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">arIdentify</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$str</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$html</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -903,6 +928,15 @@ orthography of the English language</p>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>UTF-8 multi language string</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$html</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>If True, then ignore the HTML tags (default is TRUE)</p>
 </section>
 
             </dd>
@@ -926,10 +960,67 @@ orthography of the English language</p>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span>
             &mdash;
             <section class="phpdocumentor-description"><p>Offset of the beginning and end of each Arabic segment in
 sequence in the given UTF-8 multi language string</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_arNormalizeText">
+        arNormalizeText()
+        <a href="classes/ArPHP-I18N-Arabic.html#method_arNormalizeText" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+        <p class="phpdocumentor-summary">Normalizes the input provided and returns the normalized string.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">arNormalizeText</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The input string to normalize.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>Khaled Al-Sham'aa <a href="mailto:khaled@ar-php.org">khaled@ar-php.org</a></p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The normalized string.</p>
 </section>
 
     
@@ -1229,7 +1320,7 @@ LIKE condition to match it as it is.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">arSentiment</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\ArPHP\I18N\hash">hash</abbr></span></code>
+                <span class="phpdocumentor-signature__name">arSentiment</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, bool|float&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -1264,9 +1355,10 @@ LIKE condition to match it as it is.</p>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\ArPHP\I18N\hash">hash</abbr></span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, bool|float&gt;</span>
             &mdash;
-            <section class="phpdocumentor-description"><p>of 2 elements: boolean isPositive (negative if false), and float probability (range from 0 to 1)</p>
+            <section class="phpdocumentor-description"><p>of 2 elements: boolean isPositive (negative if false),
+and float probability (range from 0 to 1)</p>
 </section>
 
     
@@ -1286,7 +1378,7 @@ LIKE condition to match it as it is.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">arSummary</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$str</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keywords</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$int</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mode</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$style</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                <span class="phpdocumentor-signature__name">arSummary</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$str</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keywords</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$int</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mode</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -1334,15 +1426,6 @@ LIKE condition to match it as it is.</p>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Output mode [1|2] for &quot;summary&quot; and &quot;highlight&quot; modes respectively</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$style</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Name of the CSS class you would like to apply</p>
 </section>
 
             </dd>
@@ -1996,6 +2079,65 @@ of text entered.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getNorm">
+        getNorm()
+        <a href="classes/ArPHP-I18N-Arabic.html#method_getNorm" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+        <p class="phpdocumentor-summary">Get given normalization form status.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getNorm</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$form</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$form</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>One of the normalization forms ['stripTatweel', 'stripTanween', 'stripShadda',
+'stripLastHarakat', 'stripWordHarakat', 'normaliseLamAlef',
+'normaliseAlef', 'normaliseHamza', 'normaliseTaa']</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>Khaled Al-Sham'aa <a href="mailto:khaled@ar-php.org">khaled@ar-php.org</a></p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>Selected normalization form status.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getNumberFeminine">
         getNumberFeminine()
         <a href="classes/ArPHP-I18N-Arabic.html#method_getNumberFeminine" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2141,7 +2283,7 @@ location set in setSalatLocation.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getPrayTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">getPrayTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -2181,7 +2323,7 @@ location set in setSalatLocation.</p>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
             &mdash;
             <section class="phpdocumentor-description"><p>of Salat times + sun rise in the following format
 hh:mm where hh is the hour in local format and 24 mode
@@ -2264,12 +2406,12 @@ $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]</p>
         getQueryArrFields()
         <a href="classes/ArPHP-I18N-Arabic.html#method_getQueryArrFields" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Getting values of $_fields Array in array format</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getQueryArrFields</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">getQueryArrFields</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -2292,7 +2434,7 @@ $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]</p>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
             &mdash;
             <section class="phpdocumentor-description"><p>Value of $_fields array in Array format</p>
 </section>
@@ -2309,7 +2451,7 @@ $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]</p>
         getQueryMode()
         <a href="classes/ArPHP-I18N-Arabic.html#method_getQueryMode" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Getting $mode propority value that refer to search mode [0 for OR logic | 1 for AND logic]</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2354,7 +2496,7 @@ $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]</p>
         getQueryStrFields()
         <a href="classes/ArPHP-I18N-Arabic.html#method_getQueryStrFields" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Getting values of $_fields array in String format (comma delimated)</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2399,7 +2541,7 @@ $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]</p>
         getSoundexCode()
         <a href="classes/ArPHP-I18N-Arabic.html#method_getSoundexCode" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Get the soundex key calculation method used now</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2444,7 +2586,7 @@ $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]</p>
         getSoundexLang()
         <a href="classes/ArPHP-I18N-Arabic.html#method_getSoundexLang" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Get the soundex key language used now</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2489,7 +2631,7 @@ $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]</p>
         getSoundexLen()
         <a href="classes/ArPHP-I18N-Arabic.html#method_getSoundexLen" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Get the soundex key length used now</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2534,7 +2676,7 @@ $Isha, $Sunset, $Midnight, $Imsak, array $timestamps]</p>
         hijriMonthDays()
         <a href="classes/ArPHP-I18N-Arabic.html#method_hijriMonthDays" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Calculate how many days in a given Hijri month</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2610,7 +2752,7 @@ in this calculation (default value is true)</p>
         int2indic()
         <a href="classes/ArPHP-I18N-Arabic.html#method_int2indic" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Represent integer number in Arabic-Indic digits using HTML entities</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2667,7 +2809,7 @@ in this calculation (default value is true)</p>
         int2str()
         <a href="classes/ArPHP-I18N-Arabic.html#method_int2str" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Spell integer number in Arabic idiom</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2724,7 +2866,7 @@ in this calculation (default value is true)</p>
         int2strItem()
         <a href="classes/ArPHP-I18N-Arabic.html#method_int2strItem" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Spell integer number in Arabic idiom followed by plural form of the counted item</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2790,7 +2932,7 @@ in this calculation (default value is true)</p>
         isArabic()
         <a href="classes/ArPHP-I18N-Arabic.html#method_isArabic" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Find out if given string is Arabic text or not</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2847,7 +2989,7 @@ in this calculation (default value is true)</p>
         isFemale()
         <a href="classes/ArPHP-I18N-Arabic.html#method_isFemale" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Arabic Gender Guesser</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2911,7 +3053,7 @@ feminine. Whether an inanimate noun is masculine or feminine is mostly arbitrary
         mktime()
         <a href="classes/ArPHP-I18N-Arabic.html#method_mktime" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">This will return current Unix timestamp
 for given Hijri date (Islamic calendar)</p>
 
@@ -3024,7 +3166,7 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
         mktimeCorrection()
         <a href="classes/ArPHP-I18N-Arabic.html#method_mktimeCorrection" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Calculate Hijri calendar correction using Um-Al-Qura calendar information</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3090,7 +3232,7 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
         money2str()
         <a href="classes/ArPHP-I18N-Arabic.html#method_money2str" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Spell number in Arabic idiom as money</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3165,7 +3307,7 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
         noDots()
         <a href="classes/ArPHP-I18N-Arabic.html#method_noDots" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Strip Dots and Hamzat</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3222,12 +3364,12 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
         olc2dd()
         <a href="classes/ArPHP-I18N-Arabic.html#method_olc2dd" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Decode an Open Location Code string into its location coordinates in decimal degrees.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">olc2dd</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$olc</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$codeLength</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">10</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">olc2dd</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$olc</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$codeLength</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">10</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, null|float&gt;</span></code>
 
         <section class="phpdocumentor-description"><p>Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md</p>
 </section>
@@ -3273,7 +3415,7 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, null|float&gt;</span>
             &mdash;
             <section class="phpdocumentor-description"><p>Location coordinates in decimal degrees [latitude, longitude] in WGS84</p>
 </section>
@@ -3290,7 +3432,7 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
         setDateMode()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setDateMode" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Setting value for $_arDateMode scalar</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3353,11 +3495,79 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setNorm">
+        setNorm()
+        <a href="classes/ArPHP-I18N-Arabic.html#method_setNorm" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+        <p class="phpdocumentor-summary">Set given normalization form status.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">setNorm</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$form</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$form</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>One of the normalization forms ['stripTatweel', 'stripTanween', 'stripShadda',
+'stripLastHarakat', 'stripWordHarakat', 'normaliseLamAlef',
+'normaliseAlef', 'normaliseHamza', 'normaliseTaa', 'all']</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$status</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Normalization form status [true|false]</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>Khaled Al-Sham'aa <a href="mailto:khaled@ar-php.org">khaled@ar-php.org</a></p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">object</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>$this to build a fluent interface.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setNumberFeminine">
         setNumberFeminine()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setNumberFeminine" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Set feminine flag of the counted object</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3414,7 +3624,7 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
         setNumberFormat()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setNumberFormat" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Set the grammar position flag of the counted object</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3471,7 +3681,7 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
         setNumberOrder()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setNumberOrder" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Set the ordering flag, is it normal number or ordering number</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3528,12 +3738,12 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
         setQueryArrFields()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setQueryArrFields" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Setting value for $_fields array</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setQueryArrFields</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$arrConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object</span></code>
+                <span class="phpdocumentor-signature__name">setQueryArrFields</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$arrConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -3541,7 +3751,7 @@ seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$arrConfig</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Name of the fields that SQL statement will search
@@ -3586,7 +3796,7 @@ them (in array format where items are those fields names)</p>
         setQueryMode()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setQueryMode" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Setting $mode propority value that refer to search mode [0 for OR logic | 1 for AND logic]</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3643,7 +3853,7 @@ them (in array format where items are those fields names)</p>
         setQueryStrFields()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setQueryStrFields" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Setting value for $_fields array</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3701,7 +3911,7 @@ them (in string format using comma as delimated)</p>
         setSalatConf()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setSalatConf" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Setting rest of Salat calculation configuration</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3807,7 +4017,7 @@ Fajr Angle = $fajrArc, Isha Angle = $ishaArc</p>
         setSalatDate()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setSalatDate" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Setting date of day for Salat calculation</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3882,7 +4092,7 @@ Fajr Angle = $fajrArc, Isha Angle = $ishaArc</p>
         setSalatLocation()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setSalatLocation" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Setting location information for Salat calculation</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3966,7 +4176,7 @@ Fajr Angle = $fajrArc, Isha Angle = $ishaArc</p>
         setSoundexCode()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setSoundexCode" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Set the mapping code of the soundex key (default value is &quot;soundex&quot;)</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -4023,7 +4233,7 @@ Fajr Angle = $fajrArc, Isha Angle = $ishaArc</p>
         setSoundexLang()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setSoundexLang" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Set the language of the soundex key (default value is &quot;en&quot;)</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -4080,7 +4290,7 @@ Fajr Angle = $fajrArc, Isha Angle = $ishaArc</p>
         setSoundexLen()
         <a href="classes/ArPHP-I18N-Arabic.html#method_setSoundexLen" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Set the length of soundex key (default value is 4)</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -4137,7 +4347,7 @@ Fajr Angle = $fajrArc, Isha Angle = $ishaArc</p>
         soundex()
         <a href="classes/ArPHP-I18N-Arabic.html#method_soundex" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Arabic soundex algorithm takes Arabic word as an input and produces a
 character string which identifies a set words that are (roughly)
 phonetically alike.</p>
@@ -4196,7 +4406,7 @@ phonetically alike.</p>
         standard()
         <a href="classes/ArPHP-I18N-Arabic.html#method_standard" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">This function will standardize Arabic text to follow writing standards
 (just like magazine/newspapers rules), for example spaces before and
 after punctuations, brackets and units etc .</p>
@@ -4256,7 +4466,7 @@ after punctuations, brackets and units etc .</p>
         str2int()
         <a href="classes/ArPHP-I18N-Arabic.html#method_str2int" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Convert Arabic idiom number string into Integer</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -4313,7 +4523,7 @@ after punctuations, brackets and units etc .</p>
         stripHarakat()
         <a href="classes/ArPHP-I18N-Arabic.html#method_stripHarakat" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Strip Harakat</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -4415,7 +4625,7 @@ after punctuations, brackets and units etc .</p>
         strtotime()
         <a href="classes/ArPHP-I18N-Arabic.html#method_strtotime" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Arabic arStrToTime Function</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -4487,7 +4697,7 @@ the current time if none is supplied.</p>
         swapAe()
         <a href="classes/ArPHP-I18N-Arabic.html#method_swapAe" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Make conversion to swap that odd Arabic text by original English sentence
 you meant when you type on your keyboard (if keyboard language was incorrect)</p>
 
@@ -4545,7 +4755,7 @@ you meant when you type on your keyboard (if keyboard language was incorrect)</p
         swapAf()
         <a href="classes/ArPHP-I18N-Arabic.html#method_swapAf" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Make conversion to swap that odd Arabic text by original French sentence
 you meant when you type on your keyboard (if keyboard language was incorrect)</p>
 
@@ -4603,7 +4813,7 @@ you meant when you type on your keyboard (if keyboard language was incorrect)</p
         swapEa()
         <a href="classes/ArPHP-I18N-Arabic.html#method_swapEa" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Make conversion to swap that odd English text by original Arabic sentence
 you meant when you type on your keyboard (if keyboard language was incorrect)</p>
 
@@ -4661,7 +4871,7 @@ you meant when you type on your keyboard (if keyboard language was incorrect)</p
         swapFa()
         <a href="classes/ArPHP-I18N-Arabic.html#method_swapFa" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Make conversion to swap that odd French text by original Arabic sentence
 you meant when you type on your keyboard (if keyboard language was incorrect)</p>
 
@@ -4719,7 +4929,7 @@ you meant when you type on your keyboard (if keyboard language was incorrect)</p
         utf8Glyphs()
         <a href="classes/ArPHP-I18N-Arabic.html#method_utf8Glyphs" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Convert Arabic string into glyph joining in UTF-8
 hexadecimals stream (take care of whole the document including English
 sections as well as numbers and arcs etc...)</p>
@@ -4807,7 +5017,7 @@ as numbers and arcs etc...)</p>
         volc()
         <a href="classes/ArPHP-I18N-Arabic.html#method_volc" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-    
+
         <p class="phpdocumentor-summary">Determine if an Open Location Code is valid.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
