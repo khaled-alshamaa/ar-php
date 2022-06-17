@@ -441,12 +441,24 @@ final class ArabicTest extends TestCase
         $expected[] = 'ﻢﻴﺣﺮﻟا ﻦﻤﺣﺮﻟا ﻪﻠﻟا ﻢﺴﺑ';
         $actual[]   = $Arabic->utf8Glyphs('بسم الله الرحمن الرحيم');
 
-        $expected[] = '٢٠٠٦ مﺎﻌﻟا ﺬﻨﻣ أﺪﺑ ﺔّﻴﺑﺮﻌﻟا ﺔﻐﻠﻟاو  PHP  عوﺮﺸﻣ
+        $expected[] = '٢٠٠٦ مﺎﻌﻟا ﺬﻨﻣ أﺪﺑ ﺔّﻴﺑﺮﻌﻟا ﺔﻐﻠﻟاو PHP عوﺮﺸﻣ
 ًاﺮﻤﺘﺴﻣ لاﺰﻳﻻو';
         $actual[]   = $Arabic->utf8Glyphs('مشروع PHP واللغة العربيّة بدأ منذ العام 2006 ولايزال مستمراً');
 
         $expected[] = 'ﱞﻦﺴﻣ ٌﻞﺟر اﺪﺟ ًﺎﻌَﻣ ِﺔﳲﻗﱢﺮﻟا ﻰَﻬَﺘْﻨُﻣ';
         $actual[]   = $Arabic->utf8Glyphs('مُنْتَهَى الرِّقَّةِ مَعاً جدًّا رجلٌ مسنٌّ');
+
+        // #29 test case 1 (ascii + arabic)
+        $expected[] = 'aب ﺐﺒﺑ'; // a \u0628 sp \uFE90 \uFE92 \uFE91
+        $actual[]   = $Arabic->utf8Glyphs('aببب ب'); // a \u0628 \u0628 \u0628 sp \u0628
+
+        // #29 test case 2 (multibyte char + arabic)
+        $expected[] = 'あب'; //
+        $actual[]   = $Arabic->utf8Glyphs('あب');
+
+        // #29 test case 3
+        $expected[] = 'بٱ'; // \u0628 \u0671
+        $actual[]   = $Arabic->utf8Glyphs('ٱب'); // \u0671 \u0628
 
         $this->assertEquals($expected, $actual);
     }
