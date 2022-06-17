@@ -51,7 +51,7 @@ namespace ArPHP\I18N;
  * @copyright 2006-2022 Khaled Al-Shamaa
  *
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
- * @version   6.3.0 released in Jun 12, 2022
+ * @version   6.3.0 released in Jun 18, 2022
  * @link      http://www.ar-php.org
  */
  
