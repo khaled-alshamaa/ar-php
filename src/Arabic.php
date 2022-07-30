@@ -2372,7 +2372,7 @@ class Arabic
                 && (mb_strpos('آأإا', $nextChar) !== false)
             ) {
                 $output = substr_replace($output, '', strrpos($output, $this->arGlyphs[$nextChar][1]) - 3, 8);
-                if ($this->arGlyphs[$prevChar]['prevLink'] == true) {
+                if ( isset($this->arGlyphs[$prevChar]['prevLink']) && $this->arGlyphs[$prevChar]['prevLink'] == true) {
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][1] . ';';
                 } else {
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][0] . ';';
