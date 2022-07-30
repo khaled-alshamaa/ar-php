@@ -2489,6 +2489,12 @@ class Arabic
     public function utf8Glyphs($text, $max_chars = 50, $hindo = true, $forcertl = false)
     {
         $lines = array();
+        $pairs = array();
+
+        $harakat = array('َ', 'ً', 'ُ', 'ٌ', 'ِ', 'ٍ');
+        foreach ($harakat as $haraka) $pairs["ّ$haraka"] = "{$haraka}ّ";
+
+        $text = strtr($text, $pairs);
         
         // process by line required for bidi in RTL case
         $userLines = explode("\n", $text);
