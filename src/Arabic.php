@@ -635,7 +635,7 @@ class Arabic
     /** @return void */
     private function arGlyphsInit()
     {
-        $this->arGlyphsVowel     = 'ًٌٍَُِّْ';
+        $this->arGlyphsVowel     = 'ًٌٍَُِّْ'.'ٰ';
         
         // Arabic Presentation Forms-B (https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-B)
         // Contextual forms (https://en.wikipedia.org/wiki/Arabic_script_in_Unicode#Contextual_forms)
