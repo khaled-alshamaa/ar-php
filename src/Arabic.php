@@ -2383,10 +2383,7 @@ class Arabic
             // handle the case of HARAKAT
             if (mb_strpos($this->arGlyphsVowel, $crntChar) !== false) {
                 if ($crntChar == 'ّ') {
-                    if (mb_strpos($this->arGlyphsVowel, $chars[$i + 1]) !== false) {
-                        // remove the HARAKA from output to merge it with SHADDA
-                        $output = substr($output, 0, -8);
-                        
+                    if (mb_strpos($this->arGlyphsVowel, $chars[$i - 1]) !== false) {
                         // check if the SHADDA & HARAKA in the middle of connected letters (form 3)
                         if (
                             ($prevChar && $this->arGlyphs[$prevChar]['prevLink'] == true) &&
@@ -2396,7 +2393,10 @@ class Arabic
                         }
 
                         // handle the case of HARAKAT after SHADDA
-                        switch ($chars[$i + 1]) {
+                        switch ($chars[$i - 1]) {
+                            case 'ً':
+                                $output .= '&#x0651;&#x064B;';
+                                break;
                             case 'ٌ':
                                 $output .= '&#xFC5E;';
                                 break;
@@ -2416,7 +2416,8 @@ class Arabic
                     } else {
                         $output .= '&#x0651;';
                     }
-                } else {
+                // else show HARAKAT if it is not combined with SHADDA (which processed above)
+                } elseif ($chars[$i + 1] != 'ّ') {
                     switch ($crntChar) {
                         case 'ً':
                             $output .= '&#x064B;';
