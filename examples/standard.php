@@ -210,7 +210,7 @@ highlight_string($code);
 <div class="Paragraph" dir="rtl">
 <h2 dir="ltr">Example Output:</h2>
 <?php
-    $text = 'آسِفـــةٌ لا تَنَبُّؤْ';
+    $text = 'آسِفـــةٌ لا تَنَبُّؤْ 456';
 
     $Arabic->setNorm('stripTatweel', true)
            ->setNorm('stripTanween', true)
@@ -231,7 +231,8 @@ highlight_string($code);
 
     echo '<hr /><b>Normalized Text</b>';
     echo '<p dir="rtl" align="justify">';
-    echo $Arabic->arNormalizeText($text) . '</p>';
+    echo $Arabic->arNormalizeText($text) . '<br/>';
+    echo $Arabic->arNormalizeText($text, 'Hindu') . '</p>';
 ?>
 </div><br />
 <div class="Paragraph">
@@ -241,7 +242,7 @@ $code = <<< ENDALL
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
     
-    \$text = 'آسِفـــةٌ لا تَنَبُّؤْ';
+    \$text = 'آسِفـــةٌ لا تَنَبُّؤْ 456';
 
     \$Arabic->setNorm('stripTatweel', true)
            ->setNorm('stripTanween', true)
@@ -262,7 +263,8 @@ $code = <<< ENDALL
 
     echo '<hr /><b>Normalized Text</b>';
     echo '<p dir="rtl" align="justify">';
-    echo \$Arabic->arNormalizeText(\$text) . '</p>';    
+    echo \$Arabic->arNormalizeText(\$text) . '<br/>';
+    echo \$Arabic->arNormalizeText(\$text, 'Hindu') . '</p>';    
 ENDALL;
 
 highlight_string($code);

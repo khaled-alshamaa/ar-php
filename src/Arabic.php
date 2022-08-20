@@ -325,6 +325,15 @@ class Arabic
     /** @var boolean */
     private $normaliseTaa = true;
 
+    /** @var array<string> */
+    private $numeralHindu = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
+
+    /** @var array<string> */
+    private $numeralPersian = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
+
+    /** @var array<string> */
+    private $numeralArabic = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+
 
     public function __construct()
     {
@@ -2582,14 +2591,10 @@ class Arabic
         
         // concatenate the whole text lines using \n
         $output = implode("\n", $outLines);
-
-        $num = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-
-        $arNum = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
         
-        // convert to hindo numbers if requested
+        // convert to Hindu numerals if requested
         if ($hindo == true) {
-            $output = strtr($output, array_combine($num, $arNum));
+            $output = strtr($output, array_combine($this->numeralArabic, $this->numeralHindu));
         }
 
         return $output;
@@ -4361,12 +4366,14 @@ class Arabic
     /**
      * Normalizes the input provided and returns the normalized string.
      *
-     * @param string  $text The input string to normalize.
+     * @param string $text    The input string to normalize.
+     * @param string $numeral Symbols used to represent numerical digits [Arabic, Hindu, or Persian]
+     *                        default is null (i.e., will not normalize digits in the given string.
      *
      * @return string The normalized string.
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function arNormalizeText($text)
+    public function arNormalizeText($text, $numeral = null)
     {
         if ($this->stripWordHarakat) {
             $bodyHarakat = array('/َ(\S)/u', '/ُ(\S)/u', '/ِ(\S)/u', '/ْ(\S)/u');
@@ -4407,6 +4414,17 @@ class Arabic
 
         if ($this->normaliseTaa) {
             $text = strtr($text, array('ة' => 'ه'));
+        }
+        
+        if ($numeral == 'Hindu') {
+            $text = strtr($text, array_combine($this->numeralPersian, $this->numeralHindu));
+            $text = strtr($text, array_combine($this->numeralArabic, $this->numeralHindu));
+        } else if ($numeral == 'Persian') {
+            $text = strtr($text, array_combine($this->numeralHindu, $this->numeralPersian));
+            $text = strtr($text, array_combine($this->numeralArabic, $this->numeralPersian));
+        } else if ($numeral == 'Arabic') {
+            $text = strtr($text, array_combine($this->numeralHindu, $this->numeralArabic));
+            $text = strtr($text, array_combine($this->numeralPersian, $this->numeralArabic));
         }
 
         return($text);
