@@ -111,9 +111,9 @@ Make sure that the autoload file from Composer is loaded. *if you are using Lara
 require 'vendor/autoload.php';
 ```
 
-### Download and Install
+### Download and Install (Manually)
 
-Download the [latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest) of Ar-PHP library and extract it into the directory where it will be used. *if you are using Laravel framework, you don't have to do that because you are using composer.*
+Download the [latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest) of Ar-PHP library and extract it into the directory where it will be used.
 
 ```php
 require_once 'ar-php/src/Arabic.php';
