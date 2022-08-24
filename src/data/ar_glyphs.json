@@ -390,5 +390,29 @@
         "3": "FEFC",
         "prevLink": false,
         "nextLink": true
+    },
+    "ٰ":{
+        "0": "0670",
+        "1": "0670",
+        "2": "0670",
+        "3": "0670",
+        "prevLink": true,
+        "nextLink": false
+    },
+    "ىٰ":{
+        "0": "FC5D",
+        "1": "FC5D",
+        "2": "0670",
+        "3": "FC5D",
+        "prevLink": true,
+        "nextLink": true
+    },
+    "ﲐ":{
+        "0": "FC5D",
+        "1": "FC90",
+        "2": "0670",
+        "3": "0670",
+        "prevLink": true,
+        "nextLink": false
     }
 }
