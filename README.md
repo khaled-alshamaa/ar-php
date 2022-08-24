@@ -103,7 +103,7 @@ To install with [Composer](https://getcomposer.org/), simply require the latest 
 composer require khaled.alshamaa/ar-php
 ```
 
-Make sure that the autoload file from Composer is loaded.
+Make sure that the autoload file from Composer is loaded. *if you are using Laravel framework, you don't have to do that.*
 
 ```php
 // somewhere early in your project's loading, require the Composer autoloader
@@ -113,7 +113,7 @@ require 'vendor/autoload.php';
 
 ### Download and Install
 
-Download the [latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest) of Ar-PHP library and extract it into the directory where it will be used.
+Download the [latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest) of Ar-PHP library and extract it into the directory where it will be used. *if you are using Laravel framework, you don't have to do that because you are using composer.*
 
 ```php
 require_once 'ar-php/src/Arabic.php';
