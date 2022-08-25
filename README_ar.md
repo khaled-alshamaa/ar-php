@@ -117,7 +117,7 @@ composer require khaled.alshamaa/ar-php
   
 </div>
 
-تأكد من أن ملف التحميل الآلي الخاص بأداة Composer يتم تحميله.
+تأكد من أن ملف التحميل الآلي الخاص بأداة Composer يتم تحميله. *لن تحتاج إلى أمر كهذا إن كنت تستخدم إطار عمل لارافل.*
 
 <div dir="ltr" align="left">
   
