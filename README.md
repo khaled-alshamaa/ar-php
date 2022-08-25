@@ -103,7 +103,7 @@ To install with [Composer](https://getcomposer.org/), simply require the latest 
 composer require khaled.alshamaa/ar-php
 ```
 
-Make sure that the autoload file from Composer is loaded. *if you are using Laravel framework, you don't have to do that.*
+Make sure that the autoload file from Composer is loaded. *if you are using composer for autoloading like what Laravel framework does, you don't have to do that.*
 
 ```php
 // somewhere early in your project's loading, require the Composer autoloader
