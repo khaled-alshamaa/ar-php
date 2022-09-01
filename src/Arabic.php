@@ -2735,7 +2735,7 @@ class Arabic
     /**
      * Setting $mode propority value that refer to search mode [0 for OR logic | 1 for AND logic]
      *
-     * @param integer $mode Setting value to be saved in the $mode propority
+     * @param integer $mode Setting value to be saved in the $mode propority [0 for OR logic | 1 for AND logic]
      *
      * @return object $this to build a fluent interface
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
