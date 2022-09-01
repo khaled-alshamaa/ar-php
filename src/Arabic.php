@@ -70,6 +70,9 @@ class Arabic
     private $arFemaleNames = array();
     
     /** @var array<string> */
+    private $arMaleNames = array();
+    
+    /** @var array<string> */
     private $strToTimeSearch = array();
 
     /** @var array<string> */
@@ -341,6 +344,7 @@ class Arabic
         
         $this->rootDirectory = dirname(__FILE__);
         $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
+        $this->arMaleNames = file($this->rootDirectory . '/data/ar_male.txt', FILE_IGNORE_NEW_LINES);
         $this->umAlqoura  = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
         $this->arDateJSON = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
 
@@ -739,13 +743,18 @@ class Arabic
         $last       = mb_substr($str, -1, 1);
         $beforeLast = mb_substr($str, -2, 1);
 
-        if ($last == 'ا' || $last == 'ة' || $last == 'ى' || ($last == 'ء' && $beforeLast == 'ا')) {
+        if ($last == 'ا' || $last == 'ة' || $last == 'ه' || $last == 'ى' || ($last == 'ء' && $beforeLast == 'ا')) {
             $female = true;
         } elseif (preg_match("/^[اإ].{2}ا.$/u", $str) || preg_match("/^[إا].ت.ا.+$/u", $str)) {
             // الأسماء على وزن إفتعال و إفعال
             $female = true;
         } elseif (array_search($str, $this->arFemaleNames) > 0) {
             $female = true;
+        } 
+        
+        // إستثناء الأسماء المذكرة المؤنثة تأنيث لفظي
+        if (array_search($str, $this->arMaleNames) > 0) {
+            $female = false;
         }
 
         return $female;
