@@ -103,7 +103,7 @@ To install with [Composer](https://getcomposer.org/), simply require the latest 
 composer require khaled.alshamaa/ar-php
 ```
 
-Make sure that the autoload file from Composer is loaded.
+Make sure that the autoload file from Composer is loaded. *if you are using composer for autoloading like what Laravel framework does, you don't have to do that.*
 
 ```php
 // somewhere early in your project's loading, require the Composer autoloader
@@ -111,7 +111,7 @@ Make sure that the autoload file from Composer is loaded.
 require 'vendor/autoload.php';
 ```
 
-### Download and Install
+### Download and Install (Manually)
 
 Download the [latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest) of Ar-PHP library and extract it into the directory where it will be used.
 
@@ -127,7 +127,7 @@ require_once 'ar-php/src/Arabic.php';
 * Arabic Keyboard Swapping Language ([live demo](https://ar-php.org/github/examples/keyswap.php))
 * Arabic Soundex ([live demo](https://ar-php.org/github/examples/soundex.php))
 * Arabic Gender Guesser ([live demo](https://ar-php.org/github/examples/gender.php))
-* Arabic SQL Queary ([live demo](https://ar-php.org/github/examples/ar_query.php))
+* Arabic SQL Query ([live demo](https://ar-php.org/github/examples/ar_query.php))
 * Muslim Prayer Times & Qibla Determination ([live demo](https://ar-php.org/github/examples/salat.php))
 * Arabic/Hijri Date ([live demo](https://ar-php.org/github/examples/date.php))
 * Arabic/Hijri Maketime ([live demo](https://ar-php.org/github/examples/mktime.php))
