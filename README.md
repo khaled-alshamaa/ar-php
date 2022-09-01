@@ -127,7 +127,7 @@ require_once 'ar-php/src/Arabic.php';
 * Arabic Keyboard Swapping Language ([live demo](https://ar-php.org/github/examples/keyswap.php))
 * Arabic Soundex ([live demo](https://ar-php.org/github/examples/soundex.php))
 * Arabic Gender Guesser ([live demo](https://ar-php.org/github/examples/gender.php))
-* Arabic SQL Queary ([live demo](https://ar-php.org/github/examples/ar_query.php))
+* Arabic SQL Query ([live demo](https://ar-php.org/github/examples/ar_query.php))
 * Muslim Prayer Times & Qibla Determination ([live demo](https://ar-php.org/github/examples/salat.php))
 * Arabic/Hijri Date ([live demo](https://ar-php.org/github/examples/date.php))
 * Arabic/Hijri Maketime ([live demo](https://ar-php.org/github/examples/mktime.php))
