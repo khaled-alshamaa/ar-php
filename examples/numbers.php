@@ -361,7 +361,6 @@ highlight_string($code);
 <hr/><i>Related Documentation: 
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_str2int" target="_blank">str2int</a>
 </i>
-
 </div>
 <footer><i><a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, an open-source library for website developers to process Arabic content</i></footer>
 </body>
