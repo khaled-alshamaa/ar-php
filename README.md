@@ -111,6 +111,8 @@ Make sure that the autoload file from Composer is loaded. *if you are using comp
 require 'vendor/autoload.php';
 ```
 
+Also make sure that the `calendar` php extension is enabled in your `php.ini` by uncommenting its line.
+
 ### Download and Install (Manually)
 
 Download the [latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest) of Ar-PHP library and extract it into the directory where it will be used.
