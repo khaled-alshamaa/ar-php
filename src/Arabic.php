@@ -4371,7 +4371,7 @@ class Arabic
         
         return $value;
     }
-    
+
     /**
      * Normalizes the input provided and returns the normalized string.
      *
@@ -4438,7 +4438,20 @@ class Arabic
 
         return($text);
     }
-    
+
+    /**
+     * Get the difference in a human readable format.
+     *
+     * @param int      $time   the timestamp that is being compared.
+     * @param int|null $others if null passed, now will be used as comparison reference;
+     *                         if integer value, it will be used as reference timestamp.
+     *                         (default value is null).
+     * @param int      $parts  maximum number of parts to display (default value is 2).
+     * @param bool     $floor  logic for rounding last part, if true then use floor, else use ceiling.
+     *
+     * @return string the difference in a human readable format.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
     public function diffForHumans($time, $others = null, $parts = 2, $floor = TRUE)
     {
         $diff = $others == null ? $time - time() : $time - $others;
