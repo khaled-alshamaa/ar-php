@@ -4438,4 +4438,126 @@ class Arabic
 
         return($text);
     }
+    
+    public function diffForHumans($time, $others = null, $parts = 2, $floor = TRUE)
+    {
+        $diff = $others == null ? $time - time() : $time - $others;
+
+        if ($diff < 0) {
+            $when = $others == null ? 'منذ' : 'قبل';
+        } else {
+            $when = $others == null ? 'باقي' : 'بعد';
+        }
+
+        $diff = abs($diff);
+
+        $string = '';
+        $minute = 60;
+        $hour   = 60 * $minute;
+        $day    = 24 * $hour;
+        $week   = 7 * $day;
+        $month  = 30 * $day;
+        $year   = 365 * $day;
+
+        while ($parts > 0) {
+            if ($diff >= $year) {
+                if ($parts > 1 || $floor === TRUE) {
+                    $value = floor($diff / $year);
+                } else {
+                    $value = ceil($diff / $year);
+                }
+
+                $text = $this->arPlural('سنة', $value);
+                $text = str_replace('%d', $value, $text);
+
+                $string = $string == '' ? $text : $string . ' و ' . $text;
+
+                $diff  = $diff % $year;
+                $parts = --$parts;
+            } else if ($diff >= $month) {
+                if ($parts > 1 || $floor === TRUE) {
+                    $value = floor($diff / $month);
+                } else {
+                    $value = ceil($diff / $month);
+                }
+
+                $text = $this->arPlural('شهر', $value);
+                $text = str_replace('%d', $value, $text);
+
+                $string = $string == '' ? $text : $string . ' و ' . $text;
+
+                $diff  = $diff % $month;
+                $parts = --$parts;
+            } else if ($diff >= $week) {
+                if ($parts > 1 || $floor === TRUE) {
+                    $value = floor($diff / $week);
+                } else {
+                    $value = ceil($diff / $week);
+                }
+
+                $text = $this->arPlural('إسبوع', $value);
+                $text = str_replace('%d', $value, $text);
+
+                $string = $string == '' ? $text : $string . ' و ' . $text;
+
+                $diff  = $diff % $week;
+                $parts = --$parts;
+            } else if ($diff >= $day) {
+                if ($parts > 1 || $floor === TRUE) {
+                    $value = floor($diff / $day);
+                } else {
+                    $value = ceil($diff / $day);
+                }
+
+                $text = $this->arPlural('يوم', $value);
+                $text = str_replace('%d', $value, $text);
+
+                $string = $string == '' ? $text : $string . ' و ' . $text;
+
+                $diff  = $diff % $day;
+                $parts = --$parts;
+            } else if ($diff >= $hour) {
+                if ($parts > 1 || $floor === TRUE) {
+                    $value = floor($diff / $hour);
+                } else {
+                    $value = ceil($diff / $hour);
+                }
+
+                $text = $this->arPlural('ساعة', $value);
+                $text = str_replace('%d', $value, $text);
+
+                $string = $string == '' ? $text : $string . ' و ' . $text;
+
+                $diff  = $diff % $hour;
+                $parts = --$parts;
+            } else if ($diff >= $minute) {
+                if ($parts > 1 || $floor === TRUE) {
+                    $value = floor($diff / $minute);
+                } else {
+                    $value = ceil($diff / $minute);
+                }
+
+                $text = $this->arPlural('دقيقة', $value);
+                $text = str_replace('%d', $value, $text);
+
+                $string = $string == '' ? $text : $string . ' و ' . $text;
+
+                $diff  = $diff % $minute;
+                $parts = --$parts;
+            } else {
+                if ($diff > 0) {
+                    $text = $this->arPlural('ثانية', $diff);
+                    $text = str_replace('%d', $diff, $text);
+
+                    $string = $string == '' ? $text : $string . ' و ' . $text;
+                }
+
+                $parts = 0;
+            }
+        }
+        
+        $string = $when . ' ' . $string;
+        
+        return $string;
+    }
 }
