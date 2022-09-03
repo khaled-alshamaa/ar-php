@@ -37,11 +37,13 @@
 
 * Improve example scripts by adding anchor links to the internal sections and links to the related reference documentation.
 
-* Fix the issue of the masculine names formed by adding feminine special characters to the end (e.g., علاء, أسامة, زكريا, مصطفى).
+* Fix the issue of the masculine names formed by adding feminine special characters to the end (e.g., علاء, أسامة, زكريا, مصطفى). Thanks to [Alaa Najmi](https://twitter.com/Alaa_Najmi) for reporting this.
 
 * Fix the issue of handling HARAKAT before SHADDA properly, including the overlapping SHADDA with HARAKAT. Thanks to [Said Bakr](https://github.com/saidbakr) for reporting [#33](https://github.com/khaled-alshamaa/ar-php/issues/33) and contributing to [fixing](https://github.com/khaled-alshamaa/ar-php/pull/36) it.
 
 * Fix bug #34 of the undefined array key when the string starts by LAM-ALEF in the arGlyphs() function. Thanks to [Tarun Saini](https://github.com/tsaini530) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/35).
+
+* Make sure that the required calendar extension is enabled. Thanks to [Marwane Chaoui](https://github.com/moghwan) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/45).
 -->
 
 ## What's new in ArPHP 6.3.0 _(release date: Jun 18, 2022)_
