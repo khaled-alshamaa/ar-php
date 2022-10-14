@@ -4,7 +4,7 @@
  * Performing Arabic sentiment analysis using a statistical algorithm based on the log-odds model of the bi-radical roots.
  *
  * @author    Khaled Al-Sham'aa <khaled.alshamaa@gmail.com>
- * @copyright 2021, Khaled Al-Sham'aa
+ * @copyright 2022, Khaled Al-Sham'aa
  * @license   LGPLv3
  * @version   2.0
  * @link      https://github.com/khaled-alshamaa/ar-php/blob/master/examples/ar_sentiment.js
