@@ -41,6 +41,8 @@
 
 * Fix the issue of handling HARAKAT before SHADDA properly, including the overlapping SHADDA with HARAKAT. Thanks to [Said Bakr](https://github.com/saidbakr) for reporting [#33](https://github.com/khaled-alshamaa/ar-php/issues/33) and contributing to [fixing](https://github.com/khaled-alshamaa/ar-php/pull/36) it.
 
+* Fix the issue of singular feminine number. Thanks to [Jeremy Varnham](https://github.com/jvarn) and Saudi ADHD Society for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/49).
+
 * Fix bug #34 of the undefined array key when the string starts by LAM-ALEF in the arGlyphs() function. Thanks to [Tarun Saini](https://github.com/tsaini530) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/35).
 
 * Fix bug #47 of handling Arabic-Indic digits in the arGlyphs() function. Thanks to [Mohammed Anas Al-Mahdi](https://github.com/mamprogr) for [reporting it](https://github.com/khaled-alshamaa/ar-php/issues/47).
