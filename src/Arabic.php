@@ -4094,8 +4094,10 @@ class Arabic
     {
         if ($count == 0) {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][0] : "لا $plural3";
-        } elseif ($count == 1) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحد";
+        } elseif ($count == 1 && $this->isFemale($singular)) {
+                $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحدة";
+            } elseif ($count == 1 && !$this->isFemale($singular)) {
+                $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحد";
         } elseif ($count == 2) {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][2] : $plural2;
         } elseif ($count % 100 >= 3 && $count % 100 <= 10) {
