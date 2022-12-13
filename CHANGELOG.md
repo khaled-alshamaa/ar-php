@@ -1,6 +1,6 @@
 # ArPHP Library - Change Log
 
-<!-- * Version [6.3.1](#whats-new-in-arphp-631-release-date-sep-10-2022) _(release date: Sep 10, 2022)_ -->
+<!-- * Version [6.3.1](#whats-new-in-arphp-631-release-date-dec-18-2022) _(release date: Dec 18, 2022)_ -->
 * Version [6.3.0](#whats-new-in-arphp-630-release-date-jun-18-2022) _(release date: Jun 18, 2022)_
 * Version [6.2.0](#whats-new-in-arphp-620-release-date-jun-20-2021) _(release date: Jun 20, 2021)_
 * Version [6.1.0](#whats-new-in-arphp-610-release-date-may-1-2021) _(release date: May 1, 2021)_
@@ -31,7 +31,7 @@
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
 <!--
-## What's new in ArPHP 6.3.1 _(release date: Sep 10, 2022)_
+## What's new in ArPHP 6.3.1 _(release date: Dec 18, 2022)_
 
 * Add new functionality to normalize digits styles in the arNormalizeText() function by setting the symbol's type used to represent numerical digits (Arabic, Hindu, or Persian). Thanks to [Taha Zerrouki](https://github.com/linuxscout) for his [suggestion](https://github.com/khaled-alshamaa/ar-php/issues/31).
 
@@ -43,9 +43,9 @@
 
 * Fix the issue of singular feminine number. Thanks to [Jeremy Varnham](https://github.com/jvarn) and Saudi ADHD Society for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/49).
 
-* Fix bug #34 of the undefined array key when the string starts by LAM-ALEF in the arGlyphs() function. Thanks to [Tarun Saini](https://github.com/tsaini530) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/35).
+* Fix bug [#34](https://github.com/khaled-alshamaa/ar-php/issues/34) of the undefined array key when the string starts by LAM-ALEF in the arGlyphs() function. Thanks to [Tarun Saini](https://github.com/tsaini530) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/35).
 
-* Fix bug #47 of handling Arabic-Indic digits in the arGlyphs() function. Thanks to [Mohammed Anas Al-Mahdi](https://github.com/mamprogr) for [reporting it](https://github.com/khaled-alshamaa/ar-php/issues/47).
+* Fix bug [#47](https://github.com/khaled-alshamaa/ar-php/issues/47) of handling Arabic-Indic digits in the arGlyphs() function. Thanks to [Mohammed Anas Al-Mahdi](https://github.com/mamprogr) for [reporting it](https://github.com/khaled-alshamaa/ar-php/issues/47).
 
 * Make sure that the required calendar extension is enabled. Thanks to [Marwane Chaoui](https://github.com/moghwan) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/45).
 -->
@@ -54,7 +54,7 @@
 
 * Add Arabic text normalization method (e.g., Alef, Hamza, Taa, Alef Lam, etc.). Thanks to [Watheq Alshowaiter](https://github.com/WatheqAlshowaiter) for the [request](https://github.com/khaled-alshamaa/ar-php/issues/18).
 
-* Rewrite the Arabic glyphs mechanism for more flexibility and performance, and resolve reported issue #25 with some fonts like Cairo and Tajawal by using standard UTF-8 code for isolated letters instead of the Arabic Presentation Forms-B. Thanks to [Firas Darwish](https://github.com/firasdarwish) for reporting this issue and [Khaled Hosny](https://github.com/khaledhosny) for help in fixing it.
+* Rewrite the Arabic glyphs mechanism for more flexibility and performance, and resolve reported issue [#25](https://github.com/khaled-alshamaa/ar-php/issues/25) with some fonts like Cairo and Tajawal by using standard UTF-8 code for isolated letters instead of the Arabic Presentation Forms-B. Thanks to [Firas Darwish](https://github.com/firasdarwish) for reporting this issue and [Khaled Hosny](https://github.com/khaledhosny) for help in fixing it.
 
 * Fix issues of handling glyphs of LAM-ALEF and SHADDA with HARAKAT properly. Thanks to [Said Bakr](https://twitter.com/saidbakr) for reporting these issues and [Khaled Hosny](https://github.com/khaledhosny) for help in fixing it.
 
