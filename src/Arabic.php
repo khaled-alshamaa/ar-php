@@ -3661,9 +3661,11 @@ class Arabic
      */
     private function arCleanCommon($str)
     {
-        $str = strtr($str, array_fill_keys($this->arSummaryCommonWords, ' '));
+        $str = str_replace(' ', '  ', $str);
+        $str = strtr(" $str", array_fill_keys($this->arSummaryCommonWords, ' '));
+        $str = str_replace('  ', ' ', $str);
 
-        return $str;
+        return trim($str);
     }
 
     /**
