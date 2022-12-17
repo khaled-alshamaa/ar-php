@@ -4484,8 +4484,8 @@ class Arabic
                     $value = ceil($diff / $year);
                 }
 
-                $text = $this->arPlural('سنة', $value);
-                $text = str_replace('%d', $value, $text);
+                $text = $this->arPlural('سنة', (int)$value);
+                $text = str_replace('%d', (string)$value, $text);
 
                 $string = $string == '' ? $text : $string . ' و ' . $text;
 
@@ -4498,8 +4498,8 @@ class Arabic
                     $value = ceil($diff / $month);
                 }
 
-                $text = $this->arPlural('شهر', $value);
-                $text = str_replace('%d', $value, $text);
+                $text = $this->arPlural('شهر', (int)$value);
+                $text = str_replace('%d', (string)$value, $text);
 
                 $string = $string == '' ? $text : $string . ' و ' . $text;
 
@@ -4512,8 +4512,8 @@ class Arabic
                     $value = ceil($diff / $week);
                 }
 
-                $text = $this->arPlural('إسبوع', $value);
-                $text = str_replace('%d', $value, $text);
+                $text = $this->arPlural('إسبوع', (int)$value);
+                $text = str_replace('%d', (string)$value, $text);
 
                 $string = $string == '' ? $text : $string . ' و ' . $text;
 
@@ -4526,8 +4526,8 @@ class Arabic
                     $value = ceil($diff / $day);
                 }
 
-                $text = $this->arPlural('يوم', $value);
-                $text = str_replace('%d', $value, $text);
+                $text = $this->arPlural('يوم', (int)$value);
+                $text = str_replace('%d', (string)$value, $text);
 
                 $string = $string == '' ? $text : $string . ' و ' . $text;
 
@@ -4540,8 +4540,8 @@ class Arabic
                     $value = ceil($diff / $hour);
                 }
 
-                $text = $this->arPlural('ساعة', $value);
-                $text = str_replace('%d', $value, $text);
+                $text = $this->arPlural('ساعة', (int)$value);
+                $text = str_replace('%d', (string)$value, $text);
 
                 $string = $string == '' ? $text : $string . ' و ' . $text;
 
@@ -4554,8 +4554,8 @@ class Arabic
                     $value = ceil($diff / $minute);
                 }
 
-                $text = $this->arPlural('دقيقة', $value);
-                $text = str_replace('%d', $value, $text);
+                $text = $this->arPlural('دقيقة', (int)$value);
+                $text = str_replace('%d', (string)$value, $text);
 
                 $string = $string == '' ? $text : $string . ' و ' . $text;
 
@@ -4563,8 +4563,8 @@ class Arabic
                 $parts = --$parts;
             } else {
                 if ($diff > 0) {
-                    $text = $this->arPlural('ثانية', $diff);
-                    $text = str_replace('%d', $diff, $text);
+                    $text = $this->arPlural('ثانية', (int)$diff);
+                    $text = str_replace('%d', (string)$diff, $text);
 
                     $string = $string == '' ? $text : $string . ' و ' . $text;
                 }
