@@ -1229,4 +1229,29 @@ END;
         
         $this->assertEquals($expected, $actual);
     }
+    
+    public function testNormalizeText(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $expected = array();
+        $actual   = array();
+        
+        $text = 'آسِفـــةٌ لا تَنَبُّؤْ 456';
+        
+        $expected[] = 'اسفه لا تنبء 456';
+        $actual[]   = $Arabic->arNormalizeText($text);
+        
+        $expected[] = 'اسفه لا تنبء 456';
+        $actual[]   = $Arabic->arNormalizeText($text, 'Arabic');
+        
+        $expected[] = 'اسفه لا تنبء ٤٥٦';
+        $actual[]   = $Arabic->arNormalizeText($text, 'Hindu');
+        
+        $expected[] = 'اسفه لا تنبء ۴۵۶';
+        $actual[]   = $Arabic->arNormalizeText($text, 'Persian');
+        
+        $this->assertEquals($expected, $actual);
+    }
+
 }

@@ -4122,12 +4122,11 @@ class Arabic
      * @param boolean $shadda  Strip Shadda (default is TRUE).
      * @param boolean $last    Strip last Harakat (default is TRUE).
      * @param boolean $harakat Strip in word Harakat (default is TRUE).
-     * @param string  $numeral Symbols used to represent numerical digits [default Arabic, Hindu, or Persian].
      *
      * @return string Arabic string clean from selected Harakat
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function stripHarakat($text, $tatweel = true, $tanwen = true, $shadda = true, $last = true, $harakat = true, $numeral = 'Arabic')
+    public function stripHarakat($text, $tatweel = true, $tanwen = true, $shadda = true, $last = true, $harakat = true)
     {
         $text = $this->setNorm('stripTatweel', $tatweel)
                      ->setNorm('stripTanween', $tanwen)
@@ -4138,7 +4137,7 @@ class Arabic
                      ->setNorm('normaliseAlef', false)
                      ->setNorm('normaliseHamza', false)
                      ->setNorm('normaliseTaa', false)
-                     ->arNormalizeText($text, $numeral);
+                     ->arNormalizeText($text);
 
         return $text;
     }
