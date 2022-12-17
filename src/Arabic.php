@@ -750,7 +750,7 @@ class Arabic
             $female = true;
         } elseif (array_search($str, $this->arFemaleNames) > 0) {
             $female = true;
-        } 
+        }
         
         // إستثناء الأسماء المذكرة المؤنثة تأنيث لفظي
         if (array_search($str, $this->arMaleNames) > 0) {
@@ -2390,7 +2390,7 @@ class Arabic
                 && (mb_strpos('آأإا', $nextChar) !== false)
             ) {
                 $output = substr_replace($output, '', strrpos($output, $this->arGlyphs[$nextChar][1]) - 3, 8);
-                if ( isset($this->arGlyphs[$prevChar]['prevLink']) && $this->arGlyphs[$prevChar]['prevLink'] == true) {
+                if (isset($this->arGlyphs[$prevChar]['prevLink']) && $this->arGlyphs[$prevChar]['prevLink'] == true) {
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][1] . ';';
                 } else {
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][0] . ';';
@@ -2511,7 +2511,9 @@ class Arabic
         $pairs = array();
 
         $harakat = array('َ', 'ً', 'ُ', 'ٌ', 'ِ', 'ٍ');
-        foreach ($harakat as $haraka) $pairs["ّ$haraka"] = "{$haraka}ّ";
+        foreach ($harakat as $haraka) {
+            $pairs["ّ$haraka"] = "{$haraka}ّ";
+        }
 
         $text = strtr($text, $pairs);
         
@@ -4430,10 +4432,10 @@ class Arabic
         if ($numeral == 'Hindu') {
             $text = strtr($text, array_combine($this->numeralPersian, $this->numeralHindu));
             $text = strtr($text, array_combine($this->numeralArabic, $this->numeralHindu));
-        } else if ($numeral == 'Persian') {
+        } elseif ($numeral == 'Persian') {
             $text = strtr($text, array_combine($this->numeralHindu, $this->numeralPersian));
             $text = strtr($text, array_combine($this->numeralArabic, $this->numeralPersian));
-        } else if ($numeral == 'Arabic') {
+        } elseif ($numeral == 'Arabic') {
             $text = strtr($text, array_combine($this->numeralHindu, $this->numeralArabic));
             $text = strtr($text, array_combine($this->numeralPersian, $this->numeralArabic));
         }
@@ -4454,7 +4456,7 @@ class Arabic
      * @return string the difference in a human readable format.
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function diffForHumans($time, $others = null, $parts = 2, $floor = TRUE)
+    public function diffForHumans($time, $others = null, $parts = 2, $floor = true)
     {
         $diff = $others == null ? $time - time() : $time - $others;
 
@@ -4476,7 +4478,7 @@ class Arabic
 
         while ($parts > 0) {
             if ($diff >= $year) {
-                if ($parts > 1 || $floor === TRUE) {
+                if ($parts > 1 || $floor === true) {
                     $value = floor($diff / $year);
                 } else {
                     $value = ceil($diff / $year);
@@ -4489,8 +4491,8 @@ class Arabic
 
                 $diff  = $diff % $year;
                 $parts = --$parts;
-            } else if ($diff >= $month) {
-                if ($parts > 1 || $floor === TRUE) {
+            } elseif ($diff >= $month) {
+                if ($parts > 1 || $floor === true) {
                     $value = floor($diff / $month);
                 } else {
                     $value = ceil($diff / $month);
@@ -4503,8 +4505,8 @@ class Arabic
 
                 $diff  = $diff % $month;
                 $parts = --$parts;
-            } else if ($diff >= $week) {
-                if ($parts > 1 || $floor === TRUE) {
+            } elseif ($diff >= $week) {
+                if ($parts > 1 || $floor === true) {
                     $value = floor($diff / $week);
                 } else {
                     $value = ceil($diff / $week);
@@ -4517,8 +4519,8 @@ class Arabic
 
                 $diff  = $diff % $week;
                 $parts = --$parts;
-            } else if ($diff >= $day) {
-                if ($parts > 1 || $floor === TRUE) {
+            } elseif ($diff >= $day) {
+                if ($parts > 1 || $floor === true) {
                     $value = floor($diff / $day);
                 } else {
                     $value = ceil($diff / $day);
@@ -4531,8 +4533,8 @@ class Arabic
 
                 $diff  = $diff % $day;
                 $parts = --$parts;
-            } else if ($diff >= $hour) {
-                if ($parts > 1 || $floor === TRUE) {
+            } elseif ($diff >= $hour) {
+                if ($parts > 1 || $floor === true) {
                     $value = floor($diff / $hour);
                 } else {
                     $value = ceil($diff / $hour);
@@ -4545,8 +4547,8 @@ class Arabic
 
                 $diff  = $diff % $hour;
                 $parts = --$parts;
-            } else if ($diff >= $minute) {
-                if ($parts > 1 || $floor === TRUE) {
+            } elseif ($diff >= $minute) {
+                if ($parts > 1 || $floor === true) {
                     $value = floor($diff / $minute);
                 } else {
                     $value = ceil($diff / $minute);
