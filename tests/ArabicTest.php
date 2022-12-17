@@ -1253,5 +1253,29 @@ END;
         
         $this->assertEquals($expected, $actual);
     }
+    
+    public function testDiffForHumans(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+        
+        $expected = array();
+        $actual   = array();
 
+        $time  = time();
+        $other = $time - 1.618 * 3600 * 24 * 365;
+
+        $expected[] = 'بعد سنة واحدة و 7 أشهر';
+        $actual[]   = $Arabic->diffForHumans($time, $other);
+
+        $expected[] = 'بعد سنة واحدة و 7 أشهر و إسبوعين';
+        $actual[]   = $Arabic->diffForHumans($time, $other, 3);
+
+        $expected[] = 'بعد سنة واحدة و 7 أشهر و 3 أسابيع';
+        $actual[]   = $Arabic->diffForHumans($time, $other, 3, false);
+
+        $expected[] = 'قبل سنة واحدة و 7 أشهر و إسبوعين و يوم واحد و 13 ساعة و 40 دقيقة و 48 ثانية';
+        $actual[]   = $Arabic->diffForHumans($other, $time, 7);
+
+        $this->assertEquals($expected, $actual);
+    }
 }

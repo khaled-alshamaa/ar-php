@@ -129,7 +129,68 @@ highlight_string($code);
 <hr/><i>Related Documentation: 
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_strtotime" target="_blank">strtotime</a>
 </i>
+</div><br />
+
+
+
+<div class="Paragraph" dir="rtl">
+<h2 dir="ltr" id="example-2">
+<a href="#example-2" class="anchor"><img src="./images/link_icon.png" width="16" border="0"></a>Example Output 2:</h2>
+<?php
+
+$time  = time();
+$other = $time - 1.618 * 3600 * 24 * 365;
+
+$str = $Arabic->diffForHumans($time, $other);
+echo "$str<br /><br />";
+
+$str = $Arabic->diffForHumans($time, $other, 3);
+echo "$str<br /><br />";
+
+$str = $Arabic->diffForHumans($time, $other, 3, false);
+echo "$str<br /><br />";
+
+$str = $Arabic->diffForHumans($other, $time, 7);
+echo "$str<br /><br />";
+?>
+</div><br />
+<div class="Paragraph">
+<h2 dir="ltr">Example Code 2:</h2>
+<?php
+$code = <<< END
+<?php
+    date_default_timezone_set('UTC');
+    
+    \$time  = time();
+    \$other = \$time - 1.618 * 3600 * 24 * 365;
+
+	\$Arabic = new \\ArPHP\\I18N\\Arabic();
+
+    \$str = \$Arabic->diffForHumans(\$time, \$other);
+    echo "\$str<br /><br />";
+
+    \$str = \$Arabic->diffForHumans(\$time, \$other, 3);
+    echo "\$str<br /><br />";
+
+    \$str = \$Arabic->diffForHumans(\$time, \$other, 3, false);
+    echo "\$str<br /><br />";
+
+    \$str = \$Arabic->diffForHumans(\$other, \$time, 7);
+    echo "\$str<br /><br />";
+END;
+
+highlight_string($code);
+?>
+<hr/><i>Related Documentation: 
+<a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_diffForHumans" target="_blank">diffForHumans</a>
+</i>
 </div>
+
+
+
+
+
+
 <footer><i><a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, an open-source library for website developers to process Arabic content</i></footer>
 </body>
 </html>

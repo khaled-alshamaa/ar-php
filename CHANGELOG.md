@@ -35,6 +35,8 @@
 
 * Add new functionality to normalize digits styles in the arNormalizeText() function by setting the symbol's type used to represent numerical digits (Arabic, Hindu, or Persian). Thanks to [Taha Zerrouki](https://github.com/linuxscout) for his [suggestion](https://github.com/khaled-alshamaa/ar-php/issues/31).
 
+* Add the new "diffForHumans" method to get the difference between 2 timestamps in a human readable format. Thanks to [Watheq Alshowaiter](https://github.com/WatheqAlshowaiter) for requesting this functionality.
+
 * Improve example scripts by adding anchor links to the internal sections and links to the related reference documentation.
 
 * Fix the issue of the masculine names formed by adding feminine special characters to the end (e.g., علاء, أسامة, زكريا, مصطفى). Thanks to [Alaa Najmi](https://twitter.com/Alaa_Najmi) for reporting this.

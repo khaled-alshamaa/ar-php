@@ -4381,7 +4381,7 @@ class Arabic
      *
      * @param string $text    The input string to normalize.
      * @param string $numeral Symbols used to represent numerical digits [Arabic, Hindu, or Persian]
-     *                        default is null (i.e., will not normalize digits in the given string.
+     *                        default is null (i.e., will not normalize digits in the given string).
      *
      * @return string The normalized string.
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
