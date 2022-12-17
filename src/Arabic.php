@@ -787,8 +787,8 @@ class Arabic
             if (strpos($text, $this->hj[$i]) > 0) {
                 preg_match('/.*(\d{1,2}).*(\d{4}).*/', $text, $matches);
 
-                $fix  = $this->mktimeCorrection($i + 1, $matches[2]);
-                $int  = $this->mktime(0, 0, 0, $i + 1, $matches[1], $matches[2], $fix);
+                $fix  = $this->mktimeCorrection($i + 1, (int)$matches[2]);
+                $int  = $this->mktime(0, 0, 0, $i + 1, (int)$matches[1], (int)$matches[2], $fix);
                 $temp = null;
 
                 break;
@@ -2435,7 +2435,7 @@ class Arabic
                         $output .= '&#x0651;';
                     }
                 // else show HARAKAT if it is not combined with SHADDA (which processed above)
-                } elseif ($chars[$i + 1] != 'ّ') {
+                } elseif (!isset($chars[$i + 1]) || $chars[$i + 1] != 'ّ') {
                     switch ($crntChar) {
                         case 'ً':
                             $output .= '&#x064B;';
@@ -3421,7 +3421,7 @@ class Arabic
 
         preg_match($pattern, $value, $matches);
 
-        $degree = $matches[1] + ($matches[3] / 60) + ($matches[5] / 3600);
+        $degree = (int)$matches[1] + ((int)$matches[3] / 60) + ((float)$matches[5] / 3600);
 
         $direction = strtoupper($matches[6]);
 
@@ -4122,11 +4122,12 @@ class Arabic
      * @param boolean $shadda  Strip Shadda (default is TRUE).
      * @param boolean $last    Strip last Harakat (default is TRUE).
      * @param boolean $harakat Strip in word Harakat (default is TRUE).
+     * @param string  $numeral Symbols used to represent numerical digits [default Arabic, Hindu, or Persian].
      *
      * @return string Arabic string clean from selected Harakat
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function stripHarakat($text, $tatweel = true, $tanwen = true, $shadda = true, $last = true, $harakat = true)
+    public function stripHarakat($text, $tatweel = true, $tanwen = true, $shadda = true, $last = true, $harakat = true, $numeral = 'Arabic')
     {
         $text = $this->setNorm('stripTatweel', $tatweel)
                      ->setNorm('stripTanween', $tanwen)
@@ -4137,7 +4138,7 @@ class Arabic
                      ->setNorm('normaliseAlef', false)
                      ->setNorm('normaliseHamza', false)
                      ->setNorm('normaliseTaa', false)
-                     ->arNormalizeText($text);
+                     ->arNormalizeText($text, $numeral);
 
         return $text;
     }

@@ -445,7 +445,7 @@ final class ArabicTest extends TestCase
 ًاﺮﻤﺘﺴﻣ لاﺰﻳﻻو';
         $actual[]   = $Arabic->utf8Glyphs('مشروع PHP واللغة العربيّة بدأ منذ العام 2006 ولايزال مستمراً');
 
-        $expected[] = 'ﱞﻦﺴﻣ ٌﻞﺟر اﺪﺟ ًﺎﻌَﻣ ِﺔﳲﻗﱢﺮﻟا ﻰَﻬَﺘْﻨُﻣ';
+        $expected[] = 'ﱞﻦﺴﻣ ٌﻞﺟر اًّﺪﺟ ًﺎﻌَﻣ ِﺔﳲﻗﱢﺮﻟا ﻰَﻬَﺘْﻨُﻣ';
         $actual[]   = $Arabic->utf8Glyphs('مُنْتَهَى الرِّقَّةِ مَعاً جدًّا رجلٌ مسنٌّ');
 
         // #29 test case 1 (ascii + arabic)
