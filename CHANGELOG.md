@@ -44,9 +44,9 @@
 
 * Fix the issue of singular feminine numbers. Thanks to [Jeremy Varnham](https://github.com/jvarn) and Saudi ADHD Society for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/49).
 
-* Fix bug [#34](https://github.com/khaled-alshamaa/ar-php/issues/34) of the undefined array key when the string starts by LAM-ALEF in the arGlyphs() function. Thanks to [Tarun Saini](https://github.com/tsaini530) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/35).
+* Fix the bug [#34](https://github.com/khaled-alshamaa/ar-php/issues/34) of the undefined array key when the string starts by LAM-ALEF in the arGlyphs() function. Thanks to [Tarun Saini](https://github.com/tsaini530) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/35).
 
-* Fix bug [#47](https://github.com/khaled-alshamaa/ar-php/issues/47) of handling Arabic-Indic digits in the arGlyphs() function. Thanks to [Mohammed Anas Al-Mahdi](https://github.com/mamprogr) for [reporting it](https://github.com/khaled-alshamaa/ar-php/issues/47).
+* Fix the bug [#47](https://github.com/khaled-alshamaa/ar-php/issues/47) of handling Arabic-Indic digits in the arGlyphs() function. Thanks to [Mohammed Anas Al-Mahdi](https://github.com/mamprogr) for [reporting it](https://github.com/khaled-alshamaa/ar-php/issues/47).
 
 * Make sure that the required calendar extension is enabled. Thanks to [Marwane Chaoui](https://github.com/moghwan) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/45).
 
