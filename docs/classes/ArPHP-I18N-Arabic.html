@@ -37,8 +37,7 @@
 </label>
 
             <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Ar-PHP</a></h1>
-
+<h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Ar-PHP</a></h1>
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
     Arabic
@@ -125,9 +124,9 @@ soundex, Hijri calendar, spell numbers, keyboard language, and more...</p>
                     <span class="phpdocumentor-tag__name">version</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">6.3.0</span>
+                                            <span class="phpdocumentor-tag-link">6.3.1</span>
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>released in Jun 18, 2022</p>
+                                                 <section class="phpdocumentor-description"><p>released in Dec 18, 2022</p>
 </section>
 
                                     </dd>
@@ -286,6 +285,13 @@ LIKE condition to match it as it is.</dd>
 </dt>
 <dd>Encode a location coordinates (latitude and longitude in WGS84) into Open Location Code
 Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/ArPHP-I18N-Arabic.html#method_diffForHumans">diffForHumans()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Get the difference in a human readable format.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/ArPHP-I18N-Arabic.html#method_dms2dd">dms2dd()</a>
@@ -700,13 +706,12 @@ sections as well as numbers and arcs etc...)</dd>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
-
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$version</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;6.3.0&#039;</span></code>
+     = <span class="phpdocumentor-signature__default-value">&#039;6.3.1&#039;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -730,7 +735,6 @@ sections as well as numbers and arcs etc...)</dd>
         __construct()
         <a href="classes/ArPHP-I18N-Arabic.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
-
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -983,7 +987,7 @@ sequence in the given UTF-8 multi language string</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">arNormalizeText</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                <span class="phpdocumentor-signature__name">arNormalizeText</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$numeral</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -995,6 +999,16 @@ sequence in the given UTF-8 multi language string</p>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The input string to normalize.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$numeral</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Symbols used to represent numerical digits [Arabic, Hindu, or Persian]
+default is null (i.e., will not normalize digits in the given string).</p>
 </section>
 
             </dd>
@@ -1830,6 +1844,92 @@ Ref: https://github.com/google/open-location-code/blob/master/docs/specification
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
             <section class="phpdocumentor-description"><p>Open Location Code string (e.g. 8G6RM7C7+PF)</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_diffForHumans">
+        diffForHumans()
+        <a href="classes/ArPHP-I18N-Arabic.html#method_diffForHumans" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+        <p class="phpdocumentor-summary">Get the difference in a human readable format.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">diffForHumans</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$time</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$others</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parts</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">2</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$floor</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$time</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>the timestamp that is being compared.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$others</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>if null passed, now will be used as comparison reference;
+if integer value, it will be used as reference timestamp.
+(default value is null).</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$parts</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">2</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>maximum number of parts to display (default value is 2).</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$floor</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>logic for rounding last part, if true then use floor, else use ceiling.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>Khaled Al-Sham'aa <a href="mailto:khaled@ar-php.org">khaled@ar-php.org</a></p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>the difference in a human readable format.</p>
 </section>
 
     
@@ -3812,7 +3912,7 @@ them (in array format where items are those fields names)</p>
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Setting value to be saved in the $mode propority</p>
+                    <section class="phpdocumentor-description"><p>Setting value to be saved in the $mode propority [0 for OR logic | 1 for AND logic]</p>
 </section>
 
             </dd>
