@@ -1,5 +1,6 @@
 # ArPHP Library - Change Log
 
+<!-- * Version [6.3.2](#whats-new-in-arphp-632-release-date-jan-14-2023) _(release date: Jan 14, 2023)_ -->
 * Version [6.3.1](#whats-new-in-arphp-631-release-date-dec-18-2022) _(release date: Dec 18, 2022)_
 * Version [6.3.0](#whats-new-in-arphp-630-release-date-jun-18-2022) _(release date: Jun 18, 2022)_
 * Version [6.2.0](#whats-new-in-arphp-620-release-date-jun-20-2021) _(release date: Jun 20, 2021)_
@@ -29,6 +30,17 @@
 * Version [1.2.0](#whats-new-in-arphp-120-release-date-apr-8-2008) _(release date: Apr 8, 2008)_
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
+
+<!--
+## What's new in ArPHP 6.3.2 _(release date: Jan 14, 2023)_
+
+* Hotfix for the date function to make it compatible with PHP 8.2. Thanks to [Mohannad Najjar](https://github.com/MohannadNaj) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/58).
+
+* Optimise PNG images using `optipng -o7 -zm9` images. Thanks to [Дилян Палаузов](https://github.com/dilyanpalauzov) for the [suggestion](https://github.com/khaled-alshamaa/ar-php/pull/51). 
+
+[Top](#arphp-library---change-log)
+
+-->
 
 ## What's new in ArPHP 6.3.1 _(release date: Dec 18, 2022)_
 
