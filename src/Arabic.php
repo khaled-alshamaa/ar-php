@@ -1125,14 +1125,14 @@ class Arabic
             $patterns[] = 'j';
             $patterns[] = 'd';
 
-            $replacements[] = 'x1';
-            $replacements[] = 'x2';
-            $replacements[] = 'x3';
-            $replacements[] = 'x3';
-            $replacements[] = 'x4';
-            $replacements[] = 'x5';
-            $replacements[] = 'x6';
-            $replacements[] = 'x7';
+            $replacements[] = 'b1';
+            $replacements[] = 'b2';
+            $replacements[] = 'b3';
+            $replacements[] = 'b3';
+            $replacements[] = 'b4';
+            $replacements[] = 'b5';
+            $replacements[] = 'b6';
+            $replacements[] = 'b7';
 
             if ($this->arDateMode == 8) {
                 $patterns[] = 'S';
@@ -1166,13 +1166,13 @@ class Arabic
             $patterns     = array();
             $replacements = array();
 
-            $patterns[] = 'x1';
-            $patterns[] = 'x2';
-            $patterns[] = 'x3';
-            $patterns[] = 'x4';
-            $patterns[] = 'x5';
-            $patterns[] = 'x6';
-            $patterns[] = 'x7';
+            $patterns[] = 'b1';
+            $patterns[] = 'b2';
+            $patterns[] = 'b3';
+            $patterns[] = 'b4';
+            $patterns[] = 'b5';
+            $patterns[] = 'b6';
+            $patterns[] = 'b7';
             
             $replacements[] = $hj_y;
             $replacements[] = substr((string)$hj_y, -2);
