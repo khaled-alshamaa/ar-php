@@ -1,6 +1,6 @@
 # ArPHP Library - Change Log
 
-<!-- * Version [6.3.2](#whats-new-in-arphp-632-release-date-jan-14-2023) _(release date: Jan 14, 2023)_ -->
+<!-- * Version [6.3.2](#whats-new-in-arphp-632-release-date-jan-18-2023) _(release date: Jan 18, 2023)_ -->
 * Version [6.3.1](#whats-new-in-arphp-631-release-date-dec-18-2022) _(release date: Dec 18, 2022)_
 * Version [6.3.0](#whats-new-in-arphp-630-release-date-jun-18-2022) _(release date: Jun 18, 2022)_
 * Version [6.2.0](#whats-new-in-arphp-620-release-date-jun-20-2021) _(release date: Jun 20, 2021)_
@@ -32,7 +32,9 @@
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
 <!--
-## What's new in ArPHP 6.3.2 _(release date: Jan 14, 2023)_
+## What's new in ArPHP 6.3.2 _(release date: Jan 18, 2023)_
+
+* Fix the [reported bug](https://github.com/khaled-alshamaa/ar-php/issues/57) in the utf8Glyphs function when the text has ALEF after double LAMs. Thanks to [Fakiri25](https://github.com/fakiri25) for reporting and [Moutaz Al Khatib](https://github.com/muotaz) for investigation. 
 
 * Hotfix for the date function to make it compatible with PHP 8.2. Thanks to [Mohannad Najjar](https://github.com/MohannadNaj) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/58).
 
