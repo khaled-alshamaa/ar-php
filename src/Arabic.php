@@ -2389,11 +2389,16 @@ class Arabic
                 $crntChar == 'ل' && isset($nextChar)
                 && (mb_strpos('آأإا', $nextChar) !== false)
             ) {
-                $output = substr_replace($output, '', strrpos($output, $this->arGlyphs[$nextChar][1]) - 3, 8);
+                $output = substr($output, 0, strlen($output) - 8);
                 if (isset($this->arGlyphs[$prevChar]['prevLink']) && $this->arGlyphs[$prevChar]['prevLink'] == true) {
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][1] . ';';
                 } else {
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][0] . ';';
+                }
+                if ($prevChar == 'ل') {
+                    $tmp_form = ($this->arGlyphs[$chars[$i - 2]]['prevLink'] == true) ? 3 : 2;
+                    $output .= '&#x' . $this->arGlyphs[$prevChar][$tmp_form] . ';';
+                    $i--;
                 }
                 continue;
             }
