@@ -5,7 +5,7 @@ namespace ArPHP\I18N;
 /**
  * ----------------------------------------------------------------------
  *
- * Copyright (c) 2006-2022 Khaled Al-Sham'aa.
+ * Copyright (c) 2006-2023 Khaled Al-Sham'aa.
  *
  * http://www.ar-php.org
  *
@@ -48,17 +48,17 @@ namespace ArPHP\I18N;
  *         soundex, Hijri calendar, spell numbers, keyboard language, and more...
  *
  * @author    Khaled Al-Shamaa <khaled@ar-php.org>
- * @copyright 2006-2022 Khaled Al-Shamaa
+ * @copyright 2006-2023 Khaled Al-Shamaa
  *
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
- * @version   6.3.1 released in Dec 18, 2022
+ * @version   6.3.2 released in Jan 21, 2023
  * @link      http://www.ar-php.org
  */
  
 class Arabic
 {
     /** @var string */
-    public $version = '6.3.1';
+    public $version = '6.3.2';
     
     /** @var array<string> */
     private $arStandardPatterns = array();

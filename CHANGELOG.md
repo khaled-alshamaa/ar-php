@@ -34,7 +34,7 @@
 
 ## What's new in ArPHP 6.3.2 _(release date: Jan 21, 2023)_
 
-* Fix the [reported bug](https://github.com/khaled-alshamaa/ar-php/issues/57) in the utf8Glyphs function when the text has ALEF after double LAMs. Thanks to [Fakiri25](https://github.com/fakiri25) for reporting and [Moutaz Al Khatib](https://github.com/muotaz) for investigation. 
+* Fix the [reported bug](https://github.com/khaled-alshamaa/ar-php/issues/57) in the utf8Glyphs function when the text has ALEF after double LAMs. Thanks to [Fakiri25](https://github.com/fakiri25) for reporting and [Moutaz Al Khatib](https://github.com/muotaz) for the investigation. 
 
 * Hotfix for the date function to make it compatible with PHP 8.2. Thanks to [Mohannad Najjar](https://github.com/MohannadNaj) for the [fix](https://github.com/khaled-alshamaa/ar-php/pull/58).
 

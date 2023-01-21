@@ -5,7 +5,7 @@
 
 # Ar-PHP Project ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _PHP Speaks Arabic - Be Ready!_
-_Copyright © 2006-2022 Khaled Al-Sham'aa._
+_Copyright © 2006-2023 Khaled Al-Sham'aa._
 
 [![DOI](https://zenodo.org/badge/231197063.svg)](https://zenodo.org/badge/latestdoi/231197063)
 
@@ -40,7 +40,7 @@ If you would cite it in academic work, you can use this citation
 
 ```
 K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
-https://github.com/khaled-alshamaa/ar-php, 2022
+https://github.com/khaled-alshamaa/ar-php, 2023
 ```
 
 or in bibtex format
@@ -50,8 +50,8 @@ or in bibtex format
   title={Ar-PHP, PHP library for website developers to process Arabic content},
   author={Al-Shamaa, Khaled},
   url={https://github.com/khaled-alshamaa/ar-php},
-  version = {6.3.1},
-  year={2022}
+  version = {6.3.2},
+  year={2023}
 }
 ```
 
