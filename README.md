@@ -50,7 +50,7 @@ or in bibtex format
   title={Ar-PHP, PHP library for website developers to process Arabic content},
   author={Al-Shamaa, Khaled},
   url={https://github.com/khaled-alshamaa/ar-php},
-  version = {6.3.3},
+  version = {6.3.4},
   year={2023}
 }
 ```
