@@ -2396,7 +2396,8 @@ class Arabic
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][0] . ';';
                 }
                 if ($prevChar == 'ل') {
-                    $tmp_form = (isset($this->arGlyphs[$chars[$i - 2]]['prevLink']) && $this->arGlyphs[$chars[$i - 2]]['prevLink'] == true) ? 3 : 2;
+                    $tmp_form = (isset($this->arGlyphs[$chars[$i - 2]]['prevLink']) &&
+                                 $this->arGlyphs[$chars[$i - 2]]['prevLink'] == true) ? 3 : 2;
                     $output .= '&#x' . $this->arGlyphs[$prevChar][$tmp_form] . ';';
                     $i--;
                 }
