@@ -38,7 +38,7 @@
 
 * Hotfix the [reported XSS vulnerability](https://github.com/khaled-alshamaa/ar-php/issues/62) in the qibla example. Thanks to [thabetrighi](https://github.com/thabetrighi) for reporting it. 
 
-* Fix the notice error of undefined array key if the string starts by لل. thanks to [thabetrighi](https://github.com/thabetrighi) for [reporting it](https://github.com/khaled-alshamaa/ar-php/issues/60).
+* Fix the [notice error of undefined array key](https://github.com/khaled-alshamaa/ar-php/issues/60) if the string starts by لل. Thanks to [thabetrighi](https://github.com/thabetrighi) for reporting it.
 
 [Top](#arphp-library---change-log)
 
