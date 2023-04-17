@@ -2872,10 +2872,13 @@ class Arabic
     private function getWordRegExp($arg)
     {
         $arg = $this->arQueryLex($arg);
-        //$sql = implode(" REGEXP '$arg' OR ", $this->_fields) . " REGEXP '$arg'";
+        $argLike = preg_replace('/\(([^()]|(?R))*\)\??/', '', $arg);
+        $sql = implode(" LIKE '%$argLike%' AND REGEXP '$arg') OR (", $this->arQueryFields) . 
+               " LIKE '%$argLike%' AND REGEXP '$arg'";
+        /*
         $sql = ' REPLACE(' . implode(", 'ـ', '') REGEXP '$arg' OR REPLACE(", $this->arQueryFields) .
                ", 'ـ', '') REGEXP '$arg'";
-
+        */
         return $sql;
     }
 
@@ -2929,7 +2932,7 @@ class Arabic
         $words = explode(' ', $arg);
         foreach ($words as $word) {
             if ($word != '') {
-                $wordOrder[] = 'CASE WHEN ' . $this->getWordRegExp($word) . ' THEN 1 ELSE 0 END';
+                $wordOrder[] = 'CASE WHEN (' . $this->getWordRegExp($word) . ') THEN 1 ELSE 0 END';
             }
         }
 

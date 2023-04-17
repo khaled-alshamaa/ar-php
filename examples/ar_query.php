@@ -81,7 +81,7 @@ Inc., 319 North First Ave., Sandpoint, Idaho, USA, 208-263-8178, Fax: 208-263-63
     echo 'نتائج البحث عن <b>فلسطينيون</b>:<br />';
     echo $Arabic->arQueryAllForms('فلسطينيون');
     
-    $keyword = 'فلسطينيون';
+    $keyword = 'الفلسطينيون';
     $keyword = str_replace('\"', '"', $keyword);
 
     $Arabic->setQueryStrFields('field');
