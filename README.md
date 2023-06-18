@@ -65,6 +65,7 @@ or in bibtex format
 [check it out [here](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L135) and 
 [here](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L134)]
 
+* [ArabKey](https://arabkey.site/): Easy way to switch between Arabic and English keyboard, and more useful tools for Arabic language [check it out [here](https://github.com/still-code/ar-php-laravel)].
 
 ### Arabic Language
 Worldwide Internet use has grown tremendously in recent years, most rapidly in non-English speaking regions especially in Arab world. For example, from 2000 to 2020, the online populations grew by more than 9,300 %. Meanwhile, Arabic Web content was estimated to be doubling every year. Such growth has created demand for better websites developing resources in Arabic language. However, existing websites developing resources may be unable to meet it because they primarily serve English-speaking users.
