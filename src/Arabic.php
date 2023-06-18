@@ -55,6 +55,8 @@ namespace ArPHP\I18N;
  * @link      http://www.ar-php.org
  */
  
+ require_once "SarahSpell.php";
+ 
 class Arabic
 {
     /** @var string */
@@ -338,6 +340,8 @@ class Arabic
     private $numeralArabic = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
 
 
+	private $speller = null;
+
     public function __construct()
     {
         mb_internal_encoding('UTF-8');
@@ -361,7 +365,35 @@ class Arabic
         $this->arQueryInit();
         $this->arSummaryInit();
         $this->arSentimentInit();
+		$this->arSpellerInit();
+		
     }
+	
+	
+    private function arSpellerInit() {
+        $this->speller = new \ArPHP\MZK\Speller();
+    }
+
+
+    public function spellCheck($text) {
+        $ret =$this->speller->spell_check($text, false);
+        return array_keys($ret['no_sugg_cache']);
+
+    }
+
+    public function spellSuggestCorrections($text) {
+        $ret=  $this->speller->spell_check($text, true);
+        return array_map(function ($element) {
+            return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'],0,8)];
+        }, $ret['suggestion_array']);
+    }
+
+    public function spellSuggestCorrectionsText($text) {
+        $ret =  $this->speller->spell_check($text, true);
+        return array_map(function ($element) {
+            return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'],0,8)];
+        }, $ret['suggestion_array']);
+    }	
     
     /** @return void */
     private function arStandardInit()
