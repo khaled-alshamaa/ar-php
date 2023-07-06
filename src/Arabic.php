@@ -1411,7 +1411,7 @@ class Arabic
      */
     public function setNumberOrder($value)
     {
-        if ($value == 1 || $value == 2) {
+        if ($value == 1 || $value == 2 || $value == 3) {
             $this->arNumberOrder = $value;
         }
 
@@ -1461,11 +1461,17 @@ class Arabic
      */
     public function int2str($number)
     {
-        if ($number == 1 && $this->arNumberOrder == 2) {
-            if ($this->arNumberFeminine == 1) {
-                $string = 'الأول';
-            } else {
-                $string = 'الأولى';
+        if ($number == 1) {
+            switch (true) {
+                case ($this->arNumberOrder == 2 && $this->arNumberFeminine == 1):
+                    $string = 'الأول';
+                    break;
+                case ($this->arNumberOrder == 3 && $this->arNumberFeminine == 1):
+                    $string = 'أولاً';
+                    break;
+                case ($this->arNumberOrder == 2 || $this->arNumberOrder == 3):
+                    $string = 'الأولى';
+                    break;
             }
         } else {
             if ($number < 0) {
@@ -1700,8 +1706,12 @@ class Arabic
                         $text .= ' ' . $this->arNumberComplications[$i][4];
                     }
                     
-                    if ($this->arNumberOrder == 2 && ($number > 1 && $number < 11)) {
+                    if (($this->arNumberOrder == 2 || ($this->arNumberOrder == 3 && $this->arNumberFeminine == 2)) && ($number > 1 && $number < 11)) {
                         $text = 'ال' . $text;
+                    }
+
+                    if ($this->arNumberOrder == 3 && $this->arNumberFeminine == 1 && ($number > 1 && $number < 11)) {
+                        $text = $text . 'اً';
                     }
 
                     //--- by Jnom: handle left zero
@@ -1740,7 +1750,7 @@ class Arabic
             $hundred = floor($number / 100) * 100;
             $number  = $number % 100;
 
-            if ($this->arNumberOrder == 2) {
+            if ($this->arNumberOrder == 2 || $this->arNumberOrder == 3) {
                 $pre = 'ال';
             } else {
                 $pre = '';
@@ -1754,7 +1764,7 @@ class Arabic
         }
 
         if ($number != 0) {
-            if ($this->arNumberOrder == 2) {
+            if ($this->arNumberOrder == 2 || $this->arNumberOrder == 3) {
                 if ($number <= 10) {
                     $items[] = $this->arNumberOrdering[$number][$this->arNumberFeminine];
                 } elseif ($number < 20) {
