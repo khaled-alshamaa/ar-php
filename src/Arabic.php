@@ -4127,7 +4127,7 @@ class Arabic
         }
 
         if ($nameOnly) {
-            return trim(str_replace('%d', '', $plural));
+            $plural = trim(str_replace('%d', '', $plural));
         }
 
         return $plural;
