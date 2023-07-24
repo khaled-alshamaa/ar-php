@@ -23,7 +23,7 @@ and will try to parse that format into a Unix timestamp (the number of seconds s
 <a href="#example-1" class="anchor"><img src="./images/link_icon.png" width="16" border="0"></a>Example Output 1:</h2>
 <?php
 
-error_reporting(E_STRICT);
+error_reporting(E_ALL);
 
 date_default_timezone_set('UTC');
 $time = time();

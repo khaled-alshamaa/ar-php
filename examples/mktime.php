@@ -42,7 +42,7 @@ to a 64 bit integer, for example) before the clock ticks the dreaded doomsday se
 
 <?php
 
-error_reporting(E_STRICT);
+error_reporting(E_ALL);
 
 date_default_timezone_set('UTC');
 

@@ -13,7 +13,7 @@
 <h2 dir="ltr">SimpleXML Example Output:</h2>
 <?php
 
-error_reporting(E_STRICT);
+error_reporting(E_ALL);
 
 // set name of XML file
 $file = '../src/data/ar_countries.xml';

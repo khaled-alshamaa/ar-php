@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_STRICT);
+error_reporting(E_ALL);
 
 if (isset($_GET['d'])) { 
     $degree = (float)$_GET['d']; 

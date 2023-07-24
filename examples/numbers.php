@@ -34,7 +34,7 @@ and more personality.</p>
 <a href="#example-1" class="anchor"><img src="./images/link_icon.png" width="16" border="0"></a>Example Output 1: المعدود مذكر مرفوع</h2>
 <?php
 
-error_reporting(E_STRICT);
+error_reporting(E_ALL);
 
 /*
   // Autoload files using Composer autoload
