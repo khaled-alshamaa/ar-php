@@ -3248,13 +3248,13 @@ class Arabic
         // http://aa.usno.navy.mil/faq/docs/SunApprox.php
         // Note: mod % in PHP ignore decimels!
         $g = 357.529 + 0.98560028 * $d;
-        $g = $g % 360 + ($g - ceil($g) + 1);
+        $g = fmod($g, 360 + ($g - ceil($g) + 1));
 
         $q = 280.459 + 0.98564736 * $d;
-        $q = $q % 360 + ($q - ceil($q) + 1);
+        $q = fmod($q, 360 + ($q - ceil($q) + 1));
 
         $L = $q + 1.915 * sin(deg2rad($g)) + 0.020 * sin(deg2rad(2 * $g));
-        $L = $L % 360 + ($L - ceil($L) + 1);
+        $L = fmod($L, 360 + ($L - ceil($L) + 1));
 
         $R = 1.00014 - 0.01671 * cos(deg2rad($g)) - 0.00014 * cos(deg2rad(2 * $g));
         $e = 23.439 - 0.00000036 * $d;
