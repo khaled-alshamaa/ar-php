@@ -11,21 +11,21 @@
 
 <div class="Paragraph">
 <h2>Spell Numbers in the Arabic Idiom:</h2>
-<p align="justified">Spell numbers in the Arabic idiom. This function is very useful for e-Commerce applications 
-in Arabic for example. It accepts almost any numeric value and convert it into an equivalent string of words in 
+<p align="justified">Spell numbers in the Arabic idiom. This function is very useful for e-Commerce applications
+in Arabic for example. It accepts almost any numeric value and convert it into an equivalent string of words in
 written Arabic language and take care of feminine and Arabic grammar rules.</p>
 
-<p align="justified">If you ever have to create an Arabic PHP application built around invoicing or accounting, 
-you might find this method useful. Its sole reason for existence is to help you translate integers into their 
-spoken-word equivalents in Arabic language.How is this useful? Well, consider the typical invoice: In addition to 
-a description of the work done, the date, and the hourly or project cost, it always includes a total cost at the 
-end, the amount that the customer is expected to pay. To avoid any misinterpretation of the total amount, many 
-organizations (mine included) put the amount in both words and figures; for example, $1,200 becomes "one thousand 
+<p align="justified">If you ever have to create an Arabic PHP application built around invoicing or accounting,
+you might find this method useful. Its sole reason for existence is to help you translate integers into their
+spoken-word equivalents in Arabic language.How is this useful? Well, consider the typical invoice: In addition to
+a description of the work done, the date, and the hourly or project cost, it always includes a total cost at the
+end, the amount that the customer is expected to pay. To avoid any misinterpretation of the total amount, many
+organizations (mine included) put the amount in both words and figures; for example, $1,200 becomes "one thousand
 and two hundred dollars." You probably do the same thing every time you write a check.</p>
 
-<p align="justified">Now take this scenario to a Web-based invoicing system. The actual data used to generate the 
-invoice will be stored in a database as integers, both to save space and to simplify calculations. So when a printable 
-invoice is generated, your Web application will need to convert those integers into words, this is more clarity 
+<p align="justified">Now take this scenario to a Web-based invoicing system. The actual data used to generate the
+invoice will be stored in a database as integers, both to save space and to simplify calculations. So when a printable
+invoice is generated, your Web application will need to convert those integers into words, this is more clarity
 and more personality.</p>
 </div><br />
 
@@ -46,7 +46,7 @@ $Arabic = new \ArPHP\I18N\Arabic();
 
 $Arabic->setNumberFeminine(1);
 $Arabic->setNumberFormat(1);
-           
+
 $integer = 141592653589;
 
 $text = $Arabic->int2str($integer);
@@ -75,7 +75,7 @@ END;
 highlight_string($code);
 
 ?>
-<hr/><i>Related Documentation: 
+<hr/><i>Related Documentation:
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFeminine" target="_blank">setNumberFeminine</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFormat" target="_blank">setNumberFormat</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_int2str" target="_blank">int2str</a>
@@ -108,16 +108,16 @@ $code = <<< END
     \$Arabic->setNumberFormat(2);
 
     \$integer = 141592653589;
-    
+
     \$text = \$Arabic->int2str(\$integer);
-    
+
     echo "<center>\$integer<br />\$text</center>";
 END;
 
 highlight_string($code);
 
 ?>
-<hr/><i>Related Documentation: 
+<hr/><i>Related Documentation:
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFeminine" target="_blank">setNumberFeminine</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFormat" target="_blank">setNumberFormat</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_int2str" target="_blank">int2str</a>
@@ -130,11 +130,11 @@ highlight_string($code);
 <?php
     $Arabic->setNumberFeminine(2);
     $Arabic->setNumberFormat(2);
-    
+
     $integer = '-2749.317';
-    
+
     $text = $Arabic->int2str($integer);
-    
+
     echo "<p dir=ltr align=center>$integer<br />$text</p>";
 ?>
 
@@ -145,21 +145,21 @@ highlight_string($code);
 $code = <<< END
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
-    
+
     \$Arabic->setNumberFeminine(2);
     \$Arabic->setNumberFormat(2);
-    
+
     \$integer = '-2749.317';
-    
+
     \$text = \$Arabic->int2str(\$integer);
-    
+
     echo "<p dir=ltr align=center>\$integer<br />\$text</p>";
 END;
 
 highlight_string($code);
 
 ?>
-<hr/><i>Related Documentation: 
+<hr/><i>Related Documentation:
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFeminine" target="_blank">setNumberFeminine</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFormat" target="_blank">setNumberFormat</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_int2str" target="_blank">int2str</a>
@@ -175,7 +175,7 @@ highlight_string($code);
 
     $number = 7.25;
     $text   = $Arabic->money2str($number, 'KWD', 'ar');
-    
+
     echo "<p align=center>$number<br />$text</p>";
 ?>
 
@@ -189,17 +189,17 @@ $code = <<< END
 
     \$Arabic->setNumberFeminine(1);
     \$Arabic->setNumberFormat(1);
-    
+
     \$number = 7.25;
     \$text   = \$Arabic->money2str(\$number, 'KWD', 'ar');
-    
+
     echo "<p align=center>\$number<br />\$text</p>";
 END;
 
 highlight_string($code);
 
 ?>
-<hr/><i>Related Documentation: 
+<hr/><i>Related Documentation:
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFeminine" target="_blank">setNumberFeminine</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFormat" target="_blank">setNumberFormat</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_money2str" target="_blank">money2str</a>
@@ -215,14 +215,22 @@ Example Output 5: صيغ الجمع
     $number = 9;
     $text   = $Arabic->arPlural('تعليق', $number);
     $text   = str_replace('%d', $number, $text);
-    
+
     echo "<p align=center>$text</p>";
-    
+
     $number = 16;
     $text   = $Arabic->arPlural('صندوق', $number, 'صندوقان', 'صناديق', 'صندوقا');
     $text   = str_replace('%d', $number, $text);
 
     echo "<p align=center>$text</p>";
+
+
+    $number = 4;
+    $text = $Arabic->arPlural('يوم', $number, nameOnly: true);
+    $text = str_replace('%d', $number, $text);
+
+    echo "<p align=center><span style='font-size: 24px; font-weight: bold; color: #0077cc; margin-right: 10px;' >$number</span> $text</p>";
+
 ?>
 
 </div><br />
@@ -236,9 +244,9 @@ $code = <<< END
     \$number = 9;
     \$text   = \$Arabic->arPlural('تعليق', \$number);
     \$text   = str_replace('%d', \$number, \$text);
-    
+
     echo "<p align=center>\$text</p>";
-    
+
     \$number = 16;
     \$text   = \$Arabic->arPlural('صندوق', \$number, 'صندوقان', 'صناديق', 'صندوقا');
     \$text   = str_replace('%d', \$number, \$text);
@@ -249,7 +257,7 @@ END;
 highlight_string($code);
 
 ?>
-<hr/><i>Related Documentation: 
+<hr/><i>Related Documentation:
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_arPlural" target="_blank">arPlural</a>
 </i>
 </div><br />
@@ -260,7 +268,7 @@ highlight_string($code);
 <?php
     $text1 = '1975/8/2 9:43 صباحا';
     $text2 = $Arabic->int2indic($text1);
-    
+
     echo "<p align=center>$text1<br />$text2</p>";
 ?>
 
@@ -271,17 +279,17 @@ highlight_string($code);
 $code = <<< END
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
-    
+
     \$text1 = '1975/8/2 9:43 صباحا';
     \$text2 = \$Arabic->int2indic(\$text1);
-    
+
     echo "<p align=center>\$text1<br />\$text2</p>";
 END;
 
 highlight_string($code);
 
 ?>
-<hr/><i>Related Documentation: 
+<hr/><i>Related Documentation:
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_int2indic" target="_blank">int2indic</a>
 </i>
 </div><br />
@@ -293,11 +301,11 @@ highlight_string($code);
     $Arabic->setNumberFeminine(2);
     $Arabic->setNumberFormat(2);
     $Arabic->setNumberOrder(2);
-    
+
     $integer = '17';
-    
+
     $text = $Arabic->int2str($integer);
-    
+
     echo "<p align=center>$integer<br />$text</p>";
 ?>
 </div><br />
@@ -307,22 +315,22 @@ highlight_string($code);
 $code = <<< END
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
-    
+
     \$Arabic->setNumberFeminine(2);
     \$Arabic->setNumberFormat(2);
     \$Arabic->setNumberOrder(2);
-    
+
     \$integer = '17';
-    
+
     \$text = \$Arabic->int2str(\$integer);
-    
+
     echo "<p align=center>\$integer<br />\$text</p>";
 END;
 
 highlight_string($code);
 
 ?>
-<hr/><i>Related Documentation: 
+<hr/><i>Related Documentation:
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFeminine" target="_blank">setNumberFeminine</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberFormat" target="_blank">setNumberFormat</a>,
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNumberOrder" target="_blank">setNumberOrder</a>,
@@ -337,7 +345,7 @@ highlight_string($code);
     $string  = 'مليار ومئتين وخمسة وستين مليون وثلاثمئة وثمانية وخمسين ألف وتسعمئة وتسعة وسبعين';
 
     $integer = $Arabic->str2int($string);
-    
+
     echo "<p align=center>$string<br />$integer</p>";
 ?>
 
@@ -348,17 +356,17 @@ highlight_string($code);
 $code = <<< END
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
-    
+
     \$string  = 'مليار ومئتين وخمسة وستين مليون وثلاثمئة وثمانية وخمسين ألف وتسعمئة وتسعة وسبعين';
 
     \$integer = \$Arabic->str2int(\$string);
-    
+
     echo "<p align=center>\$string<br />\$integer</p>";
 END;
 
 highlight_string($code);
 ?>
-<hr/><i>Related Documentation: 
+<hr/><i>Related Documentation:
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_str2int" target="_blank">str2int</a>
 </i>
 </div>

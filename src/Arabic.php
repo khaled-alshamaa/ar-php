@@ -54,24 +54,24 @@ namespace ArPHP\I18N;
  * @version   6.3.4 released in Apr 5, 2023
  * @link      http://www.ar-php.org
  */
- 
+
 class Arabic
 {
     /** @var string */
     public $version = '6.3.4';
-    
+
     /** @var array<string> */
     private $arStandardPatterns = array();
 
     /** @var array<string> */
     private $arStandardReplacements = array();
-    
+
     /** @var array<string> */
     private $arFemaleNames = array();
-    
+
     /** @var array<string> */
     private $arMaleNames = array();
-    
+
     /** @var array<string> */
     private $strToTimeSearch = array();
 
@@ -80,28 +80,28 @@ class Arabic
 
     /** @var array<string> */
     private $hj = array();
-    
+
     /** @var array<string> */
     private $strToTimePatterns = array();
 
     /** @var array<string> */
     private $strToTimeReplacements = array();
-    
+
     /** @var string|false */
     private $umAlqoura;
-    
+
     /** @var array<string> */
     private $arFinePatterns = array("/'+/u", "/([\- ])'/u", '/(.)#/u');
 
     /** @var array<string> */
     private $arFineReplacements = array("'", '\\1', "\\1'\\1");
-    
+
     /** @var array<string> */
     private $diariticalSearch = array();
 
     /** @var array<string> */
     private $diariticalReplace = array();
-    
+
     /** @var array<string> */
     private $en2arPregSearch = array();
 
@@ -113,7 +113,7 @@ class Arabic
 
     /** @var array<string> */
     private $en2arStrReplace = array();
-    
+
     /** @var array<string> */
     private $ar2enPregSearch = array();
 
@@ -125,31 +125,31 @@ class Arabic
 
     /** @var array<string> */
     private $ar2enStrReplace = array();
-    
+
     /** @var array<string> */
     private $iso233Search = array();
 
     /** @var array<string> */
     private $iso233Replace = array();
-    
+
     /** @var array<string> */
     private $rjgcSearch = array();
 
     /** @var array<string> */
     private $rjgcReplace = array();
-    
+
     /** @var array<string> */
     private $sesSearch = array();
 
     /** @var array<string> */
     private $sesReplace = array();
-    
+
     /** @var int */
     private $arDateMode = 1;
 
     /** @var array<array<string|array<string>>> */
     private $arDateJSON = array();
-    
+
     /** @var array<string|array<string|array<string>>> */
     private $arNumberIndividual = array();
 
@@ -191,13 +191,13 @@ class Arabic
 
     /** @var array<string> */
     private $frKeyboard = array();
-    
+
     /** @var array<string> */
     private $soundexTransliteration = array();
 
     /** @var array<string> */
     private $soundexMap = array();
-    
+
     /** @var array<string> */
     private $arSoundexCode = array();
 
@@ -285,10 +285,10 @@ class Arabic
 
     /** @var array<string> */
     private $arSummaryImportantWords = array();
-    
+
     /** @var array<string> */
     private $arPluralsForms = array();
-    
+
     /** @var array<string> */
     private $logOdd = array();
 
@@ -297,25 +297,25 @@ class Arabic
 
     /** @var array<string> */
     private $allStems = array();
-    
+
     /** @var string */
     private $rootDirectory;
 
     /** @var boolean */
     private $stripTatweel = true;
-    
+
     /** @var boolean */
     private $stripTanween = true;
-    
+
     /** @var boolean */
     private $stripShadda = true;
-    
+
     /** @var boolean */
     private $stripLastHarakat = true;
-    
+
     /** @var boolean */
     private $stripWordHarakat = true;
-    
+
     /** @var boolean */
     private $normaliseLamAlef = true;
 
@@ -341,7 +341,7 @@ class Arabic
     public function __construct()
     {
         mb_internal_encoding('UTF-8');
-        
+
         $this->rootDirectory = dirname(__FILE__);
         $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
         $this->arMaleNames = file($this->rootDirectory . '/data/ar_male.txt', FILE_IGNORE_NEW_LINES);
@@ -362,18 +362,18 @@ class Arabic
         $this->arSummaryInit();
         $this->arSentimentInit();
     }
-    
+
     /** @return void */
     private function arStandardInit()
     {
         $this->arStandardPatterns[] = '/\r\n/u';
         $this->arStandardPatterns[] = '/([^\@])\n([^\@])/u';
         $this->arStandardPatterns[] = '/\r/u';
-        
+
         $this->arStandardReplacements[] = "\n@@@\n";
         $this->arStandardReplacements[] = "\\1\n&&&\n\\2";
         $this->arStandardReplacements[] = "\n###\n";
-        
+
         /**
          * النقطة، الفاصلة، الفاصلة المنقوطة،
          * النقطتان، علامتي الاستفهام والتعجب،
@@ -383,14 +383,14 @@ class Arabic
          */
         $this->arStandardPatterns[] = '/\s*([\.\،\؛\:\!\؟])\s*/u';
         $this->arStandardReplacements[] = '\\1 ';
-        
+
         /**
          * النقاط المتتالية عددها 3 فقط
          * (ليست نقطتان وليست أربع أو أكثر)
          */
         $this->arStandardPatterns[] = '/(\. ){2,}/u';
         $this->arStandardReplacements[] = '...';
-        
+
         /**
          * الأقواس ( ) [ ] { } يترك قبلها وبعدها فراغ
          * وحيد، فيما لا يوجد بينها وبين ما بداخلها
@@ -398,10 +398,10 @@ class Arabic
          */
         $this->arStandardPatterns[] = '/\s*([\(\{\[])\s*/u';
         $this->arStandardPatterns[] = '/\s*([\)\}\]])\s*/u';
-        
+
         $this->arStandardReplacements[] = ' \\1';
         $this->arStandardReplacements[] = '\\1 ';
-        
+
         /**
          * علامات الاقتباس "..."
          * يترك قبلها وبعدها فراغ
@@ -410,7 +410,7 @@ class Arabic
          */
         $this->arStandardPatterns[] = '/\s*\"\s*(.+)((?<!\s)\"|\s+\")\s*/u';
         $this->arStandardReplacements[] = ' "\\1" ';
-        
+
         /**
          * علامات الإعتراض -...-
          * يترك قبلها وبعدها فراغ
@@ -419,7 +419,7 @@ class Arabic
          */
         $this->arStandardPatterns[] = '/\s*\-\s*(.+)((?<!\s)\-|\s+\-)\s*/u';
         $this->arStandardReplacements[] = ' -\\1- ';
-        
+
         /**
          * لا يترك فراغ بين حرف العطف الواو وبين
          * الكلمة التي تليه
@@ -427,17 +427,17 @@ class Arabic
          */
         $this->arStandardPatterns[] = '/\sو\s+([^و])/u';
         $this->arStandardReplacements[] = ' و\\1';
-        
+
         /**
          * الواحدات الإنجليزية توضع
          * على يمين الرقم مع ترك فراغ
          */
         $this->arStandardPatterns[] = '/\s+(\w+)\s*(\d+)\s+/';
         $this->arStandardPatterns[] = '/\s+(\d+)\s*(\w+)\s+/';
-        
+
         $this->arStandardReplacements[] = ' <span dir="ltr">\\2 \\1</span> ';
         $this->arStandardReplacements[] = ' <span dir="ltr">\\1 \\2</span> ';
-        
+
         /**
          * النسبة المؤية دائما إلى يسار الرقم
          * وبدون أي فراغ يفصل بينهما 40% مثلا
@@ -446,32 +446,32 @@ class Arabic
         $this->arStandardPatterns[] = '/\n?@@@\n?/u';
         $this->arStandardPatterns[] = '/\n?&&&\n?/u';
         $this->arStandardPatterns[] = '/\n?###\n?/u';
-        
+
         $this->arStandardReplacements[] = ' %\\1 ';
         $this->arStandardReplacements[] = "\r\n";
         $this->arStandardReplacements[] = "\n";
         $this->arStandardReplacements[] = "\r";
     }
-    
+
     /** @return void */
     private function arStrToTimeInit()
     {
         $this->strToTimeSearch = file($this->rootDirectory . '/data/strtotime_search.txt', FILE_IGNORE_NEW_LINES);
         $this->strToTimeReplace = file($this->rootDirectory . '/data/strtotime_replace.txt', FILE_IGNORE_NEW_LINES);
-        
+
         foreach ($this->arDateJSON['ar_hj_month'] as $month) {
             $this->hj[] = (string)$month;
         }
-        
+
         $this->strToTimePatterns[] = '/َ|ً|ُ|ٌ|ِ|ٍ|ْ|ّ/';
         $this->strToTimePatterns[] = '/\s*ال(\S{3,})\s+ال(\S{3,})/';
         $this->strToTimePatterns[] = '/\s*ال(\S{3,})/';
-        
+
         $this->strToTimeReplacements[] = '';
         $this->strToTimeReplacements[] = ' \\2 \\1';
         $this->strToTimeReplacements[] = ' \\1';
     }
-    
+
     /** @return void */
     private function arTransliterateInit()
     {
@@ -517,12 +517,12 @@ class Arabic
             $this->iso233Replace[] = $item['replace'];
         }
     }
-    
+
     /** @return void */
     private function arNumbersInit()
     {
         $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_numbers.json'), true);
-        
+
         foreach ($json['individual']['male'] as $num) {
             if (isset($num['grammar'])) {
                 $grammar = $num['grammar'];
@@ -531,7 +531,7 @@ class Arabic
                 $this->arNumberIndividual["{$num['value']}"][1] = (string)$num['text'];
             }
         }
-        
+
         foreach ($json['individual']['female'] as $num) {
             if (isset($num['grammar'])) {
                 $grammar = $num['grammar'];
@@ -540,7 +540,7 @@ class Arabic
                 $this->arNumberIndividual["{$num['value']}"][2] = (string)$num['text'];
             }
         }
-        
+
         foreach ($json['individual']['gt19'] as $num) {
             if (isset($num['grammar'])) {
                 $grammar = $num['grammar'];
@@ -555,16 +555,16 @@ class Arabic
             $format = $num['format'];
             $this->arNumberComplications["$scale"]["$format"] = (string)$num['text'];
         }
-        
+
         foreach ($json['arabicIndic'] as $html) {
             $value  = $html['value'];
             $this->arNumberArabicIndic["$value"] = $html['text'];
         }
-        
+
         foreach ($json['order']['male'] as $num) {
             $this->arNumberOrdering["{$num['value']}"][1] = (string)$num['text'];
         }
-        
+
         foreach ($json['order']['female'] as $num) {
             $this->arNumberOrdering["{$num['value']}"][2] = (string)$num['text'];
         }
@@ -575,34 +575,34 @@ class Arabic
                 $this->arNumberSpell[$str] = (int)$num['value'];
             }
         }
-        
+
         foreach ($json['individual']['female'] as $num) {
             if ($num['value'] < 11) {
                 $str = strtr((string)$num['text'], array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا'));
                 $this->arNumberSpell[$str] = (int)$num['value'];
             }
         }
-        
+
         foreach ($json['individual']['gt19'] as $num) {
             $str = strtr((string)$num['text'], array('أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا'));
             $this->arNumberSpell[$str] = (int)$num['value'];
         }
-        
+
         foreach ($json['currency'] as $money) {
             $this->arNumberCurrency[$money['iso']]['ar']['basic']    = $money['ar_basic'];
             $this->arNumberCurrency[$money['iso']]['ar']['fraction'] = $money['ar_fraction'];
             $this->arNumberCurrency[$money['iso']]['en']['basic']    = $money['en_basic'];
             $this->arNumberCurrency[$money['iso']]['en']['fraction'] = $money['en_fraction'];
-            
+
             $this->arNumberCurrency[$money['iso']]['decimals'] = $money['decimals'];
         }
     }
-    
+
     /** @return void */
     private function arKeySwapInit()
     {
         $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_keyswap.json'), true);
-        
+
         foreach ($json['arabic'] as $key) {
             $index = (int)$key['id'];
             $this->arKeyboard[$index] = (string)$key['text'];
@@ -612,44 +612,44 @@ class Arabic
             $index = (int)$key['id'];
             $this->enKeyboard[$index] = (string)$key['text'];
         }
-        
+
         foreach ($json['french'] as $key) {
             $index = (int)$key['id'];
             $this->frKeyboard[$index] = (string)$key['text'];
         }
-        
+
         $this->arLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_ar.txt'));
         $this->enLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_en.txt'));
     }
-    
+
     /** @return void */
     private function arSoundexInit()
     {
         $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_soundex.json'), true);
-        
+
         foreach ($json['arSoundexCode'] as $item) {
             $index = $item['search'];
             $this->arSoundexCode["$index"] = (string)$item['replace'];
         }
-        
+
         foreach ($json['arPhonixCode'] as $item) {
             $index = $item['search'];
             $this->arPhonixCode["$index"] = (string)$item['replace'];
         }
-        
+
         foreach ($json['soundexTransliteration'] as $item) {
             $index = $item['search'];
             $this->soundexTransliteration["$index"] = (string)$item['replace'];
         }
-        
+
         $this->soundexMap = $this->arSoundexCode;
     }
-    
+
     /** @return void */
     private function arGlyphsInit()
     {
         $this->arGlyphsVowel     = 'ًٌٍَُِّْ';
-        
+
         // Arabic Presentation Forms-B (https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-B)
         // Contextual forms (https://en.wikipedia.org/wiki/Arabic_script_in_Unicode#Contextual_forms)
         // 0- ISOLATED FORM, 1- FINAL FORM, 2- INITIAL FORM, 3- MEDIAL FORM
@@ -675,16 +675,16 @@ class Arabic
         $en_words = file($this->rootDirectory . '/data/en_stopwords.txt', FILE_IGNORE_NEW_LINES);
 
         $words = array_merge($words, $en_words);
-        
+
         $this->arSummaryCommonWords = $words;
-        
+
         // This important words used in rankSentences method
         $words = file($this->rootDirectory . '/data/important_words.txt', FILE_IGNORE_NEW_LINES);
 
         $this->arSummaryImportantWords = $words;
     }
 
-    
+
     /** @return void */
     private function arSentimentInit()
     {
@@ -692,7 +692,7 @@ class Arabic
         $this->logOddStem = file($this->rootDirectory . '/data/logodd_stem.txt', FILE_IGNORE_NEW_LINES);
         $this->logOdd     = file($this->rootDirectory . '/data/logodd.txt', FILE_IGNORE_NEW_LINES);
     }
-    
+
     /////////////////////////////////////// Standard //////////////////////////////////////////////
 
     /**
@@ -751,7 +751,7 @@ class Arabic
         } elseif (array_search($str, $this->arFemaleNames) > 0) {
             $female = true;
         }
-        
+
         // إستثناء الأسماء المذكرة المؤنثة تأنيث لفظي
         if (array_search($str, $this->arMaleNames) > 0) {
             $female = false;
@@ -956,7 +956,7 @@ class Arabic
             } else {
                 $space = ' ';
             }
-            
+
             // skip translation if it has no a-z char (i.e., just add it to the string as is)
             if (preg_match('/[a-z]/i', $word)) {
                 $word = preg_replace($this->en2arPregSearch, $this->en2arPregReplace, $word);
@@ -1098,7 +1098,7 @@ class Arabic
         if ($this->arDateMode == 1 || $this->arDateMode == 8) {
             /** @var array<string> */
             $hj_txt_month = array();
-            
+
             if ($this->arDateMode == 1) {
                 foreach ($this->arDateJSON['ar_hj_month'] as $id => $month) {
                     $id++;
@@ -1173,7 +1173,7 @@ class Arabic
             $patterns[] = 'b5';
             $patterns[] = 'b6';
             $patterns[] = 'b7';
-            
+
             $replacements[] = $hj_y;
             $replacements[] = substr((string)$hj_y, -2);
             $replacements[] = $hj_txt_month[$hj_m];
@@ -1487,7 +1487,7 @@ class Arabic
 
         return $string;
     }
-    
+
     /**
      * Spell integer number in Arabic idiom followed by plural form of the counted item
      *
@@ -1500,12 +1500,12 @@ class Arabic
     public function int2strItem($count, $word)
     {
         $feminine = $this->isFemale($word) ? 2 : 1;
-        
+
         $this->setNumberFeminine($feminine);
-        
+
         $str1 = $this->int2str($count);
         $str2 = $this->arPlural($word, $count);
-        
+
         $string = strtr($str2, array('%d' => $str1));
 
         return $string;
@@ -1553,7 +1553,7 @@ class Arabic
                 $string .= $temp[1] . ' ' . $this->arNumberCurrency[$iso][$lang]['fraction'];
             }
         }
-        
+
         return $string;
     }
 
@@ -1699,7 +1699,7 @@ class Arabic
                     } elseif ($i != 0) {
                         $text .= ' ' . $this->arNumberComplications[$i][4];
                     }
-                    
+
                     if ($this->arNumberOrder == 2 && ($number > 1 && $number < 11)) {
                         $text = 'ال' . $text;
                     }
@@ -1833,21 +1833,21 @@ class Arabic
     public function swapAe($text)
     {
         $pieces = explode('لا', $text);
-        
+
         $max = count($pieces);
 
         for ($i = 0; $i < $max; $i++) {
             $pieces[$i] = $this->swapCore($pieces[$i], 'ar', 'en');
         }
-        
+
         if ($max > 1) {
             for ($i = 1; $i < $max; $i++) {
                 $first_next = mb_substr($pieces[$i], 0, 1);
                 $last_prev  = mb_substr($pieces[$i - 1], -1);
-                
+
                 $rank_b  = (float)$this->enLogodd[$last_prev]['b'] + (float)$this->enLogodd['b'][$first_next];
                 $rank_gh = (float)$this->enLogodd[$last_prev]['g'] + (float)$this->enLogodd['h'][$first_next];
-                
+
                 if ($rank_b > $rank_gh) {
                     $pieces[$i] = 'b' . $pieces[$i];
                 } else {
@@ -1855,7 +1855,7 @@ class Arabic
                 }
             }
         }
-        
+
         $output = implode('', $pieces);
 
         return $output;
@@ -1926,7 +1926,7 @@ class Arabic
         $output = '';
         $text   = stripslashes($text);
         $max    = mb_strlen($text);
-        
+
         $inputMap  = array();
         $outputMap = array();
 
@@ -2306,11 +2306,11 @@ class Arabic
         $this->arGlyphs[$char][1] = substr($hex, 4, 4);
         $this->arGlyphs[$char][2] = substr($hex, 8, 4);
         $this->arGlyphs[$char][3] = substr($hex, 12, 4);
-        
+
         $this->arGlyphs[$char]["prevLink"] = $prevLink;
         $this->arGlyphs[$char]["nextLink"] = $nextLink;
     }
-    
+
     /**
      * Convert Arabic string into glyph joining in UTF-8 hexadecimals stream
      *
@@ -2485,7 +2485,7 @@ class Arabic
 
             // add the current char UTF-8 code to the output string
             $output  .= '&#x' . $this->arGlyphs[$crntChar][$form] . ';';
-            
+
             // next char will be the current one before loop (we are going backword to manage right-to-left presenting)
             $nextChar = $crntChar;
         }
@@ -2526,7 +2526,7 @@ class Arabic
         }
 
         $text = strtr($text, $pairs);
-        
+
         // process by line required for bidi in RTL case
         $userLines = explode("\n", $text);
 
@@ -2535,19 +2535,19 @@ class Arabic
             while (mb_strlen($line) > $max_chars) {
                 // find the last space before hit the max line length
                 $last = mb_strrpos(mb_substr($line, 0, $max_chars), ' ');
-                
+
                 // add it as a new line in the lines array
                 $lines[] = mb_substr($line, 0, $last);
-                
+
                 // the rest of the line will be our new line now to iterate
                 $line = mb_substr($line, $last + 1, mb_strlen($line) - $last);
             }
-        
+
             $lines[] = $line;
         }
-        
+
         $outLines = array();
-        
+
         foreach ($lines as $str) {
             // identify Arabic fragments in the line for glyphs
             $p = $this->arIdentify($str);
@@ -2560,18 +2560,18 @@ class Arabic
                 } else {
                     $rtl = false;
                 }
-                
+
                 // block structure to save processed fragments
                 $block = array();
-                
+
                 // if line does not start by Arabic, then save first non-Arabic fragment in block structure
                 if ($p[0] != 0) {
                     $block[] = substr($str, 0, $p[0]);
                 }
-                
+
                 // get the last Arabic fragment identifier
                 $max = count($p);
-                
+
                 // if the bidi logic is rtl
                 if ($rtl == true) {
                     // check the start for each Arabic fragment
@@ -2580,12 +2580,12 @@ class Arabic
                         $p[$i] = strlen(preg_replace('/\)\s*$/', '', substr($str, 0, $p[$i])));
                     }
                 }
-                
+
                 // for each Arabic fragment
                 for ($i = 0; $i < $max; $i += 2) {
                     // do glyphs pre-processing and save the result in the block structure
                     $block[] = $this->arGlyphsPreConvert(substr($str, $p[$i], $p[$i + 1] - $p[$i]));
-                    
+
                     // if we still have another Arabic fragment
                     if ($i + 2 < $max) {
                         // get the in-between non-Arabic fragment as is and save it in the block structure
@@ -2596,7 +2596,7 @@ class Arabic
                         $block[] = substr($str, $p[$i + 1], strlen($str) - $p[$i + 1]);
                     }
                 }
-                
+
                 // if the logic is rtl, then reverse the blocks order before concatenate
                 if ($rtl == true) {
                     $block = array_reverse($block);
@@ -2605,14 +2605,14 @@ class Arabic
                 // concatenate the whole string blocks
                 $str = implode('', $block);
             }
-            
+
             // add the processed string to the output lines array
             $outLines[] = $str;
         }
-        
+
         // concatenate the whole text lines using \n
         $output = implode("\n", $outLines);
-        
+
         // convert to Hindu numerals if requested
         if ($hindo == true) {
             $output = strtr($output, array_combine($this->numeralArabic, $this->numeralHindu));
@@ -2638,7 +2638,7 @@ class Arabic
     {
         // Get all named HTML entities.
         $table = array_flip(get_html_translation_table(HTML_ENTITIES, ENT_COMPAT, 'UTF-8'));
-        
+
         // Add apostrophe (XML)
         $table['&apos;'] = "'";
 
@@ -2681,7 +2681,7 @@ class Arabic
         }
 
         $str = '';
-        
+
         // Encode codepoint as UTF-8 bytes
         if ($codepoint < 0x80) {
             $str = chr((int)$codepoint);
@@ -2877,7 +2877,7 @@ class Arabic
     {
         $arg = $this->arQueryLex($arg);
         $argLike = preg_replace('/\(([^()]|(?R))*\)\??/', '', $arg);
-        $sql = implode(" LIKE '%$argLike%' AND REGEXP '$arg') OR (", $this->arQueryFields) . 
+        $sql = implode(" LIKE '%$argLike%' AND REGEXP '$arg') OR (", $this->arQueryFields) .
                " LIKE '%$argLike%' AND REGEXP '$arg'";
         /*
         $sql = ' REPLACE(' . implode(", 'ـ', '') REGEXP '$arg' OR REPLACE(", $this->arQueryFields) .
@@ -2914,10 +2914,10 @@ class Arabic
     public function arQueryOrderBy($arg)
     {
         $wordOrder = array();
-        
+
         // Check if there are phrases in $arg should handle as it is
         $phrase = explode("\"", $arg);
-        
+
         if (count($phrase) > 2) {
             // Re-init $arg variable (It will contain the rest of $arg except phrases).
             $arg = '';
@@ -2981,7 +2981,7 @@ class Arabic
         }
 
         $len = mb_strlen($word);
-        
+
         $wordForms[] = $word;
 
         $str1 = mb_substr($word, 0, -1);
@@ -3045,7 +3045,7 @@ class Arabic
         if ($len >= 4 && $last1 == 'ى') {
             $wordForms[] = $str1 . 'ا';
         }
-        
+
         if (preg_match("/(\\S{1,})ئ(\\S{1,})/", $word) != false) {
             foreach ($wordForms as $form) {
                 $wordForms[] = preg_replace("/(\\S{1,})ئ(\\S{1,})/", "\\1ي\\2", $form);
@@ -3462,7 +3462,7 @@ class Arabic
         } else {
             $dd = '';
         }
-        
+
         $degrees = (int)$value;
         $minutes = (int)(($value - $degrees) * 60);
         $seconds = round(((($value - $degrees) * 60) - $minutes) * 60, 4);
@@ -3470,13 +3470,13 @@ class Arabic
         if ($degrees > 0) {
             $dd .= $degrees . '°';
         }
-        
+
         if ($minutes >= 10) {
             $dd .= $minutes . '\'';
         } else {
             $dd .= '0' . $minutes . '\'';
         }
-        
+
         if ($seconds >= 10) {
             $dd .= $seconds . '"';
         } else {
@@ -3596,7 +3596,7 @@ class Arabic
 
         $patterns[]     = '/\.|\n|\،|\؛|\(|\[|\{|\)|\]|\}|\,|\;/u';
         $replacements[] = ' ';
-        
+
         $str = preg_replace($patterns, $replacements, $str);
 
         $normalizedStr = $this->arNormalize($str);
@@ -3885,7 +3885,7 @@ class Arabic
         // https://utf8-chartable.de/unicode-utf8-table.pl?start=1536&number=128&utf8=dec
         $minAr    = 55424;
         $maxAr    = 55743;
-        
+
         $probAr   = false;
         $arFlag   = false;
         $htmlFlag = false;
@@ -3912,7 +3912,7 @@ class Arabic
             if ($cDec >= 33 && $cDec <= 58) {
                 continue;
             }
-            
+
             if (!$probAr && ($cDec == 216 || $cDec == 217)) {
                 $probAr = true;
                 continue;
@@ -3943,11 +3943,11 @@ class Arabic
                         $arRef[] = $i - 1;
                     }
                 }
-                
+
                 $probAr = false;
                 continue;
             }
-            
+
             if ($arFlag && !preg_match("/^\s$/", $str[$i])) {
                 $arFlag  = false;
                 // tag out the trailer spaces
@@ -3962,7 +3962,7 @@ class Arabic
 
         return $arRef;
     }
-    
+
     /**
      * Find out if given string is Arabic text or not
      *
@@ -3979,10 +3979,10 @@ class Arabic
         if (count($arr) == 2 && $arr[0] == 0 && $arr[1] == strlen($str)) {
             $val = true;
         }
-        
+
         return $val;
     }
-    
+
     /**
      * Encode a location coordinates (latitude and longitude in WGS84) into Open Location Code
      * Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md
@@ -3999,32 +3999,32 @@ class Arabic
     {
         $codeLength = $codeLength / 2;
         $validChars = '23456789CFGHJMPQRVWX';
-        
+
         $latitude  = $latitude + 90;
         $longitude = $longitude + 180;
-        
+
         $latitude  = round($latitude * pow(20, $codeLength - 2), 0);
         $longitude = round($longitude * pow(20, $codeLength - 2), 0);
-        
+
         $olc = '';
-        
+
         for ($i = 1; $i <= $codeLength; $i++) {
             $x = $longitude % 20;
             $y = $latitude % 20;
-            
+
             $longitude = floor($longitude / 20);
             $latitude  = floor($latitude / 20);
-            
+
             $olc = substr($validChars, $y, 1) . substr($validChars, $x, 1) . $olc;
-            
+
             if ($i == 1) {
                 $olc = '+' . $olc;
             }
         }
-        
+
         return $olc;
     }
-    
+
     /**
      * Decode an Open Location Code string into its location coordinates in decimal degrees.
      * Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md
@@ -4039,11 +4039,11 @@ class Arabic
     public function olc2dd($olc, $codeLength = 10)
     {
         $coordinates = array();
-        
+
         if ($this->volc($olc, $codeLength)) {
             $codeLength = $codeLength / 2;
             $validChars = '23456789CFGHJMPQRVWX';
-            
+
             $olc = strtoupper(strtr($olc, array('+' => '')));
 
             $latitude  = 0;
@@ -4060,10 +4060,10 @@ class Arabic
             $coordinates[] = null;
             $coordinates[] = null;
         }
-        
+
         return $coordinates;
     }
-    
+
     /**
      * Determine if an Open Location Code is valid.
      * Ref: https://github.com/google/open-location-code/blob/master/docs/specification.md
@@ -4086,10 +4086,10 @@ class Arabic
         } else {
             $isValid = true;
         }
-        
+
         return $isValid;
     }
-    
+
     /**
      * Get proper Arabic plural form
      * There are 4 plural forms in Arabic language:
@@ -4103,11 +4103,12 @@ class Arabic
      * @param string  $plural2  Plural form 2 (e.g., عنصران). If NULL [default] retrive from internal JSON dataset.
      * @param string  $plural3  Plural form 3 (e.g., عناصر). If NULL [default] retrive from internal JSON dataset.
      * @param string  $plural4  Plural form 4 (e.g., عنصرا). If NULL [default] retrive from internal JSON dataset.
+     * @param bool    $nameOnly Get only the name without the number, e.g., if you want to style numbers separately.
      *
      * @return string Proper plural form of the given singular form
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function arPlural($singular, $count, $plural2 = null, $plural3 = null, $plural4 = null)
+    public function arPlural($singular, $count, $plural2 = null, $plural3 = null, $plural4 = null, $nameOnly = false)
     {
         if ($count == 0) {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][0] : "لا $plural3";
@@ -4124,10 +4125,14 @@ class Arabic
         } else {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][5] : "%d $singular";
         }
-        
+
+        if ($nameOnly) {
+            return trim(str_replace('%d', '', $plural));
+        }
+
         return $plural;
     }
-    
+
     /**
      * Strip Harakat
      *
@@ -4156,7 +4161,7 @@ class Arabic
 
         return $text;
     }
-    
+
     /**
      * Arabic Sentiment Analysis
      *
@@ -4207,7 +4212,7 @@ class Arabic
         foreach ($words as $word) {
             # split word to letters
             $letters = preg_split('//u', $word, -1, PREG_SPLIT_NO_EMPTY);
-            
+
             $stems = array();
 
             $n = count($letters);
@@ -4221,19 +4226,19 @@ class Arabic
             }
 
             $log_odds = array();
-            
+
             # get log odd for all word stems
             foreach ($stems as $key) {
                 $log_odds[] = $this->logOddStem[$key];
             }
-            
+
             # select the most probable stem for current word
             $sel_stem = $stems[array_search(min($log_odds), $log_odds)];
 
             if ($negationFlag) {
                 // switch positive/negative sentiment because of negation word effect
                 $score += -1 * (float)$this->logOdd[$sel_stem];
-                
+
                 $negationFlag = false;
             } else {
                 # retrive the positive and negative log odd scores and accumulate them
@@ -4244,18 +4249,18 @@ class Arabic
                 $negationFlag = true;
             }
         }
-        
+
         if ($score > 0) {
             $isPositive  = true;
         } else {
             $isPositive = false;
         }
-        
+
         $probability = exp(abs($score)) / (1 + exp(abs($score)));
 
         return array('isPositive' => $isPositive, 'probability' => $probability);
     }
-    
+
     /**
      * Strip Dots and Hamzat
      *
@@ -4268,14 +4273,14 @@ class Arabic
     {
         $text = preg_replace('/ن(\b)/u', 'ں$1', $text);
         $text = preg_replace('/ك(\b)/u', 'ک$1', $text);
-        
+
         $text = strtr($text, array('ب' => 'ٮ', 'ت' => 'ٮ', 'ث' => 'ٮ', 'ن' => 'ٮ',
                                    'ي' => 'ى', 'ف' => 'ڡ', 'ق' => 'ٯ', 'ش' => 'س',
                                    'غ' => 'ع', 'ذ' => 'د', 'ز' => 'ر', 'ض' => 'ص',
                                    'ظ' => 'ط', 'ة' => 'ه', 'ج' => 'ح', 'خ' => 'ح',
                                    'أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا', 'ؤ' => 'و',
                                    'ئ' => 'ى'));
-        
+
         return $text;
     }
 
@@ -4299,7 +4304,7 @@ class Arabic
         } else {
             $status = false;
         }
-        
+
         switch ($form) {
             case 'stripTatweel':
                 $this->stripTatweel = $status;
@@ -4343,7 +4348,7 @@ class Arabic
 
         return $this;
     }
-    
+
     /**
      * Get given normalization form status.
      *
@@ -4387,7 +4392,7 @@ class Arabic
             default:
                 $value = false;
         }
-        
+
         return $value;
     }
 
@@ -4443,7 +4448,7 @@ class Arabic
         if ($this->normaliseTaa) {
             $text = strtr($text, array('ة' => 'ه'));
         }
-        
+
         if ($numeral == 'Hindu') {
             $text = strtr($text, array_combine($this->numeralPersian, $this->numeralHindu));
             $text = strtr($text, array_combine($this->numeralArabic, $this->numeralHindu));
@@ -4587,9 +4592,9 @@ class Arabic
                 $parts = 0;
             }
         }
-        
+
         $string = $when . ' ' . $string;
-        
+
         return $string;
     }
 }
