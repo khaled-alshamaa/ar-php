@@ -3,3 +3,8 @@
 /phpunit.phar
 /.phpunit.result.cache
 /phpstan.phar
+.idea/ar-php.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
