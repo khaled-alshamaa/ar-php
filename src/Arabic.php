@@ -1,6 +1,7 @@
 <?php
 
 namespace ArPHP\I18N;
+
 require_once 'SarahSpell.php';
 
 /**
@@ -338,7 +339,7 @@ class Arabic
     /** @var array<string> */
     private $numeralArabic = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
 
-
+	/** @var object */
 	private $speller = null;
 
     public function __construct()
@@ -368,29 +369,50 @@ class Arabic
 		
     }
 	
-	
+    /** @return void */
     private function arSpellerInit() {
         $this->speller = new \ArPHP\MZK\Speller();
     }
 
-
+    /**
+     * Spell Check
+	 *
+     * @param string $text Text input
+     * @return array<string> 
+     * @author Moutaz Alkhatib <muotaz@gmail.com>
+     */
     public function spellCheck($text) {
-        $ret =$this->speller->spell_check($text, false);
-        return array_keys($ret['no_sugg_cache']);
-
+        $ret = $this->speller->spell_check($text, false);
+		$ret = array_keys($ret['no_sugg_cache']);
+		
+        return $ret;
     }
 
+    /**
+     * Spell Suggest Corrections
+	 *
+     * @param string $text Text input
+     * @return array<array<string, mixed>>
+     * @author Moutaz Alkhatib <muotaz@gmail.com>
+     */
     public function spellSuggestCorrections($text) {
-        $ret=  $this->speller->spell_check($text, true);
+        $ret = $this->speller->spell_check($text, true);
         return array_map(function ($element) {
-            return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'],0,8)];
+            return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'], 0, 8)];
         }, $ret['suggestion_array']);
     }
 
+    /**
+     * Spell Suggest Corrections Text
+	 *
+     * @param string $text Text input
+     * @return array<array<string, mixed>> 
+     * @author Moutaz Alkhatib <muotaz@gmail.com>
+     */
     public function spellSuggestCorrectionsText($text) {
-        $ret =  $this->speller->spell_check($text, true);
+        $ret = $this->speller->spell_check($text, true);
         return array_map(function ($element) {
-            return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'],0,8)];
+            return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'], 0, 8)];
         }, $ret['suggestion_array']);
     }
 
@@ -1631,15 +1653,15 @@ class Arabic
             $format3 = strtr($this->arNumberComplications[$scale][3], $pattern);
             $format4 = strtr($this->arNumberComplications[$scale][4], $pattern);
 
-            if (strpos($str, $format1) !== false) {
+            if (strpos($str, $format1) !== false && strlen($format1) > 0) {
                 list($temp, $str) = explode($format1, $str);
                 $segment[$key]    = 'اثنان';
-            } elseif (strpos($str, $format2) !== false) {
+            } elseif (strpos($str, $format2) !== false && strlen($format2) > 0) {
                 list($temp, $str) = explode($format2, $str);
                 $segment[$key]    = 'اثنان';
-            } elseif (strpos($str, $format3) !== false) {
+            } elseif (strpos($str, $format3) !== false && strlen($format3) > 0) {
                 list($segment[$key], $str) = explode($format3, $str);
-            } elseif (strpos($str, $format4) !== false) {
+            } elseif (strpos($str, $format4) !== false && strlen($format4) > 0) {
                 list($segment[$key], $str) = explode($format4, $str);
                 if ($segment[$key] == '') {
                     $segment[$key] = 'واحد';
