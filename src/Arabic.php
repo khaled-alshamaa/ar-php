@@ -375,7 +375,7 @@ class Arabic
     }
 
 
-    public function spellCheck($text) {
+    public function spellGetMisspelled($text) {
         $ret =$this->speller->spell_check($text, false);
         return array_keys($ret['no_sugg_cache']);
 
@@ -388,12 +388,6 @@ class Arabic
         }, $ret['suggestion_array']);
     }
 
-    public function spellSuggestCorrectionsText($text) {
-        $ret =  $this->speller->spell_check($text, true);
-        return array_map(function ($element) {
-            return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'],0,8)];
-        }, $ret['suggestion_array']);
-    }	
     
     /** @return void */
     private function arStandardInit()
