@@ -28,7 +28,7 @@ languages document.</p>
 <a href="#example-1" class="anchor"><img src="./images/link_icon.png" width="16" border="0"></a>Example Output 1:</h2>
 <?php
 
-error_reporting(E_STRICT);
+error_reporting(E_ALL);
 
 $html = <<< END
 <p> <big><big><b> Peace &nbsp; <big>سلام</big> &nbsp; שלום &nbsp; Hasîtî &nbsp;

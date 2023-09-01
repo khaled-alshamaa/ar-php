@@ -31,7 +31,7 @@ typo chars in converted text.</p>
 <h2 dir="ltr" id="example-1-a">
 <a href="#example-1-a" class="anchor"><img src="./images/link_icon.png" width="16" border="0"></a>Example Output 1 (a):</h2>
 <?php
-error_reporting(E_STRICT);
+error_reporting(E_ALL);
 
 /*
   // Autoload files using Composer autoload

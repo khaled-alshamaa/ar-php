@@ -13,7 +13,7 @@
 <h2 dir="ltr">SimpleXML Example Output:</h2>
 <?php
 
-error_reporting(E_STRICT);
+error_reporting(E_ALL);
 
 // set name of XML file
 $file = '../src/data/ar_countries.xml';
@@ -21,7 +21,7 @@ $file = '../src/data/ar_countries.xml';
 // load XML file
 $xml = simplexml_load_file($file) or die ('Unable to load XML file!');
 
-if ($_GET['lang'] == 'arabic') {
+if (isset($_GET['lang']) && $_GET['lang'] == 'arabic') {
     $lang = 'arabic';
     $dir  = 'rtl';
     echo '<a href="Info.php?lang=english">English</a>';
@@ -44,6 +44,7 @@ echo '<td><b><u>Dial Codes</u></b></td>';
 echo '</tr>';
 
 // iterate over <country> element collection
+$i = 0;
 foreach ($xml as $country) {
     echo ($i++ % 2)? '<tr bgcolor="#F5F5F5">' : '<tr bgcolor="#E5E5E5">';
     

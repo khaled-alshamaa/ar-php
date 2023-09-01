@@ -11,6 +11,8 @@
  * @link      http://www.ar-php.org
  */
 
+error_reporting(E_ALL);
+
 header("Content-type: image/jpeg");
 
 if (isset($_GET['day'])) {
