@@ -381,11 +381,10 @@ class Arabic
      * @return array<string> 
      * @author Moutaz Alkhatib <muotaz@gmail.com>
      */
-    public function spellCheck($text) {
-        $ret = $this->speller->spell_check($text, false);
-		$ret = array_keys($ret['no_sugg_cache']);
-		
-        return $ret;
+    public function spellGetMisspelled($text) {
+        $ret =$this->speller->spell_check($text, false);
+        return array_keys($ret['no_sugg_cache']);
+
     }
 
     /**
@@ -396,20 +395,6 @@ class Arabic
      * @author Moutaz Alkhatib <muotaz@gmail.com>
      */
     public function spellSuggestCorrections($text) {
-        $ret = $this->speller->spell_check($text, true);
-        return array_map(function ($element) {
-            return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'], 0, 8)];
-        }, $ret['suggestion_array']);
-    }
-
-    /**
-     * Spell Suggest Corrections Text
-	 *
-     * @param string $text Text input
-     * @return array<array<string, mixed>> 
-     * @author Moutaz Alkhatib <muotaz@gmail.com>
-     */
-    public function spellSuggestCorrectionsText($text) {
         $ret = $this->speller->spell_check($text, true);
         return array_map(function ($element) {
             return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'], 0, 8)];
