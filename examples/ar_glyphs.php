@@ -67,7 +67,7 @@ $code = <<< ENDALL
     \$Arabic = new \ArPHP\I18N\Arabic();
 
     \$text = 'بسم الله الرحمن الرحيم';
-    $\text = \$Arabic->utf8Glyphs(\$text);
+    \$text = \$Arabic->utf8Glyphs(\$text);
 
     imagettftext(\$im, 20, 0, 10, 100, \$blue, \$font, 'Arabic Glyphs:');
     imagettftext(\$im, 20, 0, 250, 100, \$black, \$font, \$text);
