@@ -14,10 +14,15 @@
 
 <p>Arabic is a rich language with a wide collection of dialects in addition to Modern Standard Arabic (MSA).
 Arabic dialects differ in various ways from MSA. These include phonological, morphological, lexical, and 
-syntactic differences <i>(Bassiouney, 2009; Holes, 2004; Palva, 2006)</i>. Although, in theory, Arabic dialects 
-can be classified in various ways <i>(Palva, 2006)</i>, categorizations of Arabic dialects remain arbitrary 
-and primarily based on geographical divisions <i>(Habash, 2010)</i>. Dialect identification is the task of 
-automatically detecting the source variety of a given text or speech segment.</p>
+syntactic differences. Although, in theory, Arabic dialects can be classified in various ways, categorizations 
+of Arabic dialects remain arbitrary and primarily based on geographical divisions. Dialect identification 
+is the task of automatically detecting the source variety of a given text or speech segment.</p>
+
+<p>MSA is the only variety that is standardized, regulated, and taught in schools, necessitated by its use 
+in written communication and formal venues. The regional dialects, used primarily for day-to-day dealings 
+and spoken communication, remain somewhat absent from written communication compared with MSA. One domain 
+of written communication in which both MSA and dialectal Arabic are commonly used is the online domain: 
+Dialectal Arabic has a strong presence in blogs, forums, chatrooms, and user/reader commentary.</p>
 </div><br />
 
 <div class="Paragraph">
