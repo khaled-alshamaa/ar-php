@@ -37,6 +37,8 @@
 <!--
 ## What's new in ArPHP 7.0.0 _(release date: Sep 7, 2024)_
 
+* Full integration with the open-source version of the Arabic Spell Checker (ASC https://arabicspellchecker.com/open-source.html).
+
 * Add the new "arDialect" method for Arabic dialect identification (i.e., Egyptian, Levantine, Maghrebi, and Peninsular) of the text (e.g., comments, reviews, etc.).
 
 [Top](#arphp-library---change-log)
