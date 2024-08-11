@@ -7,7 +7,7 @@
 
 # مشروع PHP واللغة العربية ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _لغة PHP تتحدث العربية - كن مستعدا!_
-_حقوق النشر © 2006-2023 خالد الشمعة._
+_حقوق النشر © 2006-2024 خالد الشمعة._
 
 [![DOI](https://zenodo.org/badge/231197063.svg)](https://zenodo.org/badge/latestdoi/231197063)
 
@@ -44,7 +44,7 @@ _حقوق النشر © 2006-2023 خالد الشمعة._
   
 ```
 K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
-https://github.com/khaled-alshamaa/ar-php, 2023
+https://github.com/khaled-alshamaa/ar-php, 2024
 ```
 
 </div>
@@ -59,7 +59,7 @@ https://github.com/khaled-alshamaa/ar-php, 2023
   author={Al-Shamaa, Khaled},
   url={https://github.com/khaled-alshamaa/ar-php},
   version = {6.3.4},
-  year={2023}
+  year={2024}
 }
 ```
   
