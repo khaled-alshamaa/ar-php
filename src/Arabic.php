@@ -339,8 +339,26 @@ class Arabic
     /** @var array<string> */
     private $numeralArabic = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
 
-	/** @var object */
-	private $speller = null;
+    /** @var object */
+    private $speller = null;
+
+    /** @var array<string> */
+    private $dialectsStems = array();
+
+    /** @var array<float> */
+    private $logOddDialects = array();
+
+    /** @var array<float> */
+    private $logOddEgyptian = array();
+
+    /** @var array<float> */
+    private $logOddLevantine = array();
+
+    /** @var array<float> */
+    private $logOddMaghrebi = array();
+
+    /** @var array<float> */
+    private $logOddPeninsular = array();
 
     public function __construct()
     {
@@ -365,8 +383,8 @@ class Arabic
         $this->arQueryInit();
         $this->arSummaryInit();
         $this->arSentimentInit();
-		$this->arSpellerInit();
-		
+        $this->arSpellerInit();
+        $this->arDialectInit();
     }
 	
     /** @return void */
@@ -729,6 +747,18 @@ class Arabic
         $this->allStems   = file($this->rootDirectory . '/data/stems.txt', FILE_IGNORE_NEW_LINES);
         $this->logOddStem = file($this->rootDirectory . '/data/logodd_stem.txt', FILE_IGNORE_NEW_LINES);
         $this->logOdd     = file($this->rootDirectory . '/data/logodd.txt', FILE_IGNORE_NEW_LINES);
+    }
+
+
+    /** @return void */
+    private function arDialectInit()
+    {
+        $this->dialectsStems    = file($this->rootDirectory . '/data/dialects_stems.txt', FILE_IGNORE_NEW_LINES);
+        $this->logOddDialects   = file($this->rootDirectory . '/data/logodd_dialects.txt', FILE_IGNORE_NEW_LINES);
+        $this->logOddEgyptian   = file($this->rootDirectory . '/data/logodd_egyptian.txt', FILE_IGNORE_NEW_LINES);
+        $this->logOddLevantine  = file($this->rootDirectory . '/data/logodd_levantine.txt', FILE_IGNORE_NEW_LINES);
+        $this->logOddMaghrebi   = file($this->rootDirectory . '/data/logodd_maghrebi.txt', FILE_IGNORE_NEW_LINES);
+        $this->logOddPeninsular = file($this->rootDirectory . '/data/logodd_peninsular.txt', FILE_IGNORE_NEW_LINES);
     }
 
     /////////////////////////////////////// Standard //////////////////////////////////////////////
@@ -4298,6 +4328,114 @@ class Arabic
 
         return array('isPositive' => $isPositive, 'probability' => $probability);
     }
+
+
+    /**
+     * Arabic Dialects Detector
+     *
+     * @param string $text Arabic review string
+     *
+     * @return array<string|float> of 2 elements: string dialect (Egyptian, Levantine, Maghrebi, Peninsular),
+     *                             and float probability (range from 0 to 1)
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
+    public function arDialect($text)
+    {
+        # remove mentions
+        $text = preg_replace('/@\\S+/u', '', $text);
+
+        # remove hashtags
+        $text = preg_replace('/#\\S+/u', '', $text);
+
+        # normalise Alef, Hamza, and Taa
+        $text = $this->setNorm('normaliseAlef', true)
+                     ->setNorm('normaliseHamza', true)
+                     ->setNorm('normaliseTaa', true)
+                     ->arNormalizeText($text);
+
+        # filter only Arabic text (white list)
+        $text = preg_replace('/[^ ءابتثجحخدذرزسشصضطظعغفقكلمنهوي]+/u', ' ', $text);
+
+        # exclude one letter words
+        $text = preg_replace('/\\b\\S{1}\\b/u', ' ', $text);
+
+        # remove extra spaces
+        $text = preg_replace('/\\s{2,}/u', ' ', $text);
+        $text = preg_replace('/^\\s+/u', '', $text);
+        $text = preg_replace('/\\s+$/u', '', $text);
+
+        # split string to words
+        $words = preg_split('/\s+/u', $text, -1, PREG_SPLIT_NO_EMPTY);
+
+        # set initial scores
+        $scoreEgyptian   = 0;
+        $scoreLevantine  = 0;
+        $scoreMaghrebi   = 0;
+        $scorePeninsular = 0;
+
+        # for each word
+        foreach ($words as $word) {
+            # split word to letters
+            $letters = preg_split('//u', $word, -1, PREG_SPLIT_NO_EMPTY);
+
+            $stems = array();
+
+            $n = count($letters);
+
+            # get all possible 2 letters stems of current word
+            for ($i = 0; $i < $n - 1; $i++) {
+                for ($j = $i + 1; $j < $n; $j++) {
+                    # get stem key
+                    $stems[] = array_search($letters[$i] . $letters[$j], $this->dialectsStems);
+                }
+            }
+
+            $log_odds = array();
+
+            $egp_scores = 0;
+            $lev_scores = 0;
+            $mag_scores = 0;
+            $pen_scores = 0;
+
+            # get log odd scores for all word stems
+            foreach ($stems as $key) {
+                $log_odds[] = $this->logOddDialects[$key];
+
+                $egp_scores += $this->logOddEgyptian[$key];
+                $lev_scores += $this->logOddLevantine[$key];
+                $mag_scores += $this->logOddMaghrebi[$key];
+                $pen_scores += $this->logOddPeninsular[$key];
+            }
+
+            # retrive the positive and negative log odd scores and accumulate them
+            $scoreEgyptian   += $egp_scores / count($stems);
+            $scoreLevantine  += $lev_scores / count($stems);
+            $scoreMaghrebi   += $mag_scores / count($stems);
+            $scorePeninsular += $pen_scores / count($stems);
+        }
+
+        $score = max($scoreEgyptian, $scoreLevantine, $scoreMaghrebi, $scorePeninsular);
+		
+        switch ($score) {
+    	    case $scoreEgyptian:
+    	        $dialect = 'Egyptian';
+    	        break;
+    	    case $scoreLevantine:
+    	        $dialect = 'Levantine';
+    	        break;
+    	    case $scoreMaghrebi:
+    	        $dialect = 'Maghrebi';
+    	        break;
+    	    case $scorePeninsular:
+    	        $dialect = 'Peninsular';
+    	        break;
+        }
+
+        $probability = exp(abs($score)) / (1 + exp(abs($score)));
+
+        return array('dialect' => $dialect, 'probability' => $probability);
+    }
+
 
     /**
      * Strip Dots and Hamzat
