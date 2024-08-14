@@ -63,7 +63,7 @@ and methods can help make the process more successful. Ultimately, the search me
 is to retrieve every conceivable instance of a word or phrase and the resources you have to process search returns in order to 
 determine their true relevance.</p>
 
-<p align="justified"><i>Reference: Volume 13 Issue 7 of MultiLingual Computing & Technology published by MultiLingual Computing, 
+<p align="justified"><i><u>Reference</u>: Volume 13 Issue 7 of MultiLingual Computing & Technology published by MultiLingual Computing, 
 Inc., 319 North First Ave., Sandpoint, Idaho, USA, 208-263-8178, Fax: 208-263-6310.</i></p>
 
 <br/><b>2. Add a Normalized Field(s) to the Database Table(s):</b>
@@ -80,6 +80,10 @@ How do we use it to solve our problem?</p>
 return the normalized version of the text, then we will query our normalized column and display the original column content in 
 our search results. So in short, we added the normalized field to the table, passed the search string to our normalize function, 
 searched for the normalized name, and displayed the original name. This is a more modular solution but it requires more work.</p>
+
+<p align="justified"><i><u>Reference</u>:
+<a href="https://a-essam.medium.com/arabic-case-insensitive-in-database-systems-how-to-solve-alef-with-and-without-hamza-problem-c54ee6d40bed" 
+target="_blank"> Arabic Case Insensitive In Database Systems: How To Solve Alef With and Without Hamza Problem</a>.</i></p>
 
 </div><br />
 
