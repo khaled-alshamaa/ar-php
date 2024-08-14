@@ -1,0 +1,77 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CakePHP Example\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Khaled Al-Shamaa <khaled.alshamaa@gmail.com>\n"
+"Language-Team: Khaled Al-Shamaa <khaled.alshamaa@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Arabic\n"
+"X-Poedit-Country: SYRIAN ARAB REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "add"
+msgstr "إضافة"
+
+msgid "title"
+msgstr "عنوان"
+
+msgid "id"
+msgstr "رقم"
+
+msgid "created"
+msgstr "تاريخ"
+
+msgid "edit"
+msgstr "تعديل"
+
+msgid "delete"
+msgstr "حذف"
+
+msgid "next"
+msgstr "التالي"
+
+msgid "previous"
+msgstr "السابق"
+
+msgid "back"
+msgstr "عودة"
+
+msgid "confirm"
+msgstr "هل أنت متأكد؟"
+
+msgid "logout"
+msgstr "تسجيل خروج"
+
+msgid "login"
+msgstr "تسجيل دخول"
+
+msgid "body"
+msgstr "النص"
+
+msgid "save"
+msgstr "حفظ"
+
+msgid "headline"
+msgstr "مدونتي"
+
+msgid "comment"
+msgstr "تعليقات"
+
+msgid "success_logout"
+msgstr "تم تسجيل خروجك بنجاح"
+
+msgid "success_add_post"
+msgstr "تمت عملية الإضافة بنجاح"
+
+msgid "success_edit_post"
+msgstr "تمت عملية التعديل بنجاح"
+
+msgid "success_delete_post"
+msgstr "تمت عملية الحذف بنجاح"
+
+msgid "all"
+msgstr "إظهار الكل"
+

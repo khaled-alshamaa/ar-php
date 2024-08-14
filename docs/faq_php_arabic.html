@@ -1,0 +1,737 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>PHP & Arabic Language F.A.Q.</title>
+  <link href="./css/phpcode.css" rel="stylesheet" type="text/css">
+
+  <meta name="Keywords" content="PHP, Arabic, howto, UTF-8, Windows-1256, cp1256, charset, encoding, Apache, htaccess, MySQL, php.ini, iconv, BOM, Localization" />
+  <meta name="Author" content="Khaled Al-Shamaa" />
+  <meta name="Description" content="Set of PHP code snippets and FAQ tech you how to handle Arabic language using UTF-8 charset/encoding in PHP/MySQL web environment." />
+  <meta name="Language" content="English, Arabic" />
+  <meta name="Copyright" content="Khaled Al-Shamaa" />
+  <meta name="Publisher" content="Khaled Al-Shamaa" />
+  <meta name="Distribution" content="Global" />
+  <meta name="Robots" content="INDEX,FOLLOW" />
+</head>
+<body>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>&nbsp;</td>
+    <td width="900" align="center" valign="top">
+
+<table align="center" width="900" border="0" cellspacing="0"><tr><td class="Paragraph">
+  <div id="content">
+      <center><b><i><font face="Times" color="#000060" size="7">Arabic, Web, and UTF-8</font></i></b></center>
+      <p class="para">
+      سوف نستعرض من خلال هذه الصفحة مجموعة من الإجابات والحلول المتعلقة بالعديد من
+      الأسئلة الشائعة والمتكررة والتي كثيرا ما تردني حول قضايا متنوعة تختص بترميز
+      النصوص العربية باستخدام مجموعة المحارف الدولية UTF-8 في مفاصل متعددة من بيئة
+      تطوير تطبيقات الويب باستخدام لغة PHP وقاعدة MySQL للبيانات. لذا أحببت أن أجمعها
+      معا في صفحة واحدة تخدم كمرجع أحيل إليه السائلين من جهة، وينشر المعلومة للجميع
+      من جهة أخرى. وأتمنى في نهاية المطاف أن يكون هذا الاجتهاد مفيدا، فإن أصبت فأعينوني
+      بنشرها وإن أخطأت فقوموني وصححوا لي معلوماتي.
+      <br /><br />
+      خالد الشمعة، <a href="https://github.com/khaled-alshamaa/ar-php">مؤسس مشروع PHP واللغة العربي</a>
+      </p>
+
+      <a name="top" id="top"></a>
+        <ul>
+          <li><a href="#html">HTML &amp; UTF-8</a></li>
+          <li><a href="#apache">Apache/.htaccess & UTF-8</a></li>
+          <li><a href="#ini">php.ini & UTF-8</a></li>
+          <li><a href="#mysql">MySQL & UTF-8</a></li>
+          <li><a href="#iconv">Convert Character Encoding</a></li>
+          <li><a href="#mb">PHP & UTF-8 (Multibyte String Functions mb_*)</a></li>
+          <li><a href="#email">Email & UTF-8</a></li>
+          <li><a href="#regexp">Regular Expressions & UTF-8</a></li>
+          <li><a href="#file">File & UTF-8</a></li>
+          <li><a href="#xml">XML & UTF-8</a></li>
+          <li><a href="#css">CSS & UTF-8</a></li>
+          <li><a href="#javascript">JavaScript & UTF-8</a></li>
+          <li><a href="#gettext">PHP & localization _() & PoEdit</a></li>
+          <li><a href="#intl">The Locale class provided in the intl library (PHP 5.3)</a></li>
+        </ul>
+
+
+      <blockquote>
+        <p class="para">
+          بداية يجب أن يكون ملف برنامجك هو ذاته بتنسيق UTF-8،
+          أبسط الطرق لتحقيق ذلك هي أن تفتح الملف باستخدام برنامج المفكرة Notepad
+          ومن ثم تستخدم خيار حفظ باسم Save As من قائمة ملف File
+          حيث سترى قائمة منسدلة صغيرة قرب زر الحفظ Save
+          في أسفل صندوق الحوار الظاهر لك تسأل عن الترميز Encoding المستخدم، الآن عليك
+          إختيار UTF-8 بدلا من ANSI ومن ثم إحفظ الملف بنفس الإسم وفي ذات المكان (<a href="images/save_as_utf-8.gif" target="_blank">مثال</a>). </p>
+      </blockquote>
+
+      <h2 class="title"><a name="html" id="html"></a>HTML & UTF-8</h2>
+      <p class="para">
+      تحتاج المتصفحات إلى معرفة الترميز الذي تستعمله أي صفحة HTML وإلا فإنها تستخدم الترميز
+      الافتراضي لحاسوب زائر الموقع وهو ما قد يضعك في حالة ترى بها الموقع يعمل بشكل مثالي
+      على منصّة التطوير في حين يشكوا بعض المستخدمين من ظهور الموقع لديهم برموز غريبة غير مفهومة.
+      يمكن تقديم هذه المعلومة من خلال معرّف meta الموضّح في المثال التالي:
+      </p>
+
+      <div class="example">
+        <p><b>HTML & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 187);">&lt;?php
+<br>&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;Send&nbsp;a&nbsp;raw&nbsp;HTTP&nbsp;header
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">header&nbsp;</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'Content-Type:&nbsp;text/html;&nbsp;charset=UTF-8'</span><span style="color: rgb(0, 119, 0);">);
+<br>&nbsp;&nbsp;
+<br>&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;Declare&nbsp;encoding&nbsp;META&nbsp;tag,&nbsp;it&nbsp;causes&nbsp;browser&nbsp;to&nbsp;load&nbsp;the&nbsp;UTF-8&nbsp;charset&nbsp;before&nbsp;displaying&nbsp;the&nbsp;page.
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 119, 0);">echo&nbsp;</span><span style="color: rgb(221, 0, 0);">'&lt;meta&nbsp;http-equiv="Content-type"&nbsp;content="text/html;&nbsp;charset=UTF-8"&nbsp;/&gt;'</span><span style="color: rgb(0, 119, 0);">;
+<br>&nbsp;&nbsp;
+<br>&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;Right to Left issue
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 119, 0);">echo&nbsp;</span><span style="color: rgb(221, 0, 0);">'&lt;body dir="rtl"&gt;'</span><span style="color: rgb(0, 119, 0);">;
+<br></span><span style="color: rgb(0, 0, 187);">?&gt;</span>
+</span>
+              
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <blockquote>
+        <p class="para">
+        خلال تلقين المتصفح إسم مجموعة المحارف التي عليه استخدامها، تنبّه إلى ضرورة إضافة
+        ذلك السطر ضمن قسم head في وثيقة HTML قبل معرّف title 
+        وإلا فقدت تأثيرها على تلك الجزئيّة. كذلك لاحظ أن المصطلح 
+        Charset يستعمل  هنا للدلالة على الترميز وليس على مجموعة المحارف.
+        </p>
+      </blockquote>
+    
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="apache" id="apache"></a>Apache/.htaccess & UTF-8</h2>
+      <p class="para">
+      يمكنك أيضا أن توكل مهمة تحديد مجموعة المحارف المستخدمة إلى مخدّم الويب
+      Apache وذلك إمّا من خلال ملف إعداداته الخاص httpd.conf
+      على مستوى المخدّم ككل، أو من خلال ملف htaccess. على مستوى موقع مفرد
+      أو حتى مجلّد فرعي ضمن موقع ما. يوضّح المثال التالي كيف تستطيع الطلب إلى مخدّم
+      Apache أن يقوم بتحديد مجموعة المحارف الافتراضية على أنّها UTF-8
+      وهي التي سيتم إعادتها إلى المتصفح ضمن ترويسة الاستجابة ما لم يذكر خلاف ذلك صراحة.
+      </p>
+
+      <div class="example">
+        <p><b>Apache/.htaccess & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+&nbsp;&nbsp;#&nbsp;This&nbsp;will&nbsp;add&nbsp;a&nbsp;charset&nbsp;to&nbsp;the&nbsp;Content-Type&nbsp;response&nbsp;header.
+<br>&nbsp;&nbsp;AddDefaultCharset&nbsp;UTF-8</span>
+              
+            </code>
+          </div>
+        </div>
+      </div>
+      <blockquote>
+        <p class="para">
+        أو يمكنك تحديد مجموعة المحارف الافتراضية على أنها UTF-8 لنوع معين من الملفات فقط،
+        المثال التالي يوضح كيفية القيام بذلك من أجل ملفات JavaScript تحديدا دون أن يؤثر على غيرها:
+        <div dir="ltr" align="left">AddCharset UTF-8 .js</div>
+        </p>
+      </blockquote>
+    
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="ini" id="ini"></a>php.ini & UTF-8</h2>
+      <p class="para">
+      تقوم لغة PHP دوما بترميز مجموعة المحارف الخاصة بمخرجاتها وذلك من خلال ترويسة 
+      Content-type المرسلة مع كل إستجابة بحسب ما هو محدّد في إعداد default_charset
+      والموجود في ملف php.ini 
+      </p>
+
+      <div class="example">
+        <p><b>php.ini & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+php.ini:
+<br>default_charset&nbsp;=&nbsp;"UTF-8"
+<br>&nbsp;&nbsp;
+<br>نفسه&nbsp;PHP&nbsp;أو&nbsp;في&nbsp;برنامج
+<br>&nbsp;&nbsp;
+<br><span style="color: rgb(0, 0, 187);">&lt;?php
+<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;Sets&nbsp;the&nbsp;value&nbsp;of&nbsp;a&nbsp;configuration&nbsp;option
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;string&nbsp;ini_set&nbsp;(&nbsp;string&nbsp;$varname&nbsp;,&nbsp;string&nbsp;$newvalue&nbsp;)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">ini_set</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'default_charset'</span><span style="color: rgb(0, 119, 0);">,</span><span style="color: rgb(221, 0, 0);">'UTF-8'</span><span style="color: rgb(0, 119, 0);">);
+<br></span><span style="color: rgb(0, 0, 187);">?&gt;</span>
+</span>
+              
+            </code>
+          </div>
+        </div>
+      </div>
+    
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="mysql" id="mysql"></a>MySQL & UTF-8</h2>
+      <p class="para">
+      ربما تكون هذه هي إحدى النقاط الأكثر جدليّة وغموضا فيما يختص بالتعامل مع ترميز UTF-8
+      عند حفظ المعلومات ضمن قاعدة MySQL للبيانات، فالتوليفة الصحيحة تتألف من عدّة قطع 
+      حتى تكتمل حلقات الأحجية بالشكل الصحيح المطلوب. فبداية يجب أن تكون مجموعة المحارف
+      المستخدمة عند إنشاء الجدول هي utf8 و COLLATE هو utf8_general_cf
+      ومن ثم يجب إعداد مجموعة محارف مكتبة mysql في PHP على أنها utf8 باستخدام تعليمة mysql_set_charset،
+      بعد ذلك علينا إعلام قاعدة MySQL للبيانات أن كل البيانات القادمة تستخدم ترميز UTF-8،
+      ذات الأمر يجب أن تقوم به قاعدة البيانات حينما ترسل لنا البيانات حيث يجب أن تكون وفق
+      نفس الترميز UTF-8 بما في ذلك الترويسة التي تحدّد ترميز مجموعة النتائج المرسلة.
+      </p>
+
+      <blockquote>
+        <p class="para">
+        إحدى أهم مزايا InnoDB مقارنة بـ MyISAM عدى عن موضوع دعمه للمناقلات (Transactions)
+        أنه يقوم بقفل السجل الذي يقوم بتعديله فقط وليس الجدول بأكمله كما في حالة MyISAM.
+        </p>
+      </blockquote>
+
+      <div class="example">
+        <p><b>MySQL & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 187);">&lt;?php
+<br />&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">/**
+<br />&nbsp;&nbsp;&nbsp;*&nbsp;ALTER TABLE `myTable` CHARACTER SET utf8 COLLATE utf8_general_ci;
+<br />&nbsp;&nbsp;&nbsp;*&nbsp;
+<br />&nbsp;&nbsp;&nbsp;*&nbsp;There’s a generic way of doing by simply executing the MySQL query:
+<br />&nbsp;&nbsp;&nbsp;*&nbsp;SET NAMES utf8;
+<br />&nbsp;&nbsp;&nbsp;*&nbsp;
+<br />&nbsp;&nbsp;&nbsp;*&nbsp;...and depending on which client/driver you’re using
+<br />&nbsp;&nbsp;&nbsp;*&nbsp;there are helper functions to do this more easily instead:
+<br />&nbsp;&nbsp;&nbsp;*/
+<br />&nbsp;&nbsp;
+<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;With&nbsp;the&nbsp;built&nbsp;in&nbsp;mysql&nbsp;functions
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">mysql_set_charset</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'utf8'</span><span style="color: rgb(0, 119, 0);">);&nbsp;
+<br />
+<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;With&nbsp;MySQLi
+<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">set_charset</span><span style="color: #007700">(</span><span style="color: #DD0000">"utf8"</span><span style="color: #007700">)
+<br />
+<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;With&nbsp;PDO_MySQL&nbsp;(as&nbsp;you&nbsp;connect)
+<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$pdo&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">PDO</span><span style="color: #007700">(
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'mysql:host=localhost;dbname=test'</span><span style="color: #007700">,
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'username'</span><span style="color: #007700">,
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'password'</span><span style="color: #007700">,
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(</span><span style="color: #0000BB">PDO</span><span style="color: #007700">::</span><span style="color: #0000BB">MYSQL_ATTR_INIT_COMMAND&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"SET&nbsp;NAMES&nbsp;utf8"</span><span style="color: #007700">)
+<br />&nbsp;&nbsp;);
+<br></span><span style="color: rgb(0, 0, 187);">?&gt;</span>
+</span>
+              
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <blockquote>
+        <p class="para">
+        إن كنت تستخدم الإصدار 4.0 أو ما يسبقه من قاعدة MySQL للبيانات وتحتفظ ببياناتك النصية باستخدام ترميز UTF-8
+        وترغب بنقل تلك البيانات إلى الإصدار 4.1 أو ما يليه من قاعدة MySQL للبيانات (أي بعد أن أضيفت 
+        إليها الخصائص الموضحة أعلاه والتي تحدد مجموعة المحارف التي يتم التعامل معها)، يجب أن تستخدم تعليمة SQL
+        التي تقوم بتحديد نوع مجموعة المحارف المسندة للحقل المعني، لكن عليك أن تقوم بتحويل نوع ذلك الحقل بداية 
+        إلى ثنائي Binary بهدف منع المخدم من محاولة إجراء عملية تحويل ضمنية غير صريحة للبيانات في ذلك الحقل من 
+        مجموعة المحارف الافتراضية للمخدم (على سبيل المثال Windows-1252) إلى مجموعة المحارف الدولية UTF-8 وهو ما 
+        سيؤدي غالبا إلى تلف ترميز البيانات.
+        
+        <div dir="ltr" align="left">ALTER TABLE myTable MODIFY myColumn BINARY(255);<br>
+        ALTER TABLE myTable MODIFY myColumn VARCHAR(255) CHARACTER SET utf8;</div>
+        </p>
+      </blockquote>
+      
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="iconv" id="iconv"></a>Convert Character Encoding</h2>
+      <p class="para">
+      لتحويل ترميز (encoding) نص ما من مجموعة محارف (charset)
+      إلى أخرى يمكنك استخدام تعليمة iconv كما هو موضّح بالمثال التالي:
+      </p>
+
+      <div class="example">
+        <p><b>Convert Character Encoding</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 187);">&lt;?php
+<br>&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;Convert&nbsp;string&nbsp;to&nbsp;requested&nbsp;character&nbsp;encoding
+<br>&nbsp;&nbsp;//&nbsp;string&nbsp;iconv&nbsp;(&nbsp;string&nbsp;$in_charset&nbsp;,&nbsp;string&nbsp;$out_charset&nbsp;,&nbsp;string&nbsp;$str&nbsp;)
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">$str&nbsp;</span><span style="color: rgb(0, 119, 0);">=&nbsp;</span><span style="color: rgb(0, 0, 187);">iconv</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'cp1256'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'utf-8'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">$str</span><span style="color: rgb(0, 119, 0);">);
+<br></span><span style="color: rgb(0, 0, 187);">?&gt;</span>
+</span>
+            
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <blockquote>
+        <p class="para">
+        إنتبه إلى أننا نستخدم الرمز cp1256 للدلالة على مجموعة المحارف Windows-1256.
+        </p>
+      </blockquote>
+    
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="mb" id="mb"></a>PHP & UTF-8 (Multibyte String Functions mb_*)</h2>
+      <p class="para">
+      إن كافّة دوال PHP الخاصّة بالنصوص لا تتعامل مع ترميز UTF-8 بشكل صحيح
+      خصوصاً عندما تكون تلك النصوص خليطاً من العربيّة والإنجليزيّة،
+      وريثما يأتينا الإصدار السادس من لغة PHP والذي يعد بدعم أصيل وكامل لهذا التنسيق
+      ضمن دوال لغة PHP كافّة. تبقى الأداة الوحيدة المتاحة لنا هي الدوال التي تقدّمها مكتبة mb
+      حيث يوضح المثال التالي مقارنة بين ما ستحصل عليه من دالة PHP القياسيّة الخاصّة بتحديد 
+      طول سلسلة نصية ما في حال كانت مرمّزة باستخدام UTF-8، وبين الناتج الصحيح 
+      الذي ستحصل عليه عند استدعاء نسخة مكتبة mb من ذات الدالة.
+      </p>
+
+      <p class="para">
+      لمزيد من المعلومات حول هذه المكتبة عليك الإطلاع على الرابط التالي (أو القسم الخاص بها ضمن دليل استخدام لغة PHP الذي لديك):
+      <ul><li><a href="http://www.php.net/manual/en/ref.mbstring.php" target=_blank>http://www.php.net/manual/en/ref.mbstring.php</a></li></ul>
+      </p>
+
+      <div class="example">
+        <p><b>PHP & UTF-8 (Multibyte String Functions mb_*)</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 187);">&lt;?php
+<br>&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">/**
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;Multibyte&nbsp;character&nbsp;encoding&nbsp;schemes&nbsp;and&nbsp;their&nbsp;related&nbsp;issues&nbsp;are&nbsp;fairly
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;complicated,&nbsp;and&nbsp;are&nbsp;beyond&nbsp;the&nbsp;scope&nbsp;of&nbsp;this&nbsp;documentation.&nbsp;Please&nbsp;refer&nbsp;to
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;following&nbsp;URLs&nbsp;and&nbsp;other&nbsp;resources&nbsp;for&nbsp;further&nbsp;information&nbsp;regarding&nbsp;these&nbsp;topics.&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*/
+<br>&nbsp;&nbsp;
+
+<br>&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">// Set internal character encoding to UTF-8
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">mb_internal_encoding</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'UTF-8'</span><span style="color: rgb(0, 119, 0);">);&nbsp;</span>
+<br>
+
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">$str&nbsp;</span><span style="color: rgb(0, 119, 0);">=&nbsp;</span><span style="color: rgb(221, 0, 0);">'واللغة&nbsp;العربية&nbsp;PHP&nbsp;مشروع'</span><span style="color: rgb(0, 119, 0);">;
+<br>
+<br>&nbsp;&nbsp;echo&nbsp;</span><span style="color: rgb(0, 0, 187);">strlen</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 0, 187);">$str</span><span style="color: rgb(0, 119, 0);">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;42
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 119, 0);">echo&nbsp;</span><span style="color: rgb(0, 0, 187);">mb_strlen</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 0, 187);">$str</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'UTF-8'</span><span style="color: rgb(0, 119, 0);">);&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;24
+<br>
+<br>&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">strtolower</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;������&nbsp;�������&nbsp;php&nbsp;����
+<br>&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">mb_strtolower</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;واللغة&nbsp;العربية&nbsp;php&nbsp;مشروع
+<br></span><span style="color: rgb(0, 0, 187);">?&gt;</span>
+</span>
+
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <blockquote>
+        <p class="para">
+        كما تلاحظ لا يمكن حل  إشكال طول السلسلة النصية بمجرّد تقسيم الطول الناتج على 2 كما قد يفعل البعض أحيانا.
+        </p>
+      </blockquote>
+    
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="email" id="email"></a>Email & UTF-8</h2>
+      <p class="para">
+      الدالة البسيطة التالية تمكنك من إرسال بريد إلكتروني نصي عنوانه وموضوعه مرمّزين
+      باستخدام مجموعة المحارف UTF-8. لكن إن رغبت بإرسال بريد إلكتروني بتنسيق HTML
+      فما عليك سوى تعديل هذه الدالة بحيث تستبدل عبارة text/plain بعبارة text/html.
+      </p>
+
+      <div class="example">
+        <p><b>Email & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 187);">&lt;?php
+<br>&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">/**
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;Simple&nbsp;UTF-8&nbsp;mail&nbsp;sender&nbsp;function.&nbsp;This&nbsp;function&nbsp;also&nbsp;encode&nbsp;subject&nbsp;and&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;plain-text&nbsp;message&nbsp;to&nbsp;UTF-8.&nbsp;If&nbsp;you&nbsp;need&nbsp;HTML&nbsp;mail&nbsp;sender,&nbsp;change&nbsp;the&nbsp;code&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;line&nbsp;2&nbsp;from&nbsp;text/plain&nbsp;to&nbsp;text/html,&nbsp;but&nbsp;this&nbsp;function&nbsp;is&nbsp;usable&nbsp;the&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;most&nbsp;cases&nbsp;without&nbsp;any&nbsp;modification.
+<br>&nbsp;&nbsp;&nbsp;*/
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 119, 0);">function&nbsp;</span><span style="color: rgb(0, 0, 187);">mail_utf8</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 0, 187);">$to</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">$subject&nbsp;</span><span style="color: rgb(0, 119, 0);">=&nbsp;</span><span style="color: rgb(221, 0, 0);">'(No&nbsp;subject)'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">$message&nbsp;</span><span style="color: rgb(0, 119, 0);">=&nbsp;</span><span style="color: rgb(221, 0, 0);">''</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">$header&nbsp;</span><span style="color: rgb(0, 119, 0);">=&nbsp;</span><span style="color: rgb(221, 0, 0);">''</span><span style="color: rgb(0, 119, 0);">)&nbsp;{
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">$_header&nbsp;</span><span style="color: rgb(0, 119, 0);">=&nbsp;</span><span style="color: rgb(221, 0, 0);">"MIME-Version:&nbsp;1.0\r\nContent-type:&nbsp;text/plain;&nbsp;charset=UTF-8\r\n"</span><span style="color: rgb(0, 119, 0);">;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">mail</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 0, 187);">$to</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'=?UTF-8?B?'</span><span style="color: rgb(0, 119, 0);">.</span><span style="color: rgb(0, 0, 187);">base64_encode</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 0, 187);">$subject</span><span style="color: rgb(0, 119, 0);">).</span><span style="color: rgb(221, 0, 0);">'?='</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">$message</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">$_header&nbsp;</span><span style="color: rgb(0, 119, 0);">.&nbsp;</span><span style="color: rgb(0, 0, 187);">$header</span><span style="color: rgb(0, 119, 0);">);
+<br>&nbsp;&nbsp;}
+<br></span><span style="color: rgb(0, 0, 187);">?&gt;</span>
+</span>
+
+            </code>
+          </div>
+        </div>
+      </div>
+    
+      <blockquote>
+        <p class="para">
+        يمكن أيضا إستخدام الدالة
+		<a href="http://www.php.net/mb_send_mail" target=_blank>mb_send_mail</a>
+		من مكتبة mb المذكورة أعلاه.
+        </p>
+      </blockquote>
+
+	
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="regexp" id="regexp"></a>Regular Expressions & UTF-8</h2>
+      <p class="para">
+      إن مجموعة تعليمات *_preg في لغة PHP والمعتمدة على مكتبة PCRE
+      تتيح تقنية التعابير النظامية وفق ذات الصيغة والأسلوب المستخدم 
+      في لغة Perl، هذا الاستخدام في لغة PHP يدعم مجموعة المحارف العالمية UTF-8
+      بمجرد إضافة الخيار u/ إلى نهاية صيغة التعبير النظامي.
+
+      ولسهولة بناء الأنماط العربية يمكنك الاستعانة بالمجموعات التالية:<br /><br />
+      * مجموعة الأرقام الهندية والمقصود هنا هو الأرقام 
+      &#1641; &#1640; &#1639; &#1638; &#1637; &#1636; &#1635; &#1634; &#1633; &#1632; :
+      <span dir="ltr">[\x{0660}-\x{0669}]</span><br /><br />
+      * مجموعة أحرف الأبجدية العربية: 
+      <span dir="ltr">[\x{0621}-\x{063A}\x{0641}-\x{064A}]</span><br /><br />
+      * مجموعة علامات التشكيل (الحركات) بالإضافة إلى رمز التطويل:
+      <span dir="ltr">[\x{0640}\x{064B}-\x{0652}]</span><br /><br />
+      * مجموعة علامات الترقيم العربية:
+      <span dir="ltr">[\x{060C}\x{060D}\x{061B}-\x{061F}\x{2E2E}\x{066A}-\x{066D}]</span><br />
+
+      <blockquote>
+        <p class="para">
+          مجموعة علامات الترقيم الموضحة أعلاه تشمل مثلا الفاصلة العربية وعلامة الاستفهام وسواهما لكنها
+          لا تشمل العلامات المشتركة ما بين العربية والإنجليزية مثل النقطة وعلامة التعجب والأقواس الخ...
+          <br /><br />
+          من جهة أخرى إن استخدام رمز النقطة . في بناء النمط في التعابير النظامية للدلالة على محرف وحيد
+          قد يسلك سلوكا غير متوقع في اللغة العربية عند وجود الحركات، حيث أن الحركة بحد ذاتها تعتبر محرفا، 
+          لذا إن كنت تقصد حرفا واحدا بغض النظر عن إمتلاكه لحركة أم لا فعليك استخدام الرمز X\ عوضا عن النقطة.
+        </p>
+      </blockquote>
+            
+      </p>
+
+      <div class="example">
+        <p><b>Regular Expressions & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+              <span style="color: #000000">
+              <span style="color: #0000BB">&lt;?php
+              <br />&nbsp;&nbsp;</span><span style="color: #FF8000">/**
+              <br />&nbsp;&nbsp;&nbsp;*&nbsp;PCRE&nbsp;Patterns&nbsp;-&nbsp;Pattern&nbsp;Modifiers:&nbsp;u&nbsp;(PCRE8)
+              <br />&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;modifier&nbsp;turns&nbsp;on&nbsp;additional&nbsp;functionality&nbsp;of&nbsp;PCRE&nbsp;that&nbsp;is&nbsp;incompatible&nbsp;
+              
+              <br />&nbsp;&nbsp;&nbsp;*&nbsp;with&nbsp;Perl.&nbsp;Pattern&nbsp;strings&nbsp;are&nbsp;treated&nbsp;as&nbsp;UTF-8.&nbsp;This&nbsp;modifier&nbsp;is&nbsp;available&nbsp;
+              <br />&nbsp;&nbsp;&nbsp;*&nbsp;from&nbsp;PHP&nbsp;4.1.0&nbsp;or&nbsp;greater&nbsp;on&nbsp;Unix&nbsp;and&nbsp;from&nbsp;PHP&nbsp;4.2.3&nbsp;on&nbsp;win32.&nbsp;UTF-8&nbsp;validity&nbsp;
+              
+              <br />&nbsp;&nbsp;&nbsp;*&nbsp;of&nbsp;the&nbsp;pattern&nbsp;is&nbsp;checked&nbsp;since&nbsp;PHP&nbsp;4.3.5.
+              <br />&nbsp;&nbsp;&nbsp;*/&nbsp;&nbsp;
+              <br />&nbsp;&nbsp;
+              <br />&nbsp;&nbsp;</span><span style="color: #0000BB">$arDigits&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'\x{0660}-\x{0669}'</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;Arabic-Indic&nbsp;digits
+              
+              <br />&nbsp;&nbsp;</span><span style="color: #0000BB">$arLetters&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'\x{0621}-\x{063A}\x{0641}-\x{064A}'</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;Based&nbsp;on&nbsp;ISO&nbsp;8859-6
+              <br />&nbsp;&nbsp;</span><span style="color: #0000BB">$arVowels&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'\x{0640}\x{064B}-\x{0652}'</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;Including&nbsp;Tatweel
+              <br />&nbsp;&nbsp;</span><span style="color: #0000BB">$arPuncation&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'\x{060C}\x{060D}\x{061B}-\x{061F}\x{2E2E}\x{066A}-\x{066D}'</span><span style="color: #007700">;
+              
+              <br />&nbsp;&nbsp;
+              <br />&nbsp;&nbsp;</span><span style="color: #0000BB">$str&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'١٩٧٥'</span><span style="color: #007700">;
+              <br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">"/^\d+$/"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$str</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;No&nbsp;match
+              <br />&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">"/^[</span><span style="color: #0000BB">$arDigits</span><span style="color: #DD0000">]+$/u"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$str</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;Match
+              
+              <br />&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">preg_match</span><span style="color: #007700">(</span><span style="color: #DD0000">"/^[٩-٠]+$/u"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$str</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Match
+              <br /></span><span style="color: #0000BB">?&gt;</span>
+              </span>
+            </code>
+          </div>
+        </div>
+      </div>    
+
+      <ul>
+        <li>For more information about Unicode Regular Expressions please 
+        <a href="http://www.regular-expressions.info/unicode.html" target=_blank>click here</a>.</li>
+        <li>For more information about Unicode 6.0 Arabic character code chart 
+        <a href="http://unicode.org/charts/PDF/U0600.pdf" target=_blank>click here</a> (PDF).</li>
+      </ul>
+
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="file" id="file"></a>File & UTF-8</h2>
+      <p class="para">
+      يستخدم رمز BOM في بداية أي دفق من البيانات (مثل محتوى ملف نصي ما أو socket)
+      للدلالة على أن ما يليه مرمّز باستخدام مجموعة المحارف UTF-8، وتتألف علامة BOM
+      من ثلاثة بايتات هي EFBBBF، وقد ترتقي الحاجة إلى استخدامه من إختياريّة إلى إلزاميّة
+      في بعض بروتوكولات تدفق البيانات.
+      </p>
+
+      <div class="example">
+        <p><b>File & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 187);">&lt;?php
+<br>&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">/**
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;Detecting&nbsp;UTF&nbsp;BOM&nbsp;-&nbsp;byte&nbsp;order&nbsp;mark
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;A&nbsp;byte&nbsp;order&nbsp;mark&nbsp;(BOM)&nbsp;consists&nbsp;of&nbsp;3-byte&nbsp;sequence&nbsp;of&nbsp;EFBBBF&nbsp;at&nbsp;the&nbsp;beginning&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;of&nbsp;a&nbsp;data&nbsp;stream,&nbsp;where&nbsp;it&nbsp;can&nbsp;be&nbsp;used&nbsp;as&nbsp;a&nbsp;signature&nbsp;defining&nbsp;the&nbsp;byte&nbsp;order&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;and&nbsp;encoding&nbsp;form,&nbsp;primarily&nbsp;of&nbsp;unmarked&nbsp;plaintext&nbsp;files.&nbsp;Under&nbsp;some&nbsp;higher&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;level&nbsp;protocols,&nbsp;use&nbsp;of&nbsp;a&nbsp;BOM&nbsp;may&nbsp;be&nbsp;mandatory&nbsp;(or&nbsp;prohibited)&nbsp;in&nbsp;the&nbsp;Unicode&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*&nbsp;data&nbsp;stream&nbsp;defined&nbsp;in&nbsp;that&nbsp;protocol.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>&nbsp;&nbsp;&nbsp;*/
+<br>&nbsp;&nbsp;
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">$str&nbsp;</span><span style="color: rgb(0, 119, 0);">=&nbsp;</span><span style="color: rgb(0, 0, 187);">file_get_contents</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'file.utf8.csv'</span><span style="color: rgb(0, 119, 0);">);
+<br>
+<br>&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">$bom&nbsp;</span><span style="color: rgb(0, 119, 0);">=&nbsp;</span><span style="color: rgb(0, 0, 187);">pack</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">"CCC"</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">0xef</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">0xbb</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">0xbf</span><span style="color: rgb(0, 119, 0);">);
+<br>
+<br>&nbsp;&nbsp;if&nbsp;(</span><span style="color: rgb(0, 0, 187);">strncmp</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 0, 187);">$str</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">$bom</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">3</span><span style="color: rgb(0, 119, 0);">)&nbsp;==&nbsp;</span><span style="color: rgb(0, 0, 187);">0</span><span style="color: rgb(0, 119, 0);">)&nbsp;{
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: rgb(221, 0, 0);">"BOM&nbsp;detected&nbsp;-&nbsp;file&nbsp;is&nbsp;UTF-8\n"</span><span style="color: rgb(0, 119, 0);">;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">$str&nbsp;</span><span style="color: rgb(0, 119, 0);">=&nbsp;</span><span style="color: rgb(0, 0, 187);">substr</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 0, 187);">$str</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(0, 0, 187);">3</span><span style="color: rgb(0, 119, 0);">);
+<br>&nbsp;&nbsp;}
+<br></span><span style="color: rgb(0, 0, 187);">?&gt;</span>
+</span>
+
+            </code>
+          </div>
+        </div>
+      </div>
+    
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="xml" id="xml"></a>XML & UTF-8</h2>
+      <p class="para">
+        أنت بحاجة إلى التصريح عن مجموعة المحارف المستخدمة في النصوص ضمن ملف XML:
+      </p>
+
+      <div class="example">
+        <p><b>XML & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: #000000">
+<span style="color: #0000BB">&lt;?xml&nbsp;version</span><span style="color: #007700">=</span><span style="color: #DD0000">"1.0"&nbsp;</span>
+<span style="color: #0000BB">encoding</span><span style="color: #007700">=</span><span style="color: #DD0000">"utf-8"&nbsp;</span>
+<span style="color: #0000BB">?&gt;</span>
+<br /></span>&lt;bookstore&gt;
+<br />&nbsp;&nbsp;&lt;book&gt;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&nbsp;lang="ar"&gt;واللغة&nbsp;العربية&nbsp;PHP&lt;/title&gt;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;price&gt;350&lt;/price&gt;
+<br />&nbsp;&nbsp;&lt;/book&gt;
+<br />&lt;/bookstore&gt;
+</span>
+
+            </code>
+          </div>
+        </div>
+      </div>
+    
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="css" id="css"></a>CSS & UTF-8</h2>
+      <p class="para">
+        أنت بحاجة إلى التصريح عن مجموعة المحارف المستخدمة في ملف CSS
+        أيضا في حال تضمن ذلك الملف أي محتوى على شكل نص مثلا:
+      </p>
+
+      <div class="example">
+        <p><b>CSS & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+&nbsp;&nbsp;@charset&nbsp;"utf-8";
+<br>
+<br>&nbsp;&nbsp;[rel="external"]::after
+<br>&nbsp;&nbsp;{
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;'&nbsp;رابط&nbsp;خارجي&nbsp;';
+<br>&nbsp;&nbsp;}</span>
+
+            </code>
+          </div>
+        </div>
+      </div>
+    
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="javascript" id="javascript"></a>JavaScript & UTF-8</h2>
+      <p class="para">
+        إن أسهل طريقة للتأكد من من أن النصوص الواردة في ملف JavaScript برمجي يتم تضمينه في صفحتك 
+        على أنها مرمزة باستخدام مجموعة المحارف الدولية UTF-8 يتم من خلال إضافة خاصية charset إلى 
+        معرف &lt;script&gt; المستخدم في صفحتك.
+      </p>
+
+      <div class="example">
+        <p><b>JavaScript & UTF-8</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+<span style="color: #0000BB">&nbsp;&nbsp;&lt;script 
+type</span><span style="color: #007700">=</span><span style="color: #DD0000">"text/javascript"</span> 
+<span style="color: #0000BB">src</span><span style="color: #007700">=</span><span style="color: #DD0000">"myscript.js"</span> 
+<span style="color: #0000BB">charset</span><span style="color: #007700">=</span><span style="color: #DD0000">"utf-8"</span>
+<span style="color: #0000BB">&gt;&lt;/script&gt;</span>
+</span>
+
+            </code>
+          </div>
+        </div>
+      </div>
+
+    
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="gettext" id="gettext"></a>PHP & localization _() & PoEdit</h2>
+      <p class="para"></p>
+
+      <div class="example">
+        <p><b>PHP & localization _() & PoEdit</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: #000000">
+<span style="color: #0000BB">&lt;?php
+<br />&nbsp;&nbsp;</span><span style="color: #FF8000">/*
+<br />&nbsp;&nbsp;The&nbsp;gettext&nbsp;functions&nbsp;implement&nbsp;an&nbsp;NLS&nbsp;(Native&nbsp;Language&nbsp;Support)&nbsp;API&nbsp;which&nbsp;can&nbsp;
+<br />&nbsp;&nbsp;be&nbsp;used&nbsp;to&nbsp;internationalize&nbsp;your&nbsp;PHP&nbsp;applications.&nbsp;Please&nbsp;see&nbsp;the&nbsp;gettext&nbsp;
+<br />&nbsp;&nbsp;documentation&nbsp;for&nbsp;your&nbsp;system&nbsp;for&nbsp;a&nbsp;thorough&nbsp;explanation&nbsp;of&nbsp;these&nbsp;functions&nbsp;or&nbsp;
+<br />&nbsp;&nbsp;view&nbsp;the&nbsp;docs&nbsp;at:&nbsp;
+<br />&nbsp;&nbsp;http://www.gnu.org/software/gettext/manual/gettext.html&nbsp;
+<br />&nbsp;&nbsp;
+<br />&nbsp;&nbsp;Poedit&nbsp;is&nbsp;cross-platform&nbsp;gettext&nbsp;catalogs&nbsp;(.po&nbsp;files)&nbsp;editor.&nbsp;It&nbsp;aims&nbsp;to&nbsp;provide&nbsp;
+<br />&nbsp;&nbsp;more&nbsp;convenient&nbsp;approach&nbsp;to&nbsp;editing&nbsp;catalogs.&nbsp;
+<br />&nbsp;&nbsp;http://www.poedit.net/
+<br />&nbsp;&nbsp;*/
+<br />
+<br />&nbsp;&nbsp;//&nbsp;Set&nbsp;language&nbsp;to&nbsp;Arabic
+<br />&nbsp;&nbsp;//&nbsp;available&nbsp;if&nbsp;PHP&nbsp;was&nbsp;compiled&nbsp;with&nbsp;libintl
+<br />&nbsp;&nbsp;</span><span style="color: #0000BB">putenv</span><span style="color: #007700">(</span><span style="color: #DD0000">'LANG=ar'</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;</span><span style="color: #0000BB">setlocale</span><span style="color: #007700">(</span><span style="color: #0000BB">LC_MESSAGES</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'ar.UTF-8'</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;
+<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$domain&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'default'</span><span style="color: #007700">;
+<br />&nbsp;&nbsp;
+<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Specify&nbsp;location&nbsp;of&nbsp;translation&nbsp;tables
+<br />&nbsp;&nbsp;</span><span style="color: #0000BB">bindtextdomain</span><span style="color: #007700">(</span><span style="color: #0000BB">$domain</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"./locale"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;
+<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Choose&nbsp;domain
+<br />&nbsp;&nbsp;</span><span style="color: #0000BB">textdomain</span><span style="color: #007700">(</span><span style="color: #0000BB">$domain</span><span style="color: #007700">);
+<br />
+<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Specify&nbsp;the&nbsp;character&nbsp;encoding
+<br />&nbsp;&nbsp;</span><span style="color: #0000BB">bind_textdomain_codeset</span><span style="color: #007700">(</span><span style="color: #0000BB">$domain</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">);&nbsp;
+<br />&nbsp;&nbsp;
+<br />&nbsp;&nbsp;</span><span style="color: #FF8000">/*
+<br />&nbsp;&nbsp;Gettext&nbsp;works&nbsp;by&nbsp;expecting&nbsp;a&nbsp;locale&nbsp;directory&nbsp;where&nbsp;all&nbsp;of&nbsp;the&nbsp;translated&nbsp;
+<br />&nbsp;&nbsp;strings&nbsp;are&nbsp;kept,&nbsp;in&nbsp;the&nbsp;following&nbsp;structure:
+<br />&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;locale
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ar
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|__LC_MESSAGES
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__&nbsp;default.po
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__&nbsp;default.mo
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__en
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__LC_MESSAGES
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__&nbsp;default.po
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__&nbsp;default.mo
+<br />&nbsp;&nbsp;*/
+<br />&nbsp;&nbsp;
+<br />&nbsp;&nbsp;//&nbsp;Print&nbsp;a&nbsp;test&nbsp;message
+<br />&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">gettext</span><span style="color: #007700">(</span><span style="color: #DD0000">"login"</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;\r\n"</span><span style="color: #007700">;
+<br />&nbsp;&nbsp;
+<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Or&nbsp;use&nbsp;the&nbsp;alias&nbsp;_()&nbsp;for&nbsp;gettext()
+<br />&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">_</span><span style="color: #007700">(</span><span style="color: #DD0000">"logout"</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;\r\n"</span><span style="color: #007700">;
+<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+
+            </code>
+          </div>
+        </div>
+      </div>
+      
+      <ul>
+        <li>For more information about gettext please 
+        <a href="http://www.gnu.org/software/gettext/manual/gettext.html" target=_blank>click here</a>.</li>
+
+        <li>For more information about Poedit please 
+        <a href="http://www.poedit.net/" target=_blank>click here</a>.</li>
+      
+        <li><a href="./resources/default.po">default.po</a> example file</li>
+        <li><a href="./resources/default.mo">default.mo</a> example file</li>
+      </ul>
+      
+      <blockquote>
+        <p class="para">
+        لمعرفة اللغة الإفتراضية لمتصفح الزائر يمكنك استخدام أول حرفين من السلسلة النصية ضمن المتحول:<br /><br />
+        <span dir="ltr">$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2); // ar, en, etc...</span>
+        </p>
+      </blockquote>
+          
+
+      <a href="#top">Top</a><br />
+      <h2 class="title"><a name="intl" id="intl"></a>The Locale class provided in the intl library (PHP 5.3)</h2>
+      <p class="para">
+      مكتبة intl في الإصدار 5.3 من لغة PHP أتت كتأطير لمكتبة 
+      <a href="https://icu.unicode.org/" target=_blank>International Components for Unicode - ICU</a> 
+      الشهيرة والتي تستخدم لتوطين العديد من التطبيقات وتوفير دعم ملائم لمجموعة المحارف العالمية 
+      </p>
+
+      <div class="example">
+        <p><b>The Locale class provided in the intl library</b></p>
+        <div class="example-contents">
+          <div class="phpcode">
+            <code>
+
+<span style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 187);">&lt;?php
+<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;Return&nbsp;name&nbsp;of&nbsp;language&nbsp;used&nbsp;for&nbsp;"en"&nbsp;locale&nbsp;in&nbsp;Arabic&nbsp;(ar)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(0, 119, 0);">echo&nbsp;</span><span style="color: rgb(0, 0, 187);">Locale</span><span style="color: rgb(0, 119, 0);">::</span><span style="color: rgb(0, 0, 187);">getDisplayLanguage</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'en'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'ar'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'&lt;br&nbsp;/&gt;'</span><span style="color: rgb(0, 119, 0);">);&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;الانجليزية
+<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Display&nbsp;name&nbsp;of&nbsp;Portuguese&nbsp;as&nbsp;used&nbsp;in&nbsp;Brazil&nbsp;in&nbsp;different&nbsp;languages
+<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(0, 119, 0);">echo&nbsp;</span><span style="color: rgb(0, 0, 187);">Locale</span><span style="color: rgb(0, 119, 0);">::</span><span style="color: rgb(0, 0, 187);">getDisplayName</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'ar_SY'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'ar'</span><span style="color: rgb(0, 119, 0);">),&nbsp;</span><span style="color: rgb(221, 0, 0);">'&lt;br&nbsp;/&gt;'</span><span style="color: rgb(0, 119, 0);">;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: rgb(0, 0, 187);">Locale</span><span style="color: rgb(0, 119, 0);">::</span><span style="color: rgb(0, 0, 187);">getDisplayName</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'ar_SY'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'en'</span><span style="color: rgb(0, 119, 0);">),&nbsp;</span><span style="color: rgb(221, 0, 0);">'&lt;br&nbsp;/&gt;'</span><span style="color: rgb(0, 119, 0);">;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: rgb(0, 0, 187);">Locale</span><span style="color: rgb(0, 119, 0);">::</span><span style="color: rgb(0, 0, 187);">getDisplayName</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'ar_SY'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'fr'</span><span style="color: rgb(0, 119, 0);">),&nbsp;</span><span style="color: rgb(221, 0, 0);">'&lt;br&nbsp;/&gt;'</span><span style="color: rgb(0, 119, 0);">;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: rgb(0, 0, 187);">Locale</span><span style="color: rgb(0, 119, 0);">::</span><span style="color: rgb(0, 0, 187);">getDisplayName</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'ar_SY'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'de'</span><span style="color: rgb(0, 119, 0);">),&nbsp;</span><span style="color: rgb(221, 0, 0);">'&lt;br&nbsp;/&gt;'</span><span style="color: rgb(0, 119, 0);">;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: rgb(0, 0, 187);">Locale</span><span style="color: rgb(0, 119, 0);">::</span><span style="color: rgb(0, 0, 187);">getDisplayName</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(221, 0, 0);">'ar_SY'</span><span style="color: rgb(0, 119, 0);">,&nbsp;</span><span style="color: rgb(221, 0, 0);">'ru'</span><span style="color: rgb(0, 119, 0);">),&nbsp;</span><span style="color: rgb(221, 0, 0);">'&lt;br&nbsp;/&gt;'</span><span style="color: rgb(0, 119, 0);">;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(255, 128, 0);">//&nbsp;Return&nbsp;preferred&nbsp;locale&nbsp;set&nbsp;in&nbsp;user's&nbsp;browser
+<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(0, 119, 0);">echo&nbsp;</span><span style="color: rgb(221, 0, 0);">'Preferred&nbsp;locale&nbsp;from&nbsp;browser:&nbsp;'</span><span style="color: rgb(0, 119, 0);">,
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(0, 0, 187);">Locale</span><span style="color: rgb(0, 119, 0);">::</span><span style="color: rgb(0, 0, 187);">acceptFromHttp</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 0, 187);">$_SERVER</span><span style="color: rgb(0, 119, 0);">[</span><span style="color: rgb(221, 0, 0);">'HTTP_ACCEPT_LANGUAGE'</span><span style="color: rgb(0, 119, 0);">]);&nbsp;&nbsp;
+<br></span><span style="color: rgb(0, 0, 187);">?&gt;</span>
+</span>
+
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <ul>
+        <li>For more information about PHP Internationalization Functions: 
+        <a href="http://php.net/manual/en/book.intl.php" target=_blank>click here</a>.</li>
+      </ul>
+      
+      <blockquote>
+        <p class="para">
+        لاحظ أن التعريب المستخدم ليس مثاليا، فالإنجليزية تظهر بهمزة وصل بدل همزة القطع.
+        </p>
+      </blockquote>
+
+      <a href="#top">Top</a>
+  </div>
+
+</td></tr></table>
+
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>
