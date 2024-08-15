@@ -26,7 +26,7 @@ _حقوق النشر © 2006-2024 خالد الشمعة._
 
 > [سجل التعديلات](https://github.com/khaled-alshamaa/ar-php/blob/master/CHANGELOG.md)
 
-> [التوثيق](https://ar-php.org/github/docs/classes/ArPHP-I18N-Arabic.html)
+> [التوثيق](https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html)
 
 > [الانتقال من الإصدار 4.0](https://github.com/khaled-alshamaa/ar-php/blob/master/UPGRADE.md)
 
@@ -36,6 +36,8 @@ _حقوق النشر © 2006-2024 خالد الشمعة._
 
 > [دعم احترافي](#الدعم-الاحترافي)
 
+> [أسئلة شائعة](https://khaled-alshamaa.github.io/ar-php/faq_php_arabic.html)
+> 
 ### الاقتباس
 
 إذا رغبت في الإشارة إلى مكتبة PHP واللغة العربية في عمل أكاديمي، يمكنك استخدام الاقتباس التالي:
@@ -144,7 +146,7 @@ require_once 'ar-php/src/Arabic.php';
 </div>
 
 ### الوظائف الرئيسية
-* تحليل مشاعر النص العربي ([مثال 1](https://ar-php.org/github/examples/ar_sentiment.php)، [مثال 2](https://ar-php.org/github/examples/ar_sentiment.html))
+* تحليل مشاعر النص العربي ([مثال 1](https://ar-php.org/github/examples/ar_sentiment.php)، [مثال 2](https://khaled-alshamaa.github.io/ar-php/ar_sentiment.html))
 * الترجمة اللفظية بين اللغتين العربية والإنجليزية ([مثال 1](https://ar-php.org/github/examples/ar_transliteration.php)، [مثال 2](https://ar-php.org/github/examples/en_transliteration.php))
 * التفقيط: كتابة الأرقام بالعربية ([مثال](https://ar-php.org/github/examples/numbers.php))
 * معالجة إظهار الحروف العربية المتصلة ([مثال](https://ar-php.org/github/examples/ar_glyphs.php))
