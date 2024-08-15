@@ -24,7 +24,7 @@ This project provides a set of tools that enable Arabic website developers to se
 
 > [Change Log](https://github.com/khaled-alshamaa/ar-php/blob/master/CHANGELOG.md)
 
-> [Class Documentation](https://ar-php.org/github/docs/classes/ArPHP-I18N-Arabic.html)
+> [Class Documentation](https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html)
 
 > [Migrating from Version 4.0](https://github.com/khaled-alshamaa/ar-php/blob/master/UPGRADE.md)
 
@@ -33,6 +33,8 @@ This project provides a set of tools that enable Arabic website developers to se
 > [How to Contribute?](#how-to-contribute)
 
 > [Professional Support](#professional-support)
+
+> [FAQ](https://khaled-alshamaa.github.io/ar-php/faq_php_arabic.html)
 
 ### Citation
 
@@ -121,7 +123,7 @@ require_once 'ar-php/src/Arabic.php';
 ```
 
 ### Main Functionalities
-* Arabic Sentiment Analysis ([live demo 1](https://ar-php.org/github/examples/ar_sentiment.php), [live demo 2](https://ar-php.org/github/examples/ar_sentiment.html))
+* Arabic Sentiment Analysis ([live demo 1](https://ar-php.org/github/examples/ar_sentiment.php), [live demo 2](https://khaled-alshamaa.github.io/ar-php/ar_sentiment.html))
 * English-Arabic Transliteration ([live demo 1](https://ar-php.org/github/examples/ar_transliteration.php), [live demo 2](https://ar-php.org/github/examples/en_transliteration.php))
 * Spell Numbers in the Arabic Idiom ([live demo](https://ar-php.org/github/examples/numbers.php))
 * Arabic Glyphs to Render Arabic Text ([live demo](https://ar-php.org/github/examples/ar_glyphs.php))
