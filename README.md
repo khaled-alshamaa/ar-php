@@ -68,7 +68,7 @@ or in bibtex format
 
 * [UnoPim](https://unopim.com/): Open-source Product Information Management (PIM) system built on the Laravel framework. [check it out [here](https://github.com/unopim/unopim/blob/94980ecefb57e9161d9c44cd58148f975b7e76a7/packages/Webkul/Core/src/Traits/PDFHandler.php#L35)]
 
-* [GPDF](https://github.com/omaralalwi/Gpdf): Open Source PHP HTML to PDF converter for PHP & Laravel applications. [check it out [here](https://github.com/omaralalwi/Gpdf/blob/506ae25535e5690d2d0a3f3c3086c5ee365dcecd/src/Builders/PdfBuilder.php#L151)]
+* [GPDF](https://github.com/omaralalwi/Gpdf): Open Source HTML to PDF converter for PHP & Laravel applications. [check it out [here](https://github.com/omaralalwi/Gpdf/blob/506ae25535e5690d2d0a3f3c3086c5ee365dcecd/src/Builders/PdfBuilder.php#L151)]
 
 * [ArabKey](https://arabkey.site/): Easy way to switch between Arabic and English keyboard, and more useful tools for Arabic language [check it out [here](https://github.com/still-code/ar-php-laravel)].
 
