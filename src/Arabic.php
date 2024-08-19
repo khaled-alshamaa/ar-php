@@ -360,6 +360,33 @@ class Arabic
     /** @var array<float> */
     private $logOddPeninsular = array();
 
+    /** @var array<string> */
+    private $arKeyX = array();
+
+    /** @var array<string> */
+    private $arKeyY = array();
+
+    /** @var array<string> */
+    private $arKeyZ = array();
+
+    /** @var array<string> */
+    private $arGraphGroup = array();
+
+    /** @var array<string> */
+    private $arSoundGroup = array();
+
+    /** @var array<string> */
+    private $arGapPenalty = array();
+	
+    /** @var float */
+    private $keyboardWeight = 1;
+	
+    /** @var float */
+    private $graphicWeight = 1;
+	
+    /** @var float */
+    private $phoneticWeight = 1;
+
     public function __construct()
     {
         mb_internal_encoding('UTF-8');
@@ -385,6 +412,7 @@ class Arabic
         $this->arSentimentInit();
         $this->arSpellerInit();
         $this->arDialectInit();
+		$this->arSimilarityInit();
     }
 	
     /** @return void */
@@ -759,6 +787,34 @@ class Arabic
         $this->logOddLevantine  = file($this->rootDirectory . '/data/logodd_levantine.txt', FILE_IGNORE_NEW_LINES);
         $this->logOddMaghrebi   = file($this->rootDirectory . '/data/logodd_maghrebi.txt', FILE_IGNORE_NEW_LINES);
         $this->logOddPeninsular = file($this->rootDirectory . '/data/logodd_peninsular.txt', FILE_IGNORE_NEW_LINES);
+    }
+
+    /** @return void */
+    private function arSimilarityInit()
+    {
+        $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_similarity.json'), true);
+
+        foreach ($json['keyboard'] as $item) {
+        	$char = $item['char'];
+            $this->arKeyX["$char"] = (int)$item['x'];
+            $this->arKeyY["$char"] = (int)$item['y'];
+            $this->arKeyZ["$char"] = (int)$item['z'];
+        }
+
+        foreach ($json['graphic'] as $item) {
+            $char = $item['char'];
+            $this->arGraphGroup["$char"] = (int)$item['graph'];
+        }
+
+        foreach ($json['phonetic'] as $item) {
+            $char = $item['char'];
+            $this->arSoundGroup["$char"] = (int)$item['sound'];
+        }
+
+        foreach ($json['gap_penalty'] as $item) {
+            $char = $item['char'];
+            $this->arGapPenalty["$char"] = (int)$item['penalty'];
+        }
     }
 
     /////////////////////////////////////// Standard //////////////////////////////////////////////
@@ -4772,5 +4828,191 @@ class Arabic
         $string = $when . ' ' . $string;
 
         return $string;
+    }
+
+    /////////////////////////////////////// Similarity ////////////////////////////////////////////
+
+	private function arKeyboardSimilarity($chr1, $chr2)
+	{
+		// key order in the row (left to right)
+		$xi = $this->arKeyX["$chr1"];
+		$xj = $this->arKeyX["$chr2"];
+
+		// key row (buttom to up)
+		$yi = $this->arKeyY["$chr1"];
+		$yj = $this->arKeyY["$chr2"];
+
+		// shift key status (0/1 if pressed)
+		$zi = $this->arKeyZ["$chr1"];
+		$zj = $this->arKeyZ["$chr2"];
+		
+		// similarity score
+		$score = 0;
+		
+		if ($yi == $yj && $xi == $xj) {
+			// the same key + shift status penalty if differ
+			$score = 8 - 4 * abs($zi - $zj);
+		} elseif (min($yi, $yj) == 0 && max($xi, $xj) > 1 && max($xi, $xj) < 9) {
+			// space bar case
+			$score = 4;
+		} elseif ($yi == $yj && abs($xi - $xj) == 1) {
+			// left or right + shift status penalty if differ
+			$score = 4 - 2 * abs($zi - $zj);
+		} elseif (abs($yi - $yj) == 1 && ($xi - $xj == 0 || $xi - $xj == $yi - $yj)) {
+			// up or down + shift status penalty if differ
+			$score = 2 - 1 * abs($zi - $zj);
+		}
+		
+		return $score;
+	}
+	
+	private function arGraphicSimilarity($chr1, $chr2)
+	{
+		if (!array_key_exists($chr1, $this->arGraphGroup) || !array_key_exists($chr2, $this->arGraphGroup)) {
+			$score = 0;
+		} else {
+			$chr1Group = $this->arGraphGroup["$chr1"];
+			$chr2Group = $this->arGraphGroup["$chr2"];
+			
+			if ($chr1 == $chr2) {
+				$score = 8;
+			} elseif ($chr1Group == $chr2Group) {
+				$score = 4;
+			} else {
+				$score = 0;
+			}
+		}
+		
+		return $score;
+	}
+	
+	private function arSoundSimilarity($chr1, $chr2)
+	{
+		if ($chr1 == $chr2) {
+			$score = 8;
+		} elseif (!array_key_exists($chr1, $this->arSoundGroup) || !array_key_exists($chr2, $this->arSoundGroup)) {
+			$score = 0;
+		} else {
+			$chr1Group = $this->arSoundGroup["$chr1"];
+			$chr2Group = $this->arSoundGroup["$chr2"];
+			
+			if ($chr1Group == $chr2Group) {
+				$score = 4;
+			} else {
+				$score = 0;
+			}
+		}
+		
+		return $score;
+	}
+	
+	// the similarity score of characters a and b (keyboard, graphic, phonetic)
+	private function S($chr1, $chr2)
+	{
+		$totalWeight = $this->keyboardWeight + $this->graphicWeight + $this->phoneticWeight;
+
+		$score = $this->arKeyboardSimilarity($chr1, $chr2) * $this->keyboardWeight / $totalWeight;
+		$score += $this->arGraphicSimilarity($chr1, $chr2) * $this->graphicWeight / $totalWeight;
+		$score += $this->arSoundSimilarity($chr1, $chr2) * $this->phoneticWeight / $totalWeight;
+
+		return $score;
+	}
+	
+	// gap penalty scores (for each character)
+	private function d($chr)
+	{
+		if (array_key_exists($chr, $this->arGapPenalty)) {
+			$score = $this->arGapPenalty["$chr"];
+		} else {
+			$score = 8;
+		}
+		
+		return -1 * $score;
+	}
+	
+	// https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm
+	// Needleman-Wunsch algorithm using weighted scoring matrices and gap penalty
+	private function arSimilarityScore($string1, $string2)
+	{
+		$max1 = mb_strlen($string1);
+		$max2 = mb_strlen($string2);
+
+		$F = array();
+
+		$F[0][0] = 0;
+
+        for ($i = 1; $i <= $max1; $i++) {
+            $chr = mb_substr($string1, $i-1, 1);
+			$F[$i][0] = $this->d($chr) + $F[$i-1][0];
+		}
+
+        for ($j = 1; $j <= $max2; $j++) {
+            $chr = mb_substr($string2, $j-1, 1);
+			$F[0][$j] = $this->d($chr) + $F[0][$j-1];
+		}
+		
+		for ($i = 1; $i <= $max1; $i++) {
+			for ($j = 1; $j <= $max2; $j++) {
+				$A = mb_substr($string1, $i-1, 1);
+				$B = mb_substr($string2, $j-1, 1);
+				
+				$match  = $F[$i-1][$j-1] + $this->S($A, $B);
+				$delete = $F[$i-1][$j] + $this->d($A);
+				$insert = $F[$i][$j-1] + $this->d($B);
+				
+				$F[$i][$j] = max($match, $delete, $insert);
+			}
+		}
+		$score   = $F[$max1][$max2];
+		
+		return $score;
+	}
+	
+	// Calculate the similarity between two Arabic strings
+	public function similar_text($string1, $string2, &$percent = null)
+	{
+		$score  = $this->arSimilarityScore($string1, $string2);
+		$score1 = $this->arSimilarityScore($string1, $string1);
+		$score2 = $this->arSimilarityScore($string2, $string2);
+		
+		$percent = 100 * $score / max($score1, $score2);
+		
+		return $score/8;
+	}
+	
+    public function setSimilarityWeight($source, $value = 1)
+    {
+        switch ($source) {
+            case 'keyboardWeight':
+                $this->keyboardWeight = $value;
+                break;
+            case 'graphicWeight':
+                $this->graphicWeight = $value;
+                break;
+            case 'phoneticWeight':
+                $this->phoneticWeight = $value;
+                break;
+        }
+
+        return $this;
+    }
+
+    public function getSimilarityWeight($source)
+    {
+        switch ($source) {
+            case 'keyboardWeight':
+                $value = $this->keyboardWeight;
+                break;
+            case 'graphicWeight':
+                $value = $this->graphicWeight;
+                break;
+            case 'phoneticWeight':
+                $value = $this->phoneticWeight;
+                break;
+            default:
+                $value = 1;
+        }
+
+        return $value;
     }
 }
