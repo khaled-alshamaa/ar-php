@@ -69,13 +69,17 @@ https://github.com/khaled-alshamaa/ar-php, 2024
 
 ### أين تم استخدامه؟
 
-برنامج [Akeneo](https://www.akeneo.com/): برمجية حرّة مفتوحة المصدر سهلة ومرنة لتنظيم وإثراء كتالوج منتجاتك. حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/akeneo/pim-community-dev/blob/master/src/Akeneo/Pim/Enrichment/Bundle/PdfGeneration/HtmlFormatter/ArabicHtmlFormatter.php)] 
-
 برنامج [Bagisto](https://www.bagisto.com/): حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
 
+برنامج [Akeneo](https://www.akeneo.com/): برمجية حرّة مفتوحة المصدر سهلة ومرنة لتنظيم وإثراء كتالوج منتجاتك. حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/akeneo/pim-community-dev/blob/da071fb95d4dc43c9eaf19cc4112bc86774eee24/src/Akeneo/Pim/Enrichment/Bundle/PdfGeneration/HtmlFormatter/ArabicHtmlFormatter.php#L18)] 
+
 برنامج [LimeSurvey](https://www.limesurvey.org/): برمجية استبيان مفتوحة المصدر. 
-[تحقق من ذلك [هنا](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L135) و 
-[هنا](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L134)]
+[تحقق من ذلك [هنا](https://github.com/LimeSurvey/LimeSurvey/blob/33b86de3de17573ba17b3f059cd1d79d58bbd175/application/helpers/userstatistics_helper.php#L135) و 
+[هنا](https://github.com/LimeSurvey/LimeSurvey/blob/33b86de3de17573ba17b3f059cd1d79d58bbd175/application/helpers/admin/statistics_helper.php#L134)]
+
+برنامج [UnoPim](https://unopim.com/): نظام إدارة معلومات المنتج (PIM) مفتوح المصدر مبني على إطار عمل لارافل. [تحقق من ذلك [هنا](https://github.com/unopim/unopim/blob/94980ecefb57e9161d9c44cd58148f975b7e76a7/packages/Webkul/Core/src/Traits/PDFHandler.php#L35)]
+
+برنامج [GPDF](https://github.com/omaralalwi/Gpdf): محول مفتوح المصدر من HTML إلى PDF لتطبيقات PHP و لارافل. [تحقق من ذلك [هنا](https://github.com/omaralalwi/Gpdf/blob/506ae25535e5690d2d0a3f3c3086c5ee365dcecd/src/Builders/PdfBuilder.php#L151)]
 
 برنامج [عرب كيبورد](https://arabkey.site/): طريقة سهلة للتحويل ما بين لوحة المفاتيح العربية والإنجليزية، والعديد من الأدوات المفيدة للغة العربية. [تحقق من ذلك [هنا](https://github.com/still-code/ar-php-laravel)]
 
