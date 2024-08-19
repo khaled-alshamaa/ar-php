@@ -72,6 +72,10 @@ or in bibtex format
 
 * [ArabKey](https://arabkey.site/): Easy way to switch between Arabic and English keyboard, and more useful tools for Arabic language [check it out [here](https://github.com/still-code/ar-php-laravel)].
 
+### Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
+
 ### Arabic Language
 Worldwide Internet use has grown tremendously in recent years, most rapidly in non-English speaking regions, especially in the Arab world. For example, from 2000 to 2020, the online population grew by more than 9,300 %. Meanwhile, Arabic Web content was estimated to be doubling every year. Such growth has created a demand for better websites developing resources in the Arabic language. However, existing websites developing resources may be unable to meet it because they primarily serve English-speaking users.
 
