@@ -2501,9 +2501,13 @@ class Arabic
                 continue;
             }
 
-            // if it is an English char, then show it as it is
-            if (ord($crntChar) < 128) {
-                $output  .= $crntChar;
+             // if it is an English char or Arabic Percent Sign, then show it as it is
+            if (ord($crntChar) < 128 || mb_strpos('٪', $crntChar) !== false) {
+                if (mb_strpos('٪', $crntChar) !== false) {
+                    $output .= '&#x066A;'; // Unicode for Arabic Percent Sign
+                } else {
+                    $output .= $crntChar;
+                }
                 $nextChar = $crntChar;
                 continue;
             }
