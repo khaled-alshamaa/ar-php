@@ -226,7 +226,12 @@ Example Output 5: صيغ الجمع
 
 
     $number = 4;
-    $text = $Arabic->arPlural('يوم', $number, nameOnly: true);
+    $text = $Arabic->arPlural('يوم', $number, nameOnly: true); // str_replace('%d', $number, $text) is redundant in this case
+
+    echo "<p align=center><span style='font-size: 24px; font-weight: bold; color: #0077cc; margin-right: 10px;' >$number</span> $text</p>";
+
+    $number = 1;
+    $text = $Arabic->arPlural('خطأ', $number, isFemale: false);
     $text = str_replace('%d', $number, $text);
 
     echo "<p align=center><span style='font-size: 24px; font-weight: bold; color: #0077cc; margin-right: 10px;' >$number</span> $text</p>";
