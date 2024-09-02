@@ -1105,10 +1105,14 @@ END;
         $actual[]   = str_replace('%d', $number, $text);
 
         $number = 7;
-
         $expected[] = 'أيام';
         $text = $Arabic->arPlural('يوم', $number, nameOnly: true);
         $actual[] = $text; // str_replace('%d', $number, $text) is redundant in this case
+
+        $number = 1;
+        $expected[] = 'خطأ واحد';
+        $text  = $Arabic->arPlural('خطأ', 1, 'خطآن', 'أخطاء', 'خطأ', isFemale: false);
+        $actual[]   = str_replace('%d', $number, $text);
 
         $this->assertEquals($actual, $expected);
     }

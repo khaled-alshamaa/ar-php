@@ -377,13 +377,13 @@ class Arabic
 
     /** @var array<string> */
     private $arGapPenalty = array();
-	
+
     /** @var float */
     private $keyboardWeight = 1;
-	
+
     /** @var float */
     private $graphicWeight = 1;
-	
+
     /** @var float */
     private $phoneticWeight = 1;
 
@@ -414,7 +414,7 @@ class Arabic
         $this->arDialectInit();
 		$this->arSimilarityInit();
     }
-	
+
     /** @return void */
     private function arSpellerInit() {
         $this->speller = new \ArPHP\MZK\Speller();
@@ -424,7 +424,7 @@ class Arabic
      * Spell Check
 	 *
      * @param string $text Text input
-     * @return array<string> 
+     * @return array<string>
      * @author Moutaz Alkhatib <muotaz@gmail.com>
      */
     public function spellGetMisspelled($text) {
@@ -4232,13 +4232,15 @@ class Arabic
      * @return string Proper plural form of the given singular form
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function arPlural($singular, $count, $plural2 = null, $plural3 = null, $plural4 = null, $nameOnly = false)
+    public function arPlural($singular, $count, $plural2 = null, $plural3 = null, $plural4 = null, $nameOnly = false, $isFemale = null)
     {
+        $isFemale = $isFemale === null ? $this->isFemale($singular) : $isFemale;
+
         if ($count == 0) {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][0] : "لا $plural3";
-        } elseif ($count == 1 && $this->isFemale($singular)) {
+        } elseif ($count == 1 && $isFemale) {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحدة";
-        } elseif ($count == 1 && !$this->isFemale($singular)) {
+        } elseif ($count == 1 && !$isFemale) {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحد";
         } elseif ($count == 2) {
             $plural = is_null($plural2) ? $this->arPluralsForms[$singular][2] : $plural2;
@@ -4471,7 +4473,7 @@ class Arabic
         }
 
         $score = max($scoreEgyptian, $scoreLevantine, $scoreMaghrebi, $scorePeninsular);
-		
+
         switch ($score) {
     	    case $scoreEgyptian:
     	        $dialect = 'Egyptian';
@@ -4845,10 +4847,10 @@ class Arabic
 		// shift key status (0/1 if pressed)
 		$zi = $this->arKeyZ["$chr1"];
 		$zj = $this->arKeyZ["$chr2"];
-		
+
 		// similarity score
 		$score = 0;
-		
+
 		if ($yi == $yj && $xi == $xj) {
 			// the same key + shift status penalty if differ
 			$score = 8 - 4 * abs($zi - $zj);
@@ -4862,10 +4864,10 @@ class Arabic
 			// up or down + shift status penalty if differ
 			$score = 2 - 1 * abs($zi - $zj);
 		}
-		
+
 		return $score;
 	}
-	
+
 	private function arGraphicSimilarity($chr1, $chr2)
 	{
 		if (!array_key_exists($chr1, $this->arGraphGroup) || !array_key_exists($chr2, $this->arGraphGroup)) {
@@ -4873,7 +4875,7 @@ class Arabic
 		} else {
 			$chr1Group = $this->arGraphGroup["$chr1"];
 			$chr2Group = $this->arGraphGroup["$chr2"];
-			
+
 			if ($chr1 == $chr2) {
 				$score = 8;
 			} elseif ($chr1Group == $chr2Group) {
@@ -4882,10 +4884,10 @@ class Arabic
 				$score = 0;
 			}
 		}
-		
+
 		return $score;
 	}
-	
+
 	private function arSoundSimilarity($chr1, $chr2)
 	{
 		if ($chr1 == $chr2) {
@@ -4895,17 +4897,17 @@ class Arabic
 		} else {
 			$chr1Group = $this->arSoundGroup["$chr1"];
 			$chr2Group = $this->arSoundGroup["$chr2"];
-			
+
 			if ($chr1Group == $chr2Group) {
 				$score = 4;
 			} else {
 				$score = 0;
 			}
 		}
-		
+
 		return $score;
 	}
-	
+
 	// the similarity score of characters a and b (keyboard, graphic, phonetic)
 	private function S($chr1, $chr2)
 	{
@@ -4917,7 +4919,7 @@ class Arabic
 
 		return $score;
 	}
-	
+
 	// gap penalty scores (for each character)
 	private function d($chr)
 	{
@@ -4926,10 +4928,10 @@ class Arabic
 		} else {
 			$score = 8;
 		}
-		
+
 		return -1 * $score;
 	}
-	
+
 	// https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm
 	// Needleman-Wunsch algorithm using weighted scoring matrices and gap penalty
 	private function arSimilarityScore($string1, $string2)
@@ -4950,36 +4952,36 @@ class Arabic
             $chr = mb_substr($string2, $j-1, 1);
 			$F[0][$j] = $this->d($chr) + $F[0][$j-1];
 		}
-		
+
 		for ($i = 1; $i <= $max1; $i++) {
 			for ($j = 1; $j <= $max2; $j++) {
 				$A = mb_substr($string1, $i-1, 1);
 				$B = mb_substr($string2, $j-1, 1);
-				
+
 				$match  = $F[$i-1][$j-1] + $this->S($A, $B);
 				$delete = $F[$i-1][$j] + $this->d($A);
 				$insert = $F[$i][$j-1] + $this->d($B);
-				
+
 				$F[$i][$j] = max($match, $delete, $insert);
 			}
 		}
 		$score   = $F[$max1][$max2];
-		
+
 		return $score;
 	}
-	
+
 	// Calculate the similarity between two Arabic strings
 	public function similar_text($string1, $string2, &$percent = null)
 	{
 		$score  = $this->arSimilarityScore($string1, $string2);
 		$score1 = $this->arSimilarityScore($string1, $string1);
 		$score2 = $this->arSimilarityScore($string2, $string2);
-		
+
 		$percent = 100 * $score / max($score1, $score2);
-		
+
 		return $score/8;
 	}
-	
+
     public function setSimilarityWeight($source, $value = 1)
     {
         switch ($source) {

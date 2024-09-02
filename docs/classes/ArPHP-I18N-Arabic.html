@@ -856,7 +856,6 @@ orthography of the English language</p>
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">ar2en</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$string</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$standard</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;UNGEGN&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1061,7 +1060,7 @@ There are 4 plural forms in Arabic language:
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">arPlural</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$singular</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$count</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$plural2</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$plural3</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$plural4</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+               <span class="phpdocumentor-signature__name">arPlural</span><span>(</span> <span class="phpdocumentor-signature__argument"> <span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span> <span class="phpdocumentor-signature__argument__name">$singular</span> </span> <span class="phpdocumentor-signature__argument"> <span>, </span> <span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span> <span class="phpdocumentor-signature__argument__name">$count</span> </span> <span class="phpdocumentor-signature__argument"> <span>[</span> <span>, </span> <span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span> <span class="phpdocumentor-signature__argument__name">$plural2</span> <span> = </span> <span class="phpdocumentor-signature__argument__default-value">null</span> <span> ]</span> </span> <span class="phpdocumentor-signature__argument"> <span>[</span> <span>, </span> <span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span> <span class="phpdocumentor-signature__argument__name">$plural3</span> <span> = </span> <span class="phpdocumentor-signature__argument__default-value">null</span> <span> ]</span> </span> <span class="phpdocumentor-signature__argument"> <span>[</span> <span>, </span> <span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span> <span class="phpdocumentor-signature__argument__name">$plural4</span> <span> = </span> <span class="phpdocumentor-signature__argument__default-value">null</span> <span> ]</span> </span> <span class="phpdocumentor-signature__argument"> <span>[</span> <span>, </span> <span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span> <span class="phpdocumentor-signature__argument__name">$nameOnly</span> <span> = </span> <span class="phpdocumentor-signature__argument__default-value">false</span> <span> ]</span> </span> <span class="phpdocumentor-signature__argument"> <span>[</span> <span>, </span> <span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span> <span class="phpdocumentor-signature__argument__name">$isFemale</span> <span> = </span> <span class="phpdocumentor-signature__argument__default-value">null</span> <span> ]</span> </span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -1122,6 +1121,16 @@ There are 4 plural forms in Arabic language:
 </section>
 
             </dd>
+
+            <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$isFemale</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <dd class="phpdocumentor-argument-list__definition">
+                <section class="phpdocumentor-description"><p>$isFemale explicitly says that this word is female or not, (e.g., خطأ) is considered by the detection algorithm in the library as female, which is wrong. if we pass explicit that it is not female to fix the output.</p>
+               </section>
+
+                </dd>
 
             </dl>
 
