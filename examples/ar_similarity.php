@@ -33,6 +33,8 @@ $Arabic->setSimilarityWeight('keyboardWeight', 1)
 	   ->setSimilarityWeight('graphicWeight', 1)
 	   ->setSimilarityWeight('phoneticWeight', 1);
 
+echo "<p>";
+
 $sim = $Arabic->similar_text('مرحباً','مرحب', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
 echo "similarity (مرحباً، مرحب): $sim ($perc%)<br>";
@@ -45,7 +47,7 @@ $sim = $Arabic->similar_text('مرحباً','مرحبًا', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
 echo "similarity (مرحبًا، مرحباً): $sim ($perc%)<br>";
 
-echo "<hr/>";
+echo "</p><p>";
 
 $sim = $Arabic->similar_text('إستعمال','استعمال', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
@@ -55,7 +57,7 @@ $sim = $Arabic->similar_text('إستعمال','مستعمال', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
 echo "similarity (إستعمال، مستعمال): $sim ($perc%)<br>";
 
-echo "<hr/>";
+echo "</p><p>";
 
 $sim = $Arabic->similar_text('مدرست','مدرسة', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
@@ -65,7 +67,7 @@ $sim = $Arabic->similar_text('مدرست','مدرس', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
 echo "similarity (مدرست، مدرس): $sim ($perc%)<br>";
 
-echo "<hr/>";
+echo "</p><p>";
 
 $sim = $Arabic->similar_text('ظرب','ضرب', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
@@ -75,7 +77,7 @@ $sim = $Arabic->similar_text('ظرب','كرب', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
 echo "similarity (ظرب، كرب): $sim ($perc%)<br>";
 
-echo "<hr/>";
+echo "</p><p>";
 
 $sim = $Arabic->similar_text('استفسر','الاستفسارات', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
@@ -85,6 +87,57 @@ $sim = $Arabic->similar_text('استفسر','استنكر', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
 echo "similarity (استفسر، استنكر): $sim ($perc%)<br>";
 
+echo "</p><p>";
+
+/////////////////////////////////////////////////////////////////
+
+// https://www.php.net/manual/en/function.levenshtein.php#113702
+
+// Convert an UTF-8 encoded string to a single-byte string suitable for
+// functions such as levenshtein.
+// 
+// The function simply uses (and updates) a tailored dynamic encoding
+// (in/out map parameter) where non-ascii characters are remapped to
+// the range [128-255] in order of appearance.
+//
+// Thus it supports up to 128 different multibyte code points max over
+// the whole set of strings sharing this encoding.
+//
+function utf8_to_extended_ascii($str, &$map)
+{
+    // find all multibyte characters (cf. utf-8 encoding specs)
+    $matches = array();
+    if (!preg_match_all('/[\xC0-\xF7][\x80-\xBF]+/', $str, $matches))
+        return $str; // plain ascii string
+    
+    // update the encoding map with the characters not already met
+    foreach ($matches[0] as $mbc)
+        if (!isset($map[$mbc]))
+            $map[$mbc] = chr(128 + count($map));
+    
+    // finally remap non-ascii characters
+    return strtr($str, $map);
+}
+
+// Didactic example showing the usage of the previous conversion function but,
+// for better performance, in a real application with a single input string
+// matched against many strings from a database, you will probably want to
+// pre-encode the input only once.
+//
+function mb_levenshtein($string1, $string2, $insertion_cost = 1, $replacement_cost = 1, $deletion_cost = 1)
+{
+    $charMap = array();
+    $string1 = utf8_to_extended_ascii($string1, $charMap);
+    $string2 = utf8_to_extended_ascii($string2, $charMap);
+
+    return levenshtein($string1, $string2, $insertion_cost, $replacement_cost, $deletion_cost);
+}
+
+echo 'levenshtein("استقلال", "مستقل") = ' . levenshtein("استقلال", "مستقل");
+echo "<br>";
+echo 'mb_levenshtein("استقلال", "مستقل") = ' . mb_levenshtein("استقلال", "مستقل");
+
+echo "</p>";
 ?>
 </div><br />
 
@@ -94,7 +147,7 @@ echo "similarity (استفسر، استنكر): $sim ($perc%)<br>";
 $code = <<< ENDALL
 <?php
 	\$Arabic = new \\ArPHP\\I18N\\Arabic();
-
+?>
 ENDALL;
 
 highlight_string($code);
