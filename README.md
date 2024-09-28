@@ -18,19 +18,15 @@ Welcome to Ar-PHP, an open-source PHP library dedicated to simplifying Arabic la
 
 > [Adoption](#adoption)
 
-> [Installation](#quick-start)
+> [Installation](#installation)
 
-> [Features](#main-functionalities) 
+> [Features](#features) 
 
 > [Change Log](https://github.com/khaled-alshamaa/ar-php/blob/master/CHANGELOG.md)
 
 > [Documentation](https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html)
 
-> [Migrating from Version 4.0](https://github.com/khaled-alshamaa/ar-php/blob/master/UPGRADE.md)
-
-> [Contributors Logistics](https://github.com/khaled-alshamaa/ar-php/blob/master/TODO.md)
-
-> [How to Contribute?](#how-to-contribute)
+> [Contributing](#contributing)
 
 > [Professional Support](#professional-support)
 
@@ -53,15 +49,15 @@ The key difference between the GPL and LGPL is that the LGPL allows a library to
 
 [[LGPL](http://www.gnu.org/licenses/lgpl-3.0.html), [GNU FAQ](http://www.gnu.org/licenses/gpl-faq.html)]
 
-### History
+### Project History
 
-<a href="https://darshoaa.com/pHP-and-Arabic-language/" target="_blank"><img align="right" width="171" height="256" src="https://user-images.githubusercontent.com/11270404/129626204-d354e794-bfbf-4f3c-bc22-27e7fc252701.png" border="0"></a>
+[![محاضرة افتتاحية عن تجربة بناء ادوات لدعم اللغة العربية و المشاريع مفتوحة المصدر - خالد الشمعة](https://img.youtube.com/vi/P4zV1Iu5QcE/0.jpg)](https://www.youtube.com/watch?v=P4zV1Iu5QcE)
 
 * PHP 7/8 at [GitHub.com](https://github.com/khaled-alshamaa/ar-php) 2020-present.
 * PHP 5 at [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
 * PHP 4 at [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
 
-[![محاضرة افتتاحية عن تجربة بناء ادوات لدعم اللغة العربية و المشاريع مفتوحة المصدر - خالد الشمعة](https://img.youtube.com/vi/P4zV1Iu5QcE/0.jpg)](https://www.youtube.com/watch?v=P4zV1Iu5QcE)
+> __Alshamaa, Khaled__ (2008). _PHP واللغة العربية_. Dar Shoaa. Retrieved from [https://darshoaa.com/pHP-and-Arabic-language/](https://darshoaa.com/pHP-and-Arabic-language/).
 
 [Top](#ar-php-project-ar-phporg)
 
@@ -77,7 +73,9 @@ Ar-PHP has been successfully integrated into several projects, including:
 
 [![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
 
-## _Quick Start_
+[Top](#ar-php-project-ar-phporg)
+
+## _Installation_
 
 ### Installation with Composer
 
@@ -102,7 +100,9 @@ require_once 'ar-php/src/Arabic.php';
 
 Ensure the path matches the location of the Arabic.php file relative to your script.
 
-### Main Functionalities
+[Top](#ar-php-project-ar-phporg)
+
+## _Features_
 * Arabic Sentiment Analysis ([live demo 1](https://ar-php.org/github/examples/ar_sentiment.php), [live demo 2](https://khaled-alshamaa.github.io/ar-php/ar_sentiment.html))
 * English-Arabic Transliteration ([live demo 1](https://ar-php.org/github/examples/ar_transliteration.php), [live demo 2](https://ar-php.org/github/examples/en_transliteration.php))
 * Spell Numbers in the Arabic Idiom ([live demo](https://ar-php.org/github/examples/numbers.php))
@@ -121,8 +121,8 @@ Ensure the path matches the location of the Arabic.php file relative to your scr
 
 [Top](#ar-php-project-ar-phporg)
 
-## _How to Contribute?_
-We always welcome new contributors – especially new programmers. But no matter what your skills and interests are, there is a place where you can participate in improving the Ar-PHP project:
+## _Contributing_
+We welcome contributions from the community! Whether it is reporting bugs, suggesting new features, or submitting pull requests, your help is valuable. Before contributing, please review our project logistics and [TODO list](https://github.com/khaled-alshamaa/ar-php/blob/master/TODO.md) for current tasks and priorities. If you are migrating from an older version, check out our [UPGRADE guide](https://github.com/khaled-alshamaa/ar-php/blob/master/UPGRADE.md) to ensure a smooth transition. No matter what your skills and interests are, there is a place where you can participate in improving the Ar-PHP project:
 
 * __Programming:__ Here are some ideas for contribution: Review the To-Dos, add a feature, contribute to a core module, create an extension, and fix a bug.
 * __Quality Assurance:__ Quality Assurance (QA) is one of the most important but understated elements of any software community project. It is also something most people can do. If you want to help fix Ar-PHP bugs, and you are not a programmer, you can still help by joining the QA team.
@@ -169,3 +169,5 @@ or in bibtex format
   year={2024}
 }
 ```
+
+[Top](#ar-php-project-ar-phporg)
