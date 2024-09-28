@@ -10,21 +10,21 @@ _Copyright © 2006-2024 Khaled Al-Sham'aa._
 [![DOI](https://zenodo.org/badge/231197063.svg)](https://zenodo.org/badge/latestdoi/231197063)
 
 [العربية](https://github.com/khaled-alshamaa/ar-php/blob/master/README_ar.md)
+## Ar-PHP: Empowering Arabic Language Processing in PHP
+Welcome to Ar-PHP, an open-source PHP library dedicated to simplifying Arabic language processing. Our mission is to provide developers with easy-to-use tools for professional searching, manipulating, and presenting Arabic text, enabling the creation of robust web applications that handle Arabic content effectively.
 
-### Mission & Vision
-As has happened in the Far East and Latin America, as the Internet goes to the masses, people want it in their native language.
+### Table of Contents
+> [Introduction](#introduction)
 
-Our mission is to develop open-source solutions and provide professional support to help small and medium-sized companies meet the challenges of developing professional Arabic websites in the PHP/MySQL environment, the library that we develop helps our partners save time and increase productivity.
+> [Adoption](#adoption)
 
-This project provides a set of tools that enable Arabic website developers to serve professional search, present, and process Arabic content in PHP.
+> [Installation](#quick-start)
 
-> [Easy Installation](#quick-start)
-
-> [List of Main Functionalities](#main-functionalities) 
+> [Features](#main-functionalities) 
 
 > [Change Log](https://github.com/khaled-alshamaa/ar-php/blob/master/CHANGELOG.md)
 
-> [Class Documentation](https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html)
+> [Documentation](https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html)
 
 > [Migrating from Version 4.0](https://github.com/khaled-alshamaa/ar-php/blob/master/UPGRADE.md)
 
@@ -36,58 +36,20 @@ This project provides a set of tools that enable Arabic website developers to se
 
 > [FAQ](https://khaled-alshamaa.github.io/ar-php/faq_php_arabic.html)
 
-### Citation
-
-If you would cite it in academic work, you can use this citation
-
-```
-K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
-https://github.com/khaled-alshamaa/ar-php, 2024
-```
-
-or in bibtex format
-
-```latex
-@misc{ar-php,
-  title={Ar-PHP, PHP library for website developers to process Arabic content},
-  author={Al-Shamaa, Khaled},
-  url={https://github.com/khaled-alshamaa/ar-php},
-  version = {6.3.4},
-  year={2024}
-}
-```
-
-### Where it has been used?
-
-* [Bagisto](https://www.bagisto.com/): Laravel package for e-commerce. [check it out [here](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
-
-* [Akeneo](https://www.akeneo.com/): The easy and flexible open source SaaS PIM to organize and enrich your product catalog. [check it out [here](https://github.com/akeneo/pim-community-dev/blob/da071fb95d4dc43c9eaf19cc4112bc86774eee24/src/Akeneo/Pim/Enrichment/Bundle/PdfGeneration/HtmlFormatter/ArabicHtmlFormatter.php#L18)]
-
-* [LimeSurvey](https://www.limesurvey.org/): Open-source survey software. 
-[check it out [here](https://github.com/LimeSurvey/LimeSurvey/blob/33b86de3de17573ba17b3f059cd1d79d58bbd175/application/helpers/userstatistics_helper.php#L135) and [here](https://github.com/LimeSurvey/LimeSurvey/blob/33b86de3de17573ba17b3f059cd1d79d58bbd175/application/helpers/admin/statistics_helper.php#L134)]
-
-* [UnoPim](https://unopim.com/): Open-source Product Information Management (PIM) system built on the Laravel framework. [check it out [here](https://github.com/unopim/unopim/blob/94980ecefb57e9161d9c44cd58148f975b7e76a7/packages/Webkul/Core/src/Traits/PDFHandler.php#L35)]
-
-* [GPDF](https://github.com/omaralalwi/Gpdf): Open Source HTML to PDF converter for PHP & Laravel applications. [check it out [here](https://github.com/omaralalwi/Gpdf/blob/506ae25535e5690d2d0a3f3c3086c5ee365dcecd/src/Builders/PdfBuilder.php#L151)]
-
-* [ArabKey](https://arabkey.site/): Easy way to switch between Arabic and English keyboard, and more useful tools for Arabic language [check it out [here](https://github.com/still-code/ar-php-laravel)].
-
-### Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
+## _Introduction_
 
 ### Arabic Language
-Worldwide Internet use has grown tremendously in recent years, most rapidly in non-English speaking regions, especially in the Arab world. For example, from 2000 to 2020, the online population grew by more than 9,300 %. Meanwhile, Arabic Web content was estimated to be doubling every year. Such growth has created a demand for better websites developing resources in the Arabic language. However, existing websites developing resources may be unable to meet it because they primarily serve English-speaking users.
+Internet use has grown quickly worldwide, especially in non-English speaking regions. Between 2000 and 2022, Arabic was the fastest-growing language online, increasing by 9,350%. It has around 240 million active users making up 5.2% of internet users globally. This growth has created a demand for better Arabic web development tools, but most existing resources are geared toward English-speaking users.
 
-[[Arabic language](https://en.wikipedia.org/wiki/Arabic), [Internet world stats](https://www.internetworldstats.com/stats7.htm)]
+[[Arabic language](https://en.wikipedia.org/wiki/Arabic), [Internet world stats](https://data.worldbank.org/indicator/IT.NET.USER.ZS?end=2022&locations=1A&start=1990&view=chart)]
 
 ### PHP
-PHP is a widely used general-purpose scripting language that is especially suited for web development and can be embedded into HTML. PHP runs more than 79% of all the top 10 million worldwide websites a few very good examples are Facebook and Wikipedia.
+PHP is a widely used general-purpose scripting language that is especially suited for web development and can be embedded into HTML. PHP runs more than 75% of all the top 10 million worldwide websites a few very good examples are Facebook and Wikipedia.
 
 [[PHP language](https://www.php.net/), [Server-side languages report](https://w3techs.com/technologies/overview/programming_language)]
 
 ### LGPL
-The main difference between the GPL and the LGPL is that the latter can be linked to (in the case of a library, 'used by') a non-(L)GPLed program, which may be free software or proprietary software. This non-(L)GPLed program can then be distributed under any chosen terms if it is not a derivative work.
+The key difference between the GPL and LGPL is that the LGPL allows a library to be linked to, or used by, a program that is not licensed under the (L)GPL. This means the program can be either free or proprietary software. If the program is not a derivative work of the library, it can be distributed under any license or terms chosen by its creator.
 
 [[LGPL](http://www.gnu.org/licenses/lgpl-3.0.html), [GNU FAQ](http://www.gnu.org/licenses/gpl-faq.html)]
 
@@ -95,7 +57,7 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 
 <a href="https://darshoaa.com/pHP-and-Arabic-language/" target="_blank"><img align="right" width="171" height="256" src="https://user-images.githubusercontent.com/11270404/129626204-d354e794-bfbf-4f3c-bc22-27e7fc252701.png" border="0"></a>
 
-* PHP 7 at [GitHub.com](https://github.com/khaled-alshamaa/ar-php) starting in 2020.
+* PHP 7/8 at [GitHub.com](https://github.com/khaled-alshamaa/ar-php) 2020-present.
 * PHP 5 at [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
 * PHP 4 at [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
 
@@ -103,31 +65,42 @@ The main difference between the GPL and the LGPL is that the latter can be linke
 
 [Top](#ar-php-project-ar-phporg)
 
+## _Adoption_
+Ar-PHP has been successfully integrated into several projects, including:
+
+* [Bagisto](https://www.bagisto.com/): A Laravel-based e-commerce package.
+* [Akeneo](https://www.akeneo.com/): An open-source SaaS PIM platform for organizing product catalogs.
+* [LimeSurvey](https://www.limesurvey.org/): A powerful open-source survey software.
+* [UnoPim](https://unopim.com/): An open-source PIM system built on the Laravel framework.
+* [GPDF](https://github.com/omaralalwi/Gpdf): An open-source HTML-to-PDF converter for PHP & Laravel applications.
+* [ArabKey](https://arabkey.site/): A tool for switching between Arabic and English keyboards.
+
+[![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
+
 ## _Quick Start_
 
-### Install with Composer
+### Installation with Composer
 
-To install with [Composer](https://getcomposer.org/), simply require the latest version of this package.
+To install this package using [Composer](https://getcomposer.org/), run the following command in your terminal:
 
 ```bash
 composer require khaled.alshamaa/ar-php
 ```
 
-Make sure that the autoload file from Composer is loaded. *if you are using composer for autoloading like what Laravel framework does, you don't have to do that.*
+Ensure that the Composer autoloader is included in your project. If your project already uses Composer's autoloading mechanism -like frameworks such as Laravel- you can skip this step. Otherwise, add the following line early in your project's initialization code:
 
 ```php
-// somewhere early in your project's loading, require the Composer autoloader
-// see: http://getcomposer.org/doc/00-intro.md
 require 'vendor/autoload.php';
 ```
 
-### Download and Install (Manually)
-
-Download the [latest release](https://github.com/khaled-alshamaa/ar-php/releases/latest) of the Ar-PHP library and extract it into the directory where it will be used.
+### Manual Download and Installation
+Download the [latest Ar-PHP release](https://github.com/khaled-alshamaa/ar-php/releases/latest), extract it into your project directory, and include the library by adding:
 
 ```php
 require_once 'ar-php/src/Arabic.php';
 ```
+
+Ensure the path matches the location of the Arabic.php file relative to your script.
 
 ### Main Functionalities
 * Arabic Sentiment Analysis ([live demo 1](https://ar-php.org/github/examples/ar_sentiment.php), [live demo 2](https://khaled-alshamaa.github.io/ar-php/ar_sentiment.html))
@@ -175,3 +148,24 @@ As the developers of the Ar-PHP project, we can help your company leverage the m
 [Top](#ar-php-project-ar-phporg)
 
 <!-- If you find this project useful, please consider donating. Any funds donated will be used to help further development of this project. -->
+
+### Citation
+
+If you would cite it in academic work, you can use this citation
+
+```
+K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
+https://github.com/khaled-alshamaa/ar-php, 2024
+```
+
+or in bibtex format
+
+```latex
+@misc{ar-php,
+  title={Ar-PHP, PHP library for website developers to process Arabic content},
+  author={Al-Shamaa, Khaled},
+  url={https://github.com/khaled-alshamaa/ar-php},
+  version = {6.3.4},
+  year={2024}
+}
+```
