@@ -494,5 +494,13 @@
         "3": "0669",
         "prevLink": false,
         "nextLink": false
+    },
+    "٪":{
+        "0": "066A",
+        "1": "066A",
+        "2": "066A",
+        "3": "066A",
+        "prevLink": false,
+        "nextLink": false
     }
 }
