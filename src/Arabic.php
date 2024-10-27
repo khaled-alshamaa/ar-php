@@ -2501,7 +2501,7 @@ class Arabic
                 continue;
             }
 
-            // if it is an English char, then show it as it is
+             // if it is an English char, then show it as it is
             if (ord($crntChar) < 128) {
                 $output  .= $crntChar;
                 $nextChar = $crntChar;
