@@ -502,5 +502,45 @@
         "3": "066A",
         "prevLink": false,
         "nextLink": false
+    },
+	"ٹ": {
+        "0": "FB66",
+        "1": "FB67",
+        "2": "FB68",
+        "3": "FB69",
+        "prevLink": true,
+        "nextLink": true
+    },
+    "ڈ": {
+        "0": "FB88",
+        "1": "FB89",
+        "2": "FB88",
+        "3": "FB89",
+        "prevLink": false,
+        "nextLink": true
+    },
+    "ڑ": {
+        "0": "FB8C",
+        "1": "FB8D",
+        "2": "FB8C",
+        "3": "FB8D",
+        "prevLink": false,
+        "nextLink": true
+    },
+    "ں": {
+        "0": "FB9E",
+        "1": "FB9F",
+        "2": "FEE7",
+        "3": "FEE8",
+        "prevLink": true,
+        "nextLink": true
+    },
+    "ے": {
+        "0": "FBAE",
+        "1": "FBAF",
+        "2": "FBAE",
+        "3": "FBAF",
+        "prevLink": false,
+        "nextLink": true
     }
 }
