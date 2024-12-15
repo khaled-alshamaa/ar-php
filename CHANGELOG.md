@@ -1,6 +1,6 @@
 # ArPHP Library - Change Log
 
-<!-- * Version [7.0.0](#whats-new-in-arphp-700-release-date-sep-7-2024) _(release date: Sep 7, 2024)_ -->
+<!-- * Version [7.0.0](#whats-new-in-arphp-700-release-date-dec-18-2024) _(release date: Dec 18, 2024)_ -->
 * Version [6.3.4](#whats-new-in-arphp-634-release-date-apr-5-2023) _(release date: Apr 5, 2023)_
 * Version [6.3.3](#whats-new-in-arphp-633-release-date-apr-1-2023) _(release date: Apr 1, 2023)_
 * Version [6.3.2](#whats-new-in-arphp-632-release-date-jan-21-2023) _(release date: Jan 21, 2023)_
@@ -35,13 +35,19 @@
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
 <!--
-## What's new in ArPHP 7.0.0 _(release date: Sep 7, 2024)_
+## What's new in ArPHP 7.0.0 _(release date: Dec 18, 2024)_
 
 * Full integration with the open-source version of the Arabic Spell Checker (ASC https://arabicspellchecker.com/open-source.html).
 
 * Add the new "arDialect" method for Arabic dialect identification (i.e., Egyptian, Levantine, Maghrebi, and Peninsular) of the text (e.g., comments, reviews, etc.).
 
 * Add an Arabic version of the PHP [similar_text()](https://www.php.net/manual/en/function.similar-text.php) function, implemented using the [Needleman-Wunsch algorithm](https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm) with weighted scoring matrices and a non-linear gap penalty.
+
+* Add [Urdu characters support]((https://github.com/khaled-alshamaa/ar-php/issues/71) to the utf8Glyphs() function.
+
+* Expand character glyphs support in the utf8Glyphs() function to include all single letter variants listed in the [Arabic Presentation Forms-A](https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-A) needed for Persian, Urdu, Sindhi, and Central Asian languages.
+
+* Various minor fixes and improvements, see related [pull requests](https://github.com/khaled-alshamaa/ar-php/pulls?q=is%3Apr+is%3Aclosed+66+74+75) for details.
 
 [Top](#arphp-library---change-log)
 -->
