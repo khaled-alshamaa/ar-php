@@ -815,71 +815,71 @@
   "gap_penalty": [
     {
       "char": "ا",
-      "penalty": "4"
+      "penalty": "0.5"
     },
     {
       "char": "و",
-      "penalty": "4"
+      "penalty": "0.5"
     },
     {
       "char": "ي",
-      "penalty": "4"
+      "penalty": "0.5"
     },
     {
       "char": "َ",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "ً",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "ُ",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "ٌ",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "ّ",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "ِ",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "ٍ",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "ْ",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "،",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "؛",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": ".",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": ",",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "؟",
-      "penalty": "2"
+      "penalty": "0.25"
     },
     {
       "char": "ـ",
-      "penalty": "1"
+      "penalty": "0.125"
     }
   ]
 }

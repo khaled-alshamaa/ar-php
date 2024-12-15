@@ -4853,16 +4853,16 @@ class Arabic
 
 		if ($yi == $yj && $xi == $xj) {
 			// the same key + shift status penalty if differ
-			$score = 8 - 4 * abs($zi - $zj);
+			$score = 1 - 0.5 * abs($zi - $zj);
 		} elseif (min($yi, $yj) == 0 && max($xi, $xj) > 1 && max($xi, $xj) < 9) {
 			// space bar case
-			$score = 4;
+			$score = 0.5;
 		} elseif ($yi == $yj && abs($xi - $xj) == 1) {
 			// left or right + shift status penalty if differ
-			$score = 4 - 2 * abs($zi - $zj);
+			$score = 0.5 - 0.25 * abs($zi - $zj);
 		} elseif (abs($yi - $yj) == 1 && ($xi - $xj == 0 || $xi - $xj == $yi - $yj)) {
 			// up or down + shift status penalty if differ
-			$score = 2 - 1 * abs($zi - $zj);
+			$score = 0.25 - 0.125 * abs($zi - $zj);
 		}
 
 		return $score;
@@ -4877,9 +4877,9 @@ class Arabic
 			$chr2Group = $this->arGraphGroup["$chr2"];
 
 			if ($chr1 == $chr2) {
-				$score = 8;
+				$score = 1;
 			} elseif ($chr1Group == $chr2Group) {
-				$score = 4;
+				$score = 0.5;
 			} else {
 				$score = 0;
 			}
@@ -4891,7 +4891,7 @@ class Arabic
 	private function arSoundSimilarity($chr1, $chr2)
 	{
 		if ($chr1 == $chr2) {
-			$score = 8;
+			$score = 1;
 		} elseif (!array_key_exists($chr1, $this->arSoundGroup) || !array_key_exists($chr2, $this->arSoundGroup)) {
 			$score = 0;
 		} else {
@@ -4899,7 +4899,7 @@ class Arabic
 			$chr2Group = $this->arSoundGroup["$chr2"];
 
 			if ($chr1Group == $chr2Group) {
-				$score = 4;
+				$score = 0.5;
 			} else {
 				$score = 0;
 			}
@@ -4926,7 +4926,7 @@ class Arabic
 		if (array_key_exists($chr, $this->arGapPenalty)) {
 			$score = $this->arGapPenalty["$chr"];
 		} else {
-			$score = 8;
+			$score = 1;
 		}
 
 		return -1 * $score;
@@ -4979,7 +4979,7 @@ class Arabic
 
 		$percent = 100 * $score / max($score1, $score2);
 
-		return $score/8;
+		return $score;
 	}
 
     public function setSimilarityWeight($source, $value = 1)
@@ -5017,4 +5017,13 @@ class Arabic
 
         return $value;
     }
+	/*
+	public function getSoundSimilarityGroups()
+	{
+		// check line 800
+		foreach($this->arSoundGroup as $char => $value) $groups[$value][] = $char;
+
+		return $this->arSoundGroup;
+	}
+	*/
 }
