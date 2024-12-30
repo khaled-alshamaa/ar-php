@@ -4237,19 +4237,54 @@ class Arabic
         $isFemale = $isFemale === null ? $this->isFemale($singular) : $isFemale;
 
         if ($count == 0) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][0] : "لا $plural3";
+			# $plural = $this->arPluralsForms[$singular][0] ?? "لا $plural3";
+			if (isset($this->arPluralsForms[$singular][0])) {
+				$plural = $this->arPluralsForms[$singular][0];
+			} else {
+				$plural = "لا $plural3";
+			}
         } elseif ($count == 1 && $isFemale) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحدة";
+			# $plural = $this->arPluralsForms[$singular][1] ?? "$singular واحدة";
+			if (isset($this->arPluralsForms[$singular][1])) {
+				$plural = $this->arPluralsForms[$singular][1];
+			} else {
+				$plural = "$singular واحدة";
+			}
         } elseif ($count == 1 && !$isFemale) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][1] : "$singular واحد";
+			# $plural = $this->arPluralsForms[$singular][1] ?? "$singular واحد";
+			if (isset($this->arPluralsForms[$singular][1])) {
+				$plural = $this->arPluralsForms[$singular][1];
+			} else {
+				$plural = "$singular واحد";
+			}
         } elseif ($count == 2) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][2] : $plural2;
+			# $plural = $this->arPluralsForms[$singular][2] ?? $plural2;
+			if (isset($this->arPluralsForms[$singular][2])) {
+				$plural = $this->arPluralsForms[$singular][2];
+			} else {
+				$plural = $plural2;
+			}
         } elseif ($count % 100 >= 3 && $count % 100 <= 10) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][3] : "%d $plural3";
+			# $plural = $this->arPluralsForms[$singular][3] ?? "%d $plural3";
+			if (isset($this->arPluralsForms[$singular][3])) {
+				$plural = $this->arPluralsForms[$singular][3];
+			} else {
+				$plural = "%d $plural3";
+			}
         } elseif ($count % 100 >= 11) {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][4] : "%d $plural4";
+			# $plural = $this->arPluralsForms[$singular][4] ?? "%d $plural4";
+			if (isset($this->arPluralsForms[$singular][4])) {
+				$plural = $this->arPluralsForms[$singular][4];
+			} else {
+				$plural = "%d $plural4";
+			}
         } else {
-            $plural = is_null($plural2) ? $this->arPluralsForms[$singular][5] : "%d $singular";
+			# $plural = $this->arPluralsForms[$singular][5] ?? "%d $singular";
+			if (isset($this->arPluralsForms[$singular][5])) {
+				$plural = $this->arPluralsForms[$singular][5];
+			} else {
+				$plural = "%d $singular";
+			}
         }
 
         if ($nameOnly) {
