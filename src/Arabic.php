@@ -394,7 +394,7 @@ class Arabic
         $this->rootDirectory = dirname(__FILE__);
         $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
         $this->arMaleNames = file($this->rootDirectory . '/data/ar_male.txt', FILE_IGNORE_NEW_LINES);
-        $this->umAlqoura  = file_get_contents($this->rootDirectory . '/data/um_alqoura.txt');
+        $this->umAlqoura = file($this->rootDirectory . '/data/um_alqoura.txt', FILE_IGNORE_NEW_LINES);
         $this->arDateJSON = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
 
         $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_plurals.json'), true);
@@ -983,20 +983,20 @@ class Arabic
      * Calculate Hijri calendar correction using Um-Al-Qura calendar information
      *
      * @param integer $m Hijri month (Islamic calendar)
-     * @param integer $y Hijri year  (Islamic calendar), valid range [1420-1459]
+     * @param integer $y Hijri year  (Islamic calendar), valid range [1420-1500]
      *
      * @return integer Correction factor to fix Hijri calendar calculation using Um-Al-Qura calendar information
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
     public function mktimeCorrection($m, $y)
     {
-        if ($y >= 1420 && $y < 1460) {
+        if ($y >= 1420 && $y < 1500) {
             $calc   = $this->mktime(0, 0, 0, $m, 1, $y);
-            $offset = (($y - 1420) * 12 + $m) * 11;
+			$offset = ($y - 1420) * 12 + $m;
 
-            $d = substr($this->umAlqoura, $offset, 2);
-            $m = substr($this->umAlqoura, $offset + 3, 2);
-            $y = substr($this->umAlqoura, $offset + 6, 4);
+            $d = substr($this->umAlqoura[$offset], 0, 2);
+            $m = substr($this->umAlqoura[$offset], 3, 2);
+            $y = substr($this->umAlqoura[$offset], 6, 4);
 
             $real = mktime(0, 0, 0, (int)$m, (int)$d, (int)$y);
             $diff = (int)(($real - $calc) / (3600 * 24));
@@ -1011,7 +1011,7 @@ class Arabic
      * Calculate how many days in a given Hijri month
      *
      * @param integer $m         Hijri month (Islamic calendar)
-     * @param integer $y         Hijri year  (Islamic calendar), valid range[1320-1459]
+     * @param integer $y         Hijri year  (Islamic calendar), valid range[1420-1500]
      * @param boolean $umAlqoura Should we implement Um-Al-Qura calendar correction
      *                           in this calculation (default value is true)
      *
@@ -1020,7 +1020,7 @@ class Arabic
      */
     public function hijriMonthDays($m, $y, $umAlqoura = true)
     {
-        if ($y >= 1320 && $y < 1460) {
+        if ($y >= 1420 && $y < 1500) {
             $begin = $this->mktime(0, 0, 0, $m, 1, $y);
 
             if ($m == 12) {
