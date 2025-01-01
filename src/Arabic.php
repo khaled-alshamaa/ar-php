@@ -387,7 +387,7 @@ class Arabic
     /** @var float */
     private $phoneticWeight = 1;
 
-	// Lazy loading flags
+    // Lazy loading flags
 
     /** @var boolean */
     private $arStrToTimeLoad = false;
@@ -426,13 +426,13 @@ class Arabic
     private $arSimilarityLoad = false;
 
     /** @var boolean */
-	private $arNamesLoad = false;
+    private $arNamesLoad = false;
 
     /** @var boolean */
-	private $arDateLoad = false;
+    private $arDateLoad = false;
 
     /** @var boolean */
-	private $arPluralLoad = false;
+    private $arPluralLoad = false;
 
     public function __construct()
     {
@@ -446,71 +446,71 @@ class Arabic
     /** @return void */
     private function arPluralInit()
     {
-		if ($this->arPluralLoad === false) {
-			$json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_plurals.json'), true);
-			$this->arPluralsForms = $json['arPluralsForms'];
+        if ($this->arPluralLoad === false) {
+            $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_plurals.json'), true);
+            $this->arPluralsForms = $json['arPluralsForms'];
 
-			$this->arPluralLoad = true;
-		}
-	}
+            $this->arPluralLoad = true;
+        }
+    }
 
     /** @return void */
     private function arDateInit()
     {
-		if ($this->arDateLoad === false) {
-			$this->umAlqoura = file($this->rootDirectory . '/data/um_alqoura.txt', FILE_IGNORE_NEW_LINES);
-			$this->arDateJSON = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
+        if ($this->arDateLoad === false) {
+            $this->umAlqoura = file($this->rootDirectory . '/data/um_alqoura.txt', FILE_IGNORE_NEW_LINES);
+            $this->arDateJSON = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
 
-			$this->arDateLoad = true;
-		}
-	}
+            $this->arDateLoad = true;
+        }
+    }
 
     /** @return void */
     private function arNamesInit()
     {
-		if ($this->arNamesLoad === false) {
-			$this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
-			$this->arMaleNames = file($this->rootDirectory . '/data/ar_male.txt', FILE_IGNORE_NEW_LINES);
+        if ($this->arNamesLoad === false) {
+            $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
+            $this->arMaleNames = file($this->rootDirectory . '/data/ar_male.txt', FILE_IGNORE_NEW_LINES);
 
-			$this->arNamesLoad = true;
-		}
-	}
+            $this->arNamesLoad = true;
+        }
+    }
 
     /** @return void */
     private function arSpellerInit() {
         if ($this->arSpellerLoad === false) {
-			$this->speller = new \ArPHP\MZK\Speller();
+            $this->speller = new \ArPHP\MZK\Speller();
 
-			$this->arSpellerLoad = true;
-		}
+            $this->arSpellerLoad = true;
+        }
     }
 
     /**
      * Spell Check
-	 *
+     *
      * @param string $text Text input
      * @return array<string>
      * @author Moutaz Alkhatib <muotaz@gmail.com>
      */
     public function spellGetMisspelled($text) {
         $this->arSpellerInit();
-		
-		$ret =$this->speller->spell_check($text, false);
+        
+        $ret =$this->speller->spell_check($text, false);
         return array_keys($ret['no_sugg_cache']);
 
     }
 
     /**
      * Spell Suggest Corrections
-	 *
+     *
      * @param string $text Text input
      * @return array<array<string, mixed>>
      * @author Moutaz Alkhatib <muotaz@gmail.com>
      */
     public function spellSuggestCorrections($text) {
         $this->arSpellerInit();
-		
-		$ret = $this->speller->spell_check($text, true);
+        
+        $ret = $this->speller->spell_check($text, true);
         return array_map(function ($element) {
             return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'], 0, 8)];
         }, $ret['suggestion_array']);
@@ -610,265 +610,265 @@ class Arabic
     private function arStrToTimeInit()
     {
         if ($this->arStrToTimeLoad === false) {
-			$this->arDateInit();
+            $this->arDateInit();
 
-			$this->strToTimeSearch = file($this->rootDirectory . '/data/strtotime_search.txt', FILE_IGNORE_NEW_LINES);
-			$this->strToTimeReplace = file($this->rootDirectory . '/data/strtotime_replace.txt', FILE_IGNORE_NEW_LINES);
+            $this->strToTimeSearch = file($this->rootDirectory . '/data/strtotime_search.txt', FILE_IGNORE_NEW_LINES);
+            $this->strToTimeReplace = file($this->rootDirectory . '/data/strtotime_replace.txt', FILE_IGNORE_NEW_LINES);
 
-			foreach ($this->arDateJSON['ar_hj_month'] as $month) {
-				$this->hj[] = (string)$month;
-			}
+            foreach ($this->arDateJSON['ar_hj_month'] as $month) {
+                $this->hj[] = (string)$month;
+            }
 
-			$this->strToTimePatterns[] = '/َ|ً|ُ|ٌ|ِ|ٍ|ْ|ّ/';
-			$this->strToTimePatterns[] = '/\s*ال(\S{3,})\s+ال(\S{3,})/';
-			$this->strToTimePatterns[] = '/\s*ال(\S{3,})/';
+            $this->strToTimePatterns[] = '/َ|ً|ُ|ٌ|ِ|ٍ|ْ|ّ/';
+            $this->strToTimePatterns[] = '/\s*ال(\S{3,})\s+ال(\S{3,})/';
+            $this->strToTimePatterns[] = '/\s*ال(\S{3,})/';
 
-			$this->strToTimeReplacements[] = '';
-			$this->strToTimeReplacements[] = ' \\2 \\1';
-			$this->strToTimeReplacements[] = ' \\1';
-			
-			$this->arStrToTimeLoad = true;
-		}
+            $this->strToTimeReplacements[] = '';
+            $this->strToTimeReplacements[] = ' \\2 \\1';
+            $this->strToTimeReplacements[] = ' \\1';
+            
+            $this->arStrToTimeLoad = true;
+        }
     }
 
     /** @return void */
     private function arTransliterateInit()
     {
         if ($this->arTransliterateLoad === false) {
-			$json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
+            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
 
-			foreach ($json['preg_replace_en2ar'] as $item) {
-				$this->en2arPregSearch[]  = $item['search'];
-				$this->en2arPregReplace[] = $item['replace'];
-			}
+            foreach ($json['preg_replace_en2ar'] as $item) {
+                $this->en2arPregSearch[]  = $item['search'];
+                $this->en2arPregReplace[] = $item['replace'];
+            }
 
-			foreach ($json['str_replace_en2ar'] as $item) {
-				$this->en2arStrSearch[]  = $item['search'];
-				$this->en2arStrReplace[] = $item['replace'];
-			}
+            foreach ($json['str_replace_en2ar'] as $item) {
+                $this->en2arStrSearch[]  = $item['search'];
+                $this->en2arStrReplace[] = $item['replace'];
+            }
 
-			foreach ($json['preg_replace_ar2en'] as $item) {
-				$this->ar2enPregSearch[]  = $item['search'];
-				$this->ar2enPregReplace[] = $item['replace'];
-			}
+            foreach ($json['preg_replace_ar2en'] as $item) {
+                $this->ar2enPregSearch[]  = $item['search'];
+                $this->ar2enPregReplace[] = $item['replace'];
+            }
 
-			foreach ($json['str_replace_ar2en'] as $item) {
-				$this->ar2enStrSearch[]  = $item['search'];
-				$this->ar2enStrReplace[] = $item['replace'];
-			}
+            foreach ($json['str_replace_ar2en'] as $item) {
+                $this->ar2enStrSearch[]  = $item['search'];
+                $this->ar2enStrReplace[] = $item['replace'];
+            }
 
-			foreach ($json['str_replace_diaritical'] as $item) {
-				$this->diariticalSearch[]  = $item['search'];
-				$this->diariticalReplace[] = $item['replace'];
-			}
+            foreach ($json['str_replace_diaritical'] as $item) {
+                $this->diariticalSearch[]  = $item['search'];
+                $this->diariticalReplace[] = $item['replace'];
+            }
 
-			foreach ($json['str_replace_RJGC'] as $item) {
-				$this->rjgcSearch[]  = $item['search'];
-				$this->rjgcReplace[] = $item['replace'];
-			}
+            foreach ($json['str_replace_RJGC'] as $item) {
+                $this->rjgcSearch[]  = $item['search'];
+                $this->rjgcReplace[] = $item['replace'];
+            }
 
-			foreach ($json['str_replace_SES'] as $item) {
-				$this->sesSearch[]  = $item['search'];
-				$this->sesReplace[] = $item['replace'];
-			}
+            foreach ($json['str_replace_SES'] as $item) {
+                $this->sesSearch[]  = $item['search'];
+                $this->sesReplace[] = $item['replace'];
+            }
 
-			foreach ($json['str_replace_ISO233'] as $item) {
-				$this->iso233Search[]  = $item['search'];
-				$this->iso233Replace[] = $item['replace'];
-			}
-			
-			$this->arTransliterateLoad = true;
-		}
+            foreach ($json['str_replace_ISO233'] as $item) {
+                $this->iso233Search[]  = $item['search'];
+                $this->iso233Replace[] = $item['replace'];
+            }
+            
+            $this->arTransliterateLoad = true;
+        }
     }
 
     /** @return void */
     private function arNumbersInit()
     {
-		if ($this->arNumbersLoad === false) {
-			$json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_numbers.json'), true);
+        if ($this->arNumbersLoad === false) {
+            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_numbers.json'), true);
 
-			foreach ($json['individual']['male'] as $num) {
-				if (isset($num['grammar'])) {
-					$grammar = $num['grammar'];
-					$this->arNumberIndividual["{$num['value']}"][1]["$grammar"] = (string)$num['text'];
-				} else {
-					$this->arNumberIndividual["{$num['value']}"][1] = (string)$num['text'];
-				}
-			}
+            foreach ($json['individual']['male'] as $num) {
+                if (isset($num['grammar'])) {
+                    $grammar = $num['grammar'];
+                    $this->arNumberIndividual["{$num['value']}"][1]["$grammar"] = (string)$num['text'];
+                } else {
+                    $this->arNumberIndividual["{$num['value']}"][1] = (string)$num['text'];
+                }
+            }
 
-			foreach ($json['individual']['female'] as $num) {
-				if (isset($num['grammar'])) {
-					$grammar = $num['grammar'];
-					$this->arNumberIndividual["{$num['value']}"][2]["$grammar"] = (string)$num['text'];
-				} else {
-					$this->arNumberIndividual["{$num['value']}"][2] = (string)$num['text'];
-				}
-			}
+            foreach ($json['individual']['female'] as $num) {
+                if (isset($num['grammar'])) {
+                    $grammar = $num['grammar'];
+                    $this->arNumberIndividual["{$num['value']}"][2]["$grammar"] = (string)$num['text'];
+                } else {
+                    $this->arNumberIndividual["{$num['value']}"][2] = (string)$num['text'];
+                }
+            }
 
-			foreach ($json['individual']['gt19'] as $num) {
-				if (isset($num['grammar'])) {
-					$grammar = $num['grammar'];
-					$this->arNumberIndividual["{$num['value']}"]["$grammar"] = (string)$num['text'];
-				} else {
-					$this->arNumberIndividual["{$num['value']}"] = (string)$num['text'];
-				}
-			}
+            foreach ($json['individual']['gt19'] as $num) {
+                if (isset($num['grammar'])) {
+                    $grammar = $num['grammar'];
+                    $this->arNumberIndividual["{$num['value']}"]["$grammar"] = (string)$num['text'];
+                } else {
+                    $this->arNumberIndividual["{$num['value']}"] = (string)$num['text'];
+                }
+            }
 
-			foreach ($json['complications'] as $num) {
-				$scale  = $num['scale'];
-				$format = $num['format'];
-				$this->arNumberComplications["$scale"]["$format"] = (string)$num['text'];
-			}
+            foreach ($json['complications'] as $num) {
+                $scale  = $num['scale'];
+                $format = $num['format'];
+                $this->arNumberComplications["$scale"]["$format"] = (string)$num['text'];
+            }
 
-			foreach ($json['arabicIndic'] as $html) {
-				$value  = $html['value'];
-				$this->arNumberArabicIndic["$value"] = $html['text'];
-			}
+            foreach ($json['arabicIndic'] as $html) {
+                $value  = $html['value'];
+                $this->arNumberArabicIndic["$value"] = $html['text'];
+            }
 
-			foreach ($json['order']['male'] as $num) {
-				$this->arNumberOrdering["{$num['value']}"][1] = (string)$num['text'];
-			}
+            foreach ($json['order']['male'] as $num) {
+                $this->arNumberOrdering["{$num['value']}"][1] = (string)$num['text'];
+            }
 
-			foreach ($json['order']['female'] as $num) {
-				$this->arNumberOrdering["{$num['value']}"][2] = (string)$num['text'];
-			}
+            foreach ($json['order']['female'] as $num) {
+                $this->arNumberOrdering["{$num['value']}"][2] = (string)$num['text'];
+            }
 
-			foreach ($json['individual']['male'] as $num) {
-				if ($num['value'] < 11) {
-					$str = strtr((string)$num['text'], ['أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا']);
-					$this->arNumberSpell[$str] = (int)$num['value'];
-				}
-			}
+            foreach ($json['individual']['male'] as $num) {
+                if ($num['value'] < 11) {
+                    $str = strtr((string)$num['text'], ['أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا']);
+                    $this->arNumberSpell[$str] = (int)$num['value'];
+                }
+            }
 
-			foreach ($json['individual']['female'] as $num) {
-				if ($num['value'] < 11) {
-					$str = strtr((string)$num['text'], ['أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا']);
-					$this->arNumberSpell[$str] = (int)$num['value'];
-				}
-			}
+            foreach ($json['individual']['female'] as $num) {
+                if ($num['value'] < 11) {
+                    $str = strtr((string)$num['text'], ['أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا']);
+                    $this->arNumberSpell[$str] = (int)$num['value'];
+                }
+            }
 
-			foreach ($json['individual']['gt19'] as $num) {
-				$str = strtr((string)$num['text'], ['أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا']);
-				$this->arNumberSpell[$str] = (int)$num['value'];
-			}
+            foreach ($json['individual']['gt19'] as $num) {
+                $str = strtr((string)$num['text'], ['أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا']);
+                $this->arNumberSpell[$str] = (int)$num['value'];
+            }
 
-			foreach ($json['currency'] as $money) {
-				$this->arNumberCurrency[$money['iso']]['ar']['basic']    = $money['ar_basic'];
-				$this->arNumberCurrency[$money['iso']]['ar']['fraction'] = $money['ar_fraction'];
-				$this->arNumberCurrency[$money['iso']]['en']['basic']    = $money['en_basic'];
-				$this->arNumberCurrency[$money['iso']]['en']['fraction'] = $money['en_fraction'];
+            foreach ($json['currency'] as $money) {
+                $this->arNumberCurrency[$money['iso']]['ar']['basic']    = $money['ar_basic'];
+                $this->arNumberCurrency[$money['iso']]['ar']['fraction'] = $money['ar_fraction'];
+                $this->arNumberCurrency[$money['iso']]['en']['basic']    = $money['en_basic'];
+                $this->arNumberCurrency[$money['iso']]['en']['fraction'] = $money['en_fraction'];
 
-				$this->arNumberCurrency[$money['iso']]['decimals'] = $money['decimals'];
-			}
-			
-			$this->arNumbersLoad = true;
-		}
+                $this->arNumberCurrency[$money['iso']]['decimals'] = $money['decimals'];
+            }
+            
+            $this->arNumbersLoad = true;
+        }
     }
 
     /** @return void */
     private function arKeySwapInit()
     {
         if ($this->arKeySwapLoad === false) {
-			$json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_keyswap.json'), true);
+            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_keyswap.json'), true);
 
-			foreach ($json['arabic'] as $key) {
-				$index = (int)$key['id'];
-				$this->arKeyboard[$index] = (string)$key['text'];
-			}
+            foreach ($json['arabic'] as $key) {
+                $index = (int)$key['id'];
+                $this->arKeyboard[$index] = (string)$key['text'];
+            }
 
-			foreach ($json['english'] as $key) {
-				$index = (int)$key['id'];
-				$this->enKeyboard[$index] = (string)$key['text'];
-			}
+            foreach ($json['english'] as $key) {
+                $index = (int)$key['id'];
+                $this->enKeyboard[$index] = (string)$key['text'];
+            }
 
-			foreach ($json['french'] as $key) {
-				$index = (int)$key['id'];
-				$this->frKeyboard[$index] = (string)$key['text'];
-			}
+            foreach ($json['french'] as $key) {
+                $index = (int)$key['id'];
+                $this->frKeyboard[$index] = (string)$key['text'];
+            }
 
-			$this->arLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_ar.txt'));
-			$this->enLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_en.txt'));
-			
-			$this->arKeySwapLoad = true;
-		}
+            $this->arLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_ar.txt'));
+            $this->enLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_en.txt'));
+            
+            $this->arKeySwapLoad = true;
+        }
     }
 
     /** @return void */
     private function arSoundexInit()
     {
         if ($this->arSoundexLoad === false) {
-			$json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_soundex.json'), true);
+            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_soundex.json'), true);
 
-			foreach ($json['arSoundexCode'] as $item) {
-				$index = $item['search'];
-				$this->arSoundexCode["$index"] = (string)$item['replace'];
-			}
+            foreach ($json['arSoundexCode'] as $item) {
+                $index = $item['search'];
+                $this->arSoundexCode["$index"] = (string)$item['replace'];
+            }
 
-			foreach ($json['arPhonixCode'] as $item) {
-				$index = $item['search'];
-				$this->arPhonixCode["$index"] = (string)$item['replace'];
-			}
+            foreach ($json['arPhonixCode'] as $item) {
+                $index = $item['search'];
+                $this->arPhonixCode["$index"] = (string)$item['replace'];
+            }
 
-			foreach ($json['soundexTransliteration'] as $item) {
-				$index = $item['search'];
-				$this->soundexTransliteration["$index"] = (string)$item['replace'];
-			}
+            foreach ($json['soundexTransliteration'] as $item) {
+                $index = $item['search'];
+                $this->soundexTransliteration["$index"] = (string)$item['replace'];
+            }
 
-			$this->soundexMap = $this->arSoundexCode;
+            $this->soundexMap = $this->arSoundexCode;
 
-			$this->arSoundexLoad = true;
-		}
+            $this->arSoundexLoad = true;
+        }
     }
 
     /** @return void */
     private function arGlyphsInit()
     {
         if ($this->arGlyphsLoad === false) {
-			$this->arGlyphsVowel     = 'ًٌٍَُِّْ';
+            $this->arGlyphsVowel     = 'ًٌٍَُِّْ';
 
-			// Arabic Presentation Forms-B (https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-B)
-			// Contextual forms (https://en.wikipedia.org/wiki/Arabic_script_in_Unicode#Contextual_forms)
-			// 0- ISOLATED FORM, 1- FINAL FORM, 2- INITIAL FORM, 3- MEDIAL FORM
-			$this->arGlyphs = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_glyphs.json'), true);
+            // Arabic Presentation Forms-B (https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-B)
+            // Contextual forms (https://en.wikipedia.org/wiki/Arabic_script_in_Unicode#Contextual_forms)
+            // 0- ISOLATED FORM, 1- FINAL FORM, 2- INITIAL FORM, 3- MEDIAL FORM
+            $this->arGlyphs = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_glyphs.json'), true);
 
-			$this->arGlyphsLoad = true;
-		}
+            $this->arGlyphsLoad = true;
+        }
     }
 
     /** @return void */
     private function arQueryInit()
     {
         if ($this->arQueryLoad === false) {
-			$json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_query.json'), true);
+            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_query.json'), true);
 
-			foreach ($json['preg_replace'] as $pair) {
-				$this->arQueryLexPatterns[] = (string)$pair['search'];
-				$this->arQueryLexReplacements[] = (string)$pair['replace'];
-			}
+            foreach ($json['preg_replace'] as $pair) {
+                $this->arQueryLexPatterns[] = (string)$pair['search'];
+                $this->arQueryLexReplacements[] = (string)$pair['replace'];
+            }
 
-			$this->arQueryLoad = true;
-		}
+            $this->arQueryLoad = true;
+        }
     }
 
     /** @return void */
     private function arSummaryInit()
     {
         if ($this->arSummaryLoad === false) {
-			// This common words used in cleanCommon method
-			$words    = file($this->rootDirectory . '/data/ar_stopwords.txt', FILE_IGNORE_NEW_LINES);
-			$en_words = file($this->rootDirectory . '/data/en_stopwords.txt', FILE_IGNORE_NEW_LINES);
+            // This common words used in cleanCommon method
+            $words    = file($this->rootDirectory . '/data/ar_stopwords.txt', FILE_IGNORE_NEW_LINES);
+            $en_words = file($this->rootDirectory . '/data/en_stopwords.txt', FILE_IGNORE_NEW_LINES);
 
-			$words = array_merge($words, $en_words);
+            $words = array_merge($words, $en_words);
 
-			$this->arSummaryCommonWords = $words;
+            $this->arSummaryCommonWords = $words;
 
-			// This important words used in rankSentences method
-			$words = file($this->rootDirectory . '/data/important_words.txt', FILE_IGNORE_NEW_LINES);
+            // This important words used in rankSentences method
+            $words = file($this->rootDirectory . '/data/important_words.txt', FILE_IGNORE_NEW_LINES);
 
-			$this->arSummaryImportantWords = $words;
+            $this->arSummaryImportantWords = $words;
 
-			$this->arSummaryLoad = true;
-		}
+            $this->arSummaryLoad = true;
+        }
     }
 
 
@@ -876,12 +876,12 @@ class Arabic
     private function arSentimentInit()
     {
         if ($this->arSentimentLoad === false) {
-			$this->allStems   = file($this->rootDirectory . '/data/stems.txt', FILE_IGNORE_NEW_LINES);
-			$this->logOddStem = file($this->rootDirectory . '/data/logodd_stem.txt', FILE_IGNORE_NEW_LINES);
-			$this->logOdd     = file($this->rootDirectory . '/data/logodd.txt', FILE_IGNORE_NEW_LINES);
+            $this->allStems   = file($this->rootDirectory . '/data/stems.txt', FILE_IGNORE_NEW_LINES);
+            $this->logOddStem = file($this->rootDirectory . '/data/logodd_stem.txt', FILE_IGNORE_NEW_LINES);
+            $this->logOdd     = file($this->rootDirectory . '/data/logodd.txt', FILE_IGNORE_NEW_LINES);
 
-			$this->arSentimentLoad = true;
-		}
+            $this->arSentimentLoad = true;
+        }
     }
 
 
@@ -889,47 +889,47 @@ class Arabic
     private function arDialectInit()
     {
         if ($this->arDialectLoad === false) {
-			$this->dialectsStems    = file($this->rootDirectory . '/data/dialects_stems.txt', FILE_IGNORE_NEW_LINES);
-			$this->logOddDialects   = file($this->rootDirectory . '/data/logodd_dialects.txt', FILE_IGNORE_NEW_LINES);
-			$this->logOddEgyptian   = file($this->rootDirectory . '/data/logodd_egyptian.txt', FILE_IGNORE_NEW_LINES);
-			$this->logOddLevantine  = file($this->rootDirectory . '/data/logodd_levantine.txt', FILE_IGNORE_NEW_LINES);
-			$this->logOddMaghrebi   = file($this->rootDirectory . '/data/logodd_maghrebi.txt', FILE_IGNORE_NEW_LINES);
-			$this->logOddPeninsular = file($this->rootDirectory . '/data/logodd_peninsular.txt', FILE_IGNORE_NEW_LINES);
+            $this->dialectsStems    = file($this->rootDirectory . '/data/dialects_stems.txt', FILE_IGNORE_NEW_LINES);
+            $this->logOddDialects   = file($this->rootDirectory . '/data/logodd_dialects.txt', FILE_IGNORE_NEW_LINES);
+            $this->logOddEgyptian   = file($this->rootDirectory . '/data/logodd_egyptian.txt', FILE_IGNORE_NEW_LINES);
+            $this->logOddLevantine  = file($this->rootDirectory . '/data/logodd_levantine.txt', FILE_IGNORE_NEW_LINES);
+            $this->logOddMaghrebi   = file($this->rootDirectory . '/data/logodd_maghrebi.txt', FILE_IGNORE_NEW_LINES);
+            $this->logOddPeninsular = file($this->rootDirectory . '/data/logodd_peninsular.txt', FILE_IGNORE_NEW_LINES);
 
-			$this->arDialectLoad = true;
-		}
+            $this->arDialectLoad = true;
+        }
     }
 
     /** @return void */
     private function arSimilarityInit()
     {
         if ($this->arSimilarityLoad === false) {
-			$json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_similarity.json'), true);
+            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_similarity.json'), true);
 
-			foreach ($json['keyboard'] as $item) {
-				$char = $item['char'];
-				$this->arKeyX["$char"] = (int)$item['x'];
-				$this->arKeyY["$char"] = (int)$item['y'];
-				$this->arKeyZ["$char"] = (int)$item['z'];
-			}
+            foreach ($json['keyboard'] as $item) {
+                $char = $item['char'];
+                $this->arKeyX["$char"] = (int)$item['x'];
+                $this->arKeyY["$char"] = (int)$item['y'];
+                $this->arKeyZ["$char"] = (int)$item['z'];
+            }
 
-			foreach ($json['graphic'] as $item) {
-				$char = $item['char'];
-				$this->arGraphGroup["$char"] = (int)$item['graph'];
-			}
+            foreach ($json['graphic'] as $item) {
+                $char = $item['char'];
+                $this->arGraphGroup["$char"] = (int)$item['graph'];
+            }
 
-			foreach ($json['phonetic'] as $item) {
-				$char = $item['char'];
-				$this->arSoundGroup["$char"] = (int)$item['sound'];
-			}
+            foreach ($json['phonetic'] as $item) {
+                $char = $item['char'];
+                $this->arSoundGroup["$char"] = (int)$item['sound'];
+            }
 
-			foreach ($json['gap_penalty'] as $item) {
-				$char = $item['char'];
-				$this->arGapPenalty["$char"] = (int)$item['penalty'];
-			}
+            foreach ($json['gap_penalty'] as $item) {
+                $char = $item['char'];
+                $this->arGapPenalty["$char"] = (int)$item['penalty'];
+            }
 
-			$this->arSimilarityLoad = true;
-		}
+            $this->arSimilarityLoad = true;
+        }
     }
 
     /////////////////////////////////////// Standard //////////////////////////////////////////////
@@ -975,7 +975,7 @@ class Arabic
     {
         $this->arNamesInit();
 
-		$female = false;
+        $female = false;
         $words  = explode(' ', $str);
         $str    = $words[0];
 
@@ -1023,7 +1023,7 @@ class Arabic
     public function strtotime($text, $now)
     {
         $this->arStrToTimeInit();
-		$int = 0;
+        $int = 0;
 
         for ($i = 0; $i < 12; $i++) {
             if (strpos($text, $this->hj[$i]) > 0) {
@@ -1110,9 +1110,9 @@ class Arabic
     {
         $this->arDateInit();
 
-		if ($y >= 1420 && $y < 1500) {
+        if ($y >= 1420 && $y < 1500) {
             $calc   = $this->mktime(0, 0, 0, $m, 1, $y);
-			$offset = ($y - 1420) * 12 + $m;
+            $offset = ($y - 1420) * 12 + $m;
 
             $d = substr($this->umAlqoura[$offset], 0, 2);
             $m = substr($this->umAlqoura[$offset], 3, 2);
@@ -1186,8 +1186,8 @@ class Arabic
     public function en2ar($string, $locale = 'en_US')
     {
         $this->arTransliterateInit();
-		
-		setlocale(LC_ALL, $locale);
+        
+        setlocale(LC_ALL, $locale);
 
         $string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
         $string = preg_replace('/[^\w\s]/', '', $string);
@@ -1229,7 +1229,7 @@ class Arabic
     public function ar2en($string, $standard = 'UNGEGN')
     {
         $this->arTransliterateInit();
-		
+        
         //$string = strtr($string, ['ة ال' => 'tul']);
         $words  = explode(' ', $string);
         $string = '';
@@ -1343,7 +1343,7 @@ class Arabic
      */
     public function date($format, $timestamp, $correction = 0)
     {
-		$this->arDateInit();
+        $this->arDateInit();
 
         if ($this->arDateMode == 1 || $this->arDateMode == 8) {
             /** @var array<string> */
@@ -1460,7 +1460,7 @@ class Arabic
      */
     private function arDateEn2ar($str)
     {
-		$this->arDateInit();
+        $this->arDateInit();
 
         $patterns     = [];
         $replacements = [];
@@ -1521,7 +1521,7 @@ class Arabic
      */
     private function arDateArabicMonths($mode)
     {
-		$this->arDateInit();
+        $this->arDateInit();
 
         $replacements = [];
 
@@ -1608,11 +1608,11 @@ class Arabic
 
         $y      = $this->date('Y', $time);
         $m      = $this->date('n', $time);
-		$offset = ($y - 1420) * 12 + $m;
+        $offset = ($y - 1420) * 12 + $m;
 
-		$d = substr($this->umAlqoura[$offset], 0, 2);
-		$m = substr($this->umAlqoura[$offset], 3, 2);
-		$y = substr($this->umAlqoura[$offset], 6, 4);
+        $d = substr($this->umAlqoura[$offset], 0, 2);
+        $m = substr($this->umAlqoura[$offset], 3, 2);
+        $y = substr($this->umAlqoura[$offset], 6, 4);
 
         $real = mktime(0, 0, 0, (int)$m, (int)$d, (int)$y);
         $diff = (int)(($calc - $real) / (3600 * 24));
@@ -1780,8 +1780,8 @@ class Arabic
     public function money2str($number, $iso = 'SYP', $lang = 'ar')
     {
         $this->arNumbersInit();
-		
-		$iso  = strtoupper($iso);
+        
+        $iso  = strtoupper($iso);
         $lang = strtolower($lang);
 
         $number = sprintf("%01.{$this->arNumberCurrency[$iso]['decimals']}f", $number);
@@ -2189,7 +2189,7 @@ class Arabic
      */
     private function swapCore($text, $in, $out)
     {
-		$this->arKeySwapInit();
+        $this->arKeySwapInit();
 
         $output = '';
         $text   = stripslashes($text);
@@ -2246,7 +2246,7 @@ class Arabic
      */
     private function checkEn($str)
     {
-		$this->arKeySwapInit();
+        $this->arKeySwapInit();
 
         $str  = mb_strtolower($str);
         $max  = mb_strlen($str);
@@ -2276,7 +2276,7 @@ class Arabic
      */
     private function checkAr($str)
     {
-		$this->arKeySwapInit();
+        $this->arKeySwapInit();
 
         $max  = mb_strlen($str);
         $rank = 0;
@@ -2421,7 +2421,7 @@ class Arabic
     {
         $this->arSoundexInit();
 
-		$str = strtolower($str);
+        $str = strtolower($str);
 
         if ($str == 'soundex' || $str == 'phonix') {
             $this->soundexCode = $str;
@@ -2582,7 +2582,7 @@ class Arabic
     {
         $this->arGlyphsInit();
 
-		$this->arGlyphs[$char][0] = substr($hex, 0, 4);
+        $this->arGlyphs[$char][0] = substr($hex, 0, 4);
         $this->arGlyphs[$char][1] = substr($hex, 4, 4);
         $this->arGlyphs[$char][2] = substr($hex, 8, 4);
         $this->arGlyphs[$char][3] = substr($hex, 12, 4);
@@ -2603,7 +2603,7 @@ class Arabic
     {
         $this->arGlyphsInit();
 
-		$crntChar = null;
+        $crntChar = null;
         $prevChar = null;
         $nextChar = null;
         $output   = '';
@@ -2678,12 +2678,12 @@ class Arabic
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][0] . ';';
                 }
                 if ($prevChar == 'ل') {
-					if(isset($chars[$i - 2])) {
-						$tmp_form = (isset($this->arGlyphs[$chars[$i - 2]]['prevLink']) &&
-									 $this->arGlyphs[$chars[$i - 2]]['prevLink'] == true) ? 3 : 2;
-					} else {
-						$tmp_form = 2;
-					}
+                    if(isset($chars[$i - 2])) {
+                        $tmp_form = (isset($this->arGlyphs[$chars[$i - 2]]['prevLink']) &&
+                                     $this->arGlyphs[$chars[$i - 2]]['prevLink'] == true) ? 3 : 2;
+                    } else {
+                        $tmp_form = 2;
+                    }
                     $output .= '&#x' . $this->arGlyphs[$prevChar][$tmp_form] . ';';
                     $i--;
                 }
@@ -2766,7 +2766,11 @@ class Arabic
             }
 
             // add the current char UTF-8 code to the output string
-            $output  .= '&#x' . $this->arGlyphs[$crntChar][$form] . ';';
+            if (isset($this->arGlyphs[$crntChar])) {
+                $output .= '&#x' . $this->arGlyphs[$crntChar][$form] . ';';
+            } else {
+                $output .= $crntChar;
+            }
 
             // next char will be the current one before loop (we are going backword to manage right-to-left presenting)
             $nextChar = $crntChar;
@@ -3240,7 +3244,7 @@ class Arabic
     {
         $this->arQueryInit();
 
-		$arg = preg_replace($this->arQueryLexPatterns, $this->arQueryLexReplacements, $arg);
+        $arg = preg_replace($this->arQueryLexPatterns, $this->arQueryLexReplacements, $arg);
 
         return $arg;
     }
@@ -3783,7 +3787,7 @@ class Arabic
     {
         $this->arSummaryInit();
 
-		$extra_words = file($this->rootDirectory . '/data/ar_stopwords_extra.txt');
+        $extra_words = file($this->rootDirectory . '/data/ar_stopwords_extra.txt');
         $extra_words = array_map('trim', $extra_words);
 
         $this->arSummaryCommonWords = array_merge($this->arSummaryCommonWords, $extra_words);
@@ -3805,7 +3809,7 @@ class Arabic
     {
         $this->arSummaryInit();
 
-		preg_match_all("/[^\.\n\،\؛\,\;](.+?)[\.\n\،\؛\,\;]/u", $str, $sentences);
+        preg_match_all("/[^\.\n\،\؛\,\;](.+?)[\.\n\،\؛\,\;]/u", $str, $sentences);
         $_sentences = $sentences[0];
 
         if ($mode == 1) {
@@ -3962,7 +3966,7 @@ class Arabic
      */
     private function arCleanCommon($str)
     {
-		$this->arSummaryInit();
+        $this->arSummaryInit();
 
         $str = str_replace(' ', '  ', $str);
         $str = strtr(" $str", array_fill_keys($this->arSummaryCommonWords, ' '));
@@ -4030,7 +4034,7 @@ class Arabic
     {
         $this->arSummaryInit();
 
-		$sentenceArr = [];
+        $sentenceArr = [];
         $rankArr     = [];
         $importent   = implode('|', $this->arSummaryImportantWords);
 
@@ -4403,58 +4407,58 @@ class Arabic
     public function arPlural($singular, $count, $plural2 = null, $plural3 = null, $plural4 = null, $nameOnly = false, $isFemale = null)
     {
         $this->arPluralInit();
-		
-		$isFemale = $isFemale === null ? $this->isFemale($singular) : $isFemale;
+        
+        $isFemale = $isFemale === null ? $this->isFemale($singular) : $isFemale;
 
         if ($count == 0) {
-			# $plural = $this->arPluralsForms[$singular][0] ?? "لا $plural3";
-			if (isset($this->arPluralsForms[$singular][0])) {
-				$plural = $this->arPluralsForms[$singular][0];
-			} else {
-				$plural = "لا $plural3";
-			}
+            # $plural = $this->arPluralsForms[$singular][0] ?? "لا $plural3";
+            if (isset($this->arPluralsForms[$singular][0])) {
+                $plural = $this->arPluralsForms[$singular][0];
+            } else {
+                $plural = "لا $plural3";
+            }
         } elseif ($count == 1 && $isFemale) {
-			# $plural = $this->arPluralsForms[$singular][1] ?? "$singular واحدة";
-			if (isset($this->arPluralsForms[$singular][1])) {
-				$plural = $this->arPluralsForms[$singular][1];
-			} else {
-				$plural = "$singular واحدة";
-			}
+            # $plural = $this->arPluralsForms[$singular][1] ?? "$singular واحدة";
+            if (isset($this->arPluralsForms[$singular][1])) {
+                $plural = $this->arPluralsForms[$singular][1];
+            } else {
+                $plural = "$singular واحدة";
+            }
         } elseif ($count == 1 && !$isFemale) {
-			# $plural = $this->arPluralsForms[$singular][1] ?? "$singular واحد";
-			if (isset($this->arPluralsForms[$singular][1])) {
-				$plural = $this->arPluralsForms[$singular][1];
-			} else {
-				$plural = "$singular واحد";
-			}
+            # $plural = $this->arPluralsForms[$singular][1] ?? "$singular واحد";
+            if (isset($this->arPluralsForms[$singular][1])) {
+                $plural = $this->arPluralsForms[$singular][1];
+            } else {
+                $plural = "$singular واحد";
+            }
         } elseif ($count == 2) {
-			# $plural = $this->arPluralsForms[$singular][2] ?? $plural2;
-			if (isset($this->arPluralsForms[$singular][2])) {
-				$plural = $this->arPluralsForms[$singular][2];
-			} else {
-				$plural = $plural2;
-			}
+            # $plural = $this->arPluralsForms[$singular][2] ?? $plural2;
+            if (isset($this->arPluralsForms[$singular][2])) {
+                $plural = $this->arPluralsForms[$singular][2];
+            } else {
+                $plural = $plural2;
+            }
         } elseif ($count % 100 >= 3 && $count % 100 <= 10) {
-			# $plural = $this->arPluralsForms[$singular][3] ?? "%d $plural3";
-			if (isset($this->arPluralsForms[$singular][3])) {
-				$plural = $this->arPluralsForms[$singular][3];
-			} else {
-				$plural = "%d $plural3";
-			}
+            # $plural = $this->arPluralsForms[$singular][3] ?? "%d $plural3";
+            if (isset($this->arPluralsForms[$singular][3])) {
+                $plural = $this->arPluralsForms[$singular][3];
+            } else {
+                $plural = "%d $plural3";
+            }
         } elseif ($count % 100 >= 11) {
-			# $plural = $this->arPluralsForms[$singular][4] ?? "%d $plural4";
-			if (isset($this->arPluralsForms[$singular][4])) {
-				$plural = $this->arPluralsForms[$singular][4];
-			} else {
-				$plural = "%d $plural4";
-			}
+            # $plural = $this->arPluralsForms[$singular][4] ?? "%d $plural4";
+            if (isset($this->arPluralsForms[$singular][4])) {
+                $plural = $this->arPluralsForms[$singular][4];
+            } else {
+                $plural = "%d $plural4";
+            }
         } else {
-			# $plural = $this->arPluralsForms[$singular][5] ?? "%d $singular";
-			if (isset($this->arPluralsForms[$singular][5])) {
-				$plural = $this->arPluralsForms[$singular][5];
-			} else {
-				$plural = "%d $singular";
-			}
+            # $plural = $this->arPluralsForms[$singular][5] ?? "%d $singular";
+            if (isset($this->arPluralsForms[$singular][5])) {
+                $plural = $this->arPluralsForms[$singular][5];
+            } else {
+                $plural = "%d $singular";
+            }
         }
 
         if ($nameOnly) {
@@ -4506,7 +4510,7 @@ class Arabic
     {
         $this->arSentimentInit();
 
-		# remove mentions
+        # remove mentions
         $text = preg_replace('/@\\S+/u', '', $text);
 
         # remove hashtags
@@ -4608,7 +4612,7 @@ class Arabic
     {
         $this->arDialectInit();
 
-		# remove mentions
+        # remove mentions
         $text = preg_replace('/@\\S+/u', '', $text);
 
         # remove hashtags
@@ -4684,18 +4688,18 @@ class Arabic
         $score = max($scoreEgyptian, $scoreLevantine, $scoreMaghrebi, $scorePeninsular);
 
         switch ($score) {
-    	    case $scoreEgyptian:
-    	        $dialect = 'Egyptian';
-    	        break;
-    	    case $scoreLevantine:
-    	        $dialect = 'Levantine';
-    	        break;
-    	    case $scoreMaghrebi:
-    	        $dialect = 'Maghrebi';
-    	        break;
-    	    case $scorePeninsular:
-    	        $dialect = 'Peninsular';
-    	        break;
+            case $scoreEgyptian:
+                $dialect = 'Egyptian';
+                break;
+            case $scoreLevantine:
+                $dialect = 'Levantine';
+                break;
+            case $scoreMaghrebi:
+                $dialect = 'Maghrebi';
+                break;
+            case $scorePeninsular:
+                $dialect = 'Peninsular';
+                break;
         }
 
         $probability = exp(abs($score)) / (1 + exp(abs($score)));
@@ -5043,161 +5047,161 @@ class Arabic
 
     /////////////////////////////////////// Similarity ////////////////////////////////////////////
 
-	private function arKeyboardSimilarity($chr1, $chr2)
-	{
-		$this->arSimilarityInit();
+    private function arKeyboardSimilarity($chr1, $chr2)
+    {
+        $this->arSimilarityInit();
 
-		// key order in the row (left to right)
-		$xi = $this->arKeyX["$chr1"];
-		$xj = $this->arKeyX["$chr2"];
+        // key order in the row (left to right)
+        $xi = $this->arKeyX["$chr1"];
+        $xj = $this->arKeyX["$chr2"];
 
-		// key row (buttom to up)
-		$yi = $this->arKeyY["$chr1"];
-		$yj = $this->arKeyY["$chr2"];
+        // key row (buttom to up)
+        $yi = $this->arKeyY["$chr1"];
+        $yj = $this->arKeyY["$chr2"];
 
-		// shift key status (0/1 if pressed)
-		$zi = $this->arKeyZ["$chr1"];
-		$zj = $this->arKeyZ["$chr2"];
+        // shift key status (0/1 if pressed)
+        $zi = $this->arKeyZ["$chr1"];
+        $zj = $this->arKeyZ["$chr2"];
 
-		// similarity score
-		$score = 0;
+        // similarity score
+        $score = 0;
 
-		if ($yi == $yj && $xi == $xj) {
-			// the same key + shift status penalty if differ
-			$score = 1 - 0.5 * abs($zi - $zj);
-		} elseif (min($yi, $yj) == 0 && max($xi, $xj) > 1 && max($xi, $xj) < 9) {
-			// space bar case
-			$score = 0.5;
-		} elseif ($yi == $yj && abs($xi - $xj) == 1) {
-			// left or right + shift status penalty if differ
-			$score = 0.5 - 0.25 * abs($zi - $zj);
-		} elseif (abs($yi - $yj) == 1 && ($xi - $xj == 0 || $xi - $xj == $yi - $yj)) {
-			// up or down + shift status penalty if differ
-			$score = 0.25 - 0.125 * abs($zi - $zj);
-		}
+        if ($yi == $yj && $xi == $xj) {
+            // the same key + shift status penalty if differ
+            $score = 1 - 0.5 * abs($zi - $zj);
+        } elseif (min($yi, $yj) == 0 && max($xi, $xj) > 1 && max($xi, $xj) < 9) {
+            // space bar case
+            $score = 0.5;
+        } elseif ($yi == $yj && abs($xi - $xj) == 1) {
+            // left or right + shift status penalty if differ
+            $score = 0.5 - 0.25 * abs($zi - $zj);
+        } elseif (abs($yi - $yj) == 1 && ($xi - $xj == 0 || $xi - $xj == $yi - $yj)) {
+            // up or down + shift status penalty if differ
+            $score = 0.25 - 0.125 * abs($zi - $zj);
+        }
 
-		return $score;
-	}
+        return $score;
+    }
 
-	private function arGraphicSimilarity($chr1, $chr2)
-	{
-		$this->arSimilarityInit();
+    private function arGraphicSimilarity($chr1, $chr2)
+    {
+        $this->arSimilarityInit();
 
-		if (!array_key_exists($chr1, $this->arGraphGroup) || !array_key_exists($chr2, $this->arGraphGroup)) {
-			$score = 0;
-		} else {
-			$chr1Group = $this->arGraphGroup["$chr1"];
-			$chr2Group = $this->arGraphGroup["$chr2"];
+        if (!array_key_exists($chr1, $this->arGraphGroup) || !array_key_exists($chr2, $this->arGraphGroup)) {
+            $score = 0;
+        } else {
+            $chr1Group = $this->arGraphGroup["$chr1"];
+            $chr2Group = $this->arGraphGroup["$chr2"];
 
-			if ($chr1 == $chr2) {
-				$score = 1;
-			} elseif ($chr1Group == $chr2Group) {
-				$score = 0.5;
-			} else {
-				$score = 0;
-			}
-		}
+            if ($chr1 == $chr2) {
+                $score = 1;
+            } elseif ($chr1Group == $chr2Group) {
+                $score = 0.5;
+            } else {
+                $score = 0;
+            }
+        }
 
-		return $score;
-	}
+        return $score;
+    }
 
-	private function arSoundSimilarity($chr1, $chr2)
-	{
-		$this->arSimilarityInit();
+    private function arSoundSimilarity($chr1, $chr2)
+    {
+        $this->arSimilarityInit();
 
-		if ($chr1 == $chr2) {
-			$score = 1;
-		} elseif (!array_key_exists($chr1, $this->arSoundGroup) || !array_key_exists($chr2, $this->arSoundGroup)) {
-			$score = 0;
-		} else {
-			$chr1Group = $this->arSoundGroup["$chr1"];
-			$chr2Group = $this->arSoundGroup["$chr2"];
+        if ($chr1 == $chr2) {
+            $score = 1;
+        } elseif (!array_key_exists($chr1, $this->arSoundGroup) || !array_key_exists($chr2, $this->arSoundGroup)) {
+            $score = 0;
+        } else {
+            $chr1Group = $this->arSoundGroup["$chr1"];
+            $chr2Group = $this->arSoundGroup["$chr2"];
 
-			if ($chr1Group == $chr2Group) {
-				$score = 0.5;
-			} else {
-				$score = 0;
-			}
-		}
+            if ($chr1Group == $chr2Group) {
+                $score = 0.5;
+            } else {
+                $score = 0;
+            }
+        }
 
-		return $score;
-	}
+        return $score;
+    }
 
-	// the similarity score of characters a and b (keyboard, graphic, phonetic)
-	private function S($chr1, $chr2)
-	{
-		$totalWeight = $this->keyboardWeight + $this->graphicWeight + $this->phoneticWeight;
+    // the similarity score of characters a and b (keyboard, graphic, phonetic)
+    private function S($chr1, $chr2)
+    {
+        $totalWeight = $this->keyboardWeight + $this->graphicWeight + $this->phoneticWeight;
 
-		$score = $this->arKeyboardSimilarity($chr1, $chr2) * $this->keyboardWeight / $totalWeight;
-		$score += $this->arGraphicSimilarity($chr1, $chr2) * $this->graphicWeight / $totalWeight;
-		$score += $this->arSoundSimilarity($chr1, $chr2) * $this->phoneticWeight / $totalWeight;
+        $score = $this->arKeyboardSimilarity($chr1, $chr2) * $this->keyboardWeight / $totalWeight;
+        $score += $this->arGraphicSimilarity($chr1, $chr2) * $this->graphicWeight / $totalWeight;
+        $score += $this->arSoundSimilarity($chr1, $chr2) * $this->phoneticWeight / $totalWeight;
 
-		return $score;
-	}
+        return $score;
+    }
 
-	// gap penalty scores (for each character)
-	private function d($chr)
-	{
-		$this->arSimilarityInit();
+    // gap penalty scores (for each character)
+    private function d($chr)
+    {
+        $this->arSimilarityInit();
 
-		if (array_key_exists($chr, $this->arGapPenalty)) {
-			$score = $this->arGapPenalty["$chr"];
-		} else {
-			$score = 1;
-		}
+        if (array_key_exists($chr, $this->arGapPenalty)) {
+            $score = $this->arGapPenalty["$chr"];
+        } else {
+            $score = 1;
+        }
 
-		return -1 * $score;
-	}
+        return -1 * $score;
+    }
 
-	// https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm
-	// Needleman-Wunsch algorithm using weighted scoring matrices and gap penalty
-	private function arSimilarityScore($string1, $string2)
-	{
-		$max1 = mb_strlen($string1);
-		$max2 = mb_strlen($string2);
+    // https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm
+    // Needleman-Wunsch algorithm using weighted scoring matrices and gap penalty
+    private function arSimilarityScore($string1, $string2)
+    {
+        $max1 = mb_strlen($string1);
+        $max2 = mb_strlen($string2);
 
-		$F = [];
+        $F = [];
 
-		$F[0][0] = 0;
+        $F[0][0] = 0;
 
         for ($i = 1; $i <= $max1; $i++) {
             $chr = mb_substr($string1, $i-1, 1);
-			$F[$i][0] = $this->d($chr) + $F[$i-1][0];
-		}
+            $F[$i][0] = $this->d($chr) + $F[$i-1][0];
+        }
 
         for ($j = 1; $j <= $max2; $j++) {
             $chr = mb_substr($string2, $j-1, 1);
-			$F[0][$j] = $this->d($chr) + $F[0][$j-1];
-		}
+            $F[0][$j] = $this->d($chr) + $F[0][$j-1];
+        }
 
-		for ($i = 1; $i <= $max1; $i++) {
-			for ($j = 1; $j <= $max2; $j++) {
-				$A = mb_substr($string1, $i-1, 1);
-				$B = mb_substr($string2, $j-1, 1);
+        for ($i = 1; $i <= $max1; $i++) {
+            for ($j = 1; $j <= $max2; $j++) {
+                $A = mb_substr($string1, $i-1, 1);
+                $B = mb_substr($string2, $j-1, 1);
 
-				$match  = $F[$i-1][$j-1] + $this->S($A, $B);
-				$delete = $F[$i-1][$j] + $this->d($A);
-				$insert = $F[$i][$j-1] + $this->d($B);
+                $match  = $F[$i-1][$j-1] + $this->S($A, $B);
+                $delete = $F[$i-1][$j] + $this->d($A);
+                $insert = $F[$i][$j-1] + $this->d($B);
 
-				$F[$i][$j] = max($match, $delete, $insert);
-			}
-		}
-		$score   = $F[$max1][$max2];
+                $F[$i][$j] = max($match, $delete, $insert);
+            }
+        }
+        $score   = $F[$max1][$max2];
 
-		return $score;
-	}
+        return $score;
+    }
 
-	// Calculate the similarity between two Arabic strings
-	public function similar_text($string1, $string2, &$percent = null)
-	{
-		$score  = $this->arSimilarityScore($string1, $string2);
-		$score1 = $this->arSimilarityScore($string1, $string1);
-		$score2 = $this->arSimilarityScore($string2, $string2);
+    // Calculate the similarity between two Arabic strings
+    public function similar_text($string1, $string2, &$percent = null)
+    {
+        $score  = $this->arSimilarityScore($string1, $string2);
+        $score1 = $this->arSimilarityScore($string1, $string1);
+        $score2 = $this->arSimilarityScore($string2, $string2);
 
-		$percent = 100 * $score / max($score1, $score2);
+        $percent = 100 * $score / max($score1, $score2);
 
-		return $score;
-	}
+        return $score;
+    }
 
     public function setSimilarityWeight($source, $value = 1)
     {
@@ -5234,13 +5238,13 @@ class Arabic
 
         return $value;
     }
-	/*
-	public function getSoundSimilarityGroups()
-	{
-		// check line 800
-		foreach($this->arSoundGroup as $char => $value) $groups[$value][] = $char;
+    /*
+    public function getSoundSimilarityGroups()
+    {
+        // check line 800
+        foreach($this->arSoundGroup as $char => $value) $groups[$value][] = $char;
 
-		return $this->arSoundGroup;
-	}
-	*/
+        return $this->arSoundGroup;
+    }
+    */
 }

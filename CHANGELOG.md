@@ -39,7 +39,7 @@
 
 * Full integration with the open-source version of the Arabic Spell Checker (ASC https://arabicspellchecker.com/open-source.html).
 
-* Implement a lazy-loading mechanism that defers reading large data files until they are actually needed, improving average performance by 40%.
+* Implement a lazy-loading mechanism that defers reading large data files until they are actually needed, improving average performance by 40% ± 5%.
 
 * Add the new "arDialect" method for Arabic dialect identification (i.e., Egyptian, Levantine, Maghrebi, and Peninsular) of the text (e.g., comments, reviews, etc.).
 
