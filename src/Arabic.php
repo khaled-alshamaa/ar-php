@@ -447,7 +447,8 @@ class Arabic
     private function arPluralInit()
     {
         if ($this->arPluralLoad === false) {
-            $json = json_decode(file_get_contents($this->rootDirectory . '/data/ar_plurals.json'), true);
+            $file = $this->rootDirectory . '/data/ar_plurals.json';
+            $json = json_decode(file_get_contents($file), true);
             $this->arPluralsForms = $json['arPluralsForms'];
 
             $this->arPluralLoad = true;
@@ -458,8 +459,11 @@ class Arabic
     private function arDateInit()
     {
         if ($this->arDateLoad === false) {
-            $this->umAlqoura = file($this->rootDirectory . '/data/um_alqoura.txt', FILE_IGNORE_NEW_LINES);
-            $this->arDateJSON = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_date.json'), true);
+            $file = $this->rootDirectory . '/data/um_alqoura.txt';
+            $this->umAlqoura = file($file, FILE_IGNORE_NEW_LINES);
+
+            $file = $this->rootDirectory . '/data/ar_date.json';
+            $this->arDateJSON = json_decode((string)file_get_contents($file), true);
 
             $this->arDateLoad = true;
         }
@@ -469,15 +473,19 @@ class Arabic
     private function arNamesInit()
     {
         if ($this->arNamesLoad === false) {
-            $this->arFemaleNames = file($this->rootDirectory . '/data/ar_female.txt', FILE_IGNORE_NEW_LINES);
-            $this->arMaleNames = file($this->rootDirectory . '/data/ar_male.txt', FILE_IGNORE_NEW_LINES);
+            $file = $this->rootDirectory . '/data/ar_female.txt';
+            $this->arFemaleNames = file($file, FILE_IGNORE_NEW_LINES);
+
+            $file = $this->rootDirectory . '/data/ar_male.txt';
+            $this->arMaleNames = file($file, FILE_IGNORE_NEW_LINES);
 
             $this->arNamesLoad = true;
         }
     }
 
     /** @return void */
-    private function arSpellerInit() {
+    private function arSpellerInit()
+    {
         if ($this->arSpellerLoad === false) {
             $this->speller = new \ArPHP\MZK\Speller();
 
@@ -492,12 +500,12 @@ class Arabic
      * @return array<string>
      * @author Moutaz Alkhatib <muotaz@gmail.com>
      */
-    public function spellGetMisspelled($text) {
+    public function spellGetMisspelled($text)
+    {
         $this->arSpellerInit();
-        
-        $ret =$this->speller->spell_check($text, false);
-        return array_keys($ret['no_sugg_cache']);
 
+        $ret = $this->speller->spell_check($text, false);
+        return array_keys($ret['no_sugg_cache']);
     }
 
     /**
@@ -507,9 +515,10 @@ class Arabic
      * @return array<array<string, mixed>>
      * @author Moutaz Alkhatib <muotaz@gmail.com>
      */
-    public function spellSuggestCorrections($text) {
+    public function spellSuggestCorrections($text)
+    {
         $this->arSpellerInit();
-        
+
         $ret = $this->speller->spell_check($text, true);
         return array_map(function ($element) {
             return ["word" => $element['word'], "suggestion" => array_slice($element['sugg'], 0, 8)];
@@ -626,7 +635,7 @@ class Arabic
             $this->strToTimeReplacements[] = '';
             $this->strToTimeReplacements[] = ' \\2 \\1';
             $this->strToTimeReplacements[] = ' \\1';
-            
+
             $this->arStrToTimeLoad = true;
         }
     }
@@ -635,7 +644,8 @@ class Arabic
     private function arTransliterateInit()
     {
         if ($this->arTransliterateLoad === false) {
-            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_transliteration.json'), true);
+            $file = $this->rootDirectory . '/data/ar_transliteration.json';
+            $json = json_decode((string)file_get_contents($file), true);
 
             foreach ($json['preg_replace_en2ar'] as $item) {
                 $this->en2arPregSearch[]  = $item['search'];
@@ -676,7 +686,7 @@ class Arabic
                 $this->iso233Search[]  = $item['search'];
                 $this->iso233Replace[] = $item['replace'];
             }
-            
+
             $this->arTransliterateLoad = true;
         }
     }
@@ -685,7 +695,8 @@ class Arabic
     private function arNumbersInit()
     {
         if ($this->arNumbersLoad === false) {
-            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_numbers.json'), true);
+            $file = $this->rootDirectory . '/data/ar_numbers.json';
+            $json = json_decode((string)file_get_contents($file), true);
 
             foreach ($json['individual']['male'] as $num) {
                 if (isset($num['grammar'])) {
@@ -760,7 +771,7 @@ class Arabic
 
                 $this->arNumberCurrency[$money['iso']]['decimals'] = $money['decimals'];
             }
-            
+
             $this->arNumbersLoad = true;
         }
     }
@@ -769,7 +780,8 @@ class Arabic
     private function arKeySwapInit()
     {
         if ($this->arKeySwapLoad === false) {
-            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_keyswap.json'), true);
+            $file = $this->rootDirectory . '/data/ar_keyswap.json';
+            $json = json_decode((string)file_get_contents($file), true);
 
             foreach ($json['arabic'] as $key) {
                 $index = (int)$key['id'];
@@ -786,9 +798,12 @@ class Arabic
                 $this->frKeyboard[$index] = (string)$key['text'];
             }
 
-            $this->arLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_ar.txt'));
-            $this->enLogodd = unserialize(file_get_contents($this->rootDirectory . '/data/logodd_en.txt'));
-            
+            $file = $this->rootDirectory . '/data/logodd_ar.txt';
+            $this->arLogodd = unserialize(file_get_contents($file));
+
+            $file = $this->rootDirectory . '/data/logodd_en.txt';
+            $this->enLogodd = unserialize(file_get_contents($file));
+
             $this->arKeySwapLoad = true;
         }
     }
@@ -797,7 +812,8 @@ class Arabic
     private function arSoundexInit()
     {
         if ($this->arSoundexLoad === false) {
-            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_soundex.json'), true);
+            $file = $this->rootDirectory . '/data/ar_soundex.json';
+            $json = json_decode((string)file_get_contents($file), true);
 
             foreach ($json['arSoundexCode'] as $item) {
                 $index = $item['search'];
@@ -829,7 +845,8 @@ class Arabic
             // Arabic Presentation Forms-B (https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-B)
             // Contextual forms (https://en.wikipedia.org/wiki/Arabic_script_in_Unicode#Contextual_forms)
             // 0- ISOLATED FORM, 1- FINAL FORM, 2- INITIAL FORM, 3- MEDIAL FORM
-            $this->arGlyphs = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_glyphs.json'), true);
+            $file = $this->rootDirectory . '/data/ar_glyphs.json';
+            $this->arGlyphs = json_decode((string)file_get_contents($file), true);
 
             $this->arGlyphsLoad = true;
         }
@@ -839,7 +856,8 @@ class Arabic
     private function arQueryInit()
     {
         if ($this->arQueryLoad === false) {
-            $json = json_decode((string)file_get_contents($this->rootDirectory . '/data/ar_query.json'), true);
+            $file = $this->rootDirectory . '/data/ar_query.json';
+            $json = json_decode((string)file_get_contents($file), true);
 
             foreach ($json['preg_replace'] as $pair) {
                 $this->arQueryLexPatterns[] = (string)$pair['search'];
@@ -1186,7 +1204,7 @@ class Arabic
     public function en2ar($string, $locale = 'en_US')
     {
         $this->arTransliterateInit();
-        
+
         setlocale(LC_ALL, $locale);
 
         $string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
@@ -1229,7 +1247,7 @@ class Arabic
     public function ar2en($string, $standard = 'UNGEGN')
     {
         $this->arTransliterateInit();
-        
+
         //$string = strtr($string, ['ة ال' => 'tul']);
         $words  = explode(' ', $string);
         $string = '';
@@ -1780,7 +1798,7 @@ class Arabic
     public function money2str($number, $iso = 'SYP', $lang = 'ar')
     {
         $this->arNumbersInit();
-        
+
         $iso  = strtoupper($iso);
         $lang = strtolower($lang);
 
@@ -2678,7 +2696,7 @@ class Arabic
                     $output .= '&#x' . $this->arGlyphs[$crntChar . $nextChar][0] . ';';
                 }
                 if ($prevChar == 'ل') {
-                    if(isset($chars[$i - 2])) {
+                    if (isset($chars[$i - 2])) {
                         $tmp_form = (isset($this->arGlyphs[$chars[$i - 2]]['prevLink']) &&
                                      $this->arGlyphs[$chars[$i - 2]]['prevLink'] == true) ? 3 : 2;
                     } else {
@@ -4404,10 +4422,17 @@ class Arabic
      * @return string Proper plural form of the given singular form
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function arPlural($singular, $count, $plural2 = null, $plural3 = null, $plural4 = null, $nameOnly = false, $isFemale = null)
-    {
+    public function arPlural(
+        $singular,
+        $count,
+        $plural2 = null,
+        $plural3 = null,
+        $plural4 = null,
+        $nameOnly = false,
+        $isFemale = null
+    ) {
         $this->arPluralInit();
-        
+
         $isFemale = $isFemale === null ? $this->isFemale($singular) : $isFemale;
 
         if ($count == 0) {
@@ -5128,7 +5153,7 @@ class Arabic
     }
 
     // the similarity score of characters a and b (keyboard, graphic, phonetic)
-    private function S($chr1, $chr2)
+    private function s($chr1, $chr2)
     {
         $totalWeight = $this->keyboardWeight + $this->graphicWeight + $this->phoneticWeight;
 
@@ -5165,23 +5190,23 @@ class Arabic
         $F[0][0] = 0;
 
         for ($i = 1; $i <= $max1; $i++) {
-            $chr = mb_substr($string1, $i-1, 1);
-            $F[$i][0] = $this->d($chr) + $F[$i-1][0];
+            $chr = mb_substr($string1, $i - 1, 1);
+            $F[$i][0] = $this->d($chr) + $F[$i - 1][0];
         }
 
         for ($j = 1; $j <= $max2; $j++) {
-            $chr = mb_substr($string2, $j-1, 1);
-            $F[0][$j] = $this->d($chr) + $F[0][$j-1];
+            $chr = mb_substr($string2, $j - 1, 1);
+            $F[0][$j] = $this->d($chr) + $F[0][$j - 1];
         }
 
         for ($i = 1; $i <= $max1; $i++) {
             for ($j = 1; $j <= $max2; $j++) {
-                $A = mb_substr($string1, $i-1, 1);
-                $B = mb_substr($string2, $j-1, 1);
+                $A = mb_substr($string1, $i - 1, 1);
+                $B = mb_substr($string2, $j - 1, 1);
 
-                $match  = $F[$i-1][$j-1] + $this->S($A, $B);
-                $delete = $F[$i-1][$j] + $this->d($A);
-                $insert = $F[$i][$j-1] + $this->d($B);
+                $match  = $F[$i - 1][$j - 1] + $this->s($A, $B);
+                $delete = $F[$i - 1][$j] + $this->d($A);
+                $insert = $F[$i][$j - 1] + $this->d($B);
 
                 $F[$i][$j] = max($match, $delete, $insert);
             }
