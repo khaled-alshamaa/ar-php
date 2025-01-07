@@ -89,7 +89,7 @@ class Arabic
     /** @var array<string> */
     private $strToTimeReplacements = [];
 
-    /** @var string|false */
+    /** @var array<string> */
     private $umAlqoura;
 
     /** @var array<string> */
@@ -345,19 +345,19 @@ class Arabic
     /** @var array<string> */
     private $dialectsStems = [];
 
-    /** @var array<float> */
+    /** @var array<string> */
     private $logOddDialects = [];
 
-    /** @var array<float> */
+    /** @var array<string> */
     private $logOddEgyptian = [];
 
-    /** @var array<float> */
+    /** @var array<string> */
     private $logOddLevantine = [];
 
-    /** @var array<float> */
+    /** @var array<string> */
     private $logOddMaghrebi = [];
 
-    /** @var array<float> */
+    /** @var array<string> */
     private $logOddPeninsular = [];
 
     /** @var array<string> */
@@ -1624,8 +1624,8 @@ class Arabic
 
         $calc = $time - (int)$this->date('j', $time) * 3600 * 24;
 
-        $y      = $this->date('Y', $time);
-        $m      = $this->date('n', $time);
+        $y      = (int)$this->date('Y', $time);
+        $m      = (int)$this->date('n', $time);
         $offset = ($y - 1420) * 12 + $m;
 
         $d = substr($this->umAlqoura[$offset], 0, 2);
@@ -4418,6 +4418,7 @@ class Arabic
      * @param string  $plural3  Plural form 3 (e.g., عناصر). If NULL [default] retrive from internal JSON dataset.
      * @param string  $plural4  Plural form 4 (e.g., عنصرا). If NULL [default] retrive from internal JSON dataset.
      * @param bool    $nameOnly Get only the name without the number, e.g., if you want to style numbers separately.
+     * @param bool    $isFemale Is Female.
      *
      * @return string Proper plural form of the given singular form
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
@@ -4710,7 +4711,8 @@ class Arabic
             $scorePeninsular += $pen_scores / count($stems);
         }
 
-        $score = max($scoreEgyptian, $scoreLevantine, $scoreMaghrebi, $scorePeninsular);
+        $score   = max($scoreEgyptian, $scoreLevantine, $scoreMaghrebi, $scorePeninsular);
+        $dialect = 'Modern';
 
         switch ($score) {
             case $scoreEgyptian:
@@ -5072,21 +5074,38 @@ class Arabic
 
     /////////////////////////////////////// Similarity ////////////////////////////////////////////
 
+    /**
+     * Calculates the keyboard proximity similarity score between two characters.
+     *
+     * This method initializes similarity parameters and computes the similarity score of two characters
+     * based on their positions on a keyboard. The score considers the key positions (row, column) and
+     * the shift key status, with the following conditions:
+     * - `1` if the characters are the same key (with a penalty for differing shift status).
+     * - `0.5` for space bar proximity.
+     * - `0.5` if the characters are adjacent horizontally (with a penalty for differing shift status).
+     * - `0.25` if the characters are adjacent vertically or diagonally (with a penalty for differing shift status).
+     * - `0` for all other cases.
+     *
+     * @param string $chr1 The first character to compare.
+     * @param string $chr2 The second character to compare.
+     *
+     * @return float The keyboard similarity score between the two characters (ranging from 0 to 1).
+     */
     private function arKeyboardSimilarity($chr1, $chr2)
     {
         $this->arSimilarityInit();
 
         // key order in the row (left to right)
-        $xi = $this->arKeyX["$chr1"];
-        $xj = $this->arKeyX["$chr2"];
+        $xi = (int)$this->arKeyX["$chr1"];
+        $xj = (int)$this->arKeyX["$chr2"];
 
         // key row (buttom to up)
-        $yi = $this->arKeyY["$chr1"];
-        $yj = $this->arKeyY["$chr2"];
+        $yi = (int)$this->arKeyY["$chr1"];
+        $yj = (int)$this->arKeyY["$chr2"];
 
         // shift key status (0/1 if pressed)
-        $zi = $this->arKeyZ["$chr1"];
-        $zj = $this->arKeyZ["$chr2"];
+        $zi = (int)$this->arKeyZ["$chr1"];
+        $zj = (int)$this->arKeyZ["$chr2"];
 
         // similarity score
         $score = 0;
@@ -5108,6 +5127,20 @@ class Arabic
         return $score;
     }
 
+    /**
+     * Calculates the graphical similarity score between two characters.
+     *
+     * This method initializes similarity parameters and determines the graphical similarity score
+     * of two characters based on their membership in predefined graphical groups. The score is:
+     * - `1` if the characters are identical.
+     * - `0.5` if the characters belong to the same graphical group.
+     * - `0` if they do not belong to the same graphical group or are not defined in the graphical groups.
+     *
+     * @param string $chr1 The first character to compare.
+     * @param string $chr2 The second character to compare.
+     *
+     * @return float The graphical similarity score between the two characters (0, 0.5, or 1).
+     */
     private function arGraphicSimilarity($chr1, $chr2)
     {
         $this->arSimilarityInit();
@@ -5130,6 +5163,20 @@ class Arabic
         return $score;
     }
 
+    /**
+     * Calculates the phonetic similarity score between two characters.
+     *
+     * This method initializes similarity parameters and determines the phonetic similarity score
+     * of two characters based on their membership in predefined sound groups. The score is:
+     * - `1` if the characters are identical.
+     * - `0.5` if the characters belong to the same sound group.
+     * - `0` if they do not belong to the same sound group or are not defined in the sound groups.
+     *
+     * @param string $chr1 The first character to compare.
+     * @param string $chr2 The second character to compare.
+     *
+     * @return float The phonetic similarity score between the two characters (0, 0.5, or 1).
+     */
     private function arSoundSimilarity($chr1, $chr2)
     {
         $this->arSimilarityInit();
@@ -5152,7 +5199,18 @@ class Arabic
         return $score;
     }
 
-    // the similarity score of characters a and b (keyboard, graphic, phonetic)
+    /**
+     * Calculates the similarity score between two characters.
+     *
+     * This method computes the similarity score of two characters based on keyboard proximity,
+     * graphical similarity, and phonetic similarity. The final score is a weighted average of the
+     * individual similarity scores using predefined weights for each factor.
+     *
+     * @param string $chr1 The first character to compare.
+     * @param string $chr2 The second character to compare.
+     *
+     * @return float The calculated similarity score between the two characters as a weighted average.
+     */
     private function s($chr1, $chr2)
     {
         $totalWeight = $this->keyboardWeight + $this->graphicWeight + $this->phoneticWeight;
@@ -5164,7 +5222,18 @@ class Arabic
         return $score;
     }
 
-    // gap penalty scores (for each character)
+    /**
+     * Calculates the gap penalty for a given character.
+     *
+     * This method initializes similarity parameters, checks if the given character exists in the
+     * predefined gap penalty array, and calculates the penalty score. If the character is not found,
+     * a default penalty score of 1 is used.
+     *
+     * @param string $chr The character for which the gap penalty is calculated.
+     *
+     * @return float The calculated gap penalty as a negative integer.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
     private function d($chr)
     {
         $this->arSimilarityInit();
@@ -5178,8 +5247,16 @@ class Arabic
         return -1 * $score;
     }
 
-    // https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm
-    // Needleman-Wunsch algorithm using weighted scoring matrices and gap penalty
+    /**
+     * Needleman-Wunsch algorithm using weighted scoring matrices and gap penalty
+     * https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm
+     *
+     * @param string $string1 The first string.
+     * @param string $string2 The second string.
+     *
+     * @return float Similarity score.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
     private function arSimilarityScore($string1, $string2)
     {
         $max1 = mb_strlen($string1);
@@ -5216,7 +5293,17 @@ class Arabic
         return $score;
     }
 
-    // Calculate the similarity between two Arabic strings
+    /**
+     * Calculate the similarity between two Arabic strings
+     *
+     * @param string $string1  The first string.
+     * @param string $string2  The second string.
+     * @param float|null &$percent [optional] By passing a reference as the third argument, this will be filled
+     *                              with the percentage of similarity between the two strings.
+     *
+     * @return float The number of matching chars in both strings.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
     public function similar_text($string1, $string2, &$percent = null)
     {
         $score  = $this->arSimilarityScore($string1, $string2);
@@ -5228,6 +5315,15 @@ class Arabic
         return $score;
     }
 
+    /**
+     * Set Similarity Weight
+     *
+     * @param string $source [keyboardWeight|graphicWeight|phoneticWeight]
+     * @param float  $value
+     *
+     * @return object $this to build a fluent interface.
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
     public function setSimilarityWeight($source, $value = 1)
     {
         switch ($source) {
@@ -5245,6 +5341,14 @@ class Arabic
         return $this;
     }
 
+    /**
+     * Get Similarity Weight
+     *
+     * @param string $source [keyboardWeight|graphicWeight|phoneticWeight]
+     *
+     * @return float the similarity weight for the given source
+     * @author Khaled Al-Sham'aa <khaled@ar-php.org>
+     */
     public function getSimilarityWeight($source)
     {
         switch ($source) {
