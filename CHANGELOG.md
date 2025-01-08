@@ -47,7 +47,7 @@
 
 * Add [Urdu characters support]((https://github.com/khaled-alshamaa/ar-php/issues/71) to the utf8Glyphs() function.
 
-* Expand character glyphs support in the utf8Glyphs() function to include all single letter variants listed in the [Arabic Presentation Forms-A](https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-A) needed for Persian, Urdu, Sindhi, and Central Asian languages.
+* Expand character glyphs support in the utf8Glyphs() function to include all single letter variants listed in the [Arabic Presentation Forms-A](https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-A) needed for Ottoman, Persian, Urdu, Sindhi, and Central Asian languages.
 
 * Various minor fixes and improvements, see related [pull requests](https://github.com/khaled-alshamaa/ar-php/pulls?q=is%3Apr+is%3Aclosed+66+74+75) for details.
 
