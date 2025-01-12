@@ -3886,6 +3886,8 @@ class Arabic
             $summary = strtr($summary, ["\n" => '<br />']);
         }
 
+        $summary = trim(preg_replace('/\s+/', ' ', $summary));
+
         return $summary;
     }
 
