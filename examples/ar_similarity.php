@@ -17,6 +17,53 @@
 <div class="Paragraph">
 <h2 dir="ltr" id="example-1">
 <a href="#example-1" class="anchor"><img src="./images/link_icon.png" width="16" border="0"></a>Example Output 1:</h2>
+
+<?php
+$keyboardWeight = 50;
+$graphicWeight  = 50;
+$phoneticWeight = 50;
+
+if (isset($_GET['keyboardWeight'])) $keyboardWeight = filter_var($_GET['keyboardWeight'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100]]);
+if (isset($_GET['graphicWeight'])) $graphicWeight = filter_var($_GET['graphicWeight'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100]]);
+if (isset($_GET['phoneticWeight'])) $phoneticWeight = filter_var($_GET['phoneticWeight'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100]]);
+
+?>
+
+<form method="get">
+<input type="range" min="0" max="100" value="<?php echo $keyboardWeight; ?>" class="slider" id="keyboardWeight" name="keyboardWeight" 
+       onChange="document.getElementById('k').innerHTML = this.value; for (const radio of document.getElementsByName('use_case'))radio.checked = false"> 
+       Keyboard Similarity Weight (<span id="k"><?php echo $keyboardWeight; ?></span>%)<br/>
+
+<input type="range" min="0" max="100" value="<?php echo $graphicWeight; ?>" class="slider" id="graphicWeight" name="graphicWeight"  
+       onChange="document.getElementById('g').innerHTML = this.value; for (const radio of document.getElementsByName('use_case'))radio.checked = false"> 
+	   Graphic Similarity Weight (<span id="g"><?php echo $graphicWeight; ?></span>%)<br/>
+	   
+<input type="range" min="0" max="100" value="<?php echo $phoneticWeight; ?>" class="slider" id="phoneticWeight" name="phoneticWeight" 
+       onChange="document.getElementById('p').innerHTML = this.value; for (const radio of document.getElementsByName('use_case'))radio.checked = false"> 
+	   Phonetic Similarity Weight (<span id="p"><?php echo $phoneticWeight; ?></span>%)<br/>
+
+<p>
+	<input type="radio" id="keyboard" name="use_case" value="keyboard" 
+		   onClick="document.getElementById('keyboardWeight').value = 100;
+					document.getElementById('graphicWeight').value  = 20;
+					document.getElementById('phoneticWeight').value = 0;"> 
+					<label for="keyboard">Data Entry (Keyboard)</label>
+
+	<input type="radio" id="ocr" name="use_case" value="ocr" 
+		   onClick="document.getElementById('keyboardWeight').value = 0;
+					document.getElementById('graphicWeight').value  = 100;
+					document.getElementById('phoneticWeight').value = 0;"> 
+					<label for="ocr">Scanned Document (OCR)</label>
+
+	<input type="radio" id="asr" name="use_case" value="asr" 
+		   onClick="document.getElementById('keyboardWeight').value = 0;
+					document.getElementById('graphicWeight').value  = 0;
+					document.getElementById('phoneticWeight').value = 100;"> 
+					<label for="asr">Speech Recognition (ASR)</label>
+</p>
+
+<input type="submit" value="Recalculate"/>
+</form>
 <?php
 
 error_reporting(E_ALL);
