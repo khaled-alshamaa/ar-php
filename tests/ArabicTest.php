@@ -1285,4 +1285,26 @@ END;
 
         $this->assertEquals($expected, $actual);
     }
+
+    public function testArabicDialectAnalysis(): void
+    {
+        $Arabic = new \ArPHP\I18N\Arabic();
+
+        $expected = array();
+        $actual   = array();
+
+        $expected[] = 'Egyptian';
+        $actual[]   = $Arabic->arDialect('الله، هو إيه أصله ده')['dialect'];
+
+        $expected[] = 'Levantine';
+        $actual[]   = $Arabic->arDialect('ليش عم تحكي هيك يا بعدي')['dialect'];
+
+        $expected[] = 'Peninsular';
+        $actual[]   = $Arabic->arDialect('ما أبغي أسمع حاجة زود')['dialect'];
+
+        $expected[] = 'Maghrebi';
+        $actual[]   = $Arabic->arDialect('يعيشك، إحنا نحبوك بالزاف')['dialect'];
+
+        $this->assertEquals($expected, $actual);
+    }
 }
