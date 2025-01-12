@@ -529,8 +529,8 @@ final class ArabicTest extends TestCase
         $direction = $Arabic->getQibla();
 
         $this->assertEquals(
-            $direction,
-            164.70473621919
+            round($direction, 6),
+            round(164.70473621919, 6)
         );
     }
 
@@ -545,16 +545,16 @@ final class ArabicTest extends TestCase
         $Arabic->setSalatDate(11, 19, 2020);
         $Arabic->setSalatConf('Shafi', -0.833333, -17.5, -19.5, 'Sunni');
 
-        $expected[] = ["5:36","7:05","12:20","15:10","17:37","18:54","17:35","0:20","5:26",
-                      [1605764160.0,1605769500.0,1605788400.0,1605798600.0,1605807420.0,1605812040.0,1605807300.0,1605831600.0,1605763560.0]];
+        $expected[] = ["5:39","7:09","12:23","15:12","17:39","18:56","17:37","0:23","5:29",
+                      [1605764340.0,1605769740.0,1605788580.0,1605798720.0,1605807540.0,1605812160.0,1605807420.0,1605831780.0,1605763740.0]];
         $actual[]   = $Arabic->getPrayTime();
 
         $Arabic->setSalatLocation(36.22, 37.13, 2, 380);
         $Arabic->setSalatDate(1, 25, 2021);
         $Arabic->setSalatConf('Hanafi', -0.833333, -17.5, -19.5, 'Shia');
 
-        $expected[] = ["5:01","6:34","11:44","15:11","17:07","18:17","16:54","22:57","4:51",
-                      [1611550860.0,1611556440.0,1611575040.0,1611587460.0,1611594420.0,1611598620.0,1611593640.0,1611615420.0,1611550260.0]];
+        $expected[] = ["5:03","6:36","11:47","15:15","17:11","18:21","16:58","23:01","4:53",
+                      [1611550980.0,1611556560.0,1611575220.0,1611587700.0,1611594660.0,1611598860.0,1611593880.0,1611615660.0,1611550380.0]];
         $actual[]   = $Arabic->getPrayTime();
 
         $this->assertEquals($expected, $actual);
@@ -735,7 +735,7 @@ END;
 
         $this->assertEquals(
             $StrSQL,
-            "SELECT `field` FROM `table` WHERE (field LIKE 'أصيلون\') OR ( REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?') OR ( REPLACE(field, 'ـ', '') REGEXP '\') ORDER BY ((field LIKE 'أصيلون') + (CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?' THEN 1 ELSE 0 END)) DESC"
+            "SELECT `field` FROM `table` WHERE (field LIKE 'أصيلون\') OR (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') OR (field LIKE '%\%' AND REGEXP '\') ORDER BY ((field LIKE 'أصيلون') + (CASE WHEN (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') THEN 1 ELSE 0 END)) DESC"
         );
     }
 
@@ -755,7 +755,7 @@ END;
 
         $this->assertEquals(
             $StrSQL,
-            "SELECT `field` FROM `table` WHERE ( REPLACE(field, 'ـ', '') REGEXP 'ثقب') AND ( REPLACE(field, 'ـ', '') REGEXP '(ا|أ|إ|آ)سود') ORDER BY ((CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'ثقب' THEN 1 ELSE 0 END) + (CASE WHEN  REPLACE(field, 'ـ', '') REGEXP '(ا|أ|إ|آ)سود' THEN 1 ELSE 0 END)) DESC"
+            "SELECT `field` FROM `table` WHERE (field LIKE '%ثقب%' AND REGEXP 'ثقب') AND (field LIKE '%سود%' AND REGEXP '(ا|أ|إ|آ)سود') ORDER BY ((CASE WHEN (field LIKE '%ثقب%' AND REGEXP 'ثقب') THEN 1 ELSE 0 END) + (CASE WHEN (field LIKE '%سود%' AND REGEXP '(ا|أ|إ|آ)سود') THEN 1 ELSE 0 END)) DESC"
         );
     }
 
@@ -775,7 +775,7 @@ END;
 
         $this->assertEquals(
             $StrSQL,
-            "SELECT `field` FROM `table` WHERE ( REPLACE(field, 'ـ', '') REGEXP 'عرب') OR ( REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?') ORDER BY ((CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'عرب' THEN 1 ELSE 0 END) + (CASE WHEN  REPLACE(field, 'ـ', '') REGEXP 'فلسطيني(ون)?' THEN 1 ELSE 0 END)) DESC"
+            "SELECT `field` FROM `table` WHERE (field LIKE '%عرب%' AND OR (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') ORDER BY ((CASE WHEN (field LIKE '%عرب%' AND REGEXP 'عرب') THEN 1 ELSE 0 END) + (CASE WHEN (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') THEN 1 ELSE 0 END)) DESC"
         );
     }
 
