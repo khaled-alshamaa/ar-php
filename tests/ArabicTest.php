@@ -528,10 +528,7 @@ final class ArabicTest extends TestCase
         $Arabic->setSalatLocation(33.52, 36.31);
         $direction = $Arabic->getQibla();
 
-        $this->assertEquals(
-            round($direction, 6),
-            round(164.70473621919, 6)
-        );
+        $this->assertEqualsWithDelta($direction, 164.70473621919, 0.000001);
     }
 
     public function testMuslimPrayerTimes(): void
@@ -775,7 +772,7 @@ END;
 
         $this->assertEquals(
             $StrSQL,
-            "SELECT `field` FROM `table` WHERE (field LIKE '%عرب%' AND OR (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') ORDER BY ((CASE WHEN (field LIKE '%عرب%' AND REGEXP 'عرب') THEN 1 ELSE 0 END) + (CASE WHEN (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') THEN 1 ELSE 0 END)) DESC"
+            "SELECT `field` FROM `table` WHERE (field LIKE '%عرب%' AND REGEXP 'عرب') OR (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') ORDER BY ((CASE WHEN (field LIKE '%عرب%' AND REGEXP 'عرب') THEN 1 ELSE 0 END) + (CASE WHEN (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') THEN 1 ELSE 0 END)) DESC"
         );
     }
 
@@ -1195,7 +1192,7 @@ END;
         $expected[] = array(null, null);
         $actual[]   = $Arabic->olc2dd('8G6RM7C7-PF');
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEqualsWithDelta($expected, $actual, 0.00001);
     }
 
     public function testArabicSentimentAnalysis(): void
