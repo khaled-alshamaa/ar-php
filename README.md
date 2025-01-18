@@ -70,6 +70,7 @@ Ar-PHP has been successfully integrated into several projects, including:
 * [UnoPim](https://unopim.com/): An open-source PIM system built on the Laravel framework.
 * [GPDF](https://github.com/omaralalwi/Gpdf): An open-source HTML-to-PDF converter for PHP & Laravel applications.
 * [ArabKey](https://arabkey.site/): A tool for switching between Arabic and English keyboards.
+* [Krayin](https://krayincrm.com/): An Open Source CRM Software.
 
 [![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
 
