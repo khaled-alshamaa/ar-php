@@ -83,6 +83,8 @@ https://github.com/khaled-alshamaa/ar-php, 2024
 
 برنامج [عرب كيبورد](https://arabkey.site/): طريقة سهلة للتحويل ما بين لوحة المفاتيح العربية والإنجليزية، والعديد من الأدوات المفيدة للغة العربية. [تحقق من ذلك [هنا](https://github.com/still-code/ar-php-laravel)]
 
+برنامج [Krayin](https://krayincrm.com/): نظام إدارة علاقات العملاء مفتوح المصدر.
+
 ### تطور تاريخ الإعجابات
 
 [![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
