@@ -31,8 +31,14 @@ class Speller {
     public function __construct(Array $options = [] ) {
 
         $this->rootDirectory = dirname(__FILE__);
+		
+		$tmpfile_path = sys_get_temp_dir().DIRECTORY_SEPARATOR.'sarahspell.db';
+		if (!file_exists($tmpfile_path)) {
+			copy('compress.bzip2://' . $this->rootDirectory.'/data/SarahSpell/sarahspell.db.bz2', $tmpfile_path);
+		}
+
         try {
-            $this->conn = new \PDO('sqlite:'.$this->rootDirectory.'/data/SarahSpell/sarahspell-db.db',null,null,[\PDO::ATTR_PERSISTENT => true]);
+            $this->conn = new \PDO('sqlite:'.$tmpfile_path,null,null,[\PDO::ATTR_PERSISTENT => true]);
             $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch(\PDOException $e) {
             echo "Connection failed: " . $e->getMessage();

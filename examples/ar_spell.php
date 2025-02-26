@@ -9,119 +9,93 @@
 
 <body>
 
-<br />
-
 <div class="Paragraph">
-<h2 dir="ltr" >ASC (المُصحِّح) Demo in ArPHP</h2>
+<h2>ASC (المُصحِّح) Demo in ArPHP</h2>
     <p align="justified">
-
-        The ASC (المُصحِّح) package in ArPHP Library adds fast, reliable spell-checking to web sites and intranets.
-        <br>
-        Our spell checker comes in two versions: an open source, bundled with ArPHP, and a paid extended version.
-        <br>
+        The ASC (المُصحِّح) package in ArPHP Library adds fast, reliable spell-checking to web sites and intranets.<br/>
+        Our spell checker comes in two versions: an open source, bundled with ArPHP, and a paid extended version.<br/>
         The bundle features:
         <ul>
-        <li>A high Performance spelling engine which can be scaled to large user bases.
-        <li>Pspell support to provide spell checking for more languages
-        <li>LanguageTool Support for style and grammar checking (Extended Version)
-        <li>Advanced spell checking support for space and 2ED errors (Extended Version)
-    </ul>
-
-    <br>
-
-    For more information please contact info@arabicspellchecker.com
-
-
+			<li>A high Performance spelling engine which can be scaled to large user bases.</li>
+			<li>Pspell support to provide spell checking for more languages.</li>
+			<li>LanguageTool Support for style and grammar checking (Extended Version).</li>
+			<li>Advanced spell checking support for space and 2ED errors (Extended Version).</li>
+		</ul>
+		<br/>For more information please contact info@arabicspellchecker.com
     </p>
-</div>
+</div><br />
 
+<div class="Paragraph">
+<h2 dir="ltr" id="example-1">
+<a href="#example-1" class="anchor"><img src="./images/link_icon.png" width="16" border="0"></a>Example Output 1:</h2>
 <?php
 
-error_reporting(0);
+error_reporting(E_ALL);
+
+/*
+  // Autoload files using Composer autoload
+  require_once __DIR__ . '/../vendor/autoload.php';
+*/
 
 require '../src/Arabic.php';
-
 $Arabic = new \ArPHP\I18N\Arabic();
-//<a href="#example-1" class="anchor"><img src="./images/link_icon.png" width="16" border="0"></a>
 
-$text = "
-والان وصلت الحوسبه الكمومية التي تعتمد على فيزياء الكم. نعم هي في المرحلة التجريبية ولكن إذا نجحت مشاريع كمبيوتراتها فستكون هذه الآلات قوية للغاية.
- ولكن لو تركت بدون تنظيم وتم تطبيقها في حياتنا اليومية، فربما تكون خطرا آخرا يهدد حياتنا وكوكبنا. 
+$text = <<< END
+والان وصلت الحوسبه الكمومية التي تعاتمد على فيزياء الكم. نعم هي في المرحلة التجريبية، ولكن إذا نجحت فستكون هذه الآلات قوية للغاية.
+لكن لو تركت تطبيقاتها بدون تتظيم وتم تطبيقها في على أرض الواقع، فربما تكون مصدرا لخظر آخر يهدد حياتنا وكوكبنا. 
+END;
 
-";
+echo "<p align=justified dir=rtl>$text</p>";
 
 $y = $Arabic->spellGetMisspelled($text);
 
-
-
-//echo "<hr>";
-
-//$y = $Arabic->spellSuggestCorrectionsText($text);
-
-/*echo "<pre>";
+echo "<b>Extract candidate misspelled words from a text:</b><pre>";
 print_r($y);
 echo "</pre>";
 
-echo "<hr>";*/
-
-?>
-
-<br>
-
-<div class="Paragraph">
-    <h2 dir="ltr" >Example output 1</h2>
-    <p align="justified">
-        <pre>
-// Extract candidate misspelled words from a text
-<?php print_r($y); ?>
-        </pre>
-    </pre>
-</div>
-
-<br>
-
-<div class="Paragraph">
-    <h2 dir="ltr" >Example output 2</h2>
-    <p align="justified">
-    <pre>
-// Get candidate misspelled words and their correction suggestions
-<?php
 $y = $Arabic->spellSuggestCorrections($text);
 
+echo "<b>Get candidate misspelled words and their correction suggestions:</b><pre>";
 print_r($y);
+echo "</pre>";
 ?>
-        </pre>
-</div>
-
-<?php
-$code ='
-<?php
-
-require \'../src/Arabic.php\';
-
-$Arabic = new \ArPHP\I18N\Arabic();
-
-$text = "
-والان وصلت الحوسبه الكمومية التي تعتمد على فيزياء الكم. نعم هي في المرحلة التجريبية ولكن إذا نجحت مشاريع كمبيوتراتها فستكون هذه الآلات قوية للغاية.
- ولكن لو تركت بدون تنظيم وتم تطبيقها في حياتنا اليومية، فربما تكون خطرا آخرا يهدد حياتنا وكوكبنا. 
-
-";
-
-$misspelled = $Arabic->spellGetMisspelled($text);
-print_r($misspelled);
-';
-?>
+</div><br />
 
 <div class="Paragraph">
-    <h2 dir="ltr" >Example output 2</h2>
-    <p align="justified">
-        <?php
-        highlight_string($code);
-        ?>
-    </p>
+<h2 dir="ltr">Example Code 1:</h2>
+<?php
+$code = <<< ENDALL
+<?php
+	\$Arabic = new \\ArPHP\\I18N\\Arabic();
+
+	\$text = <<< END
+	والان وصلت الحوسبه الكمومية التي تعاتمد على فيزياء الكم. نعم هي في المرحلة التجريبية، ولكن إذا نجحت فستكون هذه الآلات قوية للغاية.
+	لكن لو تركت تطبيقاتها بدون تتظيم وتم تطبيقها في على أرض الواقع، فربما تكون مصدرا لخظر آخر يهدد حياتنا وكوكبنا. 
+	END;
+
+	echo "<p align=justified dir=rtl>\$text</p>";
+
+	\$y = \$Arabic->spellGetMisspelled(\$text);
+
+	echo "<b>Extract candidate misspelled words from a text:</b><pre>";
+	print_r(\$y);
+	echo "</pre>";
+
+	\$y = \$Arabic->spellSuggestCorrections(\$text);
+
+	echo "<b>Get candidate misspelled words and their correction suggestions:</b><pre>";
+	print_r(\$y);
+	echo "</pre>";
+	?>
+ENDALL;
+
+highlight_string($code);
+?>
+<hr/><i>Related Documentation: 
+<a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_spellGetMisspelled" target="_blank">spellGetMisspelled</a> and 
+<a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_spellSuggestCorrections" target="_blank">spellSuggestCorrections</a> 
+</i>
 </div>
-
-
-<footer><i>المُصحِّح - Arabic Spell Checker</i></footer>
+<footer><i><a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, an open-source library for website developers to process Arabic content</i></footer>
 </body>
 </html>

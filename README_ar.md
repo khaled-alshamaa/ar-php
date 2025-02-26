@@ -7,7 +7,7 @@
 
 # مشروع PHP واللغة العربية ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _لغة PHP تتحدث العربية - كن مستعدا!_
-_حقوق النشر © 2006-2023 خالد الشمعة._
+_حقوق النشر © 2006-2024 خالد الشمعة._
 
 [![DOI](https://zenodo.org/badge/231197063.svg)](https://zenodo.org/badge/latestdoi/231197063)
 
@@ -26,7 +26,7 @@ _حقوق النشر © 2006-2023 خالد الشمعة._
 
 > [سجل التعديلات](https://github.com/khaled-alshamaa/ar-php/blob/master/CHANGELOG.md)
 
-> [التوثيق](https://ar-php.org/github/docs/classes/ArPHP-I18N-Arabic.html)
+> [التوثيق](https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html)
 
 > [الانتقال من الإصدار 4.0](https://github.com/khaled-alshamaa/ar-php/blob/master/UPGRADE.md)
 
@@ -36,6 +36,8 @@ _حقوق النشر © 2006-2023 خالد الشمعة._
 
 > [دعم احترافي](#الدعم-الاحترافي)
 
+> [أسئلة شائعة](https://khaled-alshamaa.github.io/ar-php/faq_php_arabic.html)
+> 
 ### الاقتباس
 
 إذا رغبت في الإشارة إلى مكتبة PHP واللغة العربية في عمل أكاديمي، يمكنك استخدام الاقتباس التالي:
@@ -44,7 +46,7 @@ _حقوق النشر © 2006-2023 خالد الشمعة._
   
 ```
 K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
-https://github.com/khaled-alshamaa/ar-php, 2023
+https://github.com/khaled-alshamaa/ar-php, 2024
 ```
 
 </div>
@@ -59,7 +61,7 @@ https://github.com/khaled-alshamaa/ar-php, 2023
   author={Al-Shamaa, Khaled},
   url={https://github.com/khaled-alshamaa/ar-php},
   version = {6.3.4},
-  year={2023}
+  year={2024}
 }
 ```
   
@@ -67,16 +69,25 @@ https://github.com/khaled-alshamaa/ar-php, 2023
 
 ### أين تم استخدامه؟
 
-برنامج [Akeneo](https://www.akeneo.com/): برمجية حرّة مفتوحة المصدر سهلة ومرنة لتنظيم وإثراء كتالوج منتجاتك. حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/akeneo/pim-community-dev/blob/master/src/Akeneo/Pim/Enrichment/Bundle/PdfGeneration/HtmlFormatter/ArabicHtmlFormatter.php)] 
-
 برنامج [Bagisto](https://www.bagisto.com/): حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
 
+برنامج [Akeneo](https://www.akeneo.com/): برمجية حرّة مفتوحة المصدر سهلة ومرنة لتنظيم وإثراء كتالوج منتجاتك. حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/akeneo/pim-community-dev/blob/da071fb95d4dc43c9eaf19cc4112bc86774eee24/src/Akeneo/Pim/Enrichment/Bundle/PdfGeneration/HtmlFormatter/ArabicHtmlFormatter.php#L18)] 
+
 برنامج [LimeSurvey](https://www.limesurvey.org/): برمجية استبيان مفتوحة المصدر. 
-[تحقق من ذلك [هنا](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/userstatistics_helper.php#L135) و 
-[هنا](https://github.com/LimeSurvey/LimeSurvey/blob/master/application/helpers/admin/statistics_helper.php#L134)]
+[تحقق من ذلك [هنا](https://github.com/LimeSurvey/LimeSurvey/blob/33b86de3de17573ba17b3f059cd1d79d58bbd175/application/helpers/userstatistics_helper.php#L135) و 
+[هنا](https://github.com/LimeSurvey/LimeSurvey/blob/33b86de3de17573ba17b3f059cd1d79d58bbd175/application/helpers/admin/statistics_helper.php#L134)]
+
+برنامج [UnoPim](https://unopim.com/): نظام إدارة معلومات المنتج (PIM) مفتوح المصدر مبني على إطار عمل لارافل. [تحقق من ذلك [هنا](https://github.com/unopim/unopim/blob/94980ecefb57e9161d9c44cd58148f975b7e76a7/packages/Webkul/Core/src/Traits/PDFHandler.php#L35)]
+
+برنامج [GPDF](https://github.com/omaralalwi/Gpdf): محول مفتوح المصدر من HTML إلى PDF لتطبيقات PHP و لارافل. [تحقق من ذلك [هنا](https://github.com/omaralalwi/Gpdf/blob/506ae25535e5690d2d0a3f3c3086c5ee365dcecd/src/Builders/PdfBuilder.php#L151)]
 
 برنامج [عرب كيبورد](https://arabkey.site/): طريقة سهلة للتحويل ما بين لوحة المفاتيح العربية والإنجليزية، والعديد من الأدوات المفيدة للغة العربية. [تحقق من ذلك [هنا](https://github.com/still-code/ar-php-laravel)]
 
+برنامج [Krayin](https://krayincrm.com/): نظام إدارة علاقات العملاء مفتوح المصدر.
+
+### تطور تاريخ الإعجابات
+
+[![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
 
 ### اللغة العربية
 لقد نما استخدام الإنترنت على المستوى العالمي بشكل هائل خلال الأعوام القليلة الماضية، وكان هذا النمو أسرع في المناطق غير الناطقة باللغة الإنجليزية وبالذات في العالم العربي. فعلى سبيل المثال، لقد نمى عدد مستخدمي الإنترنت في الشرق الأوسط بين عامي 2000 و 2020 بنسبة 9300%، في حين يقدر أن حجم المحتوى العربي على شبكة الويب يتضاعف في كل عام. إن مثل هكذا نمو أوجد حاجة إلى مصادر برمجية تساعد في تطوير مواقع الويب باللغة العربية. على كل حال، فإن مصادر تطوير مواقع الويب المتوفرة ربما لا تكون ملائمة لأنها طورت أساسا لخدمة المستخدمين الناطقين باللغة الإنجليزية.
@@ -144,7 +155,7 @@ require_once 'ar-php/src/Arabic.php';
 </div>
 
 ### الوظائف الرئيسية
-* تحليل مشاعر النص العربي ([مثال 1](https://ar-php.org/github/examples/ar_sentiment.php)، [مثال 2](https://ar-php.org/github/examples/ar_sentiment.html))
+* تحليل مشاعر النص العربي ([مثال 1](https://ar-php.org/github/examples/ar_sentiment.php)، [مثال 2](https://khaled-alshamaa.github.io/ar-php/ar_sentiment.html))
 * الترجمة اللفظية بين اللغتين العربية والإنجليزية ([مثال 1](https://ar-php.org/github/examples/ar_transliteration.php)، [مثال 2](https://ar-php.org/github/examples/en_transliteration.php))
 * التفقيط: كتابة الأرقام بالعربية ([مثال](https://ar-php.org/github/examples/numbers.php))
 * معالجة إظهار الحروف العربية المتصلة ([مثال](https://ar-php.org/github/examples/ar_glyphs.php))

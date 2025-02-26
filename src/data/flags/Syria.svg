@@ -1,17 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="600">
-	<rect width="900" height="600" fill="#000"/>
-	<rect width="900" height="400" fill="#fff"/>
-	<rect width="900" height="200" fill="#ce1126"/>
-	<g id="s" transform="translate(270,300)" fill="#007a3d">
-		<g id="c">
-			<path id="t" d="M 0,-65 V 0 H 40" transform="rotate(18 0,-65)"/>
-			<use xlink:href="#t" transform="scale(-1,1)"/>
-		</g>
-		<use xlink:href="#c" transform="rotate(72)"/>
-		<use xlink:href="#c" transform="rotate(144)"/>
-		<use xlink:href="#c" transform="rotate(216)"/>
-		<use xlink:href="#c" transform="rotate(288)"/>
-	</g>
-	<use xlink:href="#s" x="360"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600"><g stroke-width="150"><path d="M0 0v600h1200V0z" fill="#007a3d"/><path d="M0 200v400h1200V200z" fill="#fff"/><path d="M0 400v200h1200V400z"/></g><g fill="#ce1126" stroke-width=".799"><path d="M600.01 228l46.677 144-122.207-88.996h151.04L553.313 372l46.678-144z"/><path d="M300.01 228l46.677 144-122.207-88.996h151.04L253.313 372l46.678-144z"/><path d="M900.01 228l46.677 144-122.207-88.996h151.04L853.313 372l46.678-144z"/></g></svg>

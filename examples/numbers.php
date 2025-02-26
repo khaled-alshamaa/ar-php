@@ -224,12 +224,16 @@ Example Output 5: صيغ الجمع
 
     echo "<p align=center>$text</p>";
 
-
     $number = 4;
-    $text = $Arabic->arPlural('يوم', $number, nameOnly: true);
-    $text = str_replace('%d', $number, $text);
+    $text   = $Arabic->arPlural('يوم', $number, nameOnly: true); 
 
-    echo "<p align=center><span style='font-size: 24px; font-weight: bold; color: #0077cc; margin-right: 10px;' >$number</span> $text</p>";
+    echo "<p align=center>$number $text</p>";
+
+    $number = 1;
+    $text   = $Arabic->arPlural('خطأ', $number, isFemale: false);
+    $text   = str_replace('%d', $number, $text);
+
+    echo "<p align=center>$text</p>";
 
 ?>
 
@@ -249,6 +253,17 @@ $code = <<< END
 
     \$number = 16;
     \$text   = \$Arabic->arPlural('صندوق', \$number, 'صندوقان', 'صناديق', 'صندوقا');
+    \$text   = str_replace('%d', \$number, \$text);
+
+    echo "<p align=center>\$text</p>";
+
+    \$number = 4;
+    \$text   = \$Arabic->arPlural('يوم', \$number, nameOnly: true); 
+
+    echo "<p align=center>\$number \$text</p>";
+
+    \$number = 1;
+    \$text   = \$Arabic->arPlural('خطأ', \$number, isFemale: false);
     \$text   = str_replace('%d', \$number, \$text);
 
     echo "<p align=center>\$text</p>";

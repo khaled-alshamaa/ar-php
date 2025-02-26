@@ -35,7 +35,10 @@ function arSentiment(str, debug = false) {
     
     // normalise Taa
     str = str.replace(/ة/gu, 'ه');
-    
+	
+	// strip diacritics (harakat)
+	str = str.replace(/[\u064b-\u065f]/gu, '');
+
     // filter only Arabic text (white list)
     str = str.replace(/[^ ءابتثجحخدذرزسشصضطظعغفقكلمنهوي]+/gu, ' ');
     

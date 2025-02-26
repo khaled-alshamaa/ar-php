@@ -1,13 +1,12 @@
 <?php
     error_reporting(E_ALL);
-    $time_start = microtime(true);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<title>Arabic Query Class</title>
+<title>Arabic SQL Query</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
 </head>
@@ -15,7 +14,9 @@
 <body>
 
 <div class="Paragraph">
-<h2>Arabic SQL Query:</h2>
+<h2>Arabic Case Insensitive In Database Systems</h2>
+
+<br/><b>1. Use Regular Expressions in Arabic SQL Queries:</b>
 <p align="justified">Build WHERE condition for SQL statement using MySQL REGEXP and Arabic lexical rules.</p>
 
 <p align="justified">With the exception of the Qur'an and pedagogical texts, Arabic is generally written without vowels or 
@@ -62,8 +63,28 @@ and methods can help make the process more successful. Ultimately, the search me
 is to retrieve every conceivable instance of a word or phrase and the resources you have to process search returns in order to 
 determine their true relevance.</p>
 
-<p align="justified"><i>Reference: Volume 13 Issue 7 of MultiLingual Computing & Technology published by MultiLingual Computing, 
+<p align="justified"><i><u>Reference</u>: Volume 13 Issue 7 of MultiLingual Computing & Technology published by MultiLingual Computing, 
 Inc., 319 North First Ave., Sandpoint, Idaho, USA, 208-263-8178, Fax: 208-263-6310.</i></p>
+
+<br/><b>2. Add a Normalized Field(s) to the Database Table(s):</b>
+
+<p align="justified">This solution is independent of the database system. It should work even if you changed the DBS for any reason. 
+However, adding an additional column(s) to our table(s) and processing some data will be required. The idea is simple, add a new 
+column and fill it with the Arabic text in a "normalized form", then use the normalized column in your queries.</p>
+
+<p align="justified">You can use setNorm and arNormalizeText functions to perform this task. The next step will be adding a new 
+column to your table and filling it with this normalized version of your Arabic text content. Now we have your normalized data. 
+How do we use it to solve our problem?</p>
+
+<p align="justified">If the user searches for something, we will pass this text to the same normalize function first, which will 
+return the normalized version of the text, then we will query our normalized column and display the original column content in 
+our search results. So in short, we added the normalized field to the table, passed the search string to our normalize function, 
+searched for the normalized name, and displayed the original name. This is a more modular solution but it requires more work.</p>
+
+<p align="justified"><i><u>Reference</u>:
+<a href="https://a-essam.medium.com/arabic-case-insensitive-in-database-systems-how-to-solve-alef-with-and-without-hamza-problem-c54ee6d40bed" 
+target="_blank"> Arabic Case Insensitive In Database Systems: How To Solve Alef With and Without Hamza Problem</a>.</i></p>
+
 </div><br />
 
 <div class="Paragraph" dir="rtl">
@@ -132,6 +153,76 @@ highlight_string($code);
 <a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_arQueryOrderBy" target="_blank">arQueryOrderBy</a>
 </i>
 </div>
+<br/>
+<div class="Paragraph" dir="rtl">
+<h2 dir="ltr" id="example-2">
+<a href="#example-2" class="anchor"><img src="./images/link_icon.png" width="16" border="0"></a>Example Output 2:</h2>
+<?php
+    $text = 'آسِفـــةٌ لا تَنَبُّؤْ 456';
+
+    $Arabic->setNorm('stripTatweel', true)
+           ->setNorm('stripTanween', true)
+           ->setNorm('stripShadda', true)
+           ->setNorm('stripLastHarakat', true)
+           ->setNorm('stripWordHarakat', true)
+           ->setNorm('normaliseLamAlef', true)
+           ->setNorm('normaliseAlef', true)
+           ->setNorm('normaliseHamza', true)
+           ->setNorm('normaliseTaa', true);
+    
+    # you can also use all form like the following example
+    # $Arabic->setNorm('all', true)->setNorm('normaliseHamza', false)->setNorm('normaliseTaa', false);
+
+    echo '<b>Origenal Text</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $text . '</p>';
+
+    echo '<hr /><b>Normalized Text</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo $Arabic->arNormalizeText($text) . '<br/>';
+    echo $Arabic->arNormalizeText($text, 'Hindu') . '</p>';
+?>
+</div><br />
+<div class="Paragraph">
+<h2>Example Code 2:</h2>
+<?php
+$code = <<< ENDALL
+<?php
+	\$Arabic = new \\ArPHP\\I18N\\Arabic();
+    
+    \$text = 'آسِفـــةٌ لا تَنَبُّؤْ 456';
+
+    \$Arabic->setNorm('stripTatweel', true)
+           ->setNorm('stripTanween', true)
+           ->setNorm('stripShadda', true)
+           ->setNorm('stripLastHarakat', true)
+           ->setNorm('stripWordHarakat', true)
+           ->setNorm('normaliseLamAlef', true)
+           ->setNorm('normaliseAlef', true)
+           ->setNorm('normaliseHamza', true)
+           ->setNorm('normaliseTaa', true);
+
+    # you can also use all form like the following example
+    # \$Arabic->setNorm('all', true)->setNorm('normaliseHamza', false)->setNorm('normaliseTaa', false);
+
+    echo '<b>Origenal Text</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$text . '</p>';
+
+    echo '<hr /><b>Normalized Text</b>';
+    echo '<p dir="rtl" align="justify">';
+    echo \$Arabic->arNormalizeText(\$text) . '<br/>';
+    echo \$Arabic->arNormalizeText(\$text, 'Hindu') . '</p>';    
+ENDALL;
+
+highlight_string($code);
+?>
+<hr/><i>Related Documentation: 
+<a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_setNorm" target="_blank">setNorm</a>,
+<a href="https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html#method_arNormalizeText" target="_blank">arNormalizeText</a>
+</i>
+</div>
+
 <footer><i><a href="https://github.com/khaled-alshamaa/ar-php">Ar-PHP</a>, an open-source library for website developers to process Arabic content</i></footer>
 </body>
 </html>
