@@ -11,7 +11,28 @@
 
 <div class="Paragraph">
 <h2>Calculate the Similarity between two Arabic Strings:</h2>
-
+يقيم التابع درجة تشابه متغيّرين نصيين باستخدام عدة خوارزميّات:
+<p></p>
+<ul>
+<li>Keyboard Similarity:</li>
+<ul>
+<li>يقيّم مدى تقارب حرفين على لوحة مفاتيح QWERTY.</li>
+<li>يقوم بإرجاع الدرجات بناءً على التطابق المباشر أو المفاتيح المتجاورة أو تقارب شريط المسافة.</li>
+</ul>
+<li>Graphic Similarity:</li>
+<ul>
+<li>يقارن المظهر المرئي لحرفين.</li>
+<li>يمنح درجات أعلى للأحرف المتطابقة ودرجة جزئية للأحرف المتشابهة المظهر.</li>
+</ul>
+<li>Sound Similarity:</li>
+<ul>
+<li>يقيّم مدى تشابه أصوات حرفين من الناحية الصوتية.</li>
+<li>تحصل الأصوات المتطابقة على نقاط كاملة، بينما تحصل الأصوات المتشابهة على نصف نقاط.</li>
+</ul>
+</ul>
+<p></p>
+يمكن ضبط تأثير كل خوارزمية على نسبة التشابه النهائية عبر تعيين وزن لكل خورازميّة عند إنشاء متغير المكتبة الرئيسي. 
+في المثال أدناه، عبر تعيين وزن صفري يمكن استخدام وظيفة التشابه لعدة حالات استخدام حسب الحاجة.
 <p></p>
 
 <div class="Paragraph">
@@ -26,6 +47,7 @@ $phoneticWeight = 50;
 if (isset($_GET['keyboardWeight'])) $keyboardWeight = filter_var($_GET['keyboardWeight'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100]]);
 if (isset($_GET['graphicWeight'])) $graphicWeight = filter_var($_GET['graphicWeight'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100]]);
 if (isset($_GET['phoneticWeight'])) $phoneticWeight = filter_var($_GET['phoneticWeight'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100]]);
+$use_case = $_GET['use_case'];
 
 ?>
 
@@ -43,19 +65,19 @@ if (isset($_GET['phoneticWeight'])) $phoneticWeight = filter_var($_GET['phonetic
 	   Phonetic Similarity Weight (<span id="p"><?php echo $phoneticWeight; ?></span>%)<br/>
 
 <p>
-	<input type="radio" id="keyboard" name="use_case" value="keyboard" 
+	<input type="radio" id="keyboard" name="use_case" value="keyboard" <?php if($use_case == 'keyboard') echo " checked " ?>
 		   onClick="document.getElementById('keyboardWeight').value = 100;
 					document.getElementById('graphicWeight').value  = 20;
 					document.getElementById('phoneticWeight').value = 0;"> 
 					<label for="keyboard">Data Entry (Keyboard)</label>
 
-	<input type="radio" id="ocr" name="use_case" value="ocr" 
+	<input type="radio" id="ocr" name="use_case" value="ocr" <?php if($use_case == 'ocr') echo " checked " ?>
 		   onClick="document.getElementById('keyboardWeight').value = 0;
 					document.getElementById('graphicWeight').value  = 100;
 					document.getElementById('phoneticWeight').value = 0;"> 
 					<label for="ocr">Scanned Document (OCR)</label>
 
-	<input type="radio" id="asr" name="use_case" value="asr" 
+	<input type="radio" id="asr" name="use_case" value="asr" <?php if($use_case == 'asr') echo " checked " ?>
 		   onClick="document.getElementById('keyboardWeight').value = 0;
 					document.getElementById('graphicWeight').value  = 0;
 					document.getElementById('phoneticWeight').value = 100;"> 
@@ -76,9 +98,9 @@ error_reporting(E_ALL);
 require '../src/Arabic.php';
 $Arabic = new \ArPHP\I18N\Arabic();
 
-$Arabic->setSimilarityWeight('keyboardWeight', 1)
-	   ->setSimilarityWeight('graphicWeight', 1)
-	   ->setSimilarityWeight('phoneticWeight', 1);
+$Arabic->setSimilarityWeight('keyboardWeight', $keyboardWeight)
+	   ->setSimilarityWeight('graphicWeight', $graphicWeight)
+	   ->setSimilarityWeight('phoneticWeight', $phoneticWeight);
 
 echo "<p>";
 
@@ -133,6 +155,12 @@ echo "similarity (استفسر، الاستفسارات): $sim ($perc%)<br>";
 $sim = $Arabic->similar_text('استفسر','استنكر', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
 echo "similarity (استفسر، استنكر): $sim ($perc%)<br>";
+
+echo "</p><p>";
+
+$sim = $Arabic->similar_text('استفسر','اشتفسر', $perc);
+$sim = round($sim, 2); $perc = round($perc, 2);
+echo "similarity (استفسر، اشتفسر): $sim ($perc%)<br>";
 
 echo "</p><p>";
 
