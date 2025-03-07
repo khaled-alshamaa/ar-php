@@ -45,7 +45,7 @@
 
 * Add an Arabic version of the PHP [similar_text()](https://www.php.net/manual/en/function.similar-text.php) function, implemented using the [Needleman-Wunsch algorithm](https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm) with weighted scoring matrices and a non-linear gap penalty.
 
-* Add [Urdu characters support]((https://github.com/khaled-alshamaa/ar-php/issues/71) to the utf8Glyphs() function.
+* Add [Urdu characters support](https://github.com/khaled-alshamaa/ar-php/issues/71) to the utf8Glyphs() function.
 
 * Expand character glyphs support in the utf8Glyphs() function to include all single letter variants listed in the [Arabic Presentation Forms-A](https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-A) needed for Ottoman, Persian, Urdu, Sindhi, and Central Asian languages.
 
