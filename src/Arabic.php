@@ -2,8 +2,6 @@
 
 namespace ArPHP\I18N;
 
-require_once 'SarahSpell.php';
-
 /**
  * ----------------------------------------------------------------------
  *
@@ -436,6 +434,8 @@ class Arabic
 
     public function __construct()
     {
+        require_once 'SarahSpell.php';
+
         mb_internal_encoding('UTF-8');
 
         $this->rootDirectory = dirname(__FILE__);
@@ -5307,7 +5307,7 @@ class Arabic
      * @return float The number of matching chars in both strings.
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function similar_text($string1, $string2, float &$percent = null)
+    public function similar_text($string1, $string2, &$percent = null)
     {
         $score  = $this->arSimilarityScore($string1, $string2);
         $score1 = $this->arSimilarityScore($string1, $string1);
