@@ -1,6 +1,6 @@
 # ArPHP Library - Change Log
 
-* Version [7.0.0](#whats-new-in-arphp-700-release-date-mar-7-2025) _(release date: Mar 7, 2025)_ -->
+* Version [7.0.0](#whats-new-in-arphp-700-release-date-mar-7-2025) _(release date: Mar 7, 2025)_
 * Version [6.3.4](#whats-new-in-arphp-634-release-date-apr-5-2023) _(release date: Apr 5, 2023)_
 * Version [6.3.3](#whats-new-in-arphp-633-release-date-apr-1-2023) _(release date: Apr 1, 2023)_
 * Version [6.3.2](#whats-new-in-arphp-632-release-date-jan-21-2023) _(release date: Jan 21, 2023)_
