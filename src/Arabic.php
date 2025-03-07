@@ -53,7 +53,7 @@ require_once 'SarahSpell.php';
  * @copyright 2006-2025 Khaled Al-Shamaa
  *
  * @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
- * @version   7.0.0 released in Jan ##, 2025
+ * @version   7.0.0 released in Mar 7, 2025
  * @link      http://www.ar-php.org
  */
 
@@ -1806,7 +1806,7 @@ class Arabic
         $temp   = explode('.', $number);
         $string = '';
 
-        if ($temp[0] != 0) {
+        if ((int)$temp[0] != 0) {
             if ($lang == 'ar') {
                 $string .= $this->int2strItem((int)$temp[0], $this->arNumberCurrency[$iso][$lang]['basic']);
             } else {
@@ -1814,7 +1814,7 @@ class Arabic
             }
         }
 
-        if (!empty($temp[1]) && $temp[1] != 0) {
+        if (!empty($temp[1]) && (int)$temp[1] != 0) {
             if ($string != '') {
                 if ($lang == 'ar') {
                     $string .= ' و';
@@ -3516,7 +3516,8 @@ class Arabic
      * Calculate Salat times for the date set in setSalatDate methode, and
      * location set in setSalatLocation.
      *
-     * @return array<string> of Salat times + sun rise in the following format
+     * @return array<int, array<int, int>|float|string>
+     *                       of Salat times + sun rise in the following format
      *                       hh:mm where hh is the hour in local format and 24 mode
      *                       mm is minutes with leading zero to be 2 digits always
      *                       array items is [$Fajr, $Sunrise, $Dhuhr, $Asr, $Maghrib,
@@ -3683,7 +3684,7 @@ class Arabic
 
             $times[$index] = "$hours:$minutes";
 
-            $times[9][$index] = $unixtimestamp + 3600 * $hours + 60 * $minutes;
+            $times[9][$index] = (int)($unixtimestamp + 3600 * $hours + 60 * $minutes);
 
             if ($index == 7 && $hours < 6) {
                 $times[9][$index] += 24 * 3600;
@@ -5306,13 +5307,15 @@ class Arabic
      * @return float The number of matching chars in both strings.
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    public function similar_text($string1, $string2, &$percent = null)
+    public function similar_text($string1, $string2, float &$percent = null)
     {
         $score  = $this->arSimilarityScore($string1, $string2);
         $score1 = $this->arSimilarityScore($string1, $string1);
         $score2 = $this->arSimilarityScore($string2, $string2);
 
-        $percent = 100 * $score / max($score1, $score2);
+        if ($percent !== null) {
+            $percent = 100 * $score / max($score1, $score2);
+        }
 
         return $score;
     }
