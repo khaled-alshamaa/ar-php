@@ -43,11 +43,12 @@
 $keyboardWeight = 50;
 $graphicWeight  = 50;
 $phoneticWeight = 50;
+$use_case = null;
 
 if (isset($_GET['keyboardWeight'])) $keyboardWeight = filter_var($_GET['keyboardWeight'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100]]);
 if (isset($_GET['graphicWeight'])) $graphicWeight = filter_var($_GET['graphicWeight'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100]]);
 if (isset($_GET['phoneticWeight'])) $phoneticWeight = filter_var($_GET['phoneticWeight'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100]]);
-$use_case = $_GET['use_case'];
+if (isset($_GET['use_case'])) $use_case = filter_var($_GET['use_case'], FILTER_SANITIZE_STRING);
 
 ?>
 
@@ -103,6 +104,8 @@ $Arabic->setSimilarityWeight('keyboardWeight', $keyboardWeight)
 	   ->setSimilarityWeight('phoneticWeight', $phoneticWeight);
 
 echo "<p>";
+
+$perc = 0;
 
 $sim = $Arabic->similar_text('مرحباً','مرحب', $perc);
 $sim = round($sim, 2); $perc = round($perc, 2);
