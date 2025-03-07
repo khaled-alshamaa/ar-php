@@ -11,29 +11,27 @@
 
 <div class="Paragraph">
 <h2>Calculate the Similarity between two Arabic Strings:</h2>
-يقيم التابع درجة تشابه متغيّرين نصيين باستخدام عدة خوارزميّات:
-<p></p>
-<ul>
-<li>Keyboard Similarity:</li>
-<ul>
-<li>يقيّم مدى تقارب حرفين على لوحة مفاتيح QWERTY.</li>
-<li>يقوم بإرجاع الدرجات بناءً على التطابق المباشر أو المفاتيح المتجاورة أو تقارب شريط المسافة.</li>
-</ul>
-<li>Graphic Similarity:</li>
-<ul>
-<li>يقارن المظهر المرئي لحرفين.</li>
-<li>يمنح درجات أعلى للأحرف المتطابقة ودرجة جزئية للأحرف المتشابهة المظهر.</li>
-</ul>
-<li>Sound Similarity:</li>
-<ul>
-<li>يقيّم مدى تشابه أصوات حرفين من الناحية الصوتية.</li>
-<li>تحصل الأصوات المتطابقة على نقاط كاملة، بينما تحصل الأصوات المتشابهة على نصف نقاط.</li>
-</ul>
-</ul>
-<p></p>
-يمكن ضبط تأثير كل خوارزمية على نسبة التشابه النهائية عبر تعيين وزن لكل خورازميّة عند إنشاء متغير المكتبة الرئيسي. 
-في المثال أدناه، عبر تعيين وزن صفري يمكن استخدام وظيفة التشابه لعدة حالات استخدام حسب الحاجة.
-<p></p>
+
+<p>The similar_text() function provides a robust way to compare two Arabic strings by calculating how closely they match, 
+both character-by-character and in their overall structure. Internally, it utilizes the Needleman-Wunsch algorithm, 
+a well-known sequence alignment technique, which assigns scores to matches, mismatches, and gaps (insertions or deletions). 
+Three key factors influence how characters are scored against each other: keyboard proximity, graphical similarity, and 
+phonetic similarity. Keyboard proximity involves checking how close two characters are on a typical Arabic keyboard layout; 
+graphical similarity considers how closely characters share certain shapes; and phonetic similarity groups characters that 
+produce similar sounds.</p>
+
+<p>By analyzing these three factors, the similar_text() function combines them into a single measure of similarity for each 
+pair of characters, and from there produces a total alignment score for the entire pair of strings. As an additional feature, 
+the function allows retrieval of this score as a raw value and as a percentage. The percentage expresses the comparison 
+result as a fraction of the maximum possible alignment score, giving an intuitive measure of overall closeness between 
+the two strings.</p>
+
+<p>Another powerful aspect of this functionality lies in its configurability. The setSimilarityWeight() method enables you 
+to assign relative importance to keyboard, graphical, or phonetic similarities. If you wish to emphasize one factor—such 
+as phonetic closeness—more strongly than others, you can increase its corresponding weight. Conversely, you can de-emphasize 
+or even ignore one of the factors by reducing its weight to zero. This allows fine-grained control over how much each type 
+of similarity influences the final measure, making the comparison flexible enough to cater to diverse use cases, from 
+spell-checking and autocorrection to natural language processing and search optimization.</p>
 
 <div class="Paragraph">
 <h2 dir="ltr" id="example-1">
