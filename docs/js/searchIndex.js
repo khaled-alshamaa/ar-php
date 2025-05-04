@@ -11,6 +11,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/ArPHP-I18N-Arabic.html#method___construct"
         },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AspellGetMisspelled\u0028\u0029",
+            "name": "spellGetMisspelled",
+            "summary": "Spell\u0020Check",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_spellGetMisspelled"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AspellSuggestCorrections\u0028\u0029",
+            "name": "spellSuggestCorrections",
+            "summary": "Spell\u0020Suggest\u0020Corrections",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_spellSuggestCorrections"
+        },                {
             "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003Astandard\u0028\u0029",
             "name": "standard",
             "summary": "This\u0020function\u0020will\u0020standardize\u0020Arabic\u0020text\u0020to\u0020follow\u0020writing\u0020standards\n\u0028just\u0020like\u0020magazine\/newspapers\u0020rules\u0029,\u0020for\u0020example\u0020spaces\u0020before\u0020and\nafter\u0020punctuations,\u0020brackets\u0020and\u0020units\u0020etc\u0020.",
@@ -330,6 +340,51 @@ Search.appendIndex(
             "name": "arSentiment",
             "summary": "Arabic\u0020Sentiment\u0020Analysis",
             "url": "classes/ArPHP-I18N-Arabic.html#method_arSentiment"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AarDialect\u0028\u0029",
+            "name": "arDialect",
+            "summary": "Arabic\u0020Dialects\u0020Detector",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_arDialect"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AnoDots\u0028\u0029",
+            "name": "noDots",
+            "summary": "Strip\u0020Dots\u0020and\u0020Hamzat",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_noDots"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AsetNorm\u0028\u0029",
+            "name": "setNorm",
+            "summary": "Set\u0020given\u0020normalization\u0020form\u0020status.",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_setNorm"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AgetNorm\u0028\u0029",
+            "name": "getNorm",
+            "summary": "Get\u0020given\u0020normalization\u0020form\u0020status.",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_getNorm"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AarNormalizeText\u0028\u0029",
+            "name": "arNormalizeText",
+            "summary": "Normalizes\u0020the\u0020input\u0020provided\u0020and\u0020returns\u0020the\u0020normalized\u0020string.",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_arNormalizeText"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AdiffForHumans\u0028\u0029",
+            "name": "diffForHumans",
+            "summary": "Get\u0020the\u0020difference\u0020in\u0020a\u0020human\u0020readable\u0020format.",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_diffForHumans"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003Asimilar_text\u0028\u0029",
+            "name": "similar_text",
+            "summary": "Calculate\u0020the\u0020similarity\u0020between\u0020two\u0020Arabic\u0020strings",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_similar_text"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AsetSimilarityWeight\u0028\u0029",
+            "name": "setSimilarityWeight",
+            "summary": "Set\u0020Similarity\u0020Weight",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_setSimilarityWeight"
+        },                {
+            "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003AgetSimilarityWeight\u0028\u0029",
+            "name": "getSimilarityWeight",
+            "summary": "Get\u0020Similarity\u0020Weight",
+            "url": "classes/ArPHP-I18N-Arabic.html#method_getSimilarityWeight"
         },                {
             "fqsen": "\\ArPHP\\I18N\\Arabic\u003A\u003A\u0024version",
             "name": "version",

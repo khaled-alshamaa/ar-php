@@ -1,3 +1,5 @@
+/minifier/
+/phar/
 /vendor/
 /coverage/
 /phpunit.phar

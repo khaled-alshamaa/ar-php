@@ -1,6 +1,6 @@
 # ArPHP Library - Change Log
 
-<!-- * Version [7.0.0](#whats-new-in-arphp-700-release-date-dec-18-2024) _(release date: Dec 18, 2024)_ -->
+* Version [7.0.0](#whats-new-in-arphp-700-release-date-mar-7-2025) _(release date: Mar 7, 2025)_
 * Version [6.3.4](#whats-new-in-arphp-634-release-date-apr-5-2023) _(release date: Apr 5, 2023)_
 * Version [6.3.3](#whats-new-in-arphp-633-release-date-apr-1-2023) _(release date: Apr 1, 2023)_
 * Version [6.3.2](#whats-new-in-arphp-632-release-date-jan-21-2023) _(release date: Jan 21, 2023)_
@@ -34,8 +34,8 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
-<!--
-## What's new in ArPHP 7.0.0 _(release date: Dec 18, 2024)_
+
+## What's new in ArPHP 7.0.0 _(release date: Mar 7, 2025)_
 
 * Full integration with the open-source version of the Arabic Spell Checker (ASC https://arabicspellchecker.com/open-source.html).
 
@@ -45,14 +45,14 @@
 
 * Add an Arabic version of the PHP [similar_text()](https://www.php.net/manual/en/function.similar-text.php) function, implemented using the [Needleman-Wunsch algorithm](https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm) with weighted scoring matrices and a non-linear gap penalty.
 
-* Add [Urdu characters support]((https://github.com/khaled-alshamaa/ar-php/issues/71) to the utf8Glyphs() function.
+* Add [Urdu characters support](https://github.com/khaled-alshamaa/ar-php/issues/71) to the utf8Glyphs() function.
 
 * Expand character glyphs support in the utf8Glyphs() function to include all single letter variants listed in the [Arabic Presentation Forms-A](https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-A) needed for Ottoman, Persian, Urdu, Sindhi, and Central Asian languages.
 
-* Various minor fixes and improvements, see related [pull requests](https://github.com/khaled-alshamaa/ar-php/pulls?q=is%3Apr+is%3Aclosed+66+74+75) for details.
+* Various minor fixes and improvements, see related [pull requests](https://github.com/khaled-alshamaa/ar-php/pulls?q=is%3Apr+is%3Aclosed+66+74+75) and [closed issues](https://github.com/khaled-alshamaa/ar-php/issues/64) for details.
 
 [Top](#arphp-library---change-log)
--->
+
 
 ## What's new in ArPHP 6.3.4 _(release date: Apr 5, 2023)_
 

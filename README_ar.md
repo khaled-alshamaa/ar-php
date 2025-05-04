@@ -7,7 +7,7 @@
 
 # مشروع PHP واللغة العربية ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _لغة PHP تتحدث العربية - كن مستعدا!_
-_حقوق النشر © 2006-2024 خالد الشمعة._
+_حقوق النشر © 2006-2025 خالد الشمعة._
 
 [![DOI](https://zenodo.org/badge/231197063.svg)](https://zenodo.org/badge/latestdoi/231197063)
 
@@ -38,34 +38,34 @@ _حقوق النشر © 2006-2024 خالد الشمعة._
 
 > [أسئلة شائعة](https://khaled-alshamaa.github.io/ar-php/faq_php_arabic.html)
 > 
-### الاقتباس
 
-إذا رغبت في الإشارة إلى مكتبة PHP واللغة العربية في عمل أكاديمي، يمكنك استخدام الاقتباس التالي:
+### اللغة العربية
+لقد نما استخدام الإنترنت على المستوى العالمي بشكل هائل خلال الأعوام القليلة الماضية، وكان هذا النمو أسرع في المناطق غير الناطقة باللغة الإنجليزية وبالذات في العالم العربي. فعلى سبيل المثال، لقد نمى عدد مستخدمي الإنترنت في الشرق الأوسط بين عامي 2000 و 2020 بنسبة 9300%، في حين يقدر أن حجم المحتوى العربي على شبكة الويب يتضاعف في كل عام. إن مثل هكذا نمو أوجد حاجة إلى مصادر برمجية تساعد في تطوير مواقع الويب باللغة العربية. على كل حال، فإن مصادر تطوير مواقع الويب المتوفرة ربما لا تكون ملائمة لأنها طورت أساسا لخدمة المستخدمين الناطقين باللغة الإنجليزية.
 
-<div dir="ltr" align="left">
+[[اللغة العربية](https://en.wikipedia.org/wiki/Arabic)، [تقرير](https://www.internetworldstats.com/stats7.htm)]
+
+### لغة PHP
+لغة PHP هي لغة نصية واسعة الاستخدام وعامة الأغراض، وهي ملائمة بشكل خاص لعمليات تطوير مواقع الويب حيث يمكن تضمينها داخل شيفرة HTML. تستخدم لغة PHP في تشغيل أكثر من 79% من أعلى 10 ملايين موقع على مستوى العالم منها الفيسبوك والويكيبيديا.
+
+[[لغة PHP](https://www.php.net/)، [تقرير](https://w3techs.com/technologies/overview/programming_language)]
+
+### ترخيص LGPL
+الفارق الأساس فيما بين ترخيص GPL وترخيص LGPL هو أن هذا الأخير يمكن ربطه (وفي حالة المكتبات "استخدامه بواسطة") ببرامج لا تخضع لأي من الترخيصين GPL و LGPL، والتي يمكن أن تكون برامج حرة مفتوحة المصدر أو حتى برمجيات مغلقة المصدر. ويمكن إعادة توزيع هذه البرمجيات غير الخاضعة للترخيصين GPL و LGPL تحت أي شروط مختارة طالما أنها ليست عملا مشتقا منها.
+
+[[ترخيص LGPL](http://www.gnu.org/licenses/lgpl-3.0.html)، [أسئلة GPL الشائعة](http://www.gnu.org/licenses/gpl-faq.html)]
+
+### لمحة تاريخية
+
+* الإصدار 7/8 من PHP على [GitHub.com](https://github.com/khaled-alshamaa/ar-php) بداية من عام 2020.
+* الإصدار 5 من PHP على [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
+* الإصدار 4 من PHP على [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
+
+[![محاضرة افتتاحية عن تجربة بناء ادوات لدعم اللغة العربية و المشاريع مفتوحة المصدر - خالد الشمعة](https://img.youtube.com/vi/P4zV1Iu5QcE/0.jpg)](https://www.youtube.com/watch?v=P4zV1Iu5QcE)
+
+__خالد الشمعة__ (2008). _PHP واللغة العربية_. دار شعاع. [https://darshoaa.com/pHP-and-Arabic-language](https://darshoaa.com/pHP-and-Arabic-language).
+
   
-```
-K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
-https://github.com/khaled-alshamaa/ar-php, 2024
-```
-
-</div>
-
-أو باستخدام صيغة bibtex
-
-<div dir="ltr" align="left">
-  
-```latex
-@misc{ar-php,
-  title={Ar-PHP, PHP library for website developers to process Arabic content},
-  author={Al-Shamaa, Khaled},
-  url={https://github.com/khaled-alshamaa/ar-php},
-  version = {6.3.4},
-  year={2024}
-}
-```
-  
-</div>
+[Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
 ### أين تم استخدامه؟
 
@@ -88,33 +88,6 @@ https://github.com/khaled-alshamaa/ar-php, 2024
 ### تطور تاريخ الإعجابات
 
 [![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
-
-### اللغة العربية
-لقد نما استخدام الإنترنت على المستوى العالمي بشكل هائل خلال الأعوام القليلة الماضية، وكان هذا النمو أسرع في المناطق غير الناطقة باللغة الإنجليزية وبالذات في العالم العربي. فعلى سبيل المثال، لقد نمى عدد مستخدمي الإنترنت في الشرق الأوسط بين عامي 2000 و 2020 بنسبة 9300%، في حين يقدر أن حجم المحتوى العربي على شبكة الويب يتضاعف في كل عام. إن مثل هكذا نمو أوجد حاجة إلى مصادر برمجية تساعد في تطوير مواقع الويب باللغة العربية. على كل حال، فإن مصادر تطوير مواقع الويب المتوفرة ربما لا تكون ملائمة لأنها طورت أساسا لخدمة المستخدمين الناطقين باللغة الإنجليزية.
-
-[[اللغة العربية](https://en.wikipedia.org/wiki/Arabic)، [تقرير](https://www.internetworldstats.com/stats7.htm)]
-
-### PHP
-PHP هي لغة نصية واسعة الاستخدام وعامة الأغراض، وهي ملائمة بشكل خاص لعمليات تطوير مواقع الويب حيث يمكن تضمينها داخل شيفرة HTML. تستخدم لغة PHP في تشغيل أكثر من 79% من أعلى 10 ملايين موقع على مستوى العالم منها الفيسبوك والويكيبيديا.
-
-[[لغة PHP](https://www.php.net/)، [تقرير](https://w3techs.com/technologies/overview/programming_language)]
-
-### LGPL
-الفارق الأساس فيما بين ترخيص GPL وترخيص LGPL هو أن هذا الأخير يمكن ربطه (وفي حالة المكتبات "استخدامه بواسطة") ببرامج لا تخضع لأي من الترخيصين GPL و LGPL، والتي يمكن أن تكون برامج حرة مفتوحة المصدر أو حتى برمجيات مغلقة المصدر. ويمكن إعادة توزيع هذه البرمجيات غير الخاضعة للترخيصين GPL و LGPL تحت أي شروط مختارة طالما أنها ليست عملا مشتقا منها.
-
-[[ترخيص LGPL](http://www.gnu.org/licenses/lgpl-3.0.html)، [أسئلة GPL الشائعة](http://www.gnu.org/licenses/gpl-faq.html)]
-
-### لمحة تاريخية
-
-<a href="https://darshoaa.com/pHP-and-Arabic-language/"><img align="left" width="171" height="256" src="https://user-images.githubusercontent.com/11270404/129626204-d354e794-bfbf-4f3c-bc22-27e7fc252701.png" border="0"></a>
-
-* الإصدار 7 من PHP على [GitHub.com](https://github.com/khaled-alshamaa/ar-php) بداية من عام 2020.
-* الإصدار 5 من PHP على [SourceForge.net](https://sourceforge.net/projects/ar-php/) 2008-2016.
-* الإصدار 4 من PHP على [PHPClasses.org](https://www.phpclasses.org/browse/author/189864.html) 2006-2008.
-
-[![محاضرة افتتاحية عن تجربة بناء ادوات لدعم اللغة العربية و المشاريع مفتوحة المصدر - خالد الشمعة](https://img.youtube.com/vi/P4zV1Iu5QcE/0.jpg)](https://www.youtube.com/watch?v=P4zV1Iu5QcE)
-  
-[Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
 ## _مدخل سريع_
 
@@ -155,8 +128,10 @@ require_once 'ar-php/src/Arabic.php';
 </div>
 
 ### الوظائف الرئيسية
+* المصحح الإملائي العربي ([ASC](https://arabicspellchecker.com/open-source.html)) ([مثال](https://ar-php.org/github/examples/ar_spell.php)) ***جديد!***
 * تحليل مشاعر النص العربي ([مثال 1](https://ar-php.org/github/examples/ar_sentiment.php)، [مثال 2](https://khaled-alshamaa.github.io/ar-php/ar_sentiment.html))
-* الترجمة اللفظية بين اللغتين العربية والإنجليزية ([مثال 1](https://ar-php.org/github/examples/ar_transliteration.php)، [مثال 2](https://ar-php.org/github/examples/en_transliteration.php))
+* تحديد اللهجة العربية ([مثال](https://ar-php.org/github/examples/ar_dialects.php)) ***جديد!***
+*  الترجمة اللفظية بين اللغتين العربية والإنجليزية ([مثال 1](https://ar-php.org/github/examples/ar_transliteration.php)، [مثال 2](https://ar-php.org/github/examples/en_transliteration.php))
 * التفقيط: كتابة الأرقام بالعربية ([مثال](https://ar-php.org/github/examples/numbers.php))
 * معالجة إظهار الحروف العربية المتصلة ([مثال](https://ar-php.org/github/examples/ar_glyphs.php))
 * تغيير لغة لوحة المفاتيح برمجيا ([مثال](https://ar-php.org/github/examples/keyswap.php))
@@ -170,6 +145,7 @@ require_once 'ar-php/src/Arabic.php';
 * تنسيق النصوص العربية ([مثال](https://ar-php.org/github/examples/standard.php))
 * التلخيص الآلي للنص العربي ([مثال](https://ar-php.org/github/examples/ar_summarize.php))
 * تحديد النصوص العربية في الوثائق متعددة اللغات ([مثال](https://ar-php.org/github/examples/identifier.php))
+* تشابه النصوص العربية ([مثال](https://ar-php.org/github/examples/ar_similarity.php)) ***جديد!***
 
 [Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
@@ -201,3 +177,33 @@ require_once 'ar-php/src/Arabic.php';
 
 <!-- If you find this project useful, please consider making a donation. Any funds donated will be used to help further development on this project. -->
   </div>
+
+### الاقتباس
+
+إذا رغبت في الإشارة إلى مكتبة PHP واللغة العربية في عمل أكاديمي، يمكنك استخدام الاقتباس التالي:
+
+<div dir="ltr" align="left">
+  
+```
+K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
+https://github.com/khaled-alshamaa/ar-php, 2025
+```
+
+</div>
+
+أو باستخدام صيغة bibtex
+
+<div dir="ltr" align="left">
+  
+```latex
+@misc{ar-php,
+  title={Ar-PHP, PHP library for website developers to process Arabic content},
+  author={Al-Shamaa, Khaled},
+  url={https://github.com/khaled-alshamaa/ar-php},
+  version = {7.0.0},
+  year={2025}
+}
+```
+  
+</div>
+
