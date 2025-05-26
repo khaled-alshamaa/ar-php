@@ -2710,7 +2710,7 @@ class Arabic
 
             // handle the case of HARAKAT
             if (mb_strpos($this->arGlyphsVowel, $crntChar) !== false) {
-                if ($crntChar == 'ّ') {
+                if ($crntChar == 'ّ'.'ﱞ') {
                     if (mb_strpos($this->arGlyphsVowel, $chars[$i - 1]) !== false) {
                         // check if the SHADDA & HARAKA in the middle of connected letters (form 3)
                         if (
