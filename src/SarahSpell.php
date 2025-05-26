@@ -35,14 +35,14 @@ class Speller {
 		$tmpfile_path = sys_get_temp_dir().DIRECTORY_SEPARATOR.'sarahspell.db';
 		if (!file_exists($tmpfile_path)) {
 			$enabled_exts = get_loaded_extensions();
-			if(!in_array("bz2", $enabled_exts)) {
-				echo "bz2 extension is not enabled, it is needed to extract SarahSpell's DB." . PHP_EOL;
+			if(!in_array("zlib", $enabled_exts)) {
+				echo "zlib extension is not enabled, it is needed to extract SarahSpell's DB." . PHP_EOL;
 				echo "Possible solutions:" . PHP_EOL;
-				echo "(1) Enable bz2 in your PHP configuration" . PHP_EOL;
-				echo "(2) Manually extract the DB from `vendor\khaled.alshamaa\ar-php\src\data\SarahSpell\sarahspell.db.bz2` to your `temp` directory and retry" . PHP_EOL;
+				echo "(1) Enable zlib in your PHP configuration" . PHP_EOL;
+				echo "(2) Manually extract the DB from `vendor\khaled.alshamaa\ar-php\src\data\SarahSpell\sarahspell.db.gz` to your `temp` directory and retry" . PHP_EOL;
 				exit();
 			}			
-			copy('compress.bzip2://' . $this->rootDirectory.'/data/SarahSpell/sarahspell.db.bz2', $tmpfile_path);
+			copy('compress.bzip2://' . $this->rootDirectory.'/data/SarahSpell/sarahspell.db.gz', $tmpfile_path);
 		}
 
         try {
