@@ -25,7 +25,8 @@
 	"require": {
 		"php": ">=5.6.0",
 		"ext-calendar": "*",
-		"ext-mbstring": "*"
+		"ext-mbstring": "*",
+		"ext-zlib": "*"
 	},
 
 	"require-dev": {
