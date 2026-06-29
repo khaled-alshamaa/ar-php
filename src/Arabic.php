@@ -3363,16 +3363,24 @@ class Arabic
      * REGEXP clause and lex's rules
      *
      * @param string $arg String (one word) that you want to build a condition for
+     * @param when true combine LIKE and REGEXP; when false use REGEXP only
      *
      * @return string sub SQL condition (for internal use)
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    private function getWordRegExp($arg)
+    private function getWordRegExp($arg, $useLike = false) 
     {
         $arg = $this->arQueryLex($arg);
         $argLike = preg_replace('/\(([^()]|(?R))*\)\??/', '', $arg);
-        $sql = implode(" LIKE '%$argLike%' AND REGEXP '$arg') OR (", $this->arQueryFields) .
-               " LIKE '%$argLike%' AND REGEXP '$arg'";
+        $parts = [];
+        foreach ($this->arQueryFields as $field) {
+            if ($useLike) {
+                $parts[] = "$field LIKE '%$argLike%' AND $field REGEXP '$arg'";
+            } else {
+                $parts[] = "$field REGEXP '$arg'";
+            }
+        }
+        $sql = implode(' OR ', $parts);
         /*
         $sql = ' REPLACE(' . implode(", 'ـ', '') REGEXP '$arg' OR REPLACE(", $this->arQueryFields) .
                ", 'ـ', '') REGEXP '$arg'";
