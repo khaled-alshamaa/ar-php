@@ -169,7 +169,7 @@ If you would cite it in academic work, you can use this citation
 
 ```
 K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
-https://github.com/khaled-alshamaa/ar-php, 2025
+https://github.com/khaled-alshamaa/ar-php, 2026
 ```
 
 or in bibtex format
@@ -180,7 +180,7 @@ or in bibtex format
   author={Al-Shamaa, Khaled},
   url={https://github.com/khaled-alshamaa/ar-php},
   version = {7.0.0},
-  year={2025}
+  year={2026}
 }
 ```
 
