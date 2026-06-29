@@ -24,7 +24,7 @@ _حقوق النشر © 2006-2026 خالد الشمعة._
  
 > [الترخيص](#الترخيص)
 
- > [أين يتم استخدامه؟](#أين-يتم-استخدامه؟)
+ > [أين تم استخدامه؟](#أين-تم-استخدامه؟)
  
 > [تنصيب سهل](#مدخل-سريع)
 
@@ -103,6 +103,8 @@ __خالد الشمعة__ (2008). _PHP واللغة العربية_. دار شع
 
 [![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
 
+[Top](#مشروع-php-واللغة-العربية-ar-phporg)
+
 ## _مدخل سريع_
 
 ### التثبيت باستخدام Composer
@@ -138,6 +140,8 @@ require_once 'ar-php/src/Arabic.php';
 ```
   
 </div>
+
+[Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
 ## _الوظائف الرئيسية_
 * المصحح الإملائي العربي ([ASC](https://arabicspellchecker.com/open-source.html)) ([مثال](https://ar-php.org/github/examples/ar_spell.php)) ***جديد!***
