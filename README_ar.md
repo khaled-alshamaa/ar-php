@@ -7,7 +7,7 @@
 
 # مشروع PHP واللغة العربية ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _لغة PHP تتحدث العربية - كن مستعدا!_
-_حقوق النشر © 2006-2025 خالد الشمعة._
+_حقوق النشر © 2006-2026 خالد الشمعة._
 
 [![DOI](https://zenodo.org/badge/231197063.svg)](https://zenodo.org/badge/latestdoi/231197063)
 
@@ -20,6 +20,12 @@ _حقوق النشر © 2006-2025 خالد الشمعة._
 
 يقدم هذا المشروع مجموعة من الأدوات التي تمكن مطوري المواقع العربية من تقديم بحث وعرض ومعالجة احترافية للمحتوى العربي بلغة PHP.
 
+> [التعريف بالمشروع](#التعريف-بالمشروع)
+ 
+> [الترخيص](#الترخيص)
+
+ > [أين يتم استخدامه؟](#أين-يتم-استخدامه؟)
+ 
 > [تنصيب سهل](#مدخل-سريع)
 
 > [لائحة بأهم الوظائف](#الوظائف-الرئيسية) 
@@ -28,16 +34,13 @@ _حقوق النشر © 2006-2025 خالد الشمعة._
 
 > [التوثيق](https://khaled-alshamaa.github.io/ar-php/classes/ArPHP-I18N-Arabic.html)
 
-> [الانتقال من الإصدار 4.0](https://github.com/khaled-alshamaa/ar-php/blob/master/UPGRADE.md)
-
-> [الترتيبات اللوجستية للمساهمين](https://github.com/khaled-alshamaa/ar-php/blob/master/TODO.md)
-
 > [كيف تساهم؟](#كيف-تساهم)
 
 > [دعم احترافي](#الدعم-الاحترافي)
 
 > [أسئلة شائعة](https://khaled-alshamaa.github.io/ar-php/faq_php_arabic.html)
-> 
+
+## _التعريف بالمشروع_
 
 ### اللغة العربية
 لقد نما استخدام الإنترنت على المستوى العالمي بشكل هائل خلال الأعوام القليلة الماضية، وكان هذا النمو أسرع في المناطق غير الناطقة باللغة الإنجليزية وبالذات في العالم العربي. فعلى سبيل المثال، لقد نمى عدد مستخدمي الإنترنت في الشرق الأوسط بين عامي 2000 و 2020 بنسبة 9300%، في حين يقدر أن حجم المحتوى العربي على شبكة الويب يتضاعف في كل عام. إن مثل هكذا نمو أوجد حاجة إلى مصادر برمجية تساعد في تطوير مواقع الويب باللغة العربية. على كل حال، فإن مصادر تطوير مواقع الويب المتوفرة ربما لا تكون ملائمة لأنها طورت أساسا لخدمة المستخدمين الناطقين باللغة الإنجليزية.
@@ -67,7 +70,18 @@ __خالد الشمعة__ (2008). _PHP واللغة العربية_. دار شع
   
 [Top](#مشروع-php-واللغة-العربية-ar-phporg)
 
-### أين تم استخدامه؟
+## _الترخيص_
+
+تخضع مكتبة Ar-PHP لترخيص مزدوج. ويحق لك استخدام هذه المكتبة ونسخها وتعديلها بموجب أحد الترخيصين التاليين:
+
+- رخصة جنو العمومية الصغرى (GNU LGPL) الإصدار الثالث أو أي إصدار أحدث.
+- رخصة وقف العامة (Waqf Public License) الإصدار 2.0
+
+ولك حرية اختيار أي من الترخيصين. راجع الملفين [LICENSE-LGPL](LICENSE.md) و [LICENSE-WAQF](LICENSE-WAQF.md) للاطلاع على التفاصيل.
+
+  [Top](#مشروع-php-واللغة-العربية-ar-phporg)
+
+## _أين تم استخدامه؟_
 
 برنامج [Bagisto](https://www.bagisto.com/): حزمة لارافل للتجارة الإلكترونية. [تحقق من ذلك [هنا](https://github.com/bagisto/bagisto/blob/bf1c3f21af912800ffad5dcf68b9a486af0f6c81/packages/Webkul/Admin/src/Http/Controllers/Sales/InvoiceController.php#L159)]
 
@@ -108,8 +122,6 @@ composer require khaled.alshamaa/ar-php
 <div dir="ltr" align="left">
   
 ```php
-// somewhere early in your project's loading, require the Composer autoloader
-// see: http://getcomposer.org/doc/00-intro.md
 require 'vendor/autoload.php';
 ```
   
@@ -127,7 +139,7 @@ require_once 'ar-php/src/Arabic.php';
   
 </div>
 
-### الوظائف الرئيسية
+## _الوظائف الرئيسية_
 * المصحح الإملائي العربي ([ASC](https://arabicspellchecker.com/open-source.html)) ([مثال](https://ar-php.org/github/examples/ar_spell.php)) ***جديد!***
 * تحليل مشاعر النص العربي ([مثال 1](https://ar-php.org/github/examples/ar_sentiment.php)، [مثال 2](https://khaled-alshamaa.github.io/ar-php/ar_sentiment.html))
 * تحديد اللهجة العربية ([مثال](https://ar-php.org/github/examples/ar_dialects.php)) ***جديد!***
@@ -186,7 +198,7 @@ require_once 'ar-php/src/Arabic.php';
   
 ```
 K. Al-Shamaa, Ar-PHP, PHP library for website developers to process Arabic content, 
-https://github.com/khaled-alshamaa/ar-php, 2025
+https://github.com/khaled-alshamaa/ar-php, 2026
 ```
 
 </div>
@@ -201,7 +213,7 @@ https://github.com/khaled-alshamaa/ar-php, 2025
   author={Al-Shamaa, Khaled},
   url={https://github.com/khaled-alshamaa/ar-php},
   version = {7.0.0},
-  year={2025}
+  year={2026}
 }
 ```
   
