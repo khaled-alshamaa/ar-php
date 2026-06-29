@@ -71,6 +71,8 @@ Ar-PHP is dual-licensed. You may use, copy, modify, and distribute this library 
 
 You may choose either license. See [LICENSE-LGPL](LICENSE.md) and [LICENSE-WAQF](LICENSE-WAQF.md) for details.
 
+[Top](#ar-php-project-ar-phporg)
+
 ## _Adoption_
 Ar-PHP has been successfully integrated into several projects, including:
 
