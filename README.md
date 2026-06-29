@@ -1,11 +1,11 @@
-<a href="https://www.php.net/"><img src="https://img.shields.io/github/languages/top/khaled-alshamaa/ar-php"/></a> <a href="https://www.php.net/manual/en/migration56.php"><img src="https://img.shields.io/packagist/php-v/khaled.alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/releases/tag/v6.3.1"><img src="https://img.shields.io/github/v/release/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/tags"><img src="https://img.shields.io/github/release-date/khaled-alshamaa/ar-php"/></a> <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html"><img src="https://img.shields.io/packagist/l/khaled.alshamaa/ar-php"/></a> [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md) <a href="https://packagist.org/packages/khaled.alshamaa/ar-php/stats"><img src="https://img.shields.io/packagist/dt/khaled.alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/stargazers"><img src="https://img.shields.io/packagist/stars/khaled.alshamaa/ar-php"/></a> <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fkhaled-alshamaa%2Far-php&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a><a href="https://github.com/khaled-alshamaa/ar-php/issues"><img src="https://img.shields.io/github/issues-raw/khaled-alshamaa/ar-php"/></a> <img src="https://img.shields.io/github/languages/code-size/khaled-alshamaa/ar-php"/> <a href="https://github.com/khaled-alshamaa/ar-php/commits/master"><img src="https://img.shields.io/github/commit-activity/m/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/commits/master"><img src="https://img.shields.io/github/last-commit/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/network/members"><img src="https://img.shields.io/github/forks/khaled-alshamaa/ar-php?style=social"/></a> <a href="https://twitter.com/arphp"><img src="https://img.shields.io/twitter/follow/arphp?style=social"></a>
+<a href="https://www.php.net/"><img src="https://img.shields.io/github/languages/top/khaled-alshamaa/ar-php"/></a> <a href="https://www.php.net/manual/en/migration56.php"><img src="https://img.shields.io/packagist/php-v/khaled.alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/releases/tag/v6.3.1"><img src="https://img.shields.io/github/v/release/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/tags"><img src="https://img.shields.io/github/release-date/khaled-alshamaa/ar-php"/></a> <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html"><img src="https://img.shields.io/packagist/l/khaled.alshamaa/ar-php"/></a> [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md) <a href="https://packagist.org/packages/khaled.alshamaa/ar-php/stats"><img src="https://img.shields.io/packagist/dt/khaled.alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/stargazers"><img src="https://img.shields.io/packagist/stars/khaled.alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/issues"><img src="https://img.shields.io/github/issues-raw/khaled-alshamaa/ar-php"/></a> <img src="https://img.shields.io/github/languages/code-size/khaled-alshamaa/ar-php"/> <a href="https://github.com/khaled-alshamaa/ar-php/commits/master"><img src="https://img.shields.io/github/commit-activity/m/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/commits/master"><img src="https://img.shields.io/github/last-commit/khaled-alshamaa/ar-php"/></a> <a href="https://github.com/khaled-alshamaa/ar-php/network/members"><img src="https://img.shields.io/github/forks/khaled-alshamaa/ar-php?style=social"/></a> <a href="https://twitter.com/arphp"><img src="https://img.shields.io/twitter/follow/arphp?style=social"></a>
 <!-- https://shields.io/ -->
 
 <img align="right" width="256" height="256" src="https://raw.githubusercontent.com/khaled-alshamaa/ar-php/master/ar-php_256.png">
 
 # Ar-PHP Project ([ar-php.org](http://www.ar-php.org/en_index-php-arabic.html))
 #### _PHP Speaks Arabic - Be Ready!_
-_Copyright © 2006-2025 Khaled Al-Sham'aa._
+_Copyright © 2006-2026 Khaled Al-Sham'aa._
 
 [![DOI](https://zenodo.org/badge/231197063.svg)](https://zenodo.org/badge/latestdoi/231197063)
 
@@ -15,6 +15,8 @@ Welcome to Ar-PHP, an open-source PHP library dedicated to simplifying Arabic la
 
 ### Table of Contents
 > [Introduction](#introduction)
+
+> [License](#license) 
 
 > [Adoption](#adoption)
 
@@ -60,6 +62,14 @@ The key difference between the GPL and LGPL is that the LGPL allows a library to
 > __Alshamaa, Khaled__ (2008). _PHP واللغة العربية_. Dar Shoaa. Retrieved from [https://darshoaa.com/pHP-and-Arabic-language/](https://darshoaa.com/pHP-and-Arabic-language/).
 
 [Top](#ar-php-project-ar-phporg)
+
+## _License_
+Ar-PHP is dual-licensed. You may use, copy, modify, and distribute this library under either:
+
+- GNU LGPL v3 or later; or
+- Waqf Public License v2.0
+
+You may choose either license. See [LICENSE-LGPL](LICENSE.md) and [LICENSE-WAQF](LICENSE-WAQF.md) for details.
 
 ## _Adoption_
 Ar-PHP has been successfully integrated into several projects, including:
