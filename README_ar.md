@@ -101,7 +101,7 @@ __خالد الشمعة__ (2008). _PHP واللغة العربية_. دار شع
 
 ### تطور تاريخ الإعجابات
 
-[![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.dera.page/#khaled-alshamaa/ar-php&Date)
 
 [Top](#مشروع-php-واللغة-العربية-ar-phporg)
 

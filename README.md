@@ -84,7 +84,7 @@ Ar-PHP has been successfully integrated into several projects, including:
 * [ArabKey](https://arabkey.site/): A tool for switching between Arabic and English keyboards.
 * [Krayin](https://krayincrm.com/): An Open Source CRM Software.
 
-[![Star History Chart](https://api.star-history.com/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.com/#khaled-alshamaa/ar-php&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=khaled-alshamaa/ar-php&type=Date)](https://star-history.dera.page/#khaled-alshamaa/ar-php&Date)
 
 [Top](#ar-php-project-ar-phporg)
 
