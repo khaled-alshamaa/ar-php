@@ -39,6 +39,9 @@ function arSentiment(str, debug = false) {
 	// strip diacritics (harakat)
 	str = str.replace(/[\u064b-\u065f]/gu, '');
 
+	// remove tatweel
+    str = str.replace(/ـ+/gu, '');
+
     // filter only Arabic text (white list)
     str = str.replace(/[^ ءابتثجحخدذرزسشصضطظعغفقكلمنهوي]+/gu, ' ');
     
