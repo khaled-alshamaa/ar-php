@@ -21,7 +21,10 @@ ar_norm <- function(text){
   text <- gsub('و+', 'و', text)
   text <- gsub('ي+', 'ي', text)
   text <- gsub('ا+', 'ا', text)
-  
+
+  # remove tatweel
+  text <- gsub('ـ+', '', text)
+
   # filter only Arabic text (white list)
   chars <- 'ءابتثجحخدذرزسشصضطظعغفقكلمنهوي'
   text  <- gsub(paste0('[^ ', chars, ']+'), ' ', text)
