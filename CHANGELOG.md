@@ -1,5 +1,6 @@
 # ArPHP Library - Change Log
 
+<!--* Version [7.5.0](#whats-new-in-arphp-750-release-date-dec-18-2026) _(release date: Dec 18, 2026)_-->
 * Version [7.0.0](#whats-new-in-arphp-700-release-date-mar-7-2025) _(release date: Mar 7, 2025)_
 * Version [6.3.4](#whats-new-in-arphp-634-release-date-apr-5-2023) _(release date: Apr 5, 2023)_
 * Version [6.3.3](#whats-new-in-arphp-633-release-date-apr-1-2023) _(release date: Apr 1, 2023)_
@@ -34,6 +35,13 @@
 * Version [1.1.0](#whats-new-in-arphp-110-release-date-mar-10-2008) _(release date: Mar 10, 2008)_
 * Version [1.0.0](#whats-new-in-arphp-100-release-date-feb-24-2008) _(release date: Feb 24, 2008)_
 
+<!--
+## What's new in ArPHP 7.5.0 _(release date: Dec 18, 2026)_
+
+* Improve code performance, increasing request throughput by about 10% across most functions and by about 35% for key functionalities, including Arabic glyphs, sentiment analysis, and dialect detection.
+
+[Top](#arphp-library---change-log)
+-->
 
 ## What's new in ArPHP 7.0.0 _(release date: Mar 7, 2025)_
 

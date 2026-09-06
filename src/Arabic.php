@@ -307,6 +307,9 @@ class Arabic
     /** @var array<string> */
     private $allStems = [];
 
+    /** @var array<string, int> */
+    private $allStemsIndex = [];
+
     /** @var string */
     private $rootDirectory;
 
@@ -352,8 +355,8 @@ class Arabic
     /** @var array<string> */
     private $dialectsStems = [];
 
-    /** @var array<string> */
-    private $logOddDialects = [];
+    /** @var array<string, int> */
+    private $dialectsStemsIndex = [];
 
     /** @var array<string> */
     private $logOddEgyptian = [];
@@ -443,8 +446,6 @@ class Arabic
 
     public function __construct()
     {
-        require_once 'SarahSpell.php';
-
         mb_internal_encoding('UTF-8');
 
         $this->rootDirectory = dirname(__FILE__);
@@ -597,18 +598,13 @@ class Arabic
         $lines = preg_split("/\r\n|\r|\n/", $raw);
         if ($lines === false) { $lines = array(); }
 
-        $trimmed = array();
-        foreach ($lines as $l) {
-            $trimmed[] = rtrim($l, "\r\n");
-        }
-
         if ($this->___psr16) {
-            try { $this->___psr16->set($linesCacheKey, $trimmed, $this->___psr16Ttl); }
+            try { $this->___psr16->set($linesCacheKey, $lines, $this->___psr16Ttl); }
             catch (\Psr\SimpleCache\InvalidArgumentException $e) { /* ignore */ }
         }
-        $this->___resCache[$key] = $trimmed;
+        $this->___resCache[$key] = $lines;
 
-        return $trimmed;
+        return $lines;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -649,6 +645,8 @@ class Arabic
     private function arSpellerInit()
     {
         if ($this->arSpellerLoad === false) {
+            require_once $this->rootDirectory . DIRECTORY_SEPARATOR . 'SarahSpell.php';
+
             $this->speller = new \ArPHP\MZK\Speller();
 
             $this->arSpellerLoad = true;
@@ -1051,6 +1049,13 @@ class Arabic
             $this->logOddStem = $this->___lines('logodd_stem.txt');
             $this->logOdd     = $this->___lines('logodd.txt');
 
+            // Build a direct stem => index lookup once, preserving array_search() first-match semantics.
+            foreach ($this->allStems as $key => $stem) {
+                if (!isset($this->allStemsIndex[$stem])) {
+                    $this->allStemsIndex[$stem] = $key;
+                }
+            }
+
             $this->arSentimentLoad = true;
         }
     }
@@ -1061,11 +1066,17 @@ class Arabic
     {
         if ($this->arDialectLoad === false) {
             $this->dialectsStems    = $this->___lines('dialects_stems.txt');
-            $this->logOddDialects   = $this->___lines('logodd_dialects.txt');
             $this->logOddEgyptian   = $this->___lines('logodd_egyptian.txt');
             $this->logOddLevantine  = $this->___lines('logodd_levantine.txt');
             $this->logOddMaghrebi   = $this->___lines('logodd_maghrebi.txt');
             $this->logOddPeninsular = $this->___lines('logodd_peninsular.txt');
+
+            // Build a direct stem => index lookup once, preserving array_search() first-match semantics.
+            foreach ($this->dialectsStems as $key => $stem) {
+                if (!isset($this->dialectsStemsIndex[$stem])) {
+                    $this->dialectsStemsIndex[$stem] = $key;
+                }
+            }
 
             $this->arDialectLoad = true;
         }
@@ -1363,8 +1374,9 @@ class Arabic
         $string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
         $string = preg_replace('/[^\w\s]/', '', $string);
         $string = strtolower($string);
-        $words  = explode(' ', $string);
-        $string = '';
+        $words    = explode(' ', $string);
+        $string   = '';
+        $en2arMap = array_combine($this->en2arStrSearch, $this->en2arStrReplace);
 
         foreach ($words as $word) {
             // if it is el or al don't add space after
@@ -1377,7 +1389,7 @@ class Arabic
             // skip translation if it has no a-z char (i.e., just add it to the string as is)
             if (preg_match('/[a-z]/i', $word)) {
                 $word = preg_replace($this->en2arPregSearch, $this->en2arPregReplace, $word);
-                $word = strtr($word, array_combine($this->en2arStrSearch, $this->en2arStrReplace));
+                $word = strtr($word, $en2arMap);
             }
 
             $string .= $word . $space;
@@ -1402,30 +1414,43 @@ class Arabic
         $this->arTransliterateInit();
 
         //$string = strtr($string, ['ة ال' => 'tul']);
-        $words  = explode(' ', $string);
-        $string = '';
+        $words    = explode(' ', $string);
+        $string   = '';
+        $wordsMax = count($words) - 1;
 
-        for ($i = 0; $i < count($words) - 1; $i++) {
+        $ar2enMap      = array_combine($this->ar2enStrSearch, $this->ar2enStrReplace);
+        $diariticalMap = null;
+        $standardMap   = null;
+
+        if ($standard == 'UNGEGN+' || $standard == 'RJGC' || $standard == 'SES') {
+            $diariticalMap = array_combine($this->diariticalSearch, $this->diariticalReplace);
+        }
+
+        if ($standard == 'RJGC') {
+            $standardMap = array_combine($this->rjgcSearch, $this->rjgcReplace);
+        } elseif ($standard == 'SES') {
+            $standardMap = array_combine($this->sesSearch, $this->sesReplace);
+        } elseif ($standard == 'ISO233') {
+            $standardMap = array_combine($this->iso233Search, $this->iso233Replace);
+        }
+
+        for ($i = 0; $i < $wordsMax; $i++) {
             $words[$i] = strtr($words[$i], 'ة', 'ت');
         }
 
         foreach ($words as $word) {
             $temp = $word;
 
-            if ($standard == 'UNGEGN+') {
-                $temp = strtr($temp, array_combine($this->diariticalSearch, $this->diariticalReplace));
-            } elseif ($standard == 'RJGC') {
-                $temp = strtr($temp, array_combine($this->diariticalSearch, $this->diariticalReplace));
-                $temp = strtr($temp, array_combine($this->rjgcSearch, $this->rjgcReplace));
-            } elseif ($standard == 'SES') {
-                $temp = strtr($temp, array_combine($this->diariticalSearch, $this->diariticalReplace));
-                $temp = strtr($temp, array_combine($this->sesSearch, $this->sesReplace));
-            } elseif ($standard == 'ISO233') {
-                $temp = strtr($temp, array_combine($this->iso233Search, $this->iso233Replace));
+            if ($diariticalMap !== null) {
+                $temp = strtr($temp, $diariticalMap);
+            }
+
+            if ($standardMap !== null) {
+                $temp = strtr($temp, $standardMap);
             }
 
             $temp = preg_replace($this->ar2enPregSearch, $this->ar2enPregReplace, $temp);
-            $temp = strtr($temp, array_combine($this->ar2enStrSearch, $this->ar2enStrReplace));
+            $temp = strtr($temp, $ar2enMap);
             $temp = preg_replace($this->arFinePatterns, $this->arFineReplacements, $temp);
 
             if (preg_match('/[a-z]/', mb_substr($temp, 0, 1))) {
@@ -2393,14 +2418,21 @@ class Arabic
                 break;
         }
 
+        // Build the reverse lookup once instead of scanning $inputMap for every character.
+        $inputIndex = [];
+        foreach ($inputMap as $key => $char) {
+            if (!isset($inputIndex[$char])) {
+                $inputIndex[$char] = $key;
+            }
+        }
+
         for ($i = 0; $i < $max; $i++) {
             $chr = mb_substr($text, $i, 1);
-            $key = array_search($chr, $inputMap);
 
-            if ($key === false) {
-                $output .= $chr;
+            if (isset($inputIndex[$chr])) {
+                $output .= $outputMap[$inputIndex[$chr]];
             } else {
-                $output .= $outputMap[$key];
+                $output .= $chr;
             }
         }
 
@@ -3320,8 +3352,9 @@ class Arabic
             // Re-init $arg variable
             // (It will contain the rest of $arg except phrases).
             $arg = '';
+            $phraseMax = count($phrase);
 
-            for ($i = 0; $i < count($phrase); $i++) {
+            for ($i = 0; $i < $phraseMax; $i++) {
                 $subPhrase = $phrase[$i];
                 if ($i % 2 == 0 && $subPhrase != '') {
                     // Re-build $arg variable after restricting phrases
@@ -3415,7 +3448,8 @@ class Arabic
         if (count($phrase) > 2) {
             // Re-init $arg variable (It will contain the rest of $arg except phrases).
             $arg = '';
-            for ($i = 0; $i < count($phrase); $i++) {
+            $phraseMax = count($phrase);
+            for ($i = 0; $i < $phraseMax; $i++) {
                 if ($i % 2 == 0 && isset($phrase[$i])) {
                     // Re-build $arg variable after restricting phrases
                     $arg .= $phrase[$i];
@@ -4777,7 +4811,8 @@ class Arabic
             for ($i = 0; $i < $n - 1; $i++) {
                 for ($j = $i + 1; $j < $n; $j++) {
                     # get stem key
-                    $stems[] = array_search($letters[$i] . $letters[$j], $this->allStems);
+                    $stem = $letters[$i] . $letters[$j];
+                    $stems[] = isset($this->allStemsIndex[$stem]) ? $this->allStemsIndex[$stem] : false;
                 }
             }
 
@@ -4876,11 +4911,10 @@ class Arabic
             for ($i = 0; $i < $n - 1; $i++) {
                 for ($j = $i + 1; $j < $n; $j++) {
                     # get stem key
-                    $stems[] = array_search($letters[$i] . $letters[$j], $this->dialectsStems);
+                    $stem = $letters[$i] . $letters[$j];
+                    $stems[] = isset($this->dialectsStemsIndex[$stem]) ? $this->dialectsStemsIndex[$stem] : false;
                 }
             }
-
-            $log_odds = [];
 
             $egp_scores = 0;
             $lev_scores = 0;
@@ -4889,8 +4923,6 @@ class Arabic
 
             # get log odd scores for all word stems
             foreach ($stems as $key) {
-                $log_odds[] = $this->logOddDialects[$key];
-
                 $egp_scores += $this->logOddEgyptian[$key];
                 $lev_scores += $this->logOddLevantine[$key];
                 $mag_scores += $this->logOddMaghrebi[$key];
@@ -5098,12 +5130,6 @@ class Arabic
             $text = strtr($text, ['ّ' => '']);
         }
 
-        if ($this->normaliseLamAlef) {
-            $search  = ['لا', 'لآ', 'لأ', 'لإ'];
-            $replace = ['لا', 'لآ', 'لأ', 'لإ'];
-            $text    = str_replace($search, $replace, $text);
-        }
-
         if ($this->normaliseAlef) {
             $text = strtr($text, ['أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا', 'ى' => 'ا']);
         }
@@ -5286,8 +5312,6 @@ class Arabic
      */
     private function arKeyboardSimilarity($chr1, $chr2)
     {
-        $this->arSimilarityInit();
-
         // key order in the row (left to right)
         $xi = (int)$this->arKeyX["$chr1"];
         $xj = (int)$this->arKeyX["$chr2"];
@@ -5336,8 +5360,6 @@ class Arabic
      */
     private function arGraphicSimilarity($chr1, $chr2)
     {
-        $this->arSimilarityInit();
-
         if (!array_key_exists($chr1, $this->arGraphGroup) || !array_key_exists($chr2, $this->arGraphGroup)) {
             $score = 0;
         } else {
@@ -5372,8 +5394,6 @@ class Arabic
      */
     private function arSoundSimilarity($chr1, $chr2)
     {
-        $this->arSimilarityInit();
-
         if ($chr1 == $chr2) {
             $score = 1;
         } elseif (!array_key_exists($chr1, $this->arSoundGroup) || !array_key_exists($chr2, $this->arSoundGroup)) {
@@ -5429,8 +5449,6 @@ class Arabic
      */
     private function d($chr)
     {
-        $this->arSimilarityInit();
-
         if (array_key_exists($chr, $this->arGapPenalty)) {
             $score = $this->arGapPenalty["$chr"];
         } else {
@@ -5452,27 +5470,36 @@ class Arabic
      */
     private function arSimilarityScore($string1, $string2)
     {
-        $max1 = mb_strlen($string1);
-        $max2 = mb_strlen($string2);
+        $this->arSimilarityInit();
+
+        $chars1 = preg_split('//u', $string1, -1, PREG_SPLIT_NO_EMPTY);
+        $chars2 = preg_split('//u', $string2, -1, PREG_SPLIT_NO_EMPTY);
+
+        if ($chars1 === false) { $chars1 = []; }
+        if ($chars2 === false) { $chars2 = []; }
+
+        $max1 = count($chars1);
+        $max2 = count($chars2);
 
         $F = [];
 
         $F[0][0] = 0;
 
         for ($i = 1; $i <= $max1; $i++) {
-            $chr = mb_substr($string1, $i - 1, 1);
+            $chr = $chars1[$i - 1];
             $F[$i][0] = $this->d($chr) + $F[$i - 1][0];
         }
 
         for ($j = 1; $j <= $max2; $j++) {
-            $chr = mb_substr($string2, $j - 1, 1);
+            $chr = $chars2[$j - 1];
             $F[0][$j] = $this->d($chr) + $F[0][$j - 1];
         }
 
         for ($i = 1; $i <= $max1; $i++) {
+            $A = $chars1[$i - 1];
+
             for ($j = 1; $j <= $max2; $j++) {
-                $A = mb_substr($string1, $i - 1, 1);
-                $B = mb_substr($string2, $j - 1, 1);
+                $B = $chars2[$j - 1];
 
                 $match  = $F[$i - 1][$j - 1] + $this->s($A, $B);
                 $delete = $F[$i - 1][$j] + $this->d($A);
@@ -5481,7 +5508,7 @@ class Arabic
                 $F[$i][$j] = max($match, $delete, $insert);
             }
         }
-        $score   = $F[$max1][$max2];
+        $score = $F[$max1][$max2];
 
         return $score;
     }
