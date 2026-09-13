@@ -40,6 +40,8 @@
 
 * Improve code performance, increasing request throughput by about 10% across most functions and by about 35% for key functionalities, including Arabic glyphs, sentiment analysis, and dialect detection.
 
+* Reduce Composer distribution package size by excluding development, test, documentation, and repository-management files from release archives. No runtime files are affected.
+
 [Top](#arphp-library---change-log)
 -->
 
