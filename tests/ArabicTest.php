@@ -732,7 +732,7 @@ END;
 
         $this->assertEquals(
             $StrSQL,
-            "SELECT `field` FROM `table` WHERE (field LIKE 'أصيلون\') OR (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') OR (field LIKE '%\%' AND REGEXP '\') ORDER BY ((field LIKE 'أصيلون') + (CASE WHEN (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') THEN 1 ELSE 0 END)) DESC"
+            "SELECT `field` FROM `table` WHERE (field LIKE 'أصيلون\') OR (field LIKE '%فلسطيني%' AND field REGEXP 'فلسطيني(ون)?') OR (field LIKE '%\%' AND field REGEXP '\') ORDER BY ((field LIKE 'أصيلون') + (CASE WHEN (field LIKE '%فلسطيني%' AND field REGEXP 'فلسطيني(ون)?') THEN 1 ELSE 0 END)) DESC"
         );
     }
 
@@ -752,7 +752,7 @@ END;
 
         $this->assertEquals(
             $StrSQL,
-            "SELECT `field` FROM `table` WHERE (field LIKE '%ثقب%' AND REGEXP 'ثقب') AND (field LIKE '%سود%' AND REGEXP '(ا|أ|إ|آ)سود') ORDER BY ((CASE WHEN (field LIKE '%ثقب%' AND REGEXP 'ثقب') THEN 1 ELSE 0 END) + (CASE WHEN (field LIKE '%سود%' AND REGEXP '(ا|أ|إ|آ)سود') THEN 1 ELSE 0 END)) DESC"
+            "SELECT `field` FROM `table` WHERE (field LIKE '%ثقب%' AND field REGEXP 'ثقب') AND (field LIKE '%سود%' AND field REGEXP '(ا|أ|إ|آ)سود') ORDER BY ((CASE WHEN (field LIKE '%ثقب%' AND field REGEXP 'ثقب') THEN 1 ELSE 0 END) + (CASE WHEN (field LIKE '%سود%' AND field REGEXP '(ا|أ|إ|آ)سود') THEN 1 ELSE 0 END)) DESC"
         );
     }
 
@@ -772,7 +772,7 @@ END;
 
         $this->assertEquals(
             $StrSQL,
-            "SELECT `field` FROM `table` WHERE (field LIKE '%عرب%' AND REGEXP 'عرب') OR (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') ORDER BY ((CASE WHEN (field LIKE '%عرب%' AND REGEXP 'عرب') THEN 1 ELSE 0 END) + (CASE WHEN (field LIKE '%فلسطيني%' AND REGEXP 'فلسطيني(ون)?') THEN 1 ELSE 0 END)) DESC"
+            "SELECT `field` FROM `table` WHERE (field LIKE '%عرب%' AND field REGEXP 'عرب') OR (field LIKE '%فلسطيني%' AND field REGEXP 'فلسطيني(ون)?') ORDER BY ((CASE WHEN (field LIKE '%عرب%' AND field REGEXP 'عرب') THEN 1 ELSE 0 END) + (CASE WHEN (field LIKE '%فلسطيني%' AND field REGEXP 'فلسطيني(ون)?') THEN 1 ELSE 0 END)) DESC"
         );
     }
 
