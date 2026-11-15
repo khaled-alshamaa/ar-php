@@ -5154,6 +5154,22 @@ class Arabic
             $text = strtr($text, ['ّ' => '']);
         }
 
+		if ($this->normaliseLamAlef) {
+			// Single-code-point ligatures: isolated and final forms.
+			// Explicit UTF-8 bytes avoid visually ambiguous source characters.
+			// Ordinary Lam followed by the appropriate Alef variant.
+			$text = strtr($text, [
+				"\xEF\xBB\xB5" => 'لآ', // U+FEF5
+				"\xEF\xBB\xB6" => 'لآ', // U+FEF6
+				"\xEF\xBB\xB7" => 'لأ', // U+FEF7
+				"\xEF\xBB\xB8" => 'لأ', // U+FEF8
+				"\xEF\xBB\xB9" => 'لإ', // U+FEF9
+				"\xEF\xBB\xBA" => 'لإ', // U+FEFA
+				"\xEF\xBB\xBB" => 'لا', // U+FEFB
+				"\xEF\xBB\xBC" => 'لا', // U+FEFC
+			]);
+		}
+
         if ($this->normaliseAlef) {
             $text = strtr($text, ['أ' => 'ا', 'إ' => 'ا', 'آ' => 'ا', 'ى' => 'ا']);
         }
