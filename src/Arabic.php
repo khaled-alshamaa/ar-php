@@ -1187,12 +1187,12 @@ class Arabic
         } elseif (preg_match("/^[اإ].{2}ا.$/u", $str) || preg_match("/^[إا].ت.ا.+$/u", $str)) {
             // الأسماء على وزن إفتعال و إفعال
             $female = true;
-        } elseif (array_search($str, $this->arFemaleNames) > 0) {
+        } elseif (in_array($str, $this->arFemaleNames, true)) {
             $female = true;
         }
 
         // إستثناء الأسماء المذكرة المؤنثة تأنيث لفظي
-        if (array_search($str, $this->arMaleNames) > 0) {
+        if (in_array($str, $this->arMaleNames, true)) {
             $female = false;
         }
 
