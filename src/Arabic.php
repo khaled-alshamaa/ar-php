@@ -5520,51 +5520,58 @@ class Arabic
      * @return float Similarity score.
      * @author Khaled Al-Sham'aa <khaled@ar-php.org>
      */
-    private function arSimilarityScore($string1, $string2)
-    {
-        $this->arSimilarityInit();
+	private function arSimilarityScore($string1, $string2)
+	{
+		$this->arSimilarityInit();
 
-        $chars1 = preg_split('//u', $string1, -1, PREG_SPLIT_NO_EMPTY);
-        $chars2 = preg_split('//u', $string2, -1, PREG_SPLIT_NO_EMPTY);
+		$chars1 = preg_split('//u', $string1, -1, PREG_SPLIT_NO_EMPTY);
+		$chars2 = preg_split('//u', $string2, -1, PREG_SPLIT_NO_EMPTY);
 
-        if ($chars1 === false) { $chars1 = []; }
-        if ($chars2 === false) { $chars2 = []; }
+		// Preserve the existing handling of failed UTF-8 splitting.
+		if ($chars1 === false) {
+			$chars1 = [];
+		}
 
-        $max1 = count($chars1);
-        $max2 = count($chars2);
+		if ($chars2 === false) {
+			$chars2 = [];
+		}
 
-        $F = [];
+		$max1 = count($chars1);
+		$max2 = count($chars2);
 
-        $F[0][0] = 0;
+		// First row: align an empty first string with the second string.
+		$previous = [0];
 
-        for ($i = 1; $i <= $max1; $i++) {
-            $chr = $chars1[$i - 1];
-            $F[$i][0] = $this->d($chr) + $F[$i - 1][0];
-        }
+		for ($j = 1; $j <= $max2; $j++) {
+			$previous[$j] = $this->d($chars2[$j - 1]) + $previous[$j - 1];
+		}
 
-        for ($j = 1; $j <= $max2; $j++) {
-            $chr = $chars2[$j - 1];
-            $F[0][$j] = $this->d($chr) + $F[0][$j - 1];
-        }
+		for ($i = 1; $i <= $max1; $i++) {
+			$A = $chars1[$i - 1];
 
-        for ($i = 1; $i <= $max1; $i++) {
-            $A = $chars1[$i - 1];
+			// This penalty is constant throughout the current row.
+			$gapA = $this->d($A);
 
-            for ($j = 1; $j <= $max2; $j++) {
-                $B = $chars2[$j - 1];
+			// First column: align this prefix with an empty second string.
+			$current = [$gapA + $previous[0]];
 
-                $match  = $F[$i - 1][$j - 1] + $this->s($A, $B);
-                $delete = $F[$i - 1][$j] + $this->d($A);
-                $insert = $F[$i][$j - 1] + $this->d($B);
+			for ($j = 1; $j <= $max2; $j++) {
+				$B = $chars2[$j - 1];
 
-                $F[$i][$j] = max($match, $delete, $insert);
-            }
-        }
-        $score = $F[$max1][$max2];
+				$match  = $previous[$j - 1] + $this->s($A, $B);
+				$delete = $previous[$j] + $gapA;
+				$insert = $current[$j - 1] + $this->d($B);
 
-        return $score;
-    }
+				$current[$j] = max($match, $delete, $insert);
+			}
 
+			// Only this completed row is needed for the next iteration.
+			$previous = $current;
+		}
+
+		return $previous[$max2];
+	}
+	
     /**
      * Calculate the similarity between two Arabic strings
      *
@@ -5579,12 +5586,16 @@ class Arabic
     public function similar_text($string1, $string2, &$percent = null)
     {
         $score  = $this->arSimilarityScore($string1, $string2);
-        $score1 = $this->arSimilarityScore($string1, $string1);
-        $score2 = $this->arSimilarityScore($string2, $string2);
+		
+		// Self-comparisons are needed only to calculate the percentage.
+		if ($percent !== null) {
+			$score1 = $this->arSimilarityScore($string1, $string1);
+			$score2 = $this->arSimilarityScore($string2, $string2);
 
-        if ($percent !== null) {
-            $percent = 100 * $score / max($score1, $score2);
-        }
+			$denominator = max($score1, $score2);
+
+			$percent = ($denominator == 0) ? 0.0 : 100 * $score / $denominator;
+		}
 
         return $score;
     }
