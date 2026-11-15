@@ -42,7 +42,7 @@ class Speller {
 				echo "(2) Manually extract the DB from `vendor\khaled.alshamaa\ar-php\src\data\SarahSpell\sarahspell.db.gz` to your `temp` directory and retry" . PHP_EOL;
 				exit();
 			}			
-			copy('compress.bzip2://' . $this->rootDirectory.'/data/SarahSpell/sarahspell.db.gz', $tmpfile_path);
+			copy('compress.zlib://' . $this->rootDirectory.'/data/SarahSpell/sarahspell.db.gz', $tmpfile_path);
 		}
 
         try {
