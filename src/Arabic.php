@@ -1385,9 +1385,19 @@ class Arabic
     {
         $this->arTransliterateInit();
 
-        setlocale(LC_ALL, $locale);
+		// Transliteration needs the character locale, not every locale category.
+		$previousLocale = setlocale(LC_CTYPE, 0);
 
-        $string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
+		try {
+			setlocale(LC_CTYPE, $locale);
+
+			$string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
+		} finally {
+			if ($previousLocale !== false) {
+				setlocale(LC_CTYPE, $previousLocale);
+			}
+		}
+		
         $string = preg_replace('/[^\w\s]/', '', $string);
         $string = strtolower($string);
         $words    = explode(' ', $string);
