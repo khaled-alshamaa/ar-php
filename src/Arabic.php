@@ -480,7 +480,23 @@ class Arabic
         $this->___psr16Ttl = $ttl;
         return $this;
     }
-    
+	
+	/**
+	 * Generate a PSR-16-compatible resource cache key.
+	 *
+	 * @param string $type     Resource representation: raw, json, or lines.
+	 * @param string $realPath Resolved absolute resource path.
+	 * @return string
+	 */
+	private function ___cacheKey($type, $realPath)
+	{
+		return hash(
+			'sha256',
+			'arphp:' . $this->version . ':' . $type . ':' .
+			$realPath . ':' . filemtime($realPath)
+		);
+	}
+   
     private function ___raw($relativePath)
     {
         $key = "raw:" . $relativePath;
@@ -501,7 +517,7 @@ class Arabic
         }
 
         // ---- PSR-16 LOOKUP (raw) ----------------------------------------------
-        $rawCacheKey = 'arphp:data:raw:' . $relativePath . ':' . @filemtime($real);
+        $rawCacheKey = $this->___cacheKey('raw', $real);
         if ($this->___psr16) {
             try {
                 $cached = $this->___psr16->get($rawCacheKey);
@@ -544,7 +560,7 @@ class Arabic
         $real = @realpath($full);
         if ($real === false) { throw new \RuntimeException("Resource not found: " . $full); }
 
-        $jsonCacheKey = 'arphp:data:json:' . $relativePath . ':' . @filemtime($real);
+        $jsonCacheKey = $this->___cacheKey('json', $real);
         if ($this->___psr16) {
             try {
                 $cached = $this->___psr16->get($jsonCacheKey);
@@ -583,7 +599,7 @@ class Arabic
         $real = @realpath($full);
         if ($real === false) { throw new \RuntimeException("Resource not found: " . $full); }
 
-        $linesCacheKey = 'arphp:data:lines:' . $relativePath . ':' . @filemtime($real);
+        $linesCacheKey = $this->___cacheKey('lines', $real);
         if ($this->___psr16) {
             try {
                 $cached = $this->___psr16->get($linesCacheKey);
