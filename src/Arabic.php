@@ -4871,7 +4871,8 @@ class Arabic
             $isPositive = false;
         }
 
-        $probability = exp(abs($score)) / (1 + exp(abs($score)));
+        //$probability = exp(abs($score)) / (1 + exp(abs($score)));
+		$probability = 1 / (1 + exp(-abs($score)));
 
         return ['isPositive' => $isPositive, 'probability' => $probability];
     }
@@ -4978,7 +4979,8 @@ class Arabic
                 break;
         }
 
-        $probability = exp(abs($score)) / (1 + exp(abs($score)));
+        //$probability = exp(abs($score)) / (1 + exp(abs($score)));
+		$probability = 1 / (1 + exp(-abs($score)));
 
         return ['dialect' => $dialect, 'probability' => $probability];
     }
