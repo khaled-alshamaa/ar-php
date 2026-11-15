@@ -40,7 +40,9 @@
 
 * Improve code performance, increasing request throughput by about 10% across most functions and by about 35% for key functionalities, including Arabic glyphs, sentiment analysis, and dialect detection.
 
-* Reduce Composer distribution package size by excluding development, test, documentation, and repository-management files from release archives. No runtime files are affected.
+* Reduce Composer distribution package size by excluding development, test, documentation, and repository-management files from release archives. No runtime files are affected. (Fixes #93)
+
+* Updated the PHPUnit development dependency from 9.5.8 to a patched 9.6 release to address [Dependabot alert #1](https://github.com/khaled-alshamaa/ar-php/security/dependabot/1).
 
 [Top](#arphp-library---change-log)
 -->
