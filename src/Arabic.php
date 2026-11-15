@@ -5213,12 +5213,12 @@ class Arabic
      */
     public function diffForHumans($time, $others = null, $parts = 2, $floor = true)
     {
-        $diff = $others == null ? $time - time() : $time - $others;
+        $diff = $others === null ? $time - time() : $time - $others;
 
         if ($diff < 0) {
-            $when = $others == null ? 'منذ' : 'قبل';
+            $when = $others === null ? 'منذ' : 'قبل';
         } else {
-            $when = $others == null ? 'باقي' : 'بعد';
+            $when = $others === null ? 'باقي' : 'بعد';
         }
 
         $diff = abs($diff);
