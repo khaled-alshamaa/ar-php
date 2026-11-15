@@ -1461,7 +1461,7 @@ class Arabic
         }
 
         for ($i = 0; $i < $wordsMax; $i++) {
-            $words[$i] = strtr($words[$i], 'ة', 'ت');
+			$words[$i] = strtr($words[$i], ['ة' => 'ت']);
         }
 
         foreach ($words as $word) {
