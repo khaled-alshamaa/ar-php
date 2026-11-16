@@ -1009,7 +1009,18 @@ class Arabic
     private function arGlyphsInit()
     {
         if ($this->arGlyphsLoad === false) {
-            $this->arGlyphsVowel     = 'ًٌٍَُِّْ';
+			$vowels = [
+				'FATHATAN' => "\xD9\x8B", // U+064B: tanween fatha
+				'DAMMATAN' => "\xD9\x8C", // U+064C: tanween damma
+				'KASRATAN' => "\xD9\x8D", // U+064D: tanween kasra
+				'FATHA'    => "\xD9\x8E", // U+064E
+				'DAMMA'    => "\xD9\x8F", // U+064F
+				'KASRA'    => "\xD9\x90", // U+0650
+				'SHADDA'   => "\xD9\x91", // U+0651
+				'SUKUN'    => "\xD9\x92", // U+0652
+			];
+
+			$this->arGlyphsVowel = implode('', $vowels);
 
             // Arabic Presentation Forms-B (https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-B)
             // Contextual forms (https://en.wikipedia.org/wiki/Arabic_script_in_Unicode#Contextual_forms)
